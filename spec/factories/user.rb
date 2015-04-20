@@ -9,9 +9,12 @@ FactoryGirl.define do
 
 		factory :user_with_group do
 			
+			ignore do
+				group_count 4
+			end
 
 			after(:create) do |user, evaluator|
-				create_list(:user_group, 4, user: user)
+				create_list(:user_group, evaluator.group_count, user: user)
 			end
 		end
 	end
