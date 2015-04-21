@@ -27,10 +27,13 @@ ActiveRecord::Schema.define(version: 20150416204450) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "name",            null: false
-    t.string   "password_digest", null: false
-    t.string   "email",           null: false
+    t.string   "name"
+    t.string   "password_digest"
+    t.string   "email"
     t.integer  "age"
+    t.string   "address"
+    t.float    "latitude"
+    t.float    "longitude"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
