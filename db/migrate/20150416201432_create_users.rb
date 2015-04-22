@@ -5,6 +5,7 @@ class CreateUsers < ActiveRecord::Migration
     	t.string :password_digest
     	t.string :email
     	t.integer :age
+        t.boolean :searching, default: true
     	t.string :address
     	t.float :latitude
     	t.float :longitude
