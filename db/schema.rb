@@ -17,6 +17,8 @@ ActiveRecord::Schema.define(version: 20150416204450) do
   enable_extension "plpgsql"
 
   create_table "groups", force: :cascade do |t|
+    t.float    "longitude"
+    t.float    "latitude"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -31,6 +33,7 @@ ActiveRecord::Schema.define(version: 20150416204450) do
     t.string   "password_digest"
     t.string   "email"
     t.integer  "age"
+    t.boolean  "searching",       default: true
     t.string   "address"
     t.float    "latitude"
     t.float    "longitude"
