@@ -2,16 +2,16 @@ require 'rails_helper'
 
 describe User do
   it "factory creates a user" do
-  	expect(create(:user_with_group)).to be_valid
+  	expect(create(:user)).to be_valid
   end
 
 
   context "User home" do
-	before do
-  		@user = create(:user_home)
-	end
+  	before do
+    		@user = create(:user_home)
+  	end
 
-	it "user home has address" do
+  	it "user home has address" do
   		expect(@user.address).to eq('135 William Street, New York, NY')
   	end  	
 
@@ -23,7 +23,5 @@ describe User do
   		expect(@user.latitude).to eq(40.7094706)
   	end
   end
-
-
 
 end
