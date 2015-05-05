@@ -23,6 +23,18 @@ FactoryGirl.define do
 			address "48 Wall Street, New York, NY"
 		end
 
+		factory :user_138 do
+			address "138 William Street, New York, NY"
+		end
+
+		factory :user_122 do
+			address "122 Fulton St, New York, NY"
+		end
+
+		factory :user_130 do
+			address "130 Fulon st, New York, NY"
+		end
+
 		factory :user_stucco do
 			address '680 St. George Street, Lewisburg, PA'
 		end
