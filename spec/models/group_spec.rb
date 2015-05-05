@@ -1,15 +1,20 @@
-require "rails_helper"
+require 'rails_helper'
 
 describe Group do
+	before do
+		@user = create(:user_home)
+		create(:user_wtc)
+	end
+
 	it 'creates a new group' do
-		expect(build(:group_with_user)).to be_valid
+		expect(build(:group)).to be_valid
 	end
 
 	before do
-		@group = create(:group_with_user)
+		@group = create(:group)
 	end
 
-	it	'has 3 users' do
-		expect(@group.users.length).to eq(3)
+	it	'has 1 user' do
+		expect(@group.users.length).to eq(2)
 	end
 end
