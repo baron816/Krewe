@@ -20,9 +20,11 @@ class Group < ActiveRecord::Base
 
 	def get_more_users
 		if self.users.length < 6
-			found_users = User.near(self, 2).limit(5)
+			found_users = User.near(self, 2).where(searching: true).limit(5)
 			found_users.each do |user|
-				 self.users << user unless self.users.include?(user) 
+				 self.users << user unless self.users.include?(user)
+				 user.searching = false
+				 user.save! 
 			end
 		end
 	end
