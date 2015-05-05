@@ -48,5 +48,17 @@ describe Group do
 		it "third group doesn't find anyone but the original user" do
 			expect(@group3.users.length).to eq(1)
 		end
+
+		it "first group adds more users, but doesn't go over the limit" do
+			sleep(0.4)
+			create(:user_138)
+			sleep(0.4)
+			create(:user_122)
+			sleep(0.4)
+			create(:user_130)
+
+			@group.get_more_users
+			expect(@group.users.length).to eq(6)
+		end
 	end
 end
