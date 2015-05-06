@@ -1,6 +1,5 @@
 class SessionsController < ApplicationController
 	def new
-		
 	end
 
 	def create
@@ -8,14 +7,18 @@ class SessionsController < ApplicationController
 		
 		if @user
 			log_in(@user)
-			redirect_to :back
+			redirect_to root_path
 		else
 			render :new
 		end
 	end
 
-	private
+	def destroy
+		log_out
+		redirect_to root_path
+	end
 
+	private
 	def user_params
 		params.require(:session).permit(:email, :password)
 	end
