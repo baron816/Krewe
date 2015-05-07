@@ -1,2 +1,7 @@
-<%= @user.name %>
-<%= @user.address %>
+<h1><%= @user.name %></h1>
+
+<ul>
+	<% @user.groups.each do |group| %>
+		<li><%= link_to group.longitude, group_path(group) %></li>
+	<% end %>
+</ul>
