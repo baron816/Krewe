@@ -10,7 +10,7 @@ class Group < ActiveRecord::Base
 	end
 
 	def name_group
-		self.name = Faker::Commerce.color
+		self.name = Faker::Commerce.color.capitalize
 	end
 
 	def find_first_user
