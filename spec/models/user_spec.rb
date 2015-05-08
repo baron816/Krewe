@@ -2,9 +2,8 @@ require 'rails_helper'
 
 describe User do
   it "factory creates a user" do
-  	expect(create(:user)).to be_valid
+  	expect(create(:user_home)).to be_valid
   end
-
 
   context "User home" do
   	before do

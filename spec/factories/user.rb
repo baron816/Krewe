@@ -5,46 +5,68 @@ FactoryGirl.define do
 		password = Faker::Internet.password
 		sequence(:password) { password }
 		sequence(:password_confirmation) { password }
-		sequence(:age) { Faker::Number.number(2)}
+		birth_day { (1..31).to_a.sample }
+		birth_month { (1..12).to_a.sample }
+		birth_year { (1900..1999).to_a.sample }
 
 		factory :user_home do
-			address "135 William Street, New York, NY"
+			street "135 William Street"
+			city 'New York'
+			state 'NY'
 		end
 
 		factory :user_wtc do
-			address "1 World Trade Center, New York, NY"
+			street "1 World Trade Center"
+			city "New York"
+			state "NY"
 		end
 
 		factory :user_121 do
-			address "121 Fulton Street, New York, NY"
+			street "121 Fulton Street"
+			city "New York"
+			state "NY"
 		end
 
 		factory :user_dbc do
-			address "48 Wall Street, New York, NY"
+			street "48 Wall Street"
+			city "New York"
+			state "NY"
 		end
 
 		factory :user_138 do
-			address "138 William Street, New York, NY"
+			street "138 William Street"
+			city "New York"
+			state "NY"
 		end
 
 		factory :user_122 do
-			address "122 Fulton St, New York, NY"
+			street "122 Fulton St"
+			city "New York"
+			state "NY"
 		end
 
 		factory :user_130 do
-			address "130 Fulon st, New York, NY"
+			street "130 Fulon st"
+			city "New York"
+			state "NY"
 		end
 
 		factory :user_stucco do
-			address '680 St. George Street, Lewisburg, PA'
+			street '680 St. George Street'
+			city 'Lewisburg'
+			state 'PA'
 		end
 
 		factory :user_8th_st do
-			address '27 South 8th Street, Lewisburg, PA'
+			street '27 South 8th Street'
+			city 'Lewisburg'
+			state 'PA'
 		end
 
 		factory :user_gd do
-			address '1130 3rd St, New Orleans, LA'
+			street '1130 3rd St'
+			city 'New Orleans'
+			state 'LA'
 		end
 	end
 end
