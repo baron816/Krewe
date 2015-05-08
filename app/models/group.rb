@@ -3,9 +3,14 @@ class Group < ActiveRecord::Base
 	has_many :users, through: :user_groups
 	
 	before_create do
+		name_group
 		find_first_user
 		set_coordinates
 		get_more_users
+	end
+
+	def name_group
+		self.name = Faker::Commerce.color
 	end
 
 	def find_first_user
