@@ -2,6 +2,6 @@
 
 <ul>
 	<% @user.groups.each do |group| %>
-		<li><%= link_to group.longitude, group_path(group) %></li>
+		<li><%= link_to group.name, group_path(group) %></li>
 	<% end %>
 </ul>
