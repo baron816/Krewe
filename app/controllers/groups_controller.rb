@@ -4,6 +4,7 @@ class GroupsController < ApplicationController
 	end
 
 	def show
-		@group = Group.includes(:users).find(params[:id])
+		@message = Message.new
+		@group = Group.includes(:users, :messages).find(params[:id])
 	end
 end
