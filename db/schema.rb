@@ -20,7 +20,8 @@ ActiveRecord::Schema.define(version: 20150509015331) do
     t.string   "name"
     t.float    "longitude"
     t.float    "latitude"
-    t.integer  "user_limit"
+    t.integer  "user_limit", default: 6
+    t.boolean  "can_join",   default: true
     t.datetime "created_at"
     t.datetime "updated_at"
   end
