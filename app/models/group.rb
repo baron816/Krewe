@@ -1,7 +1,8 @@
 class Group < ActiveRecord::Base
 	has_many :user_groups
 	has_many :users, through: :user_groups
-	
+	has_many :messages
+
 	before_create do
 		name_group
 		find_first_user
