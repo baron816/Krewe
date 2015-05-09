@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
 	after_validation :geocode
 
 	def find_first_local_group
-		group = Group.near(self, 0.5).limit(1)
+		group = Group.near(self, 0.5).where(can_join: true).limit(1)
 
 		if group.any?
 			self.groups << group
