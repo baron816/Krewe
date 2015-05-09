@@ -4,9 +4,23 @@ class User < ActiveRecord::Base
 	has_many :groups, through: :user_groups
 	has_many :messages
 
+	after_create do
+		find_first_local_group
+	end
+
 	geocoded_by :address
 
 	after_validation :geocode
+
+	def find_first_local_group
+		group = Group.near(self, 0.5).limit(1)
+
+		if group.any?
+			self.groups << group
+		else
+			Group.create(longitude: self.longitude, latitude: self.latitude).users << self
+		end
+	end
 
 	def address
 		[street, city, state].join(', ')
