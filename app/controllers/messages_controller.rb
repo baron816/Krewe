@@ -1,6 +1,6 @@
 class MessagesController < ApplicationController
 	def create
-		@message = current_user.messages.new(message_params)
+		@message = Message.new(message_params)
 
 		if @message.save
 			redirect_to(@message.group)
@@ -11,6 +11,6 @@ class MessagesController < ApplicationController
 
 	private
 	def message_params
-		params.require(:message).permit(:content, :group_id)
+		params.require(:message).permit(:content, :group_id, :user_id)
 	end
 end
