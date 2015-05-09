@@ -1,0 +1,5 @@
+<%= form_for([@group, @message]) do |f| %>
+	<%= f.text_area :content, class: 'form-control' %>
+	<%= f.submit "Submit", class: 'btn btn-primary' %>
+	<%= f.hidden_field :group_id, value: @group.id %>
+<% end %>
