@@ -2,8 +2,19 @@
 	<%= @group.name %>
 </h1>
 
+<h2>Members</h2>
 <ul>
 	<% @group.users.each do |user| %>
 		<li><%= link_to user.name, user_path(user) %></li>
 	<% end %>
 </ul>
+
+<h2>Messages</h2>
+<ul>
+	<% @group.messages.each do |message| %>
+	<li><%= message.content %> <%= message.user.name %></li>
+	<% end %>
+</ul>
+
+<h2>Write a new message</h2>
+<%= render "messages/new" %>
