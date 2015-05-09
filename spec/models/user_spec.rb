@@ -21,6 +21,10 @@ describe User do
   	it "user home has latitude coordinate" do
   		expect(@user.latitude).to eq(40.7094706)
   	end
+
+    it "has a group" do
+      expect(@user.groups.first).to be_a(Group)
+    end
   end
 
 end
