@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20150509015331) do
     t.string   "name"
     t.float    "longitude"
     t.float    "latitude"
+    t.integer  "user_limit"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -38,16 +39,15 @@ ActiveRecord::Schema.define(version: 20150509015331) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "name",                           null: false
-    t.string   "password_digest",                null: false
-    t.string   "email",                          null: false
-    t.integer  "birth_day",                      null: false
-    t.integer  "birth_month",                    null: false
-    t.integer  "birth_year",                     null: false
-    t.boolean  "searching",       default: true
-    t.string   "street",                         null: false
-    t.string   "city",                           null: false
-    t.string   "state",                          null: false
+    t.string   "name",            null: false
+    t.string   "password_digest", null: false
+    t.string   "email",           null: false
+    t.integer  "birth_day",       null: false
+    t.integer  "birth_month",     null: false
+    t.integer  "birth_year",      null: false
+    t.string   "street",          null: false
+    t.string   "city",            null: false
+    t.string   "state",           null: false
     t.float    "latitude"
     t.float    "longitude"
     t.datetime "created_at"

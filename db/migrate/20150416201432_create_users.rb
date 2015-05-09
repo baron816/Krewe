@@ -7,7 +7,6 @@ class CreateUsers < ActiveRecord::Migration
     	t.integer :birth_day, null: false
         t.integer :birth_month, null: false
         t.integer :birth_year, null: false
-        t.boolean :searching, default: true
     	t.string :street, null: false
         t.string :city, null: false
         t.string :state, null: false
