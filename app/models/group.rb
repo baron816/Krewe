@@ -7,9 +7,16 @@ class Group < ActiveRecord::Base
 		name_group
 	end
 
+	before_save do
+		check_space
+	end
 
 	def name_group
 		self.name = Faker::Commerce.color.capitalize
+	end
+
+	def check_space
+		self.can_join = self.users.count < self.user_limit
 	end
 
 	# def get_more_users
