@@ -13,6 +13,7 @@ gem 'twitter-bootstrap-rails'
 
 gem 'geocoder'
 gem 'local_time'
+gem 'will_paginate-bootstrap'
 
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
