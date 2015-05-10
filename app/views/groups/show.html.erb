@@ -11,13 +11,14 @@
 
 <h2>Messages</h2>
 
-<% @group.messages.each do |message| %>
+<% @messages.each do |message| %>
 	<div class="well">	
 		<%= link_to message.user.name, user_path(message.user) %> <%= local_time_ago(message.created_at) %>	: <br>
 		<%= message.content %> 
 	</div>
 <% end %>
 
+<%= will_paginate @messages, renderer: BootstrapPagination::Rails %>
 
 <h2>Write a new message</h2>
 <%= render "messages/new" %>
