@@ -13,7 +13,7 @@
 
 <% @group.messages.each do |message| %>
 	<div class="well">	
-		<%= message.user.name %> at <%= message.created_at %>	: <br>
+		<%= link_to message.user.name, user_path(message.user) %> <%= local_time_ago(message.created_at) %>	: <br>
 		<%= message.content %> 
 	</div>
 <% end %>
