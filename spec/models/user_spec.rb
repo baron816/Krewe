@@ -7,7 +7,8 @@ describe User do
 
   context "User home" do
   	before do
-    		@user = create(:user_home)
+    		sleep(0.6)
+        @user = create(:user_home)
   	end
 
   	it "user home has address" do
