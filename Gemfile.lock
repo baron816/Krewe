@@ -83,6 +83,8 @@ GEM
       sprockets (> 2, < 4)
       tilt
     libv8 (3.16.14.7)
+    local_time (1.0.2)
+      coffee-rails
     loofah (2.0.1)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
@@ -195,6 +197,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   less-rails
+  local_time
   pg
   rails (= 4.2.0)
   rspec-rails
