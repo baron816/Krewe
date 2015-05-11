@@ -4,6 +4,7 @@ class CreateGroups < ActiveRecord::Migration
     	t.string :name
     	t.float :longitude
     	t.float :latitude
+        t.string :category
     	t.integer :user_limit, default: 6
     	t.boolean :can_join, default: true
     	t.timestamps

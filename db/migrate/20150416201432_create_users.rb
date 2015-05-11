@@ -10,6 +10,7 @@ class CreateUsers < ActiveRecord::Migration
     	t.string :street, null: false
         t.string :city, null: false
         t.string :state, null: false
+        t.string :category, null: false
     	t.float :latitude
     	t.float :longitude
 
