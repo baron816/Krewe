@@ -80,4 +80,12 @@ module ApplicationHelper
 	def years
 		(1900..1999).to_a.reverse
 	end
+
+	def categories
+		[
+			{name: 'Post-Grad', description: 'People just out of college'},
+			{name: 'Young Parent', description: 'Baby talkers'},
+			{name: 'Business Networkers', description: 'People looking to make business connections'}
+		]
+	end
 end
