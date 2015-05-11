@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20150509015331) do
     t.string   "name"
     t.float    "longitude"
     t.float    "latitude"
+    t.string   "category"
     t.integer  "user_limit", default: 6
     t.boolean  "can_join",   default: true
     t.datetime "created_at"
@@ -49,6 +50,7 @@ ActiveRecord::Schema.define(version: 20150509015331) do
     t.string   "street",          null: false
     t.string   "city",            null: false
     t.string   "state",           null: false
+    t.string   "category",        null: false
     t.float    "latitude"
     t.float    "longitude"
     t.datetime "created_at"
