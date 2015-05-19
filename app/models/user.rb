@@ -5,14 +5,14 @@ class User < ActiveRecord::Base
 	has_many :messages
 
 	after_create do
-		find_first_local_group
+		find_or_create_group
 	end
 
 	geocoded_by :address
 
 	after_validation :geocode
 
-	def find_first_local_group
+	def find_or_create_group
 		group = Group.near(self, 0.5).where(can_join: true, category: self.category).limit(1)
 
 		if group.any?
