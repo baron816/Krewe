@@ -9,5 +9,7 @@ Rails.application.routes.draw do
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
 
+  get '/add_group' => 'users#add_group', :as => :add_group
+
   root 'home#index'
 end
