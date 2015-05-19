@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
 	after_validation :geocode
 
 	def find_or_create_group
-		group = Group.near(self, 0.5).where(can_join: true, category: self.category).limit(1)
+		group = Group.joins(:users).near(self, 0.5).where(can_join: true, category: self.category).where.not('users.id' => self.id).limit(1)
 
 		if group.any?
 			self.groups << group
