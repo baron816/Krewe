@@ -7,8 +7,9 @@ class Group < ActiveRecord::Base
 		name_group
 	end
 
-	before_save do
+	after_touch do
 		check_space
+		save
 	end
 
 	def name_group
