@@ -54,6 +54,12 @@ FactoryGirl.define do
 				state "NY"
 			end
 
+			factory :user_134 do
+				street '134 Fulton St'
+				city "New York"
+				state "NY"
+			end
+
 			factory :user_stucco do
 				street '680 St. George Street'
 				city 'Lewisburg'
