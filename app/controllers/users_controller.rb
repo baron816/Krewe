@@ -26,6 +26,11 @@ class UsersController < ApplicationController
 		end
 	end
 
+	def add_group
+		current_user.find_or_create_group
+		redirect_to user_path(current_user)
+	end
+
 	private
 	def set_user
 		@user = User.includes(:groups).find(params[:id])
