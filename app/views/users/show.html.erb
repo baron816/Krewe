@@ -1,7 +1,10 @@
 <h1><%= @user.name %></h1>
 
+<h3>Groups</h3>
 <ul>
 	<% @user.groups.each do |group| %>
 		<li><%= link_to group.name, group_path(group) %></li>
 	<% end %>
 </ul>
+
+<h5><%= link_to "Add Group", add_group_path, class: 'btn btn-success' %> </h5>
