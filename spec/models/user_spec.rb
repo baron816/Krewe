@@ -26,6 +26,34 @@ describe User do
     it "has a group" do
       expect(@user.groups.first).to be_a(Group)
     end
+
+    describe "#find_or_create_group" do
+      before do
+        sleep(0.6)
+        create(:user_wtc)
+        sleep(0.6)
+        create(:user_121)
+        sleep(0.6)
+        create(:user_dbc)
+        sleep(0.6)
+        create(:user_138)
+        sleep(0.6)
+        create(:user_122)
+        sleep(0.6)
+        create(:user_130)
+        sleep(0.6)
+        create(:user_134)
+      end
+
+      it "user's group only has six member" do
+        expect(@user.groups.first.users.count).to eql(6)
+      end
+
+      it "user isn't put in a group it's already in" do
+        @user.find_or_create_group
+        expect(@user.groups.first).not_to eql(@user.groups.second)
+      end
+    end
   end
 
 end
