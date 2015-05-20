@@ -30,7 +30,7 @@ describe User do
     describe "#find_or_create_group" do
       before do
         sleep(0.6)
-        create(:user_wtc)
+        @user2 = create(:user_wtc)
         sleep(0.6)
         create(:user_121)
         sleep(0.6)
@@ -52,6 +52,15 @@ describe User do
       it "user isn't put in a group it's already in" do
         @user.find_or_create_group
         expect(@user.groups.first).not_to eql(@user.groups.second)
+      end
+
+      it "user2 only adds one group" do
+        @user2.find_or_create_group
+        expect(@user2.groups.count).to eql(2)
+      end
+
+      it "user2's second group is the same as first users group" do
+        expect(@user2.groups.second).to eq(@user.groups.second)
       end
     end
   end
