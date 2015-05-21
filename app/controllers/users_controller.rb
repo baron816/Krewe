@@ -1,11 +1,12 @@
 class UsersController < ApplicationController
-	before_action :set_user, only: [:show, :edit]
+	before_action :set_user, only: [:edit]
 
 	def index
 		@users = User.all
 	end
 
 	def show
+		@user = User.includes(:groups).find(params[:id])
 		redirect_to user_path(current_user) unless @user == current_user
 	end
 
