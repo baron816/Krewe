@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+	validates :name, presence: true, length: { minimum: 3 }
+
 	has_secure_password
 	has_many :user_groups
 	has_many :groups, through: :user_groups
