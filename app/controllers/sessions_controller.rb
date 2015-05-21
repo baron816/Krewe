@@ -9,6 +9,7 @@ class SessionsController < ApplicationController
 			log_in(@user)
 			redirect_to root_path
 		else
+			flash[:error] = "Email or Password not found"
 			render :new
 		end
 	end
