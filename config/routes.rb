@@ -13,5 +13,7 @@ Rails.application.routes.draw do
 
   get '/groups/:id/drop' => 'groups#drop', :as => :drop
 
+  get 'users/:id/public_profile' => 'users#public_profile', :as => :public_profile
+
   root 'home#index'
 end
