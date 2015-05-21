@@ -22,6 +22,7 @@ class Group < ActiveRecord::Base
 
 	def drop_user(user)
 		users.delete(user)
+		touch
 	end
 
 	reverse_geocoded_by :latitude, :longitude
