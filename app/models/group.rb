@@ -20,5 +20,9 @@ class Group < ActiveRecord::Base
 		self.can_join = self.users.count < self.user_limit
 	end
 
+	def drop_user(user)
+		users.delete(user)
+	end
+
 	reverse_geocoded_by :latitude, :longitude
 end
