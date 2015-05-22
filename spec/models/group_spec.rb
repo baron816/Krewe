@@ -1,27 +1,28 @@
 require 'rails_helper'
 
 describe Group do
+	before do
+		create(:user_home)
+		create(:user_wtc)
+		@group1 = Group.first
+	end
 	
 	context "Two users" do	
-		before do
-			create(:user_home)
-			create(:user_wtc)
-		end
 
 		it 'creates a new group' do
 			expect(build(:group)).to be_valid
 		end
 
 		it	'has 2 user' do
-			@group = Group.first
-			expect(@group.users.length).to eq(2)
+			@group1 = Group.first
+			expect(@group1.users.length).to eq(2)
 		end
 	end
 
-	context "Users not in same groups" do
+	context "Users divided into groups correctly" do
 		before do
-		  create(:user_home)
-		  create(:user_wtc)
+		  # create(:user_home)
+		  # create(:user_wtc)
 		  sleep(0.6)
 		  create(:user_121)
 		  sleep(0.6)
@@ -32,7 +33,6 @@ describe Group do
 		  create(:user_8th_st)
 		  sleep(0.6)
 		  create(:user_gd)
-		  @group1 = Group.first
 		  @group2 = Group.second
 		  @group3 = Group.third
 		end
