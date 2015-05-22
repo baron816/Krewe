@@ -7,7 +7,7 @@
 		<% end %>
 
 		<%= f.text_field :name, placeholder: "Name", class: 'form-control' %>
-		<%= f.text_field :email, placeholder: 'Email', class: 'form-control' %>
+		<%= f.email_field :email, placeholder: 'Email', class: 'form-control' %>
 		<%= f.text_field :street, placeholder: 'Street Address', class: 'form-control' %>
 		<%= f.text_field :city, placeholder: "City", class: 'form-control' %>
 		<%= f.select :state, us_states, {}, class: 'form-control' %>
