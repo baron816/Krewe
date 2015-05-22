@@ -3,9 +3,9 @@
 </h1>
 
 <h2>Members</h2>
-<ul>
+<ul class="list-group">
 	<% @group.users.each do |user| %>
-		<li><%= link_to user.name, public_profile_path(user) %></li>
+		<li class="list-group-item"><%= link_to user.name, public_profile_path(user) %></li>
 	<% end %>
 </ul>
 
@@ -13,7 +13,7 @@
 
 <% @messages.each do |message| %>
 	<div class="well">	
-		<%= link_to message.user.name, user_path(message.user) %> <%= local_time_ago(message.created_at) %>	: <br>
+		<%= link_to message.user.name, public_profile_path(message.user) %> <%= local_time_ago(message.created_at) %>: <br>
 		<%= message.content %> 
 	</div>
 <% end %>
