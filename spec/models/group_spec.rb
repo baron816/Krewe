@@ -21,8 +21,6 @@ describe Group do
 
 	context "Users divided into groups correctly" do
 		before do
-		  # create(:user_home)
-		  # create(:user_wtc)
 		  sleep(0.6)
 		  create(:user_121)
 		  sleep(0.6)
@@ -47,6 +45,13 @@ describe Group do
 
 		it "third group doesn't find anyone but the original user" do
 			expect(@group3.users.length).to eq(1)
+		end
+
+		describe "#drop_user" do
+		  it "correctly removes a user" do
+		  	@group1.drop_user(User.first)
+		  	expect(@group1.users.count).to eq(3) 
+		  end
 		end
 	end
 end
