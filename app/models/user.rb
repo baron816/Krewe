@@ -19,8 +19,12 @@ class User < ActiveRecord::Base
 
 	after_validation :geocode
 
+	def group_search
+		Group.joins(:users).near(self, 0.5).where(can_join: true, category: self.category).where.not('users.id'=> self.id).take
+	end
+
 	def find_or_create_group
-		group = Group.joins(:users).near(self, 0.5).where(can_join: true, category: self.category).where.not('users.id'=> self.id).take
+		group = group_search
 
 		unless group.nil?
 			self.groups << group
