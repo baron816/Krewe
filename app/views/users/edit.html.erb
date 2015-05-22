@@ -1,0 +1,25 @@
+<%= form_for(@user) do |f| %>
+	<div class="col-md-9 col-md-offset-1">
+		<% if @user.errors.any? %>
+			<% @user.errors.full_messages.each do |msg| %>
+				<div class="alert alert-danger">	<%= msg %> </div>
+			<% end %>
+		<% end %>
+		<%= f.text_field :name, placeholder: "Name", class: 'form-control' %>
+		<%= f.email_field :email, placeholder: 'Email', class: 'form-control' %>
+		<%= f.text_field :street, placeholder: 'Street Address', class: 'form-control' %>
+		<%= f.text_field :city, placeholder: "City", class: 'form-control' %>
+		<%= f.select :birth_day, month_days, {}, class: 'form-control' %>
+		<%= f.select :birth_month, month_names, {}, class: 'form-control' %>
+		<%= f.select :birth_year, years, {}, class: 'form-control' %>
+		<% categories.each do |category| %>
+			<div class="input-group">
+			<span class="input-group-addon"> <%= f.radio_button :category, category[:name] %></span>
+			<%= f.label :category, "#{category[:name]}: #{category[:description]}", class: 'form-control' %>
+			</div>
+		<% end %>
+		<%= f.hidden_field :password, value: :password %>
+		<%= f.hidden_field :password_confirmation, value: :password %>
+		<%= f.submit "Submit", class: 'btn btn-primary form-control' %>
+	</div>
+<% end %>
