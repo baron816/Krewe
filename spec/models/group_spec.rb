@@ -7,7 +7,7 @@ describe Group do
 		@group1 = Group.first
 	end
 	
-	context "Two users" do	
+	context "two users" do	
 
 		it 'creates a new group' do
 			expect(build(:group)).to be_valid
@@ -19,7 +19,7 @@ describe Group do
 		end
 	end
 
-	context "Users divided into groups correctly" do
+	context "more users" do
 		before do
 		  sleep(0.6)
 		  create(:user_121)
@@ -47,11 +47,24 @@ describe Group do
 			expect(@group3.users.length).to eq(1)
 		end
 
-		describe "#drop_user" do
-		  it "correctly removes a user" do
-		  	@group1.drop_user(User.first)
-		  	expect(@group1.users.count).to eq(3) 
-		  end
+		context "when group not full" do
+			describe "#drop_user" do
+			  it "correctly removes a user" do
+			  	@group1.drop_user(User.first)
+			  	expect(@group1.users.count).to eq(3) 
+			  end
+
+			  it "still adds users to first group" do
+			  	sleep(0.6)
+	  	        create(:user_138)
+		        sleep(0.6)
+		        create(:user_122)
+		        sleep(0.6)
+		        create(:user_130)
+		        expect(@group1.users.count).to eql(6)
+			  end
+			end
 		end
 	end
+	
 end
