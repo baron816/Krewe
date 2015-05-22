@@ -7,22 +7,18 @@ class Group < ActiveRecord::Base
 		name_group
 	end
 
-	after_touch do
-		check_space
-		save
-	end
-
 	def name_group
 		self.name = Faker::Commerce.color.capitalize
 	end
 
 	def check_space
 		self.can_join = self.users.count < self.user_limit
+		save
 	end
 
 	def drop_user(user)
 		users.delete(user)
-		touch
+		check_space
 	end
 
 	reverse_geocoded_by :latitude, :longitude
