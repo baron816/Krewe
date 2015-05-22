@@ -54,17 +54,29 @@ describe Group do
 			  	expect(@group1.users.count).to eq(3) 
 			  end
 
-			  it "still adds users to first group" do
+			  context "description" do
+			  	before do  
 			  	sleep(0.6)
 	  	        create(:user_138)
 		        sleep(0.6)
 		        create(:user_122)
 		        sleep(0.6)
 		        create(:user_130)
-		        expect(@group1.users.count).to eql(6)
+			  	end
+			  	
+				  it "still adds users to first group" do
+			        expect(@group1.users.count).to eql(6)
+				  end
+
+				  it "resets can_join to true" do
+				  	@group1.drop_user(User.first)
+				  	expect(@group1.can_join).to be true
+				  end
 			  end
+
 			end
 		end
+
 	end
 	
 end
