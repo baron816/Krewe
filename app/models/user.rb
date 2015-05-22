@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
 
 		unless group.nil?
 			self.groups << group
-			group.touch
+			group.check_space
 		else
 			Group.create(longitude: self.longitude, latitude: self.latitude, category: self.category).users << self
 		end
