@@ -49,6 +49,10 @@ describe User do
         expect(@user.groups.first.users.count).to eql(6)
       end
 
+      it "group is full" do
+        expect(@user.groups.first.can_join).to eql(false)
+      end
+
       it "user isn't put in a group it's already in" do
         @user.find_or_create_group
         expect(@user.groups.first).not_to eql(@user.groups.second)
