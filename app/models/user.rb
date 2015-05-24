@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
 	end
 
 	def active_notifications
-		self.notifications.where(viewed: false)
+		self.notifications.where(viewed: false).order(created_at: :desc).limit(3)
 	end
 
 	def address
