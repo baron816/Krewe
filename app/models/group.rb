@@ -13,7 +13,13 @@ class Group < ActiveRecord::Base
 	end
 
 	def user_notification_count(user)
-		self.notifications.where(user: user).count
+		self.notifications.where(user: user, viewed: false).count
+	end
+
+	def dismiss_notifications(user)
+		self.notifications.where(user: user).each do |notification|
+			notification.dismiss
+		end
 	end
 
 	def check_space
