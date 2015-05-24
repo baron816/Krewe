@@ -4,7 +4,7 @@
 <h3>Groups</h3>
 <ul class="list-group">
 	<% @user.groups.each do |group| %>
-		<li class="list-group-item"><%= link_to group.name, group_path(group) %></li>
+		<li class="list-group-item"><%= link_to group.name, group_path(group) %> <span class='badge'><%= group.user_notification_count current_user %></span></li>
 	<% end %>
 </ul>
 
