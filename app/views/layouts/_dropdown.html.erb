@@ -1,0 +1,12 @@
+<% if current_user.active_notifications.any? %>	
+	<div class="btn-group">
+		<button class="btn btn-default btn-sm dropdown-toggle" type='button' data-toggle='dropdown' aria-expanded='false'>
+			Notifications <span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu" role='menu'>
+			<% current_user.active_notifications.each do |notification| %>
+			<li><a href="/groups/<%= notification.group.id %>"><%= notification.poster.name %> wrote in <%= notification.group.name %> <%= local_time_ago(notification.created_at) %></a></li>
+			<% end %>
+		</ul>
+	</div>
+<% end %>
