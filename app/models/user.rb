@@ -35,6 +35,10 @@ class User < ActiveRecord::Base
 		end
 	end
 
+	def active_notifications
+		self.notifications.where(viewed: false)
+	end
+
 	def address
 		[street, city, state].join(', ')
 	end
