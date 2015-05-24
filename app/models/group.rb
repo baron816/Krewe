@@ -12,6 +12,10 @@ class Group < ActiveRecord::Base
 		self.name = Faker::Commerce.color.capitalize
 	end
 
+	def user_notification_count(user)
+		self.notifications.where(user: user).count
+	end
+
 	def check_space
 		self.can_join = self.users.count < self.user_limit
 		save
