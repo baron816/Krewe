@@ -30,13 +30,20 @@ class User < ActiveRecord::Base
 		unless group.nil?
 			self.groups << group
 			group.check_space
+			join_group_notifications(group)
 		else
 			Group.create(longitude: self.longitude, latitude: self.latitude, category: self.category).users << self
 		end
 	end
 
-	def active_notifications
-		self.notifications.where(viewed: false).order(created_at: :desc).limit(3)
+	def join_group_notifications(group)
+		group.users.each do |user|
+			Notification.create(group_id: group.id, user_id: user.id, poster_id: self.id, category: 'Join') unless user == self
+		end
+	end
+
+	def active_notifications(category)
+		self.notifications.where(viewed: false, category: category).order(created_at: :desc).limit(3)
 	end
 
 	def address
