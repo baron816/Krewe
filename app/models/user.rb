@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
 
 	def join_group_notifications(group)
 		group.users.each do |user|
-			Notification.create(group_id: group.id, user_id: user.id, poster_id: self.id, category: 'Join') unless user == self
+			Notification.create(group: group, user: user, poster: self, category: 'Join') unless user == self
 		end
 	end
 
