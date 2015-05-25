@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20150524152534) do
     t.integer  "user_id"
     t.integer  "poster_id"
     t.boolean  "viewed",     default: false
+    t.string   "category"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

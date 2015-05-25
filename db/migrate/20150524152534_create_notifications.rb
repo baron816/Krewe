@@ -5,6 +5,7 @@ class CreateNotifications < ActiveRecord::Migration
     	t.references :user
     	t.references :poster
     	t.boolean :viewed, default: false
+    	t.string :category
 
     	t.timestamps
     end
