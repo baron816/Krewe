@@ -1,10 +1,6 @@
 require "rails_helper"
 
 describe "Message" do
-  it "builds a message" do
-  	expect(build(:message)).to be_valid
-  end
-
   before do
     @message = create(:message)
   end
@@ -20,4 +16,10 @@ describe "Message" do
   it "has a group" do
   	expect(@message.group).to be_a(Group)
   end
+
+  it "has a group with a latitude" do
+    expect(@message.group.latitude).to eql(40.7094706)
+  end
+
+  
 end
