@@ -8,11 +8,6 @@ describe Group do
 	end
 	
 	context "two users" do	
-
-		it 'creates a new group' do
-			expect(build(:group)).to be_valid
-		end
-
 		it	'has 2 user' do
 			@group1 = Group.first
 			expect(@group1.users.length).to eq(2)
