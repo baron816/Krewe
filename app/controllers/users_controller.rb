@@ -7,6 +7,7 @@ class UsersController < ApplicationController
 	end
 
 	def public_profile
+		redirect_to root_path unless current_user.friends.include?(@user)
 	end
 
 	def edit
