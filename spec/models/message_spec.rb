@@ -2,11 +2,14 @@ require "rails_helper"
 
 describe "Message" do
   before do
-    @message = create(:message)
+    @user = create(:user_home)
+    create(:user_wtc)
+    create(:user_121)
+    @message = Message.create(group: @user.groups.first, user: @user, content: Faker::Lorem.sentence(5, true, 8))
   end
 
   it "has string content" do
-  	expect(@message.content).to be_a(String)
+    expect(@message.content).to be_a(String)
   end
 
   it "has a user" do
@@ -20,6 +23,4 @@ describe "Message" do
   it "has a group with a latitude" do
     expect(@message.group.latitude).to eql(40.7094706)
   end
-
-  
 end
