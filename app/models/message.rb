@@ -5,10 +5,6 @@ class Message < ActiveRecord::Base
 	after_create do	
 		send_notifications
 	end
-
-	def say
-		self.group
-	end
 	
 	def send_notifications
 		self.group.users.each do |user|
