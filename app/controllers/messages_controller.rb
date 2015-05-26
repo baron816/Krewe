@@ -2,11 +2,8 @@ class MessagesController < ApplicationController
 	def create
 		@message = Message.new(message_params)
 
-		if @message.save
-			redirect_to(@message.group)
-		else
-			render :new
-		end
+		@message.save
+		redirect_to(@message.group)
 	end
 
 	private
