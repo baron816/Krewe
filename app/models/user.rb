@@ -22,11 +22,11 @@ class User < ActiveRecord::Base
 	after_validation :geocode
 
 	def group_ids
-		self.groups.map { |group| group.id }
+		self.groups.any? ? self.groups.map { |group| group.id } : [-1]
 	end
 
 	def group_search
-		Group.where('id not in (?)', group_ids).near(self, 0.5).where(can_join: true, category: self.category).take
+		Group.near(self, 0.5).where(can_join: true, category: self.category).where('id not in (?)', group_ids).take
 	end
 
 	def find_or_create_group
