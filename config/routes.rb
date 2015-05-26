@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   get '/add_group' => 'users#add_group', :as => :add_group
 
-  get '/groups/:id/drop' => 'groups#drop', :as => :drop
+  get '/groups/:id/drop_user' => 'groups#drop_user', :as => :drop_user
 
   get 'users/:id/public_profile' => 'users#public_profile', :as => :public_profile
 

@@ -11,7 +11,7 @@ class GroupsController < ApplicationController
 		@messages = Message.order(created_at: :desc).paginate(page: params[:page], per_page: 5)
 	end
 
-	def drop
+	def drop_user
 		@group = Group.includes(:users).find(params[:id])
 		@group.drop_user(current_user)
 		redirect_to user_path(current_user)
