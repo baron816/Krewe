@@ -2,14 +2,27 @@
 <h5><%= link_to "Profile", public_profile_path(current_user), class: "btn btn-info" %></h5>
 <h5><%= link_to "Edit", edit_user_path, class: "btn btn-warning" %></h5>
 
-<h3>Groups</h3>
-<ul class="list-group">
-	<% @user.groups.each do |group| %>
-		<li class="list-group-item"><%= link_to group.name, group_path(group) %> 
-			<span class='badge'><%= group.user_notification_count(current_user) if group.user_notification_count(current_user) > 0 %></span>
-		</li>
-	<% end %>
-</ul>
+<div class="col-md-6">
+	<h3>Friends</h3>
+	<ul class="list-group">
+		<% @user.friends.uniq.each do |friend| %>
+			<li class="list-group-item">
+				<%= link_to friend.name, public_profile_path(friend) %>
+			</li>
+		<% end %>
+	</ul>
+</div>
 
-<h5><%= link_to '<i class="glyphicon glyphicon-plus"></i> Add Group'.html_safe, add_group_path, class: 'btn btn-success' %> 
-</h5>
+<div class="col-md-6">
+	<h3>Groups</h3>
+	<ul class="list-group">
+		<% @user.groups.each do |group| %>
+			<li class="list-group-item"><%= link_to group.name, group_path(group) %> 
+				<span class='badge'><%= group.user_notification_count(current_user) if group.user_notification_count(current_user) > 0 %></span>
+			</li>
+		<% end %>
+	</ul>
+	<h5><%= link_to '<i class="glyphicon glyphicon-plus"></i> Add Group'.html_safe, add_group_path, class: 'btn btn-success' %> 
+	</h5>
+</div>
+
