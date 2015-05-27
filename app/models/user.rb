@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
 	has_many :messages
 	has_many :notifications
 	has_many :friends, through: :groups, source: :users
+	has_many :personal_messages
 
 	after_create do
 		find_or_create_group
