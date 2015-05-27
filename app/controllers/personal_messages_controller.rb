@@ -1,10 +1,13 @@
 class PersonalMessagesController < ApplicationController
-	before_filter :find_personal_message
+	def create
+		@personal_message = PersonalMessage.new(personal_message_params)
 
-	
+		@personal_message.save
+		redirect_to user_public_profile_path(@personal_message.receiver)
+	end
 
 	private
-	def find_personal_message
-		@personal_message = PersonalMessages.find(params[:id]) if params[:id]
+	def personal_message_params
+		params.require(:personal_message).permit(:content, :sender_id, :receiver_id)
 	end
 end
