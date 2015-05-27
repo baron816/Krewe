@@ -52,6 +52,16 @@ class User < ActiveRecord::Base
 		self.notifications.where(viewed: false, category: category).order(created_at: :desc).limit(3)
 	end
 
+	def personal_notifications(user)
+		active_notifications("Personal").where(poster: user)
+	end
+
+	def dismiss_notifications(user)
+		personal_notifications(user).each do |notification|
+			notification.dismiss
+		end
+	end
+
 	def address
 		[street, city, state].join(', ')
 	end
