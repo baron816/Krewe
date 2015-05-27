@@ -1,0 +1,6 @@
+<%= form_for(@personal_message) do |f| %>
+	<%= f.text_area :content, class: 'form-control' %>
+	<%= f.hidden_field :sender_id, value: current_user.id %>
+	<%= f.hidden_field :receiver_id, value: @user.id %>
+	<%= f.submit "Submit", class: 'btn btn-primary', id: 'new-message-submit' %>
+<% end %>
