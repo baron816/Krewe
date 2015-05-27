@@ -15,5 +15,7 @@ Rails.application.routes.draw do
 
   get '/groups/:id/drop_user' => 'groups#drop_user', :as => :drop_user
 
+  resources :personal_messages, only: [:create]
+
   root 'home#index'
 end
