@@ -8,6 +8,7 @@ class UsersController < ApplicationController
 
 	def public_profile
 		redirect_to root_path unless current_user.friends.include?(@user)
+		@personal_message = PersonalMessage.new
 	end
 
 	def edit
@@ -44,7 +45,7 @@ class UsersController < ApplicationController
 
 	private
 	def set_user
-		@user = User.find(params[:id])
+		@user = User.find(params[:user_id])
 	end
 
 	def check_user
