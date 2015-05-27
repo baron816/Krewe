@@ -8,6 +8,8 @@ class UsersController < ApplicationController
 
 	def public_profile
 		redirect_to root_path unless current_user.friends.include?(@user)
+		users = [@user, current_user]
+		@personal_messages = PersonalMessage.where(sender: users).where(receiver: users)
 		@personal_message = PersonalMessage.new
 	end
 
