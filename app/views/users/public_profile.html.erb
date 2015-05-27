@@ -13,5 +13,7 @@
 		</div>
 	<% end %>
 
+	<%= will_paginate @personal_messages, renderer: BootstrapPagination::Rails %>
+
 	<%= render 'personal_messages/new' %>
 <% end %>
