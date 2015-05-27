@@ -5,10 +5,12 @@
 	<h3>Friends</h3>
 	<ul class="list-group">
 		<% @user.friends.uniq.each do |friend| %>
-			<li class="list-group-item">
-				<%= link_to friend.name, user_public_profile_path(friend) %>
-				<span class='badge'><%= @user.personal_notifications(friend).count if @user.personal_notifications(friend).count > 0  %></span>
-			</li>
+			<% unless friend == current_user %>
+				<li class="list-group-item">
+					<%= link_to friend.name, user_public_profile_path(friend) %>
+					<span class='badge'><%= @user.personal_notifications(friend).count if @user.personal_notifications(friend).count > 0  %></span>
+				</li>
+			<% end %>
 		<% end %>
 	</ul>
 </div>
