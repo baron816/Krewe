@@ -11,6 +11,7 @@ class UsersController < ApplicationController
 		users = [@user, current_user]
 		@personal_messages = PersonalMessage.where(sender: users).where(receiver: users)
 		@personal_message = PersonalMessage.new
+		current_user.dismiss_notifications(@user)
 	end
 
 	def edit
