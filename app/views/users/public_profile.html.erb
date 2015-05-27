@@ -4,3 +4,14 @@
 	Location: <%= @user.city %>, <%= @user.state %> <br>
 	Age: <%= @user.age %> 
 </div>
+
+<% unless current_user == @user %>
+	<% @personal_messages.each do |message| %>
+		<div class="well">
+			<%= link_to message.sender.name, user_public_profile_path(message.sender) %> <%= local_time_ago(message.created_at) %>: <br>
+			<%= message.content %> 
+		</div>
+	<% end %>
+
+	<%= render 'personal_messages/new' %>
+<% end %>
