@@ -48,7 +48,7 @@ class User < ActiveRecord::Base
 		end
 	end
 
-	def active_notifications(category = ["Personal", "Group", "Join"])
+	def active_notifications(category = ["Personal", "Message", "Join"])
 		self.notifications.where(viewed: false, category: category).order(created_at: :desc).limit(3)
 	end
 
