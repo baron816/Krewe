@@ -1,7 +1,7 @@
 <%= form_for([@group, @activity]) do |f| %>
-	<%= f.text_field :plan, class: 'form-control' %>
+	<%= f.text_field :plan, placeholder: "What's the plan?", class: 'form-control' %>
+	<%= f.datetime_select :appointment %>
 	<%= f.hidden_field :group_id, value: @group.id %>
 	<%= f.hidden_field :proposer_id, value: current_user.id %>
 	<%= f.submit "Submit", class: 'form-control' %>
 <% end %>
-  
