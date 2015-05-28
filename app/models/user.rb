@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
 	has_many :personal_messages
 	has_many :user_activities
 	has_many :activities, through: :user_activities
+	has_many :owned_activities, class_name: "Activity", foreign_key: "proposer_id"
 
 	after_create do
 		find_or_create_group
