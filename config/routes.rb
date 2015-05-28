@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   resources :groups, only: [:index, :show] do
   	resources :messages, only: [:create]
+    resources :activities, only: [:create]
   end
 
   get 'login' => 'sessions#new'
