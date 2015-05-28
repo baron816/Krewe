@@ -23,3 +23,7 @@ PersonalMessage.create(receiver: User.second, sender: User.third, content: Faker
 PersonalMessage.create(receiver: User.third, sender: User.first, content: Faker::Lorem.sentence(5, true, 8))
 PersonalMessage.create(receiver: User.first, sender: User.third, content: Faker::Lorem.sentence(5, true, 8))
 PersonalMessage.create(receiver: User.second, sender: User.first, content: Faker::Lorem.sentence(5, true, 8))
+
+Activity.create(proposer: User.second, group: Group.first, plan: "MacLaren's Pub for drinks", appointment: (Time.now + 3.hours))
+Activity.create(proposer: User.second, group: Group.first, plan: "Central Perk for coffee", appointment: (Time.now + 4.days))
+Activity.create(proposer: User.third, group: Group.first, plan: "Monk's diner for lunch", appointment: (Time.now + 8.days))
