@@ -7,6 +7,15 @@ class ActivitiesController < ApplicationController
 		redirect_to(@activity.group)
 	end
 
+	def add_user
+		@activity = Activity.find(params[:activities_id])
+		@user = User.find(params[:user_id])
+
+		@activity.users << @user
+
+		redirect_to(@activity.group)
+	end
+
 	private
 	def activity_params
 		params.require(:activity).permit(:plan, :proposer_id, :group_id, :appointment)
