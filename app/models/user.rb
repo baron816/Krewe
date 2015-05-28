@@ -62,6 +62,11 @@ class User < ActiveRecord::Base
 		end
 	end
 
+	def show_personal_notifications(user)
+		notifications = self.personal_notifications(user)
+		notifications.count if notifications.count > 0
+	end
+
 	def address
 		[street, city, state].join(', ')
 	end
