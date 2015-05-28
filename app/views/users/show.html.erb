@@ -8,7 +8,7 @@
 			<% unless friend == current_user %>
 				<li class="list-group-item">
 					<%= link_to friend.name, user_public_profile_path(friend) %>
-					<span class='badge'><%= @user.personal_notifications(friend).count if @user.personal_notifications(friend).count > 0  %></span>
+					<span class='badge'><%= @user.show_personal_notifications(friend) %></span>
 				</li>
 			<% end %>
 		<% end %>

@@ -22,7 +22,7 @@
 	<ul class="list-group">
 		<% @group.users.each do |user| %>
 			<li class="list-group-item"><%= link_to user.name, user_public_profile_path(user) %>
-			<span class='badge'><%= current_user.personal_notifications(user).count if current_user.personal_notifications(user).count > 0  %></span></li>
+			<span class='badge'><%= current_user.show_personal_notifications(user)  %></span></li>
 		<% end %>
 	</ul>
 </div>
