@@ -3,7 +3,9 @@ require "rails_helper"
 describe "Notification" do
 	before do
 		@user = create(:user_home)
+		sleep(0.6)
 	    @user2 = create(:user_wtc)
+	    sleep(0.6)
 	    create(:user_121)
   	end
 
@@ -26,7 +28,7 @@ describe "Notification" do
 
   	context "group message" do
 		before do
-		    Message.create(group: @user.groups.first, user: @user, content: Faker::Lorem.sentence(5, true, 8))
+		    Message.create(group: Group.first, user: @user, content: Faker::Lorem.sentence(5, true, 8))
 		end
 
 	  	it "new message creates notifications" do
@@ -34,9 +36,12 @@ describe "Notification" do
 	  	end
 
 	  	it "@user doesnt get notifications for its message" do
-	  		expect(@user.active_notifications('Group').count).to eql(0)
+	  		expect(@user.active_notifications('Message').count).to eql(0)
 	  	end
 
+	  	it "@user2 gets notification for @users message" do
+	  		expect(@user2.active_notifications('Message').count).to eql(1)
+	  	end
   	end
 
   	context "personal message" do
@@ -45,7 +50,7 @@ describe "Notification" do
   		end
   		
 	  	it "new personal message creates notification" do
-	  		expect(Notification.count).to eql(1)
+	  		expect(Notification.count).to eql(4)
 	  	end
   	end
 end
