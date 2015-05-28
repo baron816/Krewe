@@ -6,4 +6,6 @@ $(document).ready(function(){
 			$('#new-message-submit').removeClass('disabled')
 		};
 	})
+
+	$('.datetimepicker').datetimepicker({});
 })
