@@ -2,16 +2,6 @@
 	<%= @group.name %> <%= link_to "<i class='glyphicon glyphicon-trash'></i> Drop Group".html_safe, drop_user_path, class: 'btn btn-danger' %>
 </h1>
 
-<div class="col-md-6">
-	<h2>Members</h2>
-	<ul class="list-group">
-		<% @group.users.each do |user| %>
-			<li class="list-group-item"><%= link_to user.name, user_public_profile_path(user) %></li>
-		<% end %>
-	</ul>
-</div>
-
-<%= render 'activities/new' %>
 
 <h2>Messages</h2>
 
@@ -26,3 +16,17 @@
 
 <h2>Write a new message</h2>
 <%= render "messages/new" %>
+
+<div class="col-md-6">
+	<h2>Members</h2>
+	<ul class="list-group">
+		<% @group.users.each do |user| %>
+			<li class="list-group-item"><%= link_to user.name, user_public_profile_path(user) %></li>
+		<% end %>
+	</ul>
+</div>
+
+<h2>Activities</h2>
+<div class="col-md-6">
+	<%= render 'activities/new' %>
+</div>
