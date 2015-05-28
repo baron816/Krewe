@@ -33,7 +33,7 @@
 	<ul class="list-group">
 		<% @user.activities.each do |activity| %>
 			<li class="list-group-item">
-				<%= activity.plan %> <%= local_time_ago(activity.appointment) %>
+				<%= link_to activity.plan, activity.group %> <%= local_time_ago(activity.appointment) %>
 			</li>
 		<% end %>
 	</ul>
