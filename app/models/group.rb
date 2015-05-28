@@ -3,6 +3,7 @@ class Group < ActiveRecord::Base
 	has_many :users, through: :user_groups
 	has_many :messages
 	has_many :notifications
+	has_many :activities
 
 	before_create do
 		name_group
