@@ -28,6 +28,10 @@ class Group < ActiveRecord::Base
 		notification_count if notification_count > 0
 	end
 
+	def upcoming_activities
+		activities.where('appointment > ?', Time.now).order(appointment: :asc)
+	end
+
 	def check_space
 		self.can_join = self.users.count < self.user_limit
 		save
