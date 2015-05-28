@@ -30,7 +30,7 @@
 <h2>Activities</h2>
 <div class="col-md-6">
 	<ul class="list-group">
-		<% @group.activities.each do |activity| %>
+		<% @group.upcoming_activities.each do |activity| %>
 		<li class="list-group-item">
 			<%= activity.plan %> <%= local_time_ago(activity.appointment) %>
 		</li>
