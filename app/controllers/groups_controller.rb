@@ -9,6 +9,7 @@ class GroupsController < ApplicationController
 		@group.dismiss_notifications(current_user)
 		@message = Message.new
 		@messages = Message.order(created_at: :desc).paginate(page: params[:page], per_page: 5)
+		@activity = Activity.new
 	end
 
 	def drop_user
