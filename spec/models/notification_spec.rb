@@ -6,7 +6,7 @@ describe "Notification" do
 		sleep(0.6)
 	    @user2 = create(:user_wtc)
 	    sleep(0.6)
-	    create(:user_121)
+	    @user3 = create(:user_121)
   	end
 
   	it "users joining group creates notifications" do
@@ -58,6 +58,29 @@ describe "Notification" do
   		
 	  	it "new personal message creates notification" do
 	  		expect(Notification.count).to eql(4)
+	  	end
+
+	  	it "@user doesn't receive notification from its message" do
+	  		expect(@user.active_notifications('Personal').count).to eql(0)
+	  	end
+
+	  	it "@user3 doesn't receive notification from message not sent to it" do
+	  		expect(@user3.active_notifications('Personal').count).to eql(0)
+	  	end
+
+	  	it "@user2 does receive notification from message" do
+	  		expect(@user2.active_notifications('Personal').count).to eql(1)
+	  	end
+
+	  	describe "dismiss_notifications" do
+	  	  before do
+	  	    PersonalMessage.create(receiver: User.second, sender: @user3, content: Faker::Lorem.sentence(5, true, 8))
+	  	  end
+
+	  	  it "@user2 can dismiss @user's notification without dismissing @user3's" do
+	  	  	@user2.dismiss_notifications(@user)
+	  	  	expect(@user2.active_notifications('Personal').count).to eql(1)
+	  	  end
 	  	end
   	end
 end
