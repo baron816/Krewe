@@ -23,6 +23,11 @@ class Group < ActiveRecord::Base
 		end
 	end
 
+	def show_group_notifications(user)
+		notification_count = self.user_notification_count(user)
+		notification_count if notification_count > 0
+	end
+
 	def check_space
 		self.can_join = self.users.count < self.user_limit
 		save
