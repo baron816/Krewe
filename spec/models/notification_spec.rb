@@ -42,6 +42,11 @@ describe "Notification" do
 	  	it "@user2 gets notification for @users message" do
 	  		expect(@user2.active_notifications('Message').count).to eql(1)
 	  	end
+
+	  	it "@user2 can dismiss notification" do
+	  		Group.first.dismiss_notifications(@user2)
+	  		expect(@user2.active_notifications('Message').count).to eql(0)
+	  	end
   	end
 
   	context "personal message" do
