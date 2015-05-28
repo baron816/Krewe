@@ -45,6 +45,10 @@ class User < ActiveRecord::Base
 		end
 	end
 
+	def upcoming_activities
+		activities.where('appointment > ?', Time.now).order(appointment: :asc)
+	end
+
 	def join_group_notifications(group)
 		group.users.each do |user|
 			Notification.create(group: group, user: user, poster: self, category: 'Join') unless user == self
