@@ -17,13 +17,15 @@ describe "Notification" do
   		expect(@user.active_notifications.count).to eql(2)
   	end
 
-  	it "user has active notifications for join" do
-  		expect(@user.active_notifications('Join').count).to eql(2)
-  	end
+  	context "join notification" do
+	  	it "user has active notifications for join" do
+	  		expect(@user.active_notifications('Join').count).to eql(2)
+	  	end
 
-  	it "can dismiss all group notifications for a user" do
-  		Group.first.dismiss_notifications(@user)
-  		expect(@user.active_notifications('Join').count).to eql(0)
+	  	it "can dismiss all group notifications for a user" do
+	  		Group.first.dismiss_notifications(@user)
+	  		expect(@user.active_notifications('Join').count).to eql(0)
+	  	end
   	end
 
   	context "group message" do
