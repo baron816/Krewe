@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-	before_action :set_user, only: [:public_profile, :update, :edit]
+	before_action :set_user, only: [:public_profile, :update, :edit, :add_group]
 
 	def show
 		@user = User.includes(:groups, :notifications).find(params[:id])
@@ -42,8 +42,8 @@ class UsersController < ApplicationController
 	end
 
 	def add_group
-		current_user.find_or_create_group
-		redirect_to user_path(current_user)
+		@user.find_or_create_group
+		redirect_to user_path(@user)
 	end
 
 	private

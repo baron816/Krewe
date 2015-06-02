@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :users, except: [:index, :destroy] do
     get 'public_profile'
+    get 'add_group'
   end
 
   resources :groups, only: [:show] do
@@ -11,8 +12,6 @@ Rails.application.routes.draw do
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
-
-  get '/add_group' => 'users#add_group', :as => :add_group
 
   get '/groups/:id/drop_user' => 'groups#drop_user', :as => :drop_user
 
