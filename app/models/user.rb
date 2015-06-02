@@ -59,6 +59,10 @@ class User < ActiveRecord::Base
 		self.notifications.where(viewed: false, category: category).order(created_at: :desc).limit(3)
 	end
 
+	def render_divider?
+		(self.active_notifications("Message").any? || self.active_notifications("Personal").any?) && self.active_notifications("Join").any?
+	end
+
 	def personal_notifications(user)
 		active_notifications("Personal").where(poster: user)
 	end

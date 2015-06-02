@@ -9,7 +9,7 @@
 			<li><a href="/users/<%= notification.poster.id %>/public_profile "><%= notification.poster.name %> sent you a message <%= local_time_ago(notification.created_at) %></a></li>
 		<% end %>
 		
-		<% if (current_user.active_notifications("Message").any? || current_user.active_notifications("Personal").any?) && current_user.active_notifications("Join").any? %>
+		<% if current_user.render_divider? %>
 			<li class="divider"></li>
 		<% end %>
 		
