@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     get 'public_profile'
   end
 
-  resources :groups, only: [:index, :show] do
+  resources :groups, only: [:show] do
   	resources :messages, only: [:create]
     resources :activities, only: [:create]
   end

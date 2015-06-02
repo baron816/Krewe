@@ -1,8 +1,4 @@
 class GroupsController < ApplicationController
-	def index
-		@groups = Group.all
-	end
-
 	def show
 		@group = Group.includes(:users, :notifications, :activities).find(params[:id])
 		redirect_to user_path(current_user) unless @group.users.include?(current_user)
