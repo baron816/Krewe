@@ -1,4 +1,4 @@
-<%= form_for([@group, @activity]) do |f| %>
+<%= form_for(@activity) do |f| %>
 	<%= f.text_field :plan, placeholder: "What's the plan?", class: 'form-control' %>
 	<%= f.datetime_select :appointment %>
 	<%= f.hidden_field :group_id, value: @group.id %>

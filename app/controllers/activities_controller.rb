@@ -9,12 +9,11 @@ class ActivitiesController < ApplicationController
 	end
 
 	def add_user
-		@activity = Activity.find(params[:activities_id])
-		@user = User.find(params[:user_id])
+		@activity = Activity.find(params[:activity_id])
 
-		@activity.users << @user
+		@activity.users << current_user
 
-		redirect_to(@activity.group)
+		redirect_to(current_user)
 	end
 
 	private
