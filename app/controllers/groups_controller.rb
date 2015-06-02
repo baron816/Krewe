@@ -9,7 +9,7 @@ class GroupsController < ApplicationController
 	end
 
 	def drop_user
-		@group = Group.includes(:users).find(params[:id])
+		@group = Group.includes(:users).find(params[:group_id])
 		@group.drop_user(current_user)
 		redirect_to user_path(current_user)
 	end

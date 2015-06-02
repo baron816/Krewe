@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   end
 
   resources :groups, only: [:show] do
+    get 'drop_user'
   	resources :messages, only: [:create]
     resources :activities, only: [:create]
   end
@@ -12,8 +13,6 @@ Rails.application.routes.draw do
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
-
-  get '/groups/:id/drop_user' => 'groups#drop_user', :as => :drop_user
 
   get 'activities/:activities_id/add_user/:user_id' => 'activities#add_user', :as => :add_user
 
