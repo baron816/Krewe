@@ -49,6 +49,21 @@ class User < ActiveRecord::Base
 		activities.where('appointment > ?', Time.now).order(appointment: :asc)
 	end
 
+
+	def address
+		[street, city, state].join(', ')
+	end
+
+	def birthday
+		Date.new(birth_year, birth_month, birth_day)
+	end
+
+	def age
+		now = Date.today
+		now.year - birthday.year - ((now.month > birthday.month || (now.month == birthday.month && now.day >= birthday.day)) ? 0 : 1)
+	end
+
+	#notification methods
 	def join_group_notifications(group)
 		group.users.each do |user|
 			Notification.create(group: group, user: user, poster: self, category: 'Join') unless user == self
@@ -76,18 +91,5 @@ class User < ActiveRecord::Base
 	def show_personal_notifications(user)
 		notifications = self.personal_notifications(user)
 		notifications.count if notifications.count > 0
-	end
-
-	def address
-		[street, city, state].join(', ')
-	end
-
-	def birthday
-		Date.new(birth_year, birth_month, birth_day)
-	end
-
-	def age
-		now = Date.today
-		now.year - birthday.year - ((now.month > birthday.month || (now.month == birthday.month && now.day >= birthday.day)) ? 0 : 1)
 	end
 end
