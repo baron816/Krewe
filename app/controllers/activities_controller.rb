@@ -1,5 +1,4 @@
 class ActivitiesController < ApplicationController
-
 	def create
 		@activity = Activity.new(activity_params)
 		@activity.appointment -= Time.now.utc_offset
