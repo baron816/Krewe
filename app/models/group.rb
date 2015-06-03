@@ -18,8 +18,10 @@ class Group < ActiveRecord::Base
 	end
 
 	def dismiss_notifications(user)
-		self.notifications.where(user: user).each do |notification|
-			notification.dismiss
+		if self.notifications.where(user: user).any?
+			self.notifications.where(user: user).each do |notification|
+				notification.dismiss
+			end
 		end
 	end
 
