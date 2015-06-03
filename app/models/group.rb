@@ -5,6 +5,8 @@ class Group < ActiveRecord::Base
 	has_many :notifications
 	has_many :activities
 
+	reverse_geocoded_by :latitude, :longitude
+
 	before_create do
 		name_group
 	end
@@ -13,6 +15,23 @@ class Group < ActiveRecord::Base
 		self.name = Faker::Commerce.color.capitalize
 	end
 
+
+	def upcoming_activities
+		activities.where('appointment > ?', Time.now).order(appointment: :asc)
+	end
+
+	def check_space
+		self.can_join = self.users.count < self.user_limit
+		save
+	end
+
+	def drop_user(user)
+		users.delete(user)
+		check_space
+	end
+	
+	#notification methods
+	
 	def unviewed_user_notifications(user)
 		self.notifications.where(user: user, viewed: false)
 	end
@@ -34,20 +53,4 @@ class Group < ActiveRecord::Base
 		notification_count = self.user_notification_count(user)
 		notification_count if notification_count > 0
 	end
-
-	def upcoming_activities
-		activities.where('appointment > ?', Time.now).order(appointment: :asc)
-	end
-
-	def check_space
-		self.can_join = self.users.count < self.user_limit
-		save
-	end
-
-	def drop_user(user)
-		users.delete(user)
-		check_space
-	end
-
-	reverse_geocoded_by :latitude, :longitude
 end
