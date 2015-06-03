@@ -13,13 +13,18 @@ class Group < ActiveRecord::Base
 		self.name = Faker::Commerce.color.capitalize
 	end
 
+	def unviewed_user_notifications(user)
+		self.notifications.where(user: user, viewed: false)
+	end
+
 	def user_notification_count(user)
-		self.notifications.where(user: user, viewed: false).count
+		unviewed_user_notifications(user).count
 	end
 
 	def dismiss_notifications(user)
-		if self.notifications.where(user: user).any?
-			self.notifications.where(user: user).each do |notification|
+		notifications = unviewed_user_notifications(user)
+		if notifications.any?
+			notifications.each do |notification|
 				notification.dismiss
 			end
 		end
