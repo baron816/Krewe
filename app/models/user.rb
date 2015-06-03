@@ -26,11 +26,11 @@ class User < ActiveRecord::Base
 	after_validation :geocode
 
 	def group_ids
-		self.groups.any? ? self.groups.map { |group| group.id } : [-1]
+		groups.any? ? groups.map { |group| group.id } : [-1]
 	end
 
 	def group_search
-		Group.near(self, 0.5).where(can_join: true, category: self.category).where('id not in (?)', group_ids).take
+		Group.near(self, 0.5).where(can_join: true, category: category).where('id not in (?)', group_ids).take
 	end
 
 	def find_or_create_group
@@ -41,7 +41,7 @@ class User < ActiveRecord::Base
 			group.check_space
 			join_group_notifications(group)
 		else
-			Group.create(longitude: self.longitude, latitude: self.latitude, category: self.category).users << self
+			Group.create(longitude: longitude, latitude: latitude, category: category).users << self
 		end
 	end
 
@@ -70,12 +70,12 @@ class User < ActiveRecord::Base
 		end
 	end
 
-	def active_notifications(category = ["Personal", "Message", "Join"])
-		self.notifications.where(viewed: false, category: category).order(created_at: :desc).limit(3)
+	def active_notifications(categories = ["Personal", "Message", "Join"])
+		self.notifications.where(viewed: false, category: categories).order(created_at: :desc).limit(3)
 	end
 
 	def render_divider?
-		(self.active_notifications("Message").any? || self.active_notifications("Personal").any?) && self.active_notifications("Join").any?
+		(active_notifications("Message").any? || active_notifications("Personal").any?) && active_notifications("Join").any?
 	end
 
 	def personal_notifications(user)
@@ -89,7 +89,7 @@ class User < ActiveRecord::Base
 	end
 
 	def show_personal_notifications(user)
-		notifications = self.personal_notifications(user)
+		notifications = personal_notifications(user)
 		notifications.count if notifications.count > 0
 	end
 end

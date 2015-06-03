@@ -21,7 +21,7 @@ class Group < ActiveRecord::Base
 	end
 
 	def check_space
-		self.can_join = false if self.users.count == self.user_limit
+		self.can_join = false if users.count == user_limit
 		save
 	end
 
@@ -33,7 +33,7 @@ class Group < ActiveRecord::Base
 	#notification methods
 	
 	def unviewed_user_notifications(user)
-		self.notifications.where(user: user, viewed: false)
+		notifications.where(user: user, viewed: false)
 	end
 
 	def user_notification_count(user)
@@ -50,7 +50,7 @@ class Group < ActiveRecord::Base
 	end
 
 	def show_group_notifications(user)
-		notification_count = self.user_notification_count(user)
+		notification_count = user_notification_count(user)
 		notification_count if notification_count > 0
 	end
 end

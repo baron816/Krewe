@@ -8,6 +8,6 @@ class Activity < ActiveRecord::Base
 	validates :appointment, presence: true
 
 	def user_going?(user)
-		self.users.include?(user)
+		users.include?(user)
 	end
 end
