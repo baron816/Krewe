@@ -9,4 +9,9 @@ class PersonalMessage < ActiveRecord::Base
 	def send_notification
 		Notification.create(user: self.receiver, poster: self.sender, category: "Personal")
 	end
+
+	def self.users_messages(params = {})
+		users = [params[:first_user], params[:second_user]]
+		where(sender: users).where(receiver: users).order(created_at: :desc)
+	end
 end
