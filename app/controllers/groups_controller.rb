@@ -4,7 +4,7 @@ class GroupsController < ApplicationController
 		redirect_to user_path(current_user) unless @group.users.include?(current_user)
 		@group.dismiss_notifications(current_user)
 		@message = Message.new
-		@messages = Message.order(created_at: :desc).paginate(page: params[:page], per_page: 5).where(group: @group)
+		@messages = @group.messages.order(created_at: :desc).paginate(page: params[:page], per_page: 5)
 		@activity = Activity.new
 	end
 
