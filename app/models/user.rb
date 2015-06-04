@@ -49,6 +49,10 @@ class User < ActiveRecord::Base
 		activities.where('appointment > ?', Time.now).order(appointment: :asc)
 	end
 
+	def unique_friends
+		friends.uniq
+	end
+
 
 	def address
 		[street, city, state].join(', ')
