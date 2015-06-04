@@ -1,7 +1,6 @@
 <%= form_for(@activity) do |f| %>
 	<%= f.text_field :plan, placeholder: "What's the plan?", class: 'form-control' %>
 	<div class="form-group">
-		<%= label_tag :appointment, "DateTime" %>
 		<div class="input-group date" id='datetimepicker'>
 			<%= f.text_field :appointment, class: 'form-control' %>
 			<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
