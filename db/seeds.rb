@@ -1,29 +1,17 @@
-User.create(name: Faker::Name.name, password: '123456', password: '123456', email: Faker::Internet.email, birth_day: '4', birth_month: '3', birth_year: '1984', street: '135 William Street', city: 'New York', state: 'NY', category: 'Post-Grad')
-User.create(name: Faker::Name.name, password: '123456', password: '123456', email: Faker::Internet.email, birth_day: '4', birth_month: '4', birth_year: '1986', street: '48 Wall Street', city: 'New York', state: 'NY', category: 'Post-Grad')
-User.create(name: Faker::Name.name, password: '123456', password: '123456', email: Faker::Internet.email, birth_day: '18', birth_month: '6', birth_year: '1991', street: '120 William Street', city: 'New York', state: 'NY', category: 'Post-Grad')
-User.create(name: Faker::Name.name, password: '123456', password: '123456', email: Faker::Internet.email, birth_day: '1', birth_month: '9', birth_year: '1994', street: '121 William Street', city: 'New York', state: 'NY', category: 'Post-Grad')
-User.create(name: Faker::Name.name, password: '123456', password: '123456', email: Faker::Internet.email, birth_day: '5', birth_month: '1', birth_year: '1976', street: '50 Wall Street', city: 'New York', state: 'NY', category: 'Young Parent')
-User.create(name: Faker::Name.name, password: '123456', password: '123456', email: Faker::Internet.email, birth_day: '12', birth_month: '8', birth_year: '1992', street: '128 William Street', city: 'New York', state: 'NY', category: 'Post-Grad')
-User.create(name: Faker::Name.name, password: '123456', password: '123456', email: Faker::Internet.email, birth_day: '2', birth_month: '9', birth_year: '1996', street: '12 William Street', city: 'New York', state: 'NY', category: 'Post-Grad')
-User.create(name: Faker::Name.name, password: '123456', password: '123456', email: Faker::Internet.email, birth_day: '9', birth_month: '11', birth_year: '1966', street: '52 Wall Street', city: 'New York', state: 'NY', category: 'Business Networkers')
-User.create(name: Faker::Name.name, password: '123456', password: '123456', email: Faker::Internet.email, birth_day: '22', birth_month: '12', birth_year: '1982', street: '122 William Street', city: 'New York', state: 'NY', category: 'Young Parent')
+require 'csv'
 
-Message.create(group: Group.first, user: User.first, content: Faker::Lorem.sentence(5, true, 8))
-Message.create(group: Group.first, user: User.first, content: Faker::Lorem.sentence(5, true, 8))
-Message.create(group: Group.first, user: User.second, content: Faker::Lorem.sentence(5, true, 8))
-Message.create(group: Group.first, user: User.third, content: Faker::Lorem.sentence(5, true, 8))
-Message.create(group: Group.first, user: User.first, content: Faker::Lorem.sentence(5, true, 8))
-Message.create(group: Group.first, user: User.third, content: Faker::Lorem.sentence(5, true, 8))
-Message.create(group: Group.first, user: User.second, content: Faker::Lorem.sentence(5, true, 8))
+CSV.foreach(Rails.root.join('db', 'users.csv'), {headers: true, header_converters: :symbol}) do |row|
+	User.create(row.to_hash)
+end
 
-PersonalMessage.create(receiver: User.first, sender: User.second, content: Faker::Lorem.sentence(5, true, 8))
-PersonalMessage.create(receiver: User.second, sender: User.first, content: Faker::Lorem.sentence(5, true, 8))
-PersonalMessage.create(receiver: User.first, sender: User.second, content: Faker::Lorem.sentence(5, true, 8))
-PersonalMessage.create(receiver: User.second, sender: User.third, content: Faker::Lorem.sentence(5, true, 8))
-PersonalMessage.create(receiver: User.third, sender: User.first, content: Faker::Lorem.sentence(5, true, 8))
-PersonalMessage.create(receiver: User.first, sender: User.third, content: Faker::Lorem.sentence(5, true, 8))
-PersonalMessage.create(receiver: User.second, sender: User.first, content: Faker::Lorem.sentence(5, true, 8))
+CSV.foreach(Rails.root.join('db', 'messages.csv'), {headers: true, header_converters: :symbol}) do |row|
+	Message.create(row.to_hash)
+end
 
-Activity.create(proposer: User.second, group: Group.first, plan: "MacLaren's Pub for drinks", appointment: (Time.now + 3.hours))
-Activity.create(proposer: User.second, group: Group.first, plan: "Central Perk for coffee", appointment: (Time.now + 4.days))
-Activity.create(proposer: User.third, group: Group.first, plan: "Monk's diner for lunch", appointment: (Time.now + 8.days))
+CSV.foreach(Rails.root.join('db', 'personal_messages.csv'), {headers: true, header_converters: :symbol}) do |row|
+	PersonalMessage.create(row.to_hash)
+end
+
+CSV.foreach(Rails.root.join('db', 'activities.csv'), {headers: true, header_converters: :symbol}) do |row|
+	Activity.create(row.to_hash)
+end
