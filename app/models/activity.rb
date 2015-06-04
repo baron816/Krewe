@@ -6,8 +6,15 @@ class Activity < ActiveRecord::Base
 
 	validates :plan, presence: true, length: { minimum: 3 }
 	validates :appointment, presence: true
+	validate :is_a_time?
 
 	def user_going?(user)
 		users.include?(user)
+	end
+
+	def is_a_time?
+		unless appointment.is_a?(Time)
+			errors.add(:appointment, "must be a time")
+		end
 	end
 end
