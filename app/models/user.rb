@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
 	def find_or_create_group
 		group = group_search
 
-		unless group.nil?
+		if group
 			self.groups << group
 			group.check_space
 			join_group_notifications(group)
