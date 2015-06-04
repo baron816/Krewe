@@ -4,7 +4,7 @@ class Notification < ActiveRecord::Base
 	belongs_to :poster, class_name: 'User'
 
 	def dismiss
-		self.viewed = true if self.viewed == false
+		self.viewed = true if viewed == false
 		save
 	end
 end
