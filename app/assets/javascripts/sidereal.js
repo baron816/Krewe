@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	$('#message_content').on("keyup", function(){
+	$('.message-box').on("keyup", function(){
 		if ($(this).val().length < 3) {
 			$('#new-message-submit').addClass('disabled')
 		} else {
