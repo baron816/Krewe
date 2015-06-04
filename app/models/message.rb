@@ -2,6 +2,8 @@ class Message < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :group
 
+	delegate :name, to: :user, prefix: true
+
 	validates :content, presence: true, length: { minimum: 3 }
 
 	after_create do	
