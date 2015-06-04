@@ -2,6 +2,8 @@ class PersonalMessage < ActiveRecord::Base
 	belongs_to :sender, class_name: 'User'
 	belongs_to :receiver, class_name: 'User'
 
+	delegate :name, to: :sender, prefix: true
+
 	after_create do
 		send_notification
 	end
