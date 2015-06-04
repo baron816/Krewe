@@ -8,6 +8,8 @@ class Activity < ActiveRecord::Base
 	validates :appointment, presence: true
 	validate :is_a_time?
 
+	delegate :name, to: :group, prefix: true
+
 	def user_going?(user)
 		users.include?(user)
 	end
