@@ -71,7 +71,7 @@ class User < ActiveRecord::Base
 	end
 
 	def active_notifications(categories = ["Personal", "Message", "Join"])
-		self.notifications.where(viewed: false, category: categories).order(created_at: :desc).limit(3)
+		notifications.where(viewed: false, category: categories).order(created_at: :desc).limit(3)
 	end
 
 	def render_divider?
