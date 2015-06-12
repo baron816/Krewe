@@ -7,6 +7,7 @@ describe "Notification" do
 	    @user2 = create(:user_wtc)
 	    sleep(0.6)
 	    @user3 = create(:user_121)
+	    @group = Group.first
   	end
 
   	it "users joining group creates notifications" do
@@ -23,7 +24,7 @@ describe "Notification" do
 	  	end
 
 	  	it "can dismiss all group notifications for a user" do
-	  		Group.first.dismiss_notifications(@user)
+	  		@user.dismiss_group_notifications(@group)
 	  		expect(@user.active_notifications('Join').count).to eql(0)
 	  	end
   	end
@@ -46,7 +47,7 @@ describe "Notification" do
 	  	end
 
 	  	it "@user2 can dismiss notification" do
-	  		Group.first.dismiss_notifications(@user2)
+	  		@user2.dismiss_group_notifications(Group.first)
 	  		expect(@user2.active_notifications('Message').count).to eql(0)
 	  	end
   	end
@@ -78,7 +79,7 @@ describe "Notification" do
 	  	  end
 
 	  	  it "@user2 can dismiss @user's notification without dismissing @user3's" do
-	  	  	@user2.dismiss_notifications(@user)
+	  	  	@user2.dismiss_personal_notifications(@user)
 	  	  	expect(@user2.active_notifications('Personal').count).to eql(1)
 	  	  end
 	  	end
