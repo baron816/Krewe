@@ -6,6 +6,9 @@ class Notification < ActiveRecord::Base
 	delegate :name, to: :poster, prefix: true
 	delegate :name, to: :group, prefix: true
 
+	scope :unviewed_notifications, ->{ where(viewed: false) }
+	scope :category_notifications, ->(category) { where(category: category) }
+
 	def dismiss
 		self.viewed = true if viewed == false
 		save
