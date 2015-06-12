@@ -37,26 +37,4 @@ class Group < ActiveRecord::Base
 			Notification.create(group: self, user: user, poster: new_user, category: 'Join') unless user == new_user
 		end
 	end
-	
-	def unviewed_user_notifications(user)
-		notifications.where(user: user, viewed: false)
-	end
-
-	def user_notification_count(user)
-		unviewed_user_notifications(user).count
-	end
-
-	def dismiss_notifications(user)
-		notifications = unviewed_user_notifications(user)
-		if notifications.any?
-			notifications.each do |notification|
-				notification.dismiss
-			end
-		end
-	end
-
-	def show_group_notifications(user)
-		notification_count = user_notification_count(user)
-		notification_count if notification_count > 0
-	end
 end

@@ -82,7 +82,7 @@ class User < ActiveRecord::Base
 		active_notifications("Personal").where(poster: user)
 	end
 
-	def dismiss_notifications(user)
+	def dismiss_personal_notifications(user)
 		personal_notifications(user).each do |notification|
 			notification.dismiss
 		end
@@ -91,5 +91,27 @@ class User < ActiveRecord::Base
 	def show_personal_notifications(user)
 		notifications = personal_notifications(user)
 		notifications.count if notifications.count > 0
+	end
+
+	def unviewed_group_notifications(group)
+		notifications.group_notifications(group).unviewed_notifications
+	end
+
+	def unviewed_group_notifications_count(group)
+		unviewed_group_notifications(group).count
+	end
+
+	def dismiss_group_notifications(group)
+		notifications = unviewed_group_notifications(group)
+		if notifications.any?
+			notifications.each do |notification|
+				notification.dismiss
+			end
+		end
+	end
+
+	def show_group_notifications_count(group)
+		notification_count = user_notification_count(group)
+		notification_count if notification_count > 0
 	end
 end

@@ -9,6 +9,8 @@ class Notification < ActiveRecord::Base
 	scope :unviewed_notifications, ->{ where(viewed: false) }
 	scope :category_notifications, ->(category) { where(category: category) }
 
+	scope :group_notifications, ->(group) { where(group: group) }
+
 	def dismiss
 		self.viewed = true if viewed == false
 		save
