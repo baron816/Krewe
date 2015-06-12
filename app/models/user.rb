@@ -111,7 +111,7 @@ class User < ActiveRecord::Base
 	end
 
 	def show_group_notifications_count(group)
-		notification_count = user_notification_count(group)
+		notification_count = unviewed_group_notifications_count(group)
 		notification_count if notification_count > 0
 	end
 end
