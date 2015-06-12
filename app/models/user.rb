@@ -25,6 +25,7 @@ class User < ActiveRecord::Base
 
 	after_validation :geocode
 
+
 	def group_ids
 		groups.any? ? groups.map { |group| group.id } : [-1]
 	end
@@ -75,7 +76,7 @@ class User < ActiveRecord::Base
 	end
 
 	def active_notifications(categories = ["Personal", "Message", "Join"])
-		notifications.where(viewed: false, category: categories).order(created_at: :desc).limit(3)
+		notifications.unviewed_notifications.category_notifications(categories).order(created_at: :desc).limit(3)
 	end
 
 	def render_divider?
