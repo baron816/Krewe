@@ -20,7 +20,7 @@
 	<ul class="list-group">
 		<% @user.groups.each do |group| %>
 			<li class="list-group-item"><%= link_to group.name, group_path(group) %> 
-				<span class='badge'><%= group.show_group_notifications(current_user) %></span>
+				<span class='badge'><%= current_user.show_group_notifications_count(group) %></span>
 			</li>
 		<% end %>
 	</ul>
