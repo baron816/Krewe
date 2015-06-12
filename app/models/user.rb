@@ -40,7 +40,7 @@ class User < ActiveRecord::Base
 		if group
 			self.groups << group
 			group.check_space
-			join_group_notifications(group)
+			group.join_group_notifications(self)
 		else
 			Group.create(longitude: longitude, latitude: latitude, category: category).users << self
 		end
@@ -69,11 +69,6 @@ class User < ActiveRecord::Base
 	end
 
 	#notification methods
-	def join_group_notifications(group)
-		group.users.each do |user|
-			Notification.create(group: group, user: user, poster: self, category: 'Join') unless user == self
-		end
-	end
 
 	def active_notifications(categories = ["Personal", "Message", "Join"])
 		notifications.unviewed_notifications.category_notifications(categories).order(created_at: :desc).limit(3)

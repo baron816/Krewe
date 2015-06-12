@@ -31,6 +31,12 @@ class Group < ActiveRecord::Base
 	end
 	
 	#notification methods
+
+	def join_group_notifications(new_user)
+		users.each do |user|
+			Notification.create(group: self, user: user, poster: new_user, category: 'Join') unless user == new_user
+		end
+	end
 	
 	def unviewed_user_notifications(user)
 		notifications.where(user: user, viewed: false)
