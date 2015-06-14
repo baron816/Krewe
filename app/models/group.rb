@@ -11,10 +11,13 @@ class Group < ActiveRecord::Base
 		name_group
 	end
 
+	scope :open_groups, -> { where(can_join: true) }
+	scope :category_groups, ->(category) { where(category: category) }
+	scope :excluded_users, ->(friend_ids) { includes(:users).where("users.id not in (?)", friend_ids).references(:users) }
+
 	def name_group
 		self.name = Faker::Commerce.color.capitalize
 	end
-
 
 	def upcoming_activities
 		activities.where('appointment > ?', Time.now).order(appointment: :asc)
