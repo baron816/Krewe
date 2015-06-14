@@ -26,8 +26,8 @@ class User < ActiveRecord::Base
 	after_validation :geocode
 
 
-	def group_ids
-		groups.any? ? groups.map { |group| group.id } : [-1]
+	def friend_ids
+		friends.any? ? friends.pluck(:id) : [-1]
 	end
 
 	def group_search
