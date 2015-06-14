@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
 	end
 
 	def group_search
-		Group.open_groups.category_groups(self.category).near(self, 0.5).excluded_users(friend_ids)
+		Group.open_groups.category_groups(self.category).near(self, 0.5).excluded_users(friend_ids)[0]
 	end
 
 	def find_or_create_group
