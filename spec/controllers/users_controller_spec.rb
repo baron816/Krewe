@@ -74,4 +74,18 @@ describe UsersController do
     	expect(response).to redirect_to user_path(assigns[:user])
     end
   end
+
+  describe "GET #new" do
+    before do
+      get :new
+    end
+
+    it "makes a new user" do
+    	expect(assigns[:user]).to be_a_new(User)
+    end
+
+    it "renders new template" do
+    	expect(response).to render_template(:new)
+    end
+  end
 end
