@@ -10,6 +10,8 @@ class Activity < ActiveRecord::Base
 
 	delegate :name, to: :group, prefix: true
 
+	scope :future_activities, -> { where('appointment > ?', Time.now) }
+
 	def user_going?(user)
 		users.include?(user)
 	end

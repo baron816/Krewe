@@ -47,7 +47,7 @@ class User < ActiveRecord::Base
 	end
 
 	def upcoming_activities
-		activities.where('appointment > ?', Time.now).order(appointment: :asc)
+		activities.future_activities.order(appointment: :asc)
 	end
 
 	def unique_friends
