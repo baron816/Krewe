@@ -19,4 +19,8 @@ class Notification < ActiveRecord::Base
 	def self.unviewed_categories(categories)
 		unviewed_notifications.category_notifications(categories)
 	end
+
+	def self.unviewed_groups(group)
+		group_notifications(group).unviewed_notifications
+	end
 end

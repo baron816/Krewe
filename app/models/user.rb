@@ -94,7 +94,7 @@ class User < ActiveRecord::Base
 	end
 
 	def unviewed_group_notifications(group)
-		notifications.group_notifications(group).unviewed_notifications
+		notifications.unviewed_groups(group)
 	end
 
 	def unviewed_group_notifications_count(group)
