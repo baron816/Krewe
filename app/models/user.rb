@@ -71,7 +71,7 @@ class User < ActiveRecord::Base
 	#notification methods
 
 	def active_notifications(categories = ["Personal", "Message", "Join"])
-		notifications.unviewed_notifications.category_notifications(categories).order(created_at: :desc).limit(3)
+		notifications.unviewed_categories(categories).order(created_at: :desc).limit(3)
 	end
 
 	def render_divider?

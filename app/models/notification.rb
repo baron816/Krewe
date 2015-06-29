@@ -15,4 +15,8 @@ class Notification < ActiveRecord::Base
 		self.viewed = true if viewed == false
 		save
 	end
+
+	def self.unviewed_categories(categories)
+		unviewed_notifications.category_notifications(categories)
+	end
 end
