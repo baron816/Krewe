@@ -1,10 +1,14 @@
 require 'rails_helper'
 
 describe UsersController do
+  before do
+    @user = create(:user_home)
+    @user2 = create(:user_wtc)
+    session[:user_id] = @user
+  end
+
   describe "GET #show" do
     before do
-      @user = create(:user_home)
-      session[:user_id] = @user
       get :show, id: @user.id
     end
 
@@ -14,6 +18,21 @@ describe UsersController do
 
     it "locates the user" do
     	expect(assigns[:user]).to eql(@user)
+    end
+  end
+
+  describe "GET #public_profile" do
+    before do
+      get :public_profile, user_id: @user2.id
+      @message = PersonalMessage.create(sender: @user, receiver: @user2, content: "The message content")
+    end
+
+    it "renders public_profile template" do
+    	expect(response).to render_template(:public_profile)
+    end
+
+    it "returns the personal messages" do
+    	expect(assigns[:personal_messages]).to include(@message)
     end
   end
 end
