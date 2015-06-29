@@ -2,11 +2,13 @@ require "rails_helper"
 
 describe "Notification" do
 	before do
+		sleep(0.6)
 		@user = create(:user_home)
 		sleep(0.6)
 	    @user2 = create(:user_wtc)
 	    sleep(0.6)
 	    @user3 = create(:user_121)
+	    sleep(0.6)
 	    @group = Group.first
   	end
 
