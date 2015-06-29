@@ -49,4 +49,14 @@ describe UsersController do
     	expect(assigns[:user]).to eql(@user)
     end
   end
+
+  describe "POST #update" do
+    before do
+      put :update, { id: @user.id, user: { category: "Young Parent" } }
+    end
+
+    it "changes user category to young parent" do
+    	expect(assigns[:user].category).to eql("Young Parent")
+    end
+  end
 end
