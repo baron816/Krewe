@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :users, except: [:index, :destroy] do
     get 'public_profile'
-    patch 'add_group'
+    post 'add_group'
   end
 
   resources :groups, only: [:show] do
@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   end
 
   resources :activities, only: [:create] do
-    patch 'add_user'
+    post 'add_user'
   end
 
   get 'login' => 'sessions#new'

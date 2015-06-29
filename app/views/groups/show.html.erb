@@ -32,7 +32,7 @@
 	<ul class="list-group">
 		<% @group.upcoming_activities.each do |activity| %>
 		<li class="list-group-item">
-			<%= activity.plan %> <%= local_time_ago(activity.appointment) %> <% unless activity.user_going?(current_user) %><%= link_to "Go", activity_add_user_path(activity), method: :patch, class: 'btn btn-success' %><% end %>
+			<%= activity.plan %> <%= local_time_ago(activity.appointment) %> <% unless activity.user_going?(current_user) %><%= link_to "Go", activity_add_user_path(activity), method: :put, class: 'btn btn-success' %><% end %>
 		</li>
 		<% end %>
 	</ul>
