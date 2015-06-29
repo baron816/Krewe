@@ -19,9 +19,6 @@ class Group < ActiveRecord::Base
 		self.open_groups.category_groups(category).near(user, 0.5).excluded_users(friend_ids)[0]
 	end
 
-	def name_group
-		self.name = Faker::Commerce.color.capitalize
-	end
 
 	def upcoming_activities
 		activities.where('appointment > ?', Time.now).order(appointment: :asc)
@@ -43,5 +40,10 @@ class Group < ActiveRecord::Base
 		users.each do |user|
 			Notification.create(group: self, user: user, poster: new_user, category: 'Join') unless user == new_user
 		end
+	end
+
+	private
+	def name_group
+		self.name = Faker::Commerce.color.capitalize
 	end
 end
