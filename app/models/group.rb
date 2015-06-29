@@ -15,6 +15,10 @@ class Group < ActiveRecord::Base
 	scope :category_groups, ->(category) { where(category: category) }
 	scope :excluded_users, ->(friend_ids) { includes(:users).where("users.id not in (?)", friend_ids).references(:users) }
 
+	def self.search(category, friend_ids, user)
+		self.open_groups.category_groups(category).near(user, 0.5).excluded_users(friend_ids)[0]
+	end
+
 	def name_group
 		self.name = Faker::Commerce.color.capitalize
 	end

@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
 	end
 
 	def find_or_create_group
-		group = group_search
+		group = Group.search(category, friend_ids, self)
 
 		if group
 			self.groups << group
