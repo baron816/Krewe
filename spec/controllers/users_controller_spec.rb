@@ -35,4 +35,18 @@ describe UsersController do
     	expect(assigns[:personal_messages]).to include(@message)
     end
   end
+
+  describe "GET #edit" do
+    before do
+      get :edit, id: @user.id
+    end
+
+    it "renders the edit template" do
+    	expect(response).to render_template(:edit)
+    end
+
+    it "finds the correct_user" do
+    	expect(assigns[:user]).to eql(@user)
+    end
+  end
 end
