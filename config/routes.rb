@@ -1,16 +1,16 @@
 Rails.application.routes.draw do
   resources :users, except: [:index, :destroy] do
     get 'public_profile'
-    get 'add_group'
+    patch 'add_group'
   end
 
   resources :groups, only: [:show] do
-    get 'drop_user'
+    delete 'drop_user'
   	resources :messages, only: [:create]
   end
 
   resources :activities, only: [:create] do
-    get 'add_user'
+    patch 'add_user'
   end
 
   get 'login' => 'sessions#new'

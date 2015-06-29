@@ -24,7 +24,7 @@
 			</li>
 		<% end %>
 	</ul>
-	<h5><%= link_to '<i class="glyphicon glyphicon-plus"></i> Add Group'.html_safe, user_add_group_path(current_user), class: 'btn btn-success' %> 
+	<h5><%= link_to '<i class="glyphicon glyphicon-plus"></i> Add Group'.html_safe, user_add_group_path(current_user), method: :patch, class: 'btn btn-success' %> 
 	</h5>
 </div>
 
