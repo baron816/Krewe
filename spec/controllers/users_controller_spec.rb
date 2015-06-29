@@ -50,13 +50,28 @@ describe UsersController do
     end
   end
 
-  describe "POST #update" do
+  describe "PATCH/PUT #update" do
     before do
       put :update, { id: @user.id, user: { category: "Young Parent" } }
     end
 
     it "changes user category to young parent" do
     	expect(assigns[:user].category).to eql("Young Parent")
+    end
+  end
+
+  describe "POST #create" do
+    before do
+      @user_attributes = attributes_for(:user_121)
+    end
+
+    it "creates a user" do
+    	expect { post :create, user: @user_attributes }.to change(User, :count).by(1)
+    end
+
+    it "redirects to user" do
+    	post :create, user: @user_attributes
+    	expect(response).to redirect_to user_path(assigns[:user])
     end
   end
 end
