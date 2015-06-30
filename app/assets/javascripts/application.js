@@ -16,5 +16,7 @@
 //= require jquery.turbolinks
 //= require moment
 //= require bootstrap-datetimepicker
+//= require underscore
+//= require gmaps/google
 //= require_tree .
 //= require local_time
