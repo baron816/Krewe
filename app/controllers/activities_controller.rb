@@ -21,6 +21,6 @@ class ActivitiesController < ApplicationController
 
 	private
 	def activity_params
-		params.require(:activity).permit(:plan, :proposer_id, :appointment)
+		params.require(:activity).permit(:plan, :proposer_id, :appointment, :location)
 	end
 end
