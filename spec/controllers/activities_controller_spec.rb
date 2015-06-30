@@ -9,12 +9,22 @@ describe ActivitiesController do
 
   describe "POST #create" do
     before do
-      @activity_attributes = {plan: "Dinner", proposer_id: @user, appointment: "2015-07-01 00:55:00" }
+      @activity_attributes = attributes_for(:activity)
       
     end
 
     it "creates a new activity" do
     	expect { post :create, group_id: @group.id, activity: @activity_attributes }.to change(Activity, :count).by(1)
+    end
+  end
+
+  describe "PUT #add_user" do
+  	before do
+  	  @activity = create(:activity)
+  	end
+
+    it "adds the activity to users activities" do
+    	expect { put :add_user, group_id: @group, activity_id: @activity }.to change(@user.activities, :count).by(1)
     end
   end
 end
