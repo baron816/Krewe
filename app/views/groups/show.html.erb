@@ -4,13 +4,14 @@
 
 
 <h2>Messages</h2>
-
-<% @messages.each do |message| %>
-	<div class="well">	
-		<%= link_to message.user_name, user_public_profile_path(message.user) %> <%= local_time_ago(message.created_at) %>: <br>
-		<%= message.content %> 
-	</div>
-<% end %>
+<div class="messages">
+	<% @messages.each do |message| %>
+		<div class="well">	
+			<%= link_to message.user_name, user_public_profile_path(message.user) %> <%= local_time_ago(message.created_at) %>: <br>
+			<%= message.content %> 
+		</div>
+	<% end %>
+</div>
 
 <%= will_paginate @messages, renderer: BootstrapPagination::Rails %>
 
