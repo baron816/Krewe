@@ -32,4 +32,19 @@ describe ActivitiesController do
     	expect(assigns[:activity]).to eq(@activity)
     end
   end
+
+  describe "GET #show" do
+    before do
+      @activity = create(:activity)
+      get :show, group_id: @group, id: @activity
+    end
+
+    it "renders the show template" do
+    	expect(response).to render_template(:show)
+    end
+
+    it "gets the correct activity" do
+    	expect(assigns[:activity]).to eql(@activity)
+    end
+  end
 end
