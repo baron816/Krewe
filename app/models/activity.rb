@@ -4,6 +4,10 @@ class Activity < ActiveRecord::Base
 	has_many :user_activities
 	has_many :users, through: :user_activities
 
+	geocoded_by :location
+
+	after_validation :geocode
+
 	validates :plan, presence: true, length: { minimum: 3 }
 	validates :appointment, presence: true
 	validate :is_a_time?
