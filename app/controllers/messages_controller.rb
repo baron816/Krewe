@@ -3,7 +3,12 @@ class MessagesController < ApplicationController
 		@message = Message.new(message_params)
 
 		@message.save
-		redirect_to(@message.group)
+
+		respond_to do |format|
+			format.html { redirect_to(@message.group) }
+			format.js
+		end
+		
 	end
 
 	private
