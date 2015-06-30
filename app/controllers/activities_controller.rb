@@ -1,6 +1,6 @@
 class ActivitiesController < ApplicationController
 	def create
-		@activity = Group.find(params[:id]).activities.new(activity_params)
+		@activity = Group.find(params[:group_id]).activities.new(activity_params)
 		@activity.appointment -= Time.now.utc_offset
 
 		@activity.save
