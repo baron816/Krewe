@@ -26,5 +26,10 @@ describe ActivitiesController do
     it "adds the activity to users activities" do
     	expect { put :add_user, group_id: @group, activity_id: @activity }.to change(@user.activities, :count).by(1)
     end
+
+    it "finds the correct activity" do
+    	put :add_user, group_id: @group, activity_id: @activity
+    	expect(assigns[:activity]).to eq(@activity)
+    end
   end
 end
