@@ -15,6 +15,10 @@ class ActivitiesController < ApplicationController
 		redirect_to(current_user)
 	end
 
+	def show
+		@activity = Activity.find(params[:id])
+	end
+
 	private
 	def activity_params
 		params.require(:activity).permit(:plan, :proposer_id, :appointment)
