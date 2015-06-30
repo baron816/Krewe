@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :groups, only: [:show] do
     delete 'drop_user'
   	resources :messages, only: [:create]
-    resources :activities, only: :create do
+    resources :activities, only: [:create, :show] do
       post 'add_user'
     end
   end
