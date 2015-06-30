@@ -1,4 +1,4 @@
-proposer_id,group_id,plan,appointment
-2,1,MacLaren's Pub for drinks,2015-06-06 00:40:00 -0400
-2,1,Central Perk for coffee,2015-06-07 21:40:00 -0400
-3,1,Monk's diner for lunch,2015-06-11 21:40:00 -0400
+proposer_id,group_id,plan,location,appointment
+2,1,drinks,MacLaren's Pub,2015-07-06 00:40:00 -0400
+2,1,coffee,Central Perk,2015-07-07 21:40:00 -0400
+3,1,lunch,Monk's diner,2015-07-11 21:40:00 -0400
