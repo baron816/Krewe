@@ -23,6 +23,11 @@ class ActivitiesController < ApplicationController
 		end
 	end
 
+	def new
+		@group = Group.find(params[:group_id])
+		@activity = Activity.new
+	end
+
 	private
 	def activity_params
 		params.require(:activity).permit(:plan, :proposer_id, :appointment, :location)
