@@ -36,8 +36,5 @@
 		</li>
 		<% end %>
 	</ul>
-</div>
-
-<div class="col-md-6">
-	<%= render 'activities/new' %>
+	<%= link_to "Propose Activity", new_group_activity_path(@group), id: 'new_activity', class: 'btn btn-primary', remote: true %>
 </div>
