@@ -1,6 +1,6 @@
 class ActivitiesController < ApplicationController
 	def create
-		@activity = Activity.new(activity_params)
+		@activity = Group.find(params[:id]).activities.new(activity_params)
 		@activity.appointment -= Time.now.utc_offset
 
 		@activity.save
@@ -17,6 +17,6 @@ class ActivitiesController < ApplicationController
 
 	private
 	def activity_params
-		params.require(:activity).permit(:plan, :proposer_id, :group_id, :appointment)
+		params.require(:activity).permit(:plan, :proposer_id, :appointment)
 	end
 end

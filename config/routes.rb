@@ -7,10 +7,9 @@ Rails.application.routes.draw do
   resources :groups, only: [:show] do
     delete 'drop_user'
   	resources :messages, only: [:create]
-  end
-
-  resources :activities, only: [:create] do
-    post 'add_user'
+    resources :activities, only: :create do
+      post 'add_user'
+    end
   end
 
   get 'login' => 'sessions#new'
