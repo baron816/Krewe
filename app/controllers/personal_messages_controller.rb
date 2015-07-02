@@ -3,7 +3,10 @@ class PersonalMessagesController < ApplicationController
 		@personal_message = PersonalMessage.new(personal_message_params)
 
 		@personal_message.save
-		redirect_to user_public_profile_path(@personal_message.receiver)
+		respond_to do |format|
+			format.html { redirect_to user_public_profile_path(@personal_message.receiver) }
+			format.js
+		end
 	end
 
 	private
