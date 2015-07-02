@@ -1,3 +1,3 @@
-$('.messages').prepend('<div class="well"><a href="users/<%= @message.user.id %>/public_profile"><%= @message.user.name %></a> <%= local_time_ago(@message.created_at) %>: <br> <%= @message.content %></div>')
+$('.messages').prepend('<div class="well"><%= link_to @message.user_name, user_public_profile_path(@message.user) %> <%= local_time_ago(@message.created_at) %>: <br> <%= @message.content %></div>')
 $('.messages div:last').remove()
 $('#message_content').val('')
