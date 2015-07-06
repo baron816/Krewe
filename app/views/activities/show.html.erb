@@ -1,5 +1,5 @@
 <div class="well">
-	<h1><%= @activity.plan %></h1>
+	<h1><%= @activity.plan %> <%= link_to "Go", group_activity_add_user_path(@activity.group, @activity), method: :post, class: 'btn btn-success' unless @activity.user_going?(current_user)%></h1>
 	<h1><%= link_to @activity.group_name, @activity.group %></h1>
 	<h2><%= @activity.location %></h2>
 	<h2><%= local_time(@activity.appointment) %></h2>
