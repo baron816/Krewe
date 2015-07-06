@@ -5,9 +5,6 @@ FactoryGirl.define do
 		password = Faker::Internet.password
 		sequence(:password) { password }
 		sequence(:password_confirmation) { password }
-		birth_day { (1..31).to_a.sample }
-		birth_month { (1..12).to_a.sample }
-		birth_year { (1900..1999).to_a.sample }
 
 		factory :post_grads do 
 			category 'Post-Grad'

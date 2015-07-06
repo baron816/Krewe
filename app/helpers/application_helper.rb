@@ -56,31 +56,6 @@ module ApplicationHelper
 	    ]
 	end
 
-	def month_days
-		(1..31).to_a
-	end
-
-	def month_names
-		[
-			['January', 1],
-			['February', 2],
-			['March', 3],
-			['April', 4],
-			['May', 5],
-			['June', 6],
-			['July', 7],
-			['August', 8],
-			['September', 9],
-			['October', 10],
-			['Novermber', 11],
-			['December', 12]
-		]
-	end
-
-	def years
-		(1900..1999).to_a.reverse
-	end
-
 	def categories
 		[
 			{name: 'Post-Grad', description: 'People just out of college'},
