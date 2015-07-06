@@ -1,17 +1,14 @@
 class ActivitiesController < ApplicationController
-	def create
-		@activity = Group.find(params[:group_id]).activities.new(activity_params)
-		@activity.appointment -= Time.now.utc_offset
+	before_action :set_group, only: [:create, :new]
 
-		current_user.activities << @activity
+	def create
+		@activity = @group.activities.new(activity_params)
 
 		if @activity.save
-			redirect_to group_activity_path(@activity.group, @activity)
+			current_user.activities << @activity
+			redirect_to group_activity_path(@group, @activity)
 		else
-			@group = Group.includes(:users, :notifications, :activities).find(params[:group_id])
-			@message = Message.new
-			@messages = @group.messages.order(created_at: :desc).paginate(page: params[:page], per_page: 5)
-			render 'groups/show'
+			redirect_to group_path(@group), flash: { error: @activity.errors.full_messages }
 		end
 	end
 
@@ -32,11 +29,14 @@ class ActivitiesController < ApplicationController
 	end
 
 	def new
-		@group = Group.find(params[:group_id])
 		@activity = Activity.new
 	end
 
 	private
+	def set_group
+		@group = Group.find(params[:group_id])
+	end
+
 	def activity_params
 		params.require(:activity).permit(:plan, :proposer_id, :appointment, :location)
 	end
