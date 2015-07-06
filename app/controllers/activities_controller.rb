@@ -3,8 +3,16 @@ class ActivitiesController < ApplicationController
 		@activity = Group.find(params[:group_id]).activities.new(activity_params)
 		@activity.appointment -= Time.now.utc_offset
 
-		@activity.save
-		redirect_to(@activity.group)
+		current_user.activities << @activity
+
+		if @activity.save
+			redirect_to group_activity_path(@activity.group, @activity)
+		else
+			@group = Group.includes(:users, :notifications, :activities).find(params[:group_id])
+			@message = Message.new
+			@messages = @group.messages.order(created_at: :desc).paginate(page: params[:page], per_page: 5)
+			render 'groups/show'
+		end
 	end
 
 	def add_user
@@ -12,7 +20,7 @@ class ActivitiesController < ApplicationController
 
 		@activity.users << current_user
 
-		redirect_to(current_user)
+		redirect_to group_activity_path(@activity.group, @activity)
 	end
 
 	def show
