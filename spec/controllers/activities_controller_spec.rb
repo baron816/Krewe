@@ -20,15 +20,17 @@ describe ActivitiesController do
 
   describe "PUT #add_user" do
   	before do
-  	  @activity = create(:activity)
+  	  @activity = build(:activity)
+      @activity.group = @group
+      @activity.save
   	end
 
     it "adds the activity to users activities" do
-    	expect { put :add_user, group_id: @group, activity_id: @activity }.to change(@user.activities, :count).by(1)
+    	expect { put :add_user, group_id: @activity.group, activity_id: @activity }.to change(@user.activities, :count).by(1)
     end
 
     it "finds the correct activity" do
-    	put :add_user, group_id: @group, activity_id: @activity
+    	put :add_user, group_id: @activity.group, activity_id: @activity
     	expect(assigns[:activity]).to eq(@activity)
     end
   end
