@@ -8,7 +8,10 @@ class Activity < ActiveRecord::Base
 
 	after_validation :geocode
 
+	before_save :fix_time
+
 	validates :plan, presence: true, length: { minimum: 3 }
+	validates :location, presence: true
 	validates :appointment, presence: true
 	validate :is_a_time?
 
@@ -24,5 +27,9 @@ class Activity < ActiveRecord::Base
 		unless appointment.is_a?(Time)
 			errors.add(:appointment, "must be a time")
 		end
+	end
+
+	def fix_time
+		self.appointment -= Time.now.utc_offset if appointment
 	end
 end
