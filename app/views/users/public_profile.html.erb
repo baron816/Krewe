@@ -2,7 +2,6 @@
 	<h1><%= @user.name %></h1> 
 	Email: <%= mail_to @user.email %> <br>
 	Location: <%= @user.city %>, <%= @user.state %> <br>
-	Age: <%= @user.age %> 
 </div>
 
 <% unless current_user == @user %>
