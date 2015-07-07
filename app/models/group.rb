@@ -32,6 +32,7 @@ class Group < ActiveRecord::Base
 	def drop_user(user)
 		users.delete(user)
 		check_space
+		self.delete if users.empty?
 	end
 	
 	#notification methods
