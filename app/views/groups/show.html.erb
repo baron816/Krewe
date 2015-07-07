@@ -23,7 +23,7 @@
 	<ul class="list-group">
 		<% @group.users.each do |user| %>
 			<li class="list-group-item clearfix"><%= link_to user.name, user_public_profile_path(user) %>
-			<span class='badge'><%= current_user.personal_notifications_count(user) %></span><% unless user.can_vote?(current_user) %><%= link_to "Vote to remove #{user.group_drop_votes_count(@group)}", group_drop_user_votes_path(@group, user_id: user), method: :post, class: 'btn btn-danger pull-right' %> <% end %> </li>
+			<span class='badge'><%= current_user.personal_notifications_count(user) %></span><% if current_user.can_vote?(user) %><%= link_to "Vote to remove #{user.group_drop_votes_count(@group)}", group_drop_user_votes_path(@group, user_id: user), method: :post, class: 'btn btn-danger pull-right' %> <% end %> </li>
 		<% end %>
 	</ul>
 </div>
