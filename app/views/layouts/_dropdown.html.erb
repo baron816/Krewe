@@ -1,4 +1,4 @@
-<% if current_user.active_notifications %>
+<% if current_user.active_notifications.any? %>
 	<a href="#" class="dropdown-toggle" data-toggle='dropdown' role='button' aria-expanded='false'>Notifications <span class='caret'></span></a>
 	<ul class="dropdown-menu" role='menu'>
 		<% current_user.active_notifications_category("Message").each do |note| %>
