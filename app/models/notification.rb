@@ -19,7 +19,7 @@ class Notification < ActiveRecord::Base
 	end
 
 	def self.unviewed_personal_notifications_from_user(user)
-		unviewed_notifications.category_notifications("PersonalMessage").poster_notifications(user)
+		unviewed_category_notifications("PersonalMessage").poster_notifications(user)
 	end
 
 	def self.unviewed_category_notifications(category)
@@ -27,7 +27,7 @@ class Notification < ActiveRecord::Base
 	end
 
 	def self.unviewed_group_notifications_from_group(group)
-		unviewed_notifications.notifiable_notifications(group)
+		unviewed_category_notifications("Group").notifiable_notifications(group)
 	end
 
 	def self.unviewed_message_notifications_from_group(group)
