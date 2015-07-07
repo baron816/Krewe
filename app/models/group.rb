@@ -2,7 +2,7 @@ class Group < ActiveRecord::Base
 	has_many :user_groups
 	has_many :users, through: :user_groups
 	has_many :messages
-	has_many :notifications
+	has_many :notifications, as: :notifiable
 	has_many :activities
 
 	reverse_geocoded_by :latitude, :longitude
@@ -38,7 +38,7 @@ class Group < ActiveRecord::Base
 
 	def join_group_notifications(new_user)
 		users.each do |user|
-			Notification.create(group: self, user: user, poster: new_user, category: 'Join') unless user == new_user
+			self.notifications.create(user: user, poster: new_user) unless user == new_user
 		end
 	end
 
