@@ -83,8 +83,12 @@ class User < ActiveRecord::Base
 	end
 
 	def group_notifications_count(group)
-		group_count = group_notifications(group).count
+		group_count = group_notifications(group).count + group_message_notifications(group).count
 		group_count if group_count > 0
+	end
+
+	def group_message_notifications(group)
+		notifications.unviewed_message_notifications_from_group(group)
 	end
 
 	# def render_divider?
@@ -101,7 +105,7 @@ class User < ActiveRecord::Base
 	end
 
 	def dismiss_group_notifications(group)
-		group_notes = group_notifications(group)
+		group_notes = group_notifications(group) + group_message_notifications(group)
 		if group_notes.any?
 			group_notes.each do |notification|
 				notification.dismiss
