@@ -1,6 +1,7 @@
 class PersonalMessage < ActiveRecord::Base
 	belongs_to :sender, class_name: 'User'
 	belongs_to :receiver, class_name: 'User'
+	has_many :notifications, as: :notifiable
 
 	delegate :name, to: :sender, prefix: true
 
@@ -9,7 +10,7 @@ class PersonalMessage < ActiveRecord::Base
 	end
 
 	def send_notification
-		Notification.create(user: receiver, poster: sender, category: "Personal")
+		self.notifications.create(user: receiver, poster: sender)
 	end
 
 	def self.users_messages(params = {})
