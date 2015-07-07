@@ -59,8 +59,17 @@ class User < ActiveRecord::Base
 		drop_user_votes.group_votes(group).count
 	end
 
+	def not_self(user)
+		self != user
+	end
+
 	def can_vote?(user)
-		self != user && user.drop_user_votes.voter_votes(self).empty?
+		not_self(user) && user.drop_user_votes.voter_votes(self).empty?
+	end
+
+	def voter_vote(user)
+		votes = drop_user_votes(user).take
+		votes if votes
 	end
 
 	#notification methods
