@@ -1,6 +1,7 @@
 class Notification < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :notifiable, polymorphic: true
+	belongs_to :message, ->{ where(notifications: {notifiable_type: "Message"}) }, foreign_key: 'notifiable_id'
 	belongs_to :poster, class_name: 'User'
 
 	delegate :name, to: :poster, prefix: true
@@ -26,10 +27,10 @@ class Notification < ActiveRecord::Base
 	end
 
 	def self.unviewed_group_notifications_from_group(group)
-		unviewed_notifications.notifiable_notifications(group.id)
+		unviewed_notifications.notifiable_notifications(group)
 	end
 
-	def self.message_group_user
-		unviewed_notifications.category_notifications("Message")
+	def self.unviewed_message_notifications_from_group(group)
+		unviewed_notifications.includes(:message).where("messages.group_id" => group)
 	end
 end
