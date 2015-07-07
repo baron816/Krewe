@@ -86,4 +86,29 @@ describe "Notification" do
 	  	  end
 	  	end
   	end
+
+  	context "activity" do
+  		before do
+  		  @activity = Activity.create(group_id: @group.id, plan: "go somewhere", appointment: Time.now, proposer_id: @user, location: "World Trade Center")
+  		end
+
+  		it "creates a activity notifications" do
+  			expect(@user3.active_notifications_category("Activity").count).to eql(1)
+  		end
+
+  		it "creates a notification for the second user" do
+  			expect(@user2.active_notifications_category("Activity").count).to eql(1)
+  		end
+
+  		describe "dismiss_activity_notification" do
+  		  it "dismisses the users activity notification" do
+	  		  @user3.dismiss_activity_notification(@activity)
+	  		  expect(@user3.active_notifications_category("Activity").count).to eql(0)
+  		  end
+
+  		  it "does not dismiss second users notification" do
+  		  	expect(@user2.active_notifications_category("Activity").count).to eql(1)
+  		  end
+  		end
+  	end
 end
