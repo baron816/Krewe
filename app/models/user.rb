@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
 	has_many :user_activities
 	has_many :activities, through: :user_activities
 	has_many :owned_activities, class_name: "Activity", foreign_key: "proposer_id"
+	has_many :drop_user_votes
 
 	after_create do
 		find_or_create_group
@@ -52,6 +53,14 @@ class User < ActiveRecord::Base
 
 	def address
 		[street, city, state].join(', ')
+	end
+
+	def group_drop_votes_count(group)
+		drop_user_votes.group_votes(group).count
+	end
+
+	def can_vote?(user)
+		self == user || drop_user_votes.voter_votes(user).any?
 	end
 
 	#notification methods

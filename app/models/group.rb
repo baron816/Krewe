@@ -4,6 +4,7 @@ class Group < ActiveRecord::Base
 	has_many :messages
 	has_many :notifications, as: :notifiable
 	has_many :activities
+	has_many :drop_user_votes
 
 	reverse_geocoded_by :latitude, :longitude
 
