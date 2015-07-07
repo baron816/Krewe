@@ -7,4 +7,10 @@ class DropUserVotesController < ApplicationController
 		@group.kick_user(@user)
 		redirect_to @group
 	end
+
+	def destroy
+		@vote = DropUserVote.find(params[:id])
+		@vote.destroy
+		redirect_to Group.find(params[:group_id])
+	end
 end
