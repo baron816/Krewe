@@ -1,4 +1,4 @@
-$('.messages').prepend('<div class="well"><%= link_to @message.user_name, user_public_profile_path(@message.user) %> <%= local_time_ago(@message.created_at) %>: <br> <%= @message.content %></div>')
+$('<div class="well"><%= link_to @message.user_name, user_public_profile_path(@message.user) %> <%= local_time_ago(@message.created_at) %>: <br> <%= @message.content %></div>').prependTo('.messages').hide().slideDown("slow")
 
 if ($('.messages > div').length >= 5){
 	$('.messages div:last').remove()
