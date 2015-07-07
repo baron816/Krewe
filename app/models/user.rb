@@ -25,11 +25,6 @@ class User < ActiveRecord::Base
 
 	after_validation :geocode
 
-
-	def friend_ids
-		friends.any? ? friends.pluck(:id) : [-1]
-	end
-
 	def group_search
 		Group.open_groups.category_groups(self.category).near(self, 0.5).excluded_users(friend_ids)[0]
 	end
@@ -112,5 +107,10 @@ class User < ActiveRecord::Base
 				notification.dismiss
 			end
 		end
+	end
+	
+	private
+	def friend_ids
+		friends.any? ? friends.pluck(:id) : [-1]
 	end
 end
