@@ -22,12 +22,12 @@ describe "Notification" do
 
   	context "join notification" do
 	  	it "user has active notifications for join" do
-	  		expect(@user.active_notifications('Join').count).to eql(2)
+	  		expect(@user.active_notifications_category('Group').count).to eql(2)
 	  	end
 
 	  	it "can dismiss all group notifications for a user" do
 	  		@user.dismiss_group_notifications(@group)
-	  		expect(@user.active_notifications('Join').count).to eql(0)
+	  		expect(@user.active_notifications_category('Group').count).to eql(0)
 	  	end
   	end
 
@@ -41,16 +41,16 @@ describe "Notification" do
 	  	end
 
 	  	it "@user doesnt get notifications for its message" do
-	  		expect(@user.active_notifications('Message').count).to eql(0)
+	  		expect(@user.active_notifications_category('Message').count).to eql(0)
 	  	end
 
 	  	it "@user2 gets notification for @users message" do
-	  		expect(@user2.active_notifications('Message').count).to eql(1)
+	  		expect(@user2.active_notifications_category('Message').count).to eql(1)
 	  	end
 
 	  	it "@user2 can dismiss notification" do
 	  		@user2.dismiss_group_notifications(Group.first)
-	  		expect(@user2.active_notifications('Message').count).to eql(0)
+	  		expect(@user2.active_notifications_category('Message').count).to eql(0)
 	  	end
   	end
 
@@ -64,15 +64,15 @@ describe "Notification" do
 	  	end
 
 	  	it "@user doesn't receive notification from its message" do
-	  		expect(@user.active_notifications('Personal').count).to eql(0)
+	  		expect(@user.active_notifications_category('PersonalMessage').count).to eql(0)
 	  	end
 
 	  	it "@user3 doesn't receive notification from message not sent to it" do
-	  		expect(@user3.active_notifications('Personal').count).to eql(0)
+	  		expect(@user3.active_notifications_category('PersonalMessage').count).to eql(0)
 	  	end
 
 	  	it "@user2 does receive notification from message" do
-	  		expect(@user2.active_notifications('Personal').count).to eql(1)
+	  		expect(@user2.active_notifications_category('PersonalMessage').count).to eql(1)
 	  	end
 
 	  	describe "dismiss_notifications" do
@@ -82,7 +82,7 @@ describe "Notification" do
 
 	  	  it "@user2 can dismiss @user's notification without dismissing @user3's" do
 	  	  	@user2.dismiss_personal_notifications(@user)
-	  	  	expect(@user2.active_notifications('Personal').count).to eql(1)
+	  	  	expect(@user2.active_notifications_category('PersonalMessage').count).to eql(1)
 	  	  end
 	  	end
   	end
