@@ -1,6 +1,7 @@
 class Message < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :group
+	has_many :notifications, as: :notifiable
 
 	delegate :name, to: :user, prefix: true
 
@@ -12,7 +13,7 @@ class Message < ActiveRecord::Base
 	
 	def send_notifications
 		group.users.each do |user|
-			Notification.create(group: self.group, user: user, poster: self.user, category: 'Message') unless user == self.user
+			self.notifications.create(user: user, poster: self.user) unless user == self.user
 		end
 	end
 end
