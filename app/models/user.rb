@@ -91,6 +91,10 @@ class User < ActiveRecord::Base
 		notifications.unviewed_message_notifications_from_group(group)
 	end
 
+	def dismiss_activity_notification(activity)
+		notifications.unviewed_activity_notifications(activity).take.dismiss
+	end
+
 	# def render_divider?
 	# 	(active_notifications("Message").any? || active_notifications("PersonalMessage").any?
 	# end
