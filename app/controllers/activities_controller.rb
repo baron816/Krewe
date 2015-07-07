@@ -5,7 +5,7 @@ class ActivitiesController < ApplicationController
 		@activity = @group.activities.new(activity_params)
 
 		if @activity.save
-			current_user.activities << @activity
+			@activity.users << @activity.proposer
 			redirect_to group_activity_path(@group, @activity)
 		else
 			redirect_to group_path(@group), flash: { error: @activity.errors.full_messages }
