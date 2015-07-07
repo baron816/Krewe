@@ -60,7 +60,7 @@ class User < ActiveRecord::Base
 	end
 
 	def can_vote?(user)
-		self == user || drop_user_votes.voter_votes(user).any?
+		self != user && user.drop_user_votes.voter_votes(self).empty?
 	end
 
 	#notification methods
