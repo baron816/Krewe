@@ -2,7 +2,7 @@
 	<a href="#" class="dropdown-toggle" data-toggle='dropdown' role='button' aria-expanded='false'>Notifications <span class='caret'></span></a>
 	<ul class="dropdown-menu" role='menu'>
 		<% current_user.active_notifications_category("Message").each do |note| %>
-			<li><%= link_to "#{note.poster_name} wrote in #{note.notifiable.group.name}", group_path(note.notifiable.group) %></li>
+			<li><%= link_to "#{note.poster_name} wrote in #{note.notifiable.group_name}", group_path(note.notifiable.group) %></li>
 		<% end %>
 
 		<% current_user.active_notifications_category("PersonalMessage").each do |note| %>
