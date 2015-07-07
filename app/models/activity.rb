@@ -3,12 +3,15 @@ class Activity < ActiveRecord::Base
 	belongs_to :proposer, class_name: "User"
 	has_many :user_activities
 	has_many :users, through: :user_activities
+	has_many :notifications, as: :notifiable
 
 	geocoded_by :location
 
 	after_validation :geocode
 
 	before_save :fix_time
+
+	after_create :send_notifications
 
 	validates :plan, presence: true, length: { minimum: 3 }
 	validates :location, presence: true
@@ -31,5 +34,11 @@ class Activity < ActiveRecord::Base
 
 	def fix_time
 		self.appointment -= Time.now.utc_offset if appointment
+	end
+
+	def send_notifications
+		group.users.each do |user|
+			self.notifications.create(user: user, poster: self.proposer)
+		end
 	end
 end
