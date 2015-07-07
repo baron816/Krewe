@@ -22,6 +22,7 @@ class ActivitiesController < ApplicationController
 
 	def show
 		@activity = Activity.find(params[:id])
+		current_user.dismiss_activity_notification(@activity)
 		@hash = Gmaps4rails.build_markers([@activity]) do |activity, marker|
 			marker.lat activity.latitude
 			marker.lng activity.longitude
