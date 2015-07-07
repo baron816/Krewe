@@ -32,8 +32,11 @@
 	<h2>Activities</h2>
 	<ul class="list-group">
 		<% @group.upcoming_activities.each do |activity| %>
-		<li class="list-group-item">
-			<%= link_to activity.plan, group_activity_path(@group, activity) %> <%= local_time_ago(activity.appointment) %> <% unless activity.user_going?(current_user) %><%= link_to "Go", group_activity_add_user_path(@group, activity), method: :post, class: 'btn btn-success' %><% end %>
+		<li class="list-group-item clearfix">
+			<%= link_to activity.plan, group_activity_path(@group, activity) %> <%= local_time_ago(activity.appointment) %>
+			<% unless activity.user_going?(current_user) %>
+				<span class="pull-right"><%= link_to "Go", group_activity_add_user_path(@group, activity), method: :post, class: 'btn btn-success' %></span>
+			<% end %>
 		</li>
 		<% end %>
 	</ul>
