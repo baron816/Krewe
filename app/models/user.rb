@@ -61,48 +61,51 @@ class User < ActiveRecord::Base
 
 	#notification methods
 
-	def active_notifications(categories = ["Personal", "Message", "Join"])
-		notifications.unviewed_categories(categories).order(created_at: :desc).limit(3)
+	def active_notifications
+		notifications.unviewed_notifications
 	end
 
-	def render_divider?
-		(active_notifications("Message").any? || active_notifications("Personal").any?) && active_notifications("Join").any?
+	def active_notifications_category(category)
+		notifications.unviewed_category_notifications(category)
 	end
 
 	def personal_notifications(user)
-		active_notifications("Personal").where(poster: user)
+		notifications.unviewed_personal_notifications_from_user(user)
 	end
+
+	def personal_notifications_count(user)
+		note_count = personal_notifications(user).count
+		note_count if note_count > 0
+	end
+
+	def group_notifications(group)
+		notifications.unviewed_group_notifications_from_group(group)
+	end
+
+	def group_notifications_count(group)
+		group_count = group_notifications(group).count
+		group_count if group_count > 0
+	end
+
+	# def render_divider?
+	# 	(active_notifications("Message").any? || active_notifications("PersonalMessage").any?
+	# end
 
 	def dismiss_personal_notifications(user)
-		personal_notifications(user).each do |notification|
-			notification.dismiss
-		end
-	end
-
-	def show_personal_notifications(user)
-		notifications = personal_notifications(user)
-		notifications.count if notifications.count > 0
-	end
-
-	def unviewed_group_notifications(group)
-		notifications.unviewed_groups(group)
-	end
-
-	def unviewed_group_notifications_count(group)
-		unviewed_group_notifications(group).count
-	end
-
-	def dismiss_group_notifications(group)
-		notifications = unviewed_group_notifications(group)
-		if notifications.any?
-			notifications.each do |notification|
+		personal_notes = personal_notifications(user)
+		if personal_notes.any?
+			personal_notes.each do |notification|
 				notification.dismiss
 			end
 		end
 	end
 
-	def show_group_notifications_count(group)
-		notification_count = unviewed_group_notifications_count(group)
-		notification_count if notification_count > 0
+	def dismiss_group_notifications(group)
+		group_notes = group_notifications(group)
+		if group_notes.any?
+			group_notes.each do |notification|
+				notification.dismiss
+			end
+		end
 	end
 end
