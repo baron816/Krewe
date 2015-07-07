@@ -92,7 +92,8 @@ class User < ActiveRecord::Base
 	end
 
 	def dismiss_activity_notification(activity)
-		notifications.unviewed_activity_notifications(activity).take.dismiss
+		note = notifications.unviewed_activity_notifications(activity).take
+		note.dismiss if note
 	end
 
 	def dismiss_personal_notifications(user)
