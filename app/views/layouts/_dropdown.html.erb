@@ -1,21 +1,20 @@
-<% if current_user.active_notifications.any? %>
+<% if current_user.active_notifications %>
 	<a href="#" class="dropdown-toggle" data-toggle='dropdown' role='button' aria-expanded='false'>Notifications <span class='caret'></span></a>
 	<ul class="dropdown-menu" role='menu'>
-		<% current_user.active_notifications("Message").each do |notification| %>
-			<li><a href="/groups/<%= notification.group.id %>"><%= notification.poster_name %> wrote in <%= notification.group_name %> <%= local_time_ago(notification.created_at) %></a></li>
-		<% end %>
-		
-		<% current_user.active_notifications("Personal").each do |notification| %>
-			<li><a href="/users/<%= notification.poster.id %>/public_profile "><%= notification.poster_name %> sent you a message <%= local_time_ago(notification.created_at) %></a></li>
-		<% end %>
-		
-		<% if current_user.render_divider? %>
-			<li class="divider"></li>
-		<% end %>
-		
-		<% current_user.active_notifications("Join").each do |notification| %>
-			<li><a href="/groups/<%= notification.group.id %>"><%= notification.poster_name %> joined <%= notification.group_name %></a></li>
+		<% current_user.active_notifications_category("Message").each do |note| %>
+			<li><%= link_to "#{note.poster_name} wrote in #{note.notifiable.group.name}", group_path(note.notifiable.group) %></li>
 		<% end %>
 
+		<% current_user.active_notifications_category("PersonalMessage").each do |note| %>
+			<li><%= link_to "#{note.poster_name} sent you a message", user_public_profile_path(note.poster) %></li>
+		<% end %>
+
+		<% current_user.active_notifications_category("Group").each do |note| %>
+			<li><%= link_to "#{note.poster_name} joined #{note.notifiable.name}", group_path(note.notifiable) %></li>
+		<% end %>
+
+		<% current_user.active_notifications_category("Activity").each do |note| %>
+			<li><%= link_to "#{note.poster_name} proposed an activity", group_activity_path(note.notifiable.group, note.notifiable) %></li>
+		<% end %>
 	</ul>
 <% end %>
