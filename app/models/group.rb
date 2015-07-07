@@ -35,6 +35,10 @@ class Group < ActiveRecord::Base
 		check_space
 		self.delete if users.empty?
 	end
+
+	def kick_user(user)
+		drop_user(user) if user.group_drop_votes_count(self) >= 3
+	end
 	
 	#notification methods
 
