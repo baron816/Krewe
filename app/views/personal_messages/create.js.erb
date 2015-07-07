@@ -1,7 +1,7 @@
-$('.personal_messages').prepend('<div class="well"><%= link_to @personal_message.sender_name, user_public_profile_path(@personal_message.sender) %> <%= local_time_ago(@personal_message.created_at) %>: <br> <%= @personal_message.content %></div>')
+$('<div class="well"><%= link_to @personal_message.sender_name, user_public_profile_path(@personal_message.sender) %> <%= local_time_ago(@personal_message.created_at) %>: <br> <%= @personal_message.content %></div>').prependTo('.personal-messages').hide().slideDown("slow")
 
-if ($('.personal_messages > div').length >= 5){
-	$('.personal_messages div:last').remove()
+if ($('.personal-messages > div').length >= 5){
+	$('.personal-messages div:last').remove()
 }
 
 $('#personal_message_content').val('')
