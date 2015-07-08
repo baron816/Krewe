@@ -10,7 +10,8 @@ describe ActivitiesController do
   describe "POST #create" do
     before do
       @activity_attributes = attributes_for(:activity)
-      
+      @activity_attributes[:group_id] = @group.id
+      @activity_attributes[:proposer_id] = @user.id
     end
 
     it "creates a new activity" do
@@ -18,12 +19,13 @@ describe ActivitiesController do
     end
   end
 
+	before do
+	  @activity = build(:activity)
+    @activity.group = @group
+    @activity.save
+	end
+
   describe "PUT #add_user" do
-  	before do
-  	  @activity = build(:activity)
-      @activity.group = @group
-      @activity.save
-  	end
 
     it "adds the activity to users activities" do
     	expect { put :add_user, group_id: @activity.group, activity_id: @activity }.to change(@user.activities, :count).by(1)
@@ -37,7 +39,6 @@ describe ActivitiesController do
 
   describe "GET #show" do
     before do
-      @activity = create(:activity)
       get :show, group_id: @group, id: @activity
     end
 
