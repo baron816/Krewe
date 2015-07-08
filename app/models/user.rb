@@ -22,6 +22,8 @@ class User < ActiveRecord::Base
 		find_or_create_group
 	end
 
+	before_create { generate_token(:auth_token) }
+
 	geocoded_by :address
 
 	after_validation :geocode
@@ -75,6 +77,12 @@ class User < ActiveRecord::Base
 	def voter_vote(user)
 		votes = drop_user_votes(user).take
 		votes if votes
+	end
+
+	def generate_token(column)
+		begin
+			self[column] = SecureRandom.urlsafe_base64
+		end while User.exists?(column => self[column])
 	end
 
 	#notification methods
