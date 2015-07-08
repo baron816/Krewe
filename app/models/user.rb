@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
 	validates :street, presence: true
 	validates :city, presence: true
 	validates :category, presence: true
-	validates :password, presence: true, length: { minimum: 6 }
+	validates :password, presence: true, length: { minimum: 6 }, on: :create
 
 	has_secure_password
 	has_many :user_groups
@@ -44,6 +44,13 @@ class User < ActiveRecord::Base
 
 	def upcoming_activities
 		activities.future_activities.order(appointment: :asc)
+	end
+
+	def update_sign_in(ip)
+		self.last_sign_in_at = Time.now
+		self.sign_in_count += 1
+		self.last_sign_in_ip = ip
+		save
 	end
 
 	def unique_friends
