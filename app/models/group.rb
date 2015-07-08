@@ -26,8 +26,12 @@ class Group < ActiveRecord::Base
 	end
 
 	def check_space
-		if users.count == user_limit
-			self.can_join = false 
+		users_count = users.count
+		if users_count == user_limit - 1
+			self.can_join = true
+			save
+		elsif users_count == user_limit
+			self.can_join = false
 			save
 		end
 	end
