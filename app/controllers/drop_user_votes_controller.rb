@@ -1,16 +1,29 @@
 class DropUserVotesController < ApplicationController
+	before_action :set_group
+
 	def create
-		@group = Group.find(params[:group_id])
 		@user = User.find(params[:user_id])
 		@vote = @group.drop_user_votes.new(user: @user, voter: current_user)
 		@vote.save
 		@group.kick_user(@user)
-		redirect_to @group
+		respond_to do |format|
+			format.html { redirect_to @group }
+			format.js
+		end			
 	end
 
 	def destroy
 		@vote = DropUserVote.find(params[:id])
+		@user = @vote.user
 		@vote.destroy
-		redirect_to Group.find(params[:group_id])
+		respond_to do |format|
+			format.html { redirect_to @group }
+			format.js
+		end
+	end
+
+	private
+	def set_group
+		@group = Group.find(params[:group_id])
 	end
 end
