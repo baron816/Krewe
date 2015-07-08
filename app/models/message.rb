@@ -4,6 +4,7 @@ class Message < ActiveRecord::Base
 	has_many :notifications, as: :notifiable
 
 	delegate :name, to: :user, prefix: true
+	delegate :name, to: :group, prefix: true
 
 	validates :content, presence: true, length: { minimum: 3 }
 
