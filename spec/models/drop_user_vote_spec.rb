@@ -39,13 +39,13 @@ describe DropUserVote do
 
     it "doesn't kick user after two votes" do
     	@group.kick_user(@user2)
-    	expect(@user2.groups).to include(@group)
+    	expect(@group.users).to include(@user2)
     end
 
     it "kicks user after third vote" do
     	DropUserVote.create(voter: @user4, user: @user2, group: @group)
     	@group.kick_user(@user2)
-    	expect(@user2.groups).not_to include(@group)
+    	expect(@group.users).not_to include(@user2)
     end
   end
 end
