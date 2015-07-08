@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Sidereal</title>
+  <title>Sidereal <% if current_user && current_user.active_notifications_count > 0 %>
+  	(<%= current_user.active_notifications_count %>)
+  <% end %>
+  </title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
