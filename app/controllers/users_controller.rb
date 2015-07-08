@@ -44,8 +44,8 @@ class UsersController < ApplicationController
 	end
 
 	def add_group
-		@user.find_or_create_group
-		redirect_to user_path(@user)
+		group = @user.find_or_create_group
+		redirect_to group_path(group)
 	end
 
 	private
