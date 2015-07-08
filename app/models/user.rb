@@ -26,10 +26,6 @@ class User < ActiveRecord::Base
 
 	after_validation :geocode
 
-	def group_search
-		Group.open_groups.category_groups(self.category).near(self, 0.5).excluded_users(friend_ids)[0]
-	end
-
 	def find_or_create_group
 		group = Group.search(category, friend_ids, self)
 
@@ -38,8 +34,10 @@ class User < ActiveRecord::Base
 			group.check_space
 			group.join_group_notifications(self)
 		else
-			Group.create(longitude: longitude, latitude: latitude, category: category).users << self
+			group = Group.create(longitude: longitude, latitude: latitude, category: category)
+			group.users << self
 		end
+		group	
 	end
 
 	def upcoming_activities
