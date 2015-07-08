@@ -85,6 +85,10 @@ class User < ActiveRecord::Base
 		notifications.unviewed_notifications
 	end
 
+	def active_notifications_count
+		active_notifications.count
+	end
+
 	def active_notifications_category(category)
 		notifications.unviewed_category_notifications(category)
 	end
