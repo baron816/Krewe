@@ -6,6 +6,8 @@ class Notification < ActiveRecord::Base
 
 	delegate :name, to: :poster, prefix: true
 	delegate :name, to: :group, prefix: true
+	delegate :name, to: :notifiable, prefix: true
+	delegate :group, to: :notifiable, prefix: true
 
 	scope :unviewed_notifications, ->{ where(viewed: false) }
 	scope :category_notifications, ->(category) { where(notifiable_type: category) }
