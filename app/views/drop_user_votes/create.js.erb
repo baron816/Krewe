@@ -1,0 +1,1 @@
+$('#remove-btn-<%= @user.id %>').replaceWith('<%= link_to "Undo #{@user.group_drop_votes_count(@group)}/3", group_drop_user_vote_path(@group, @user.voter_vote(current_user)), remote: true, method: :delete, class: 'btn btn-warning', id: "undo-btn-#{@user.id}"%>')
