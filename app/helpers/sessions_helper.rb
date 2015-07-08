@@ -1,15 +1,19 @@
 module SessionsHelper
 	def log_in(user)
-		session[:user_id] = user.id
+		if params[:remember_me]
+			cookies.permanent[:auth_token] = user.auth_token
+		else
+			cookies[:auth_token] = user.auth_token		
+		end
 		user.update_sign_in(request.remote_ip)
 	end
 
 	def log_out
-		session.delete(:user_id)
+		cookies.delete(:auth_token)
 		@current_user = nil
 	end
 
 	def current_user
-		@current_user ||= User.find_by(id: session[:user_id])
+		@current_user ||= User.find_by(auth_token: cookies[:auth_token]) if cookies[:auth_token]
 	end
 end
