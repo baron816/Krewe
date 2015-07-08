@@ -7,7 +7,6 @@ class SessionsController < ApplicationController
 		
 		if @user
 			log_in(@user)
-			@user.update_sign_in(request.remote_ip)
 			redirect_to user_path(@user)
 		else
 			flash[:error] = "Email or Password not found"

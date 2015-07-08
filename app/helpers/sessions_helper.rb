@@ -1,6 +1,7 @@
 module SessionsHelper
 	def log_in(user)
 		session[:user_id] = user.id
+		user.update_sign_in(request.remote_ip)
 	end
 
 	def log_out
