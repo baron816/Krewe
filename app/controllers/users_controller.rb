@@ -37,6 +37,7 @@ class UsersController < ApplicationController
 
 		if @user.save
 			log_in(@user)
+			@user.update_sign_in(request.remote_ip)
 			redirect_to user_path(@user)
 		else
 			render :new
