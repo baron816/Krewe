@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   delete 'logout' => 'sessions#destroy'
 
   resources :personal_messages, only: [:create]
+  resources :password_resets, except: [:get, :destroy]
 
   root 'home#index'
 end
