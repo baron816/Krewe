@@ -4,7 +4,7 @@ describe ActivitiesController do
   before do
     @user = create(:user_home)
     @group = @user.groups.first
-    session[:user_id] = @user
+    cookies[:auth_token] = @user.auth_token
   end
 
   describe "POST #create" do

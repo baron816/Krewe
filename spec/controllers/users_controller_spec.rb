@@ -4,7 +4,7 @@ describe UsersController do
   before do
     @user = create(:user_home)
     @user2 = create(:user_wtc)
-    session[:user_id] = @user
+    cookies[:auth_token] = @user.auth_token
   end
 
   describe "GET #show" do

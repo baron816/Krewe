@@ -3,8 +3,8 @@ require 'rails_helper'
 describe GroupsController do
   before do
     @user = create(:user_home)
-	@group = @user.groups.first
-	session[:user_id] = @user
+    @group = @user.groups.first
+    cookies[:auth_token] = @user.auth_token
   end
 
   describe "GET #show" do
