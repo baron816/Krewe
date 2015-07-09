@@ -8,7 +8,7 @@ class ActivitiesController < ApplicationController
 			@activity.users << @activity.proposer
 			redirect_to group_activity_path(@group, @activity)
 		else
-			redirect_to group_path(@group), flash: { error: @activity.errors.full_messages }
+			redirect_to group_path(@group), flash: { errors: @activity.errors.full_messages }
 		end
 	end
 
@@ -22,7 +22,7 @@ class ActivitiesController < ApplicationController
 
 	def show
 		@activity = Activity.find(params[:id])
-		current_user.dismiss_activity_notification(@activity)
+		@notifications.dismiss_activity_notification(@activity)
 		@hash = Gmaps4rails.build_markers([@activity]) do |activity, marker|
 			marker.lat activity.latitude
 			marker.lng activity.longitude

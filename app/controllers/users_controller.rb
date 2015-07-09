@@ -10,7 +10,7 @@ class UsersController < ApplicationController
 		redirect_to root_path unless current_user.friends.include?(@user)
 		@personal_messages = PersonalMessage.users_messages(first_user: @user, second_user: current_user).paginate(page: params[:page], per_page: 5)
 		@personal_message = PersonalMessage.new
-		current_user.dismiss_personal_notifications(@user)
+		@notifications.dismiss_personal_notifications_from_user(@user)
 	end
 
 	def edit
