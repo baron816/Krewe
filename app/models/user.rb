@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
 	after_validation :geocode
 
 	def find_or_create_group
-		group = Group.search(category, friend_ids, self)
+		group = Group.search(category: category, friend_ids: friend_ids, user: self, group_ids: dropped_group_ids)
 
 		if group
 			self.groups << group
@@ -57,6 +57,10 @@ class User < ActiveRecord::Base
 		friends.uniq
 	end
 
+	def add_dropped_group(id)
+		dropped_group_ids << id
+		save
+	end
 
 	def address
 		[street, city, state].join(', ')
