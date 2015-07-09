@@ -15,9 +15,10 @@ class Group < ActiveRecord::Base
 	scope :open_groups, -> { where(can_join: true) }
 	scope :category_groups, ->(category) { where(category: category) }
 	scope :excluded_users, ->(friend_ids) { includes(:users).where("users.id not in (?)", friend_ids).references(:users) }
+	scope :non_former_groups, ->(group_ids) { where.not(id: group_ids) }
 
-	def self.search(category, friend_ids, user)
-		self.open_groups.category_groups(category).near(user, 0.5).excluded_users(friend_ids)[0]
+	def self.search(params)
+		self.open_groups.category_groups(params[:category]).near(params[:user], 0.5).excluded_users(params[:friend_ids]).non_former_groups(params[:group_ids])[0]
 	end
 
 
@@ -38,6 +39,7 @@ class Group < ActiveRecord::Base
 
 	def drop_user(user)
 		users.delete(user)
+		user.add_dropped_group(id)
 		check_space
 		self.delete if users.empty?
 	end
