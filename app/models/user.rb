@@ -84,65 +84,6 @@ class User < ActiveRecord::Base
 			self[column] = SecureRandom.urlsafe_base64
 		end while User.exists?(column => self[column])
 	end
-
-	#notification methods
-
-	def active_notifications
-		notifications.unviewed_notifications
-	end
-
-	def active_notifications_count
-		active_notifications.count
-	end
-
-	def active_notifications_category(category)
-		notifications.unviewed_category_notifications(category)
-	end
-
-	def personal_notifications(user)
-		notifications.unviewed_personal_notifications_from_user(user)
-	end
-
-	def personal_notifications_count(user)
-		note_count = personal_notifications(user).count
-		note_count if note_count > 0
-	end
-
-	def group_notifications(group)
-		notifications.unviewed_group_notifications_from_group(group)
-	end
-
-	def group_notifications_count(group)
-		group_count = group_notifications(group).count + group_message_notifications(group).count
-		group_count if group_count > 0
-	end
-
-	def group_message_notifications(group)
-		notifications.unviewed_message_notifications_from_group(group)
-	end
-
-	def dismiss_activity_notification(activity)
-		note = notifications.unviewed_activity_notifications(activity).take
-		note.dismiss if note
-	end
-
-	def dismiss_personal_notifications(user)
-		personal_notes = personal_notifications(user)
-		if personal_notes.any?
-			personal_notes.each do |notification|
-				notification.dismiss
-			end
-		end
-	end
-
-	def dismiss_group_notifications(group)
-		group_notes = group_notifications(group) + group_message_notifications(group)
-		if group_notes.any?
-			group_notes.each do |notification|
-				notification.dismiss
-			end
-		end
-	end
 	
 	private
 	def friend_ids
