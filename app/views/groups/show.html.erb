@@ -48,8 +48,8 @@
 		<% end %>
 	</ul>
 
-	<% if flash[:error] %>
-		<% flash[:error].each do |msg| %>
+	<% if flash[:errors] %>
+		<% flash[:errors].each do |msg| %>
 		<div class="alert alert-danger">
 			<%= msg %>
 		</div>

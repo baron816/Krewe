@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Sidereal <% if current_user && current_user.active_notifications_count > 0 %>
-  	(<%= current_user.active_notifications_count %>)
+  <title>Sidereal <% if @notifications && @notifications.unviewed_notifications_count > 0 %>
+  	(<%= @notifications.unviewed_notifications_count %>)
   <% end %>
   </title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
