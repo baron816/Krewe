@@ -9,6 +9,7 @@
 		<%= f.password_field :password, placeholder: 'Password', class: 'form-control' %>
 		<%= f.check_box :remember_me, class: "check_box" %>
 		<%= f.label :remember_me %>
+		<%= link_to 'Reset Password', new_password_reset_path %>
 		<%= f.submit 'Log in', class: 'btn btn-primary form-control' %>
 	</div>
 <% end %>
