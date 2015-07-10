@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
 	end
 
 	def create
-		@user = User.find_by(email: user_params[:email]).try(:authenticate, user_params[:password])
+		@user = User.find_by(email: user_params[:email].downcase).try(:authenticate, user_params[:password])
 		
 		if @user
 			log_in(@user)

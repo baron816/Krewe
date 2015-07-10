@@ -18,11 +18,9 @@ class User < ActiveRecord::Base
 	has_many :owned_activities, class_name: "Activity", foreign_key: "proposer_id"
 	has_many :drop_user_votes
 
-	after_create do
-		find_or_create_group
-	end
-
+	after_create :find_or_create_group
 	before_create { generate_token(:auth_token) }
+	before_save :downcase_email
 
 	geocoded_by :address
 
@@ -103,5 +101,9 @@ class User < ActiveRecord::Base
 	private
 	def friend_ids
 		friends.any? ? friends.pluck(:id) : [-1]
+	end
+
+	def downcase_email
+		self.email = email.downcase
 	end
 end
