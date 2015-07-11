@@ -41,4 +41,8 @@ class Activity < ActiveRecord::Base
 			self.notifications.create(user: user, poster: self.proposer)
 		end
 	end
+
+	def proposed_by?(user)
+		proposer == user
+	end
 end
