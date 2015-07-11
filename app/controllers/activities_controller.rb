@@ -1,5 +1,6 @@
 class ActivitiesController < ApplicationController
 	before_action :set_group, only: [:create, :new]
+	before_action :set_activity, only: [:add_user, :remove_user]
 
 	def create
 		@activity = @group.activities.new(activity_params)
@@ -13,11 +14,15 @@ class ActivitiesController < ApplicationController
 	end
 
 	def add_user
-		@activity = Activity.find(params[:activity_id])
-
 		@activity.users << current_user
 
 		redirect_to group_activity_path(@activity.group, @activity)
+	end
+
+	def remove_user
+		@activity.users.delete(current_user)
+
+		redirect_to current_user
 	end
 
 	def show
@@ -30,6 +35,10 @@ class ActivitiesController < ApplicationController
 	end
 
 	private
+	def set_activity
+		@activity = Activity.find(params[:activity_id])
+	end
+
 	def set_group
 		@group = Group.find(params[:group_id])
 	end
