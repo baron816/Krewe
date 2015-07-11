@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :drop_user_votes, only: [:create, :destroy]
     resources :activities, only: [:create, :show, :new] do
       post 'add_user'
+      delete 'remove_user'
     end
   end
 
