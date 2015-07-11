@@ -15,8 +15,10 @@ class ActivitiesController < ApplicationController
 
 	def add_user
 		@activity.users << current_user
-
-		redirect_to group_activity_path(@activity.group, @activity)
+		respond_to do |format|
+			format.html { redirect_to group_activity_path(@activity.group, @activity) }
+			format.js
+		end
 	end
 
 	def remove_user
