@@ -50,4 +50,14 @@ describe ActivitiesController do
     	expect(assigns[:activity]).to eql(@activity)
     end
   end
+
+  describe "DELETE #remove_user" do
+    before do
+      @activity.users << @user
+    end
+
+    it "removes the user from the activity" do
+      expect { delete :remove_user, group_id: @activity.group, activity_id: @activity }.to change(@user.activities, :count).by(-1)
+    end
+  end
 end
