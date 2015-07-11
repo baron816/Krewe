@@ -8,10 +8,7 @@
 <% unless current_user == @user %>
 	<div class="personal-messages">
 		<% @personal_messages.each do |message| %>
-			<div class="well">
-				<%= link_to message.sender_name, user_public_profile_path(message.sender) %> <%= local_time_ago(message.created_at) %>: <br>
-				<%= message.content %> 
-			</div>
+			<%= render partial: 'personal_messages/show', locals: {message: message} %>
 		<% end %>
 	</div>
 
