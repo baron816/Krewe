@@ -44,6 +44,7 @@ class ActivitiesController < ApplicationController
 	end
 
 	def show
+		@notifications.dismiss_activity_notification(@activity)
 	end
 
 	def new
