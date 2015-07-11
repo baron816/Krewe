@@ -1,0 +1,4 @@
+<div class="well">
+	<%= link_to message.sender_name, user_public_profile_path(message.sender) %> <%= local_time_ago(message.created_at) %>: <br>
+	<%= markdown(message.content) %> 
+</div>
