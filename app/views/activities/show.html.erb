@@ -3,7 +3,7 @@
 	<% if @activity.user_going?(current_user) %>
 		<%= link_to "Can't go", group_activity_remove_user_path(@activity. group, @activity), method: :delete, class: 'btn btn-danger' %>
 	<% else %>
-		<%= link_to "Go", group_activity_add_user_path(@activity.group, @activity), method: :post, class: 'btn btn-success'%></h1>
+		<%= link_to "Go", group_activity_add_user_path(@activity.group, @activity), remote: true, method: :post, class: 'btn btn-success', id: "activity-go" %></h1>
 	<% end %>
 	<h1><%= link_to @activity.group_name, @activity.group %></h1>
 	<h2><%= @activity.location %></h2>
