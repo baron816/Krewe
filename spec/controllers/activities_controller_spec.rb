@@ -60,4 +60,18 @@ describe ActivitiesController do
       expect { delete :remove_user, group_id: @activity.group, activity_id: @activity }.to change(@user.activities, :count).by(-1)
     end
   end
+
+  describe "PUT #edit" do
+    before do
+      get :edit, group_id: @group, id: @activity
+    end
+
+    it "renders the edit view" do
+      expect(response).to render_template(:edit)
+    end
+
+    it "finds the correct activity" do
+      expect(assigns[:activity]).to eql(@activity)
+    end
+  end
 end
