@@ -16,6 +16,7 @@ gem 'local_time'
 gem 'will_paginate-bootstrap'
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.7.14'
+gem 'redcarpet'
 
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
