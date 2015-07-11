@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-	before_action :set_user, only: [:public_profile, :add_group]
+	before_action :set_user_with_user_id, only: [:public_profile, :add_group]
+	before_action :set_user, only: [:edit, :update]
 
 	def show
 		@user = User.includes(:groups, :notifications).find(params[:id])
@@ -14,13 +15,10 @@ class UsersController < ApplicationController
 	end
 
 	def edit
-		@user = User.find(params[:id])
 		check_user
 	end
 
 	def update
-		@user = User.find(params[:id])
-
 		if @user.update(user_params)
 			redirect_to user_path(@user)
 		else
@@ -49,8 +47,12 @@ class UsersController < ApplicationController
 	end
 
 	private
-	def set_user
+	def set_user_with_user_id
 		@user = User.find(params[:user_id])
+	end
+
+	def set_user
+		@user = User.find(params[:id])
 	end
 
 	def check_user
