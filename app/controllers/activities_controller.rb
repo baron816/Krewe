@@ -36,7 +36,7 @@ class ActivitiesController < ApplicationController
 	end
 
 	def update
-		if @activity.update(activity_params) && @activity.proposed_by(current_user)
+		if @activity.update(activity_params) && @activity.proposed_by?(current_user)
 			redirect_to group_activity_path(@activity.group, @activity)
 		else
 			render :edit
