@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     delete 'drop_user'
   	resources :messages, only: [:create]
     resources :drop_user_votes, only: [:create, :destroy]
-    resources :activities, only: [:create, :show, :new] do
+    resources :activities, except: [:index, :destroy] do
       post 'add_user'
       delete 'remove_user'
     end
