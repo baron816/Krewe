@@ -61,7 +61,7 @@ describe ActivitiesController do
     end
   end
 
-  describe "PUT #edit" do
+  describe "GET #edit" do
     before do
       get :edit, group_id: @group, id: @activity
     end
@@ -72,6 +72,16 @@ describe ActivitiesController do
 
     it "finds the correct activity" do
       expect(assigns[:activity]).to eql(@activity)
+    end
+  end
+
+  describe "PUT #update" do
+    before do
+      put :update, { group_id: @group, id: @activity, activity: { plan: "Get some sodas" } }
+    end
+
+    it "changes the plan to get some sodas" do
+      expect(assigns[:activity].plan).to eql("Get some sodas")
     end
   end
 end
