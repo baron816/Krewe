@@ -45,4 +45,8 @@ class Activity < ActiveRecord::Base
 	def proposed_by?(user)
 		proposer == user
 	end
+
+	def message_maker
+	  "I made changes to [#{plan}](#{Rails.application.routes.url_helpers.group_activity_path(group, self)})"
+	end
 end
