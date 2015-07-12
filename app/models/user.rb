@@ -1,11 +1,8 @@
 class User < ActiveRecord::Base
 	validates :name, presence: true, length: { minimum: 3 }
 	validates :email, presence: true, uniqueness: true
-	validates :street, presence: true
-	validates :city, presence: true
-	validates :category, presence: true
 	validates :password, presence: true, length: { minimum: 6 }, on: :create
-	validates_presence_of :longitude
+	validates_presence_of :longitude, :street, :city, :category
 
 	has_secure_password
 	has_many :user_groups

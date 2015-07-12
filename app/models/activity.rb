@@ -14,8 +14,7 @@ class Activity < ActiveRecord::Base
 	after_create :send_notifications
 
 	validates :plan, presence: true, length: { minimum: 3 }
-	validates :location, presence: true
-	validates :appointment, presence: true
+	validates_presence_of :location, :appointment
 	validate :is_a_time?
 
 	delegate :name, to: :group, prefix: true
