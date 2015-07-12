@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 	before_action :set_user, only: [:edit, :update]
 
 	def show
-		@user = User.includes(:groups, :notifications).find(params[:id])
+		@user = User.includes(:groups).find(params[:id])
 		check_user
 	end
 
