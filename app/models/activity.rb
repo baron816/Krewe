@@ -36,6 +36,10 @@ class Activity < ActiveRecord::Base
 		self.appointment -= Time.now.utc_offset if appointment
 	end
 
+	def fix_form_time
+	  appointment + Time.now.utc_offset if appointment
+	end
+
 	def send_notifications
 		group.users.each do |user|
 			self.notifications.create(user: user, poster: self.proposer)
