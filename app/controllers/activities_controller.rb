@@ -28,10 +28,6 @@ class ActivitiesController < ApplicationController
 		redirect_to current_user
 	end
 
-	def show
-		@notifications.dismiss_activity_notification(@activity)
-	end
-
 	def edit
 	end
 
