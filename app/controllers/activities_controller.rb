@@ -36,11 +36,13 @@ class ActivitiesController < ApplicationController
 	end
 
 	def update
+		@group = @activity.group
+
 		if @activity.update(activity_params) && @activity.proposed_by?(current_user)
-			redirect_to group_activity_path(@activity.group, @activity)
+			redirect_to group_activity_path(@group, @activity)
 		else
-			render :edit
-		end		
+			redirect_to edit_group_activity_path(@group, @activity), flash: { errors: @activity.errors.full_messages }
+		end
 	end
 
 	def show
