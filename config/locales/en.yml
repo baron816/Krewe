@@ -20,4 +20,13 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    attributes:
+      user:
+        longitude: "Address"
+    errors:
+      models:
+        user:
+          attributes:
+            longitude:
+              blank: "not found"
