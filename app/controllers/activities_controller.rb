@@ -39,6 +39,7 @@ class ActivitiesController < ApplicationController
 		@group = @activity.group
 
 		if @activity.update(activity_params) && @activity.proposed_by?(current_user)
+			Message.create(group_id: @group.id, user_id: current_user.id, content: @activity.message_maker)
 			redirect_to group_activity_path(@group, @activity)
 		else
 			redirect_to edit_group_activity_path(@group, @activity), flash: { errors: @activity.errors.full_messages }
