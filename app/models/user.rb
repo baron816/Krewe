@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
 	validates :city, presence: true
 	validates :category, presence: true
 	validates :password, presence: true, length: { minimum: 6 }, on: :create
+	validates_presence_of :longitude
 
 	has_secure_password
 	has_many :user_groups
@@ -24,7 +25,7 @@ class User < ActiveRecord::Base
 
 	geocoded_by :address
 
-	after_validation :geocode
+	before_validation :geocode
 
 	def find_or_create_group
 		group = Group.search(category: category, friend_ids: friend_ids, user: self, group_ids: dropped_group_ids)
@@ -37,7 +38,7 @@ class User < ActiveRecord::Base
 			group = Group.create(longitude: longitude, latitude: latitude, category: category)
 			group.users << self
 		end
-		group	
+		group
 	end
 
 	def upcoming_activities
@@ -97,7 +98,7 @@ class User < ActiveRecord::Base
 	def password_reset_expired?
 		password_reset_sent_at < 1.hours.ago
 	end
-	
+
 	private
 	def friend_ids
 		friends.any? ? friends.pluck(:id) : [-1]
