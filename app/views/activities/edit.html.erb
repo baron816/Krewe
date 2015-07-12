@@ -1,9 +1,12 @@
-<% if flash[:errors] %>
-  <% flash[:errors].each do |msg| %>
-  <div class="alert alert-danger">
-    <%= msg %>
-  </div>
+<div class="col-md-6 col-md-offset-3">
+  <h1>Edit Activity</h1>
+  <% if flash[:errors] %>
+    <% flash[:errors].each do |msg| %>
+    <div class="alert alert-danger">
+      <%= msg %>
+    </div>
+    <% end %>
   <% end %>
-<% end %>
 
-<%= render 'activities/new' %>
+  <%= render 'activities/new' %>
+</div>
