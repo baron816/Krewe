@@ -2,7 +2,9 @@ require "rails_helper"
 
 describe ActivitiesController do
   before do
+    sleep(0.6)
     @user = create(:user_home)
+    sleep(0.6)
     @group = @user.groups.first
     cookies[:auth_token] = @user.auth_token
   end

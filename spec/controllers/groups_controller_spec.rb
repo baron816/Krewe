@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe GroupsController do
   before do
+    sleep(0.6)
     @user = create(:user_home)
     @group = @user.groups.first
     cookies[:auth_token] = @user.auth_token
