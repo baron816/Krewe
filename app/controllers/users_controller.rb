@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 	before_action :set_user_with_user_id, only: [:public_profile, :add_group]
 	before_action :set_user, only: [:edit, :update]
+	before_action :user_logged?, only: [:update, :edit]
 
 	def show
 		@user = User.includes(:groups).find(params[:id])

@@ -1,5 +1,6 @@
 class DropUserVotesController < ApplicationController
 	before_action :set_group
+	before_action :user_logged?, only: [:create]
 
 	def create
 		@user = User.find(params[:user_id])
@@ -9,7 +10,7 @@ class DropUserVotesController < ApplicationController
 		respond_to do |format|
 			format.html { redirect_to @group }
 			format.js
-		end			
+		end
 	end
 
 	def destroy

@@ -2,6 +2,7 @@ class ActivitiesController < ApplicationController
 	before_action :set_group, only: [:create, :new, :edit]
 	before_action :set_activity_with_activity_id, only: [:add_user, :remove_user]
 	before_action :set_activity, only: [:show, :edit, :update]
+	before_action :user_logged?, only: [:create, :update, :edit, :new]
 
 	def create
 		@activity = @group.activities.new(activity_params)

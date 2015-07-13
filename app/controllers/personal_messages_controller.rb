@@ -1,4 +1,6 @@
 class PersonalMessagesController < ApplicationController
+	before_action :user_logged?
+
 	def create
 		@personal_message = PersonalMessage.new(personal_message_params)
 

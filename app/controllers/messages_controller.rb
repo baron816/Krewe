@@ -1,4 +1,6 @@
 class MessagesController < ApplicationController
+	before_action :user_logged?
+
 	def create
 		@message = Message.new(message_params)
 
@@ -8,7 +10,7 @@ class MessagesController < ApplicationController
 			format.html { redirect_to(@message.group) }
 			format.js
 		end
-		
+
 	end
 
 	private
