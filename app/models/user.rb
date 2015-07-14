@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
 
 	geocoded_by :address
 
-	before_validation :geocode
+	before_validation :geocode, if: :address_changed?
 
 	def find_or_create_group
 		group = Group.search(category: category, friend_ids: friend_ids, user: self, group_ids: dropped_group_ids)
@@ -65,6 +65,10 @@ class User < ActiveRecord::Base
 
 	def address
 		[street, city, state].join(', ')
+	end
+
+	def address_changed?
+		street_changed? || city_changed? || state_changed?
 	end
 
 	def group_drop_votes_count(group)
