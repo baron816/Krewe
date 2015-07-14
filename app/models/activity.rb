@@ -14,7 +14,7 @@ class Activity < ActiveRecord::Base
 	after_create :send_notifications
 
 	validates :plan, presence: true, length: { minimum: 3 }
-	validates_presence_of :location, :appointment
+	validates_presence_of :location, :appointment, :group_id, :proposer_id
 	validate :is_a_time?
 
 	delegate :name, to: :group, prefix: true
@@ -50,6 +50,6 @@ class Activity < ActiveRecord::Base
 	end
 
 	def message_maker
-	  "I made changes to [#{plan}](#{Rails.application.routes.url_helpers.group_activity_path(group, self)})"
+	  "I made changes to [#{plan}](#{Rails.application.routes.url_helpers.activity_path(self)})"
 	end
 end

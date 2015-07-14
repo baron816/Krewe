@@ -1,15 +1,14 @@
 class ActivitiesController < ApplicationController
-	before_action :set_group, only: [:create, :new, :edit]
 	before_action :set_activity_with_activity_id, only: [:add_user, :remove_user]
 	before_action :set_activity, only: [:show, :edit, :update]
 	before_action :user_logged?, only: [:create, :update, :edit, :new]
 
 	def create
-		@activity = @group.activities.new(activity_params)
+		@activity = Activity.new(activity_params)
 
 		if @activity.save
 			@activity.users << @activity.proposer
-			redirect_to group_activity_path(@group, @activity)
+			redirect_to activity_path(@activity)
 		else
 			redirect_to group_path(@group), flash: { errors: @activity.errors.full_messages }
 		end
@@ -18,7 +17,7 @@ class ActivitiesController < ApplicationController
 	def add_user
 		@activity.users << current_user
 		respond_to do |format|
-			format.html { redirect_to group_activity_path(@activity.group, @activity) }
+			format.html { redirect_to activity_path(@activity.group, @activity) }
 			format.js
 		end
 	end
@@ -37,9 +36,9 @@ class ActivitiesController < ApplicationController
 
 		if @activity.update(activity_params) && @activity.proposed_by?(current_user)
 			Message.create(group_id: @group.id, user_id: current_user.id, content: @activity.message_maker)
-			redirect_to group_activity_path(@group, @activity)
+			redirect_to activity_path(@activity)
 		else
-			redirect_to edit_group_activity_path(@group, @activity), flash: { errors: @activity.errors.full_messages }
+			redirect_to edit_activity_path(@activity), flash: { errors: @activity.errors.full_messages }
 		end
 	end
 
@@ -60,11 +59,7 @@ class ActivitiesController < ApplicationController
 		@activity = Activity.find(params[:id])
 	end
 
-	def set_group
-		@group = Group.find(params[:group_id])
-	end
-
 	def activity_params
-		params.require(:activity).permit(:plan, :proposer_id, :appointment, :location)
+		params.require(:activity).permit(:plan, :proposer_id, :group_id, :appointment, :location)
 	end
 end

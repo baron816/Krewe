@@ -1,1 +1,1 @@
-$("#activity-go").replaceWith('<%= link_to "Can't go", group_activity_remove_user_path(@activity. group, @activity), method: :delete, class: 'btn btn-danger' %>')
+$("#activity-go").replaceWith('<%= link_to "Can't go", activity_remove_user_path(@activity), method: :delete, class: 'btn btn-danger' %>')

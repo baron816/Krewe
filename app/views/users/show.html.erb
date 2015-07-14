@@ -19,12 +19,12 @@
 	<h3>Groups</h3>
 	<ul class="list-group">
 		<% @user.groups.each do |group| %>
-			<li class="list-group-item"><%= link_to group.name, group_path(group) %> 
+			<li class="list-group-item"><%= link_to group.name, group_path(group) %>
 				<span class='badge'><%= @notifications.unviewed_group_notification_count(group) %></span>
 			</li>
 		<% end %>
 	</ul>
-	<h5><%= link_to '<i class="glyphicon glyphicon-plus"></i> Add Group'.html_safe, user_add_group_path(current_user), method: :post, class: 'btn btn-success' %> 
+	<h5><%= link_to '<i class="glyphicon glyphicon-plus"></i> Add Group'.html_safe, user_add_group_path(current_user), method: :post, class: 'btn btn-success' %>
 	</h5>
 </div>
 
@@ -34,7 +34,7 @@
 		<ul class="list-group">
 			<% @user.upcoming_activities.each do |activity| %>
 				<li class="list-group-item">
-					<%= link_to activity.plan, group_activity_path(activity.group, activity) %> with <%= activity.group_name %> <%= local_time_ago(activity.appointment) %>
+					<%= link_to activity.plan, activity_path(activity) %> with <%= activity.group_name %> <%= local_time_ago(activity.appointment) %>
 				</li>
 			<% end %>
 		</ul>

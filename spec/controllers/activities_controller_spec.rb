@@ -17,7 +17,7 @@ describe ActivitiesController do
     end
 
     it "creates a new activity" do
-    	expect { post :create, group_id: @group.id, activity: @activity_attributes }.to change(Activity, :count).by(1)
+    	expect { post :create, activity: @activity_attributes }.to change(Activity, :count).by(1)
     end
   end
 
@@ -30,18 +30,18 @@ describe ActivitiesController do
   describe "PUT #add_user" do
 
     it "adds the activity to users activities" do
-    	expect { put :add_user, group_id: @activity.group, activity_id: @activity }.to change(@user.activities, :count).by(1)
+    	expect { put :add_user, activity_id: @activity }.to change(@user.activities, :count).by(1)
     end
 
     it "finds the correct activity" do
-    	put :add_user, group_id: @activity.group, activity_id: @activity
+    	put :add_user, activity_id: @activity
     	expect(assigns[:activity]).to eq(@activity)
     end
   end
 
   describe "GET #show" do
     before do
-      get :show, group_id: @group, id: @activity
+      get :show, id: @activity
     end
 
     it "renders the show template" do
@@ -59,13 +59,13 @@ describe ActivitiesController do
     end
 
     it "removes the user from the activity" do
-      expect { delete :remove_user, group_id: @activity.group, activity_id: @activity }.to change(@user.activities, :count).by(-1)
+      expect { delete :remove_user, activity_id: @activity }.to change(@user.activities, :count).by(-1)
     end
   end
 
   describe "GET #edit" do
     before do
-      get :edit, group_id: @group, id: @activity
+      get :edit, id: @activity
     end
 
     it "renders the edit view" do
@@ -79,7 +79,7 @@ describe ActivitiesController do
 
   describe "PUT #update" do
     before do
-      put :update, { group_id: @group, id: @activity, activity: { plan: "Get some sodas" } }
+      put :update, { id: @activity, activity: { plan: "Get some sodas" } }
     end
 
     it "changes the plan to get some sodas" do
