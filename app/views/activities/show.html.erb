@@ -8,7 +8,7 @@
 	<h1><%= link_to @activity.group_name, @activity.group %></h1>
 	<h2><%= @activity.location %></h2>
 	<h2><%= local_time(@activity.appointment) %></h2>
-	<%= link_to "Edit Activity", edit_activity_path(@activity.group, @activity), class: 'btn btn-warning' if @activity.proposed_by?(current_user) %>
+	<%= link_to "Edit Activity", edit_activity_path(@activity, group_id: @activity.group), class: 'btn btn-warning' if @activity.proposed_by?(current_user) %>
 </div>
 
 <div class="col-md-6">
