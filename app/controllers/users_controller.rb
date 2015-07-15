@@ -43,8 +43,13 @@ class UsersController < ApplicationController
 	end
 
 	def add_group
-		group = @user.find_or_create_group
-		redirect_to group_path(group)
+		if @user.under_group_limit?
+			group = @user.find_or_create_group
+			redirect_to group_path(group)
+		else
+			flash.now[:add_error] = "You're at you group limit"
+			redirect_to @user
+		end
 	end
 
 	private
