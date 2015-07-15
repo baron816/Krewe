@@ -88,6 +88,10 @@ class User < ActiveRecord::Base
 		votes if votes
 	end
 
+	def under_group_limit?
+	  group_limit > group_count
+	end
+
 	def generate_token(column)
 		begin
 			self[column] = SecureRandom.urlsafe_base64
@@ -112,5 +116,9 @@ class User < ActiveRecord::Base
 
 	def downcase_email
 		self.email = email.downcase
+	end
+
+	def group_count
+	  groups.count
 	end
 end
