@@ -48,6 +48,9 @@ GEM
       sass (>= 3.3.0)
     bootstrap3-datetimepicker-rails (4.7.14)
       momentjs-rails (>= 2.8.1)
+    browser-timezone-rails (0.0.8)
+      jquery-rails
+      rails (>= 3.1)
     builder (3.2.2)
     byebug (5.0.0)
       columnize (= 0.9.0)
@@ -207,6 +210,7 @@ DEPENDENCIES
   bcrypt (~> 3.1.7)
   bootstrap-sass (~> 3.3.4)
   bootstrap3-datetimepicker-rails (~> 4.7.14)
+  browser-timezone-rails
   byebug
   coffee-rails (~> 4.1.0)
   dotenv-rails
