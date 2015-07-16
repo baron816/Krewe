@@ -5,7 +5,6 @@ class ActivitiesController < ApplicationController
 
 	def create
 		@activity = Activity.new(activity_params)
-		@activity.appointment -= params[:offset].to_i
 
 		if @activity.save
 			@activity.users << @activity.proposer
