@@ -9,8 +9,6 @@ class Activity < ActiveRecord::Base
 
 	after_validation :geocode
 
-	# before_update :fix_time
-
 	after_create :send_notifications
 
 	validates :plan, presence: true, length: { minimum: 3 }
@@ -30,14 +28,6 @@ class Activity < ActiveRecord::Base
 			errors.add(:appointment, "must be a time")
 		end
 	end
-
-	# def fix_time
-	# 	self.appointment -= Time.now.utc_offset if appointment
-	# end
-	#
-	# def fix_form_time
-	#   appointment + Time.now.utc_offset if appointment
-	# end
 
 	def send_notifications
 		group.users.each do |user|
