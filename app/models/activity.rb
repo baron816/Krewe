@@ -9,7 +9,7 @@ class Activity < ActiveRecord::Base
 
 	after_validation :geocode
 
-	before_update :fix_time
+	# before_update :fix_time
 
 	after_create :send_notifications
 
@@ -31,13 +31,13 @@ class Activity < ActiveRecord::Base
 		end
 	end
 
-	def fix_time
-		self.appointment -= Time.now.utc_offset if appointment
-	end
-
-	def fix_form_time
-	  appointment + Time.now.utc_offset if appointment
-	end
+	# def fix_time
+	# 	self.appointment -= Time.now.utc_offset if appointment
+	# end
+	#
+	# def fix_form_time
+	#   appointment + Time.now.utc_offset if appointment
+	# end
 
 	def send_notifications
 		group.users.each do |user|
