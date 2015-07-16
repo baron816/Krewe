@@ -12,5 +12,6 @@
 	<%= hidden_field_tag :offset, Time.now.utc_offset %>
 	<%= Time.now %>
 	<%= Time.now.utc_offset %>
+	<%= Time.now.zone %>
 	<%= f.submit "Submit", class: 'btn btn-success' %>
 <% end %>
