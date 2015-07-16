@@ -9,7 +9,7 @@ class Activity < ActiveRecord::Base
 
 	after_validation :geocode
 
-	# before_save :fix_time
+	before_update :fix_time
 
 	after_create :send_notifications
 
