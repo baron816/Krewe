@@ -10,5 +10,7 @@
 	<%= f.hidden_field :group_id, value: params[:group_id] %>
 	<%= f.hidden_field :proposer_id, value: current_user.id %>
 	<%= hidden_field_tag :offset, Time.now.utc_offset %>
+	<%= Time.now %>
+	<%= Time.now.utc_offset %>
 	<%= f.submit "Submit", class: 'btn btn-success' %>
 <% end %>
