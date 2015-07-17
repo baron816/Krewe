@@ -5,12 +5,21 @@
 				<div class="alert alert-danger">	<%= msg %> </div>
 			<% end %>
 		<% end %>
+		<div class="form-group">
+			<%= f.text_field :name, placeholder: "Name", class: 'form-control' %>
+			<%= f.email_field :email, placeholder: 'Email', class: 'form-control' %>
+		</div>
 
-		<%= f.text_field :name, placeholder: "Name", class: 'form-control' %>
-		<%= f.email_field :email, placeholder: 'Email', class: 'form-control' %>
-		<%= f.text_field :street, placeholder: 'Street Address', class: 'form-control' %>
-		<%= f.text_field :city, placeholder: "City", class: 'form-control' %>
-		<%= f.select :state, us_states, {}, class: 'form-control' %>
+		<div class="form-group", id="address-info">
+			<div class="form-inline">
+			<%= f.text_field :street, placeholder: 'Street Address', class: 'form-control' %>
+				<%= f.text_field :city, placeholder: "City", class: 'form-control' %>
+				<%= f.select :state, us_states, {}, class: 'form-control' %>
+			</div>
+		</div>
+
+		<%= f.hidden_field :latitude, id: "lat" %>
+		<%= f.hidden_field :longitude, id: 'lng' %>
 		<% categories.each do |category| %>
 			<div class="input-group">
 			<span class="input-group-addon"> <%= f.radio_button :category, category[:name] %></span>
@@ -20,5 +29,5 @@
 		<%= f.password_field :password, placeholder: 'Password', class: "form-control" %>
 		<%= f.password_field :password_confirmation, placeholder: 'Confirm Password', class: "form-control" %>
 		<%= f.submit :Submit, class: 'btn btn-primary form-control' %>
-	</div>	
+	</div>
 <% end %>
