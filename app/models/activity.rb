@@ -5,9 +5,7 @@ class Activity < ActiveRecord::Base
 	has_many :users, through: :user_activities
 	has_many :notifications, as: :notifiable
 
-	geocoded_by :location
-
-	after_validation :geocode
+	reverse_geocoded_by :latitude, :longitude
 
 	after_create :send_notifications
 
@@ -31,7 +29,7 @@ class Activity < ActiveRecord::Base
 
 	def send_notifications
 		group.users.each do |user|
-			self.notifications.create(user: user, poster: self.proposer)
+			self.notifications.create(user: user, poster: self.proposer) unless user == proposer
 		end
 	end
 
