@@ -3,9 +3,7 @@ require 'rails_helper'
 describe Group do
 	before do
 		create(:user_home)
-		sleep(0.6)
 		create(:user_wtc)
-		sleep(0.6)
 	end
 
 	let(:group1) { Group.first }
@@ -16,15 +14,10 @@ describe Group do
 
 	context "more users" do
 		before do
-		  sleep(0.6)
 		  create(:user_121)
-		  sleep(0.6)
 		  create(:user_dbc)
-		  sleep(0.6)
 		  create(:user_stucco)
-		  sleep(0.6)
 		  create(:user_8th_st)
-		  sleep(0.6)
 		  create(:user_gd)
 		end
 		  let(:group2) { Group.second }
@@ -51,11 +44,8 @@ describe Group do
 
 			  context "description" do
 				  before do
-						sleep(0.6)
 		  	    create(:user_138)
-		        sleep(0.6)
 		        create(:user_122)
-		        sleep(0.6)
 		        create(:user_130)
 					end
 

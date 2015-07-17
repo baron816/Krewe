@@ -3,13 +3,9 @@ require "rails_helper"
 describe DropUserVote do
   before do
     @user1 = create(:user_home)
-    sleep(0.6)
     @user2 = create(:user_wtc)
-    sleep(0.6)
     @user3 = create(:user_121)
-    sleep(0.6)
     @user4 = create(:user_dbc)
-    sleep(0.6)
   end
   let(:group) { Group.first }
 

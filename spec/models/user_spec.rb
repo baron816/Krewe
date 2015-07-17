@@ -7,13 +7,12 @@ describe User do
 
   context "User home" do
   	before do
-    		sleep(0.6)
         @user = create(:user_home)
   	end
 
   	it "user home has address" do
   		expect(@user.address).to eq('135 William Street, New York, NY')
-  	end  	
+  	end
 
   	it "user home has longitude coordinate" do
   		expect(@user.longitude).to eq(-74.00671419999999)
@@ -31,17 +30,11 @@ describe User do
       before do
         sleep(0.6)
         @user2 = create(:user_wtc)
-        sleep(0.6)
         create(:user_121)
-        sleep(0.6)
         create(:user_dbc)
-        sleep(0.6)
         create(:user_138)
-        sleep(0.6)
         create(:user_122)
-        sleep(0.6)
         create(:user_130)
-        sleep(0.6)
         create(:user_134)
       end
 

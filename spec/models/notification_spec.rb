@@ -2,13 +2,9 @@ require "rails_helper"
 
 describe "Notification" do
 	before do
-		sleep(0.6)
-		@user = create(:user_home)
-		sleep(0.6)
+			@user = create(:user_home)
 	    @user2 = create(:user_wtc)
-	    sleep(0.6)
 	    @user3 = create(:user_121)
-	    sleep(0.6)
 	    @group = Group.first
   	end
 
@@ -67,7 +63,7 @@ describe "Notification" do
   			@user2_notifications = @user2.notifications
   			@user3_notifications = @user3.notifications
   		end
-  		
+
 	  	it "new personal message creates notification" do
 	  		expect(Notification.count).to eql(4)
 	  	end
@@ -99,8 +95,8 @@ describe "Notification" do
 
   	context "activity" do
   		before do
-  		  @activity = Activity.create(group_id: @group.id, plan: "go somewhere", appointment: Time.now, proposer_id: @user, location: "World Trade Center")
-  			@notifications = @user.notifications
+  		  @activity = Activity.create(group_id: @group.id, plan: "go somewhere", appointment: Time.now, proposer_id: @user.id, location: "World Trade Center")
+				@notifications = @user2.notifications
   		end
 
   		it "creates a activity notifications" do

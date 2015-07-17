@@ -2,9 +2,7 @@ require 'rails_helper'
 
 describe UsersController do
   before do
-    sleep(0.6)
     @user = create(:user_home)
-    sleep(0.6)
     @user2 = create(:user_wtc)
     cookies[:auth_token] = @user.auth_token
   end
