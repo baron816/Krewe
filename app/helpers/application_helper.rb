@@ -8,7 +8,7 @@ module ApplicationHelper
 		extensions = {
 			autolink: true,
 			superscript: true
-		}		
+		}
 
 		renderer = Redcarpet::Render::HTML.new(options)
 		markdown = Redcarpet::Markdown.new(renderer, extensions)
@@ -18,6 +18,7 @@ module ApplicationHelper
 
 	def us_states
 	    [
+				['',''],
 	      ['Alabama', 'AL'],
 	      ['Alaska', 'AK'],
 	      ['Arizona', 'AZ'],
