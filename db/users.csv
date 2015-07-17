@@ -1,10 +1,10 @@
-name,password,password,email,street,city,state,category
-Chaim Rogahn,123456,123456,elisha_yost@dietrich.org,135 William Street,New York,NY,Post-Grad
-Madie Rodriguez,123456,123456,susana_strosin@gibsonbins.net,48 Wall Street,New York,NY,Post-Grad
-Scottie Sauer,123456,123456,amya@muller.name,120 William Street,New York,NY,Post-Grad
-Justen Gerlach,123456,123456,athena.jenkins@stehrvon.org,121 William Street,New York,NY,Post-Grad
-Hortense Kerluke,123456,123456,zoe_bradtke@ratke.info,50 Wall Street,New York,NY,Young Parent
-Rachael Parker IV,123456,123456,jovani@stehr.biz,128 William Street,New York,NY,Post-Grad
-Darrion West,123456,123456,cary_howell@lynch.com,12 William Street,New York,NY,Post-Grad
-Dr. Romaine Jenkins,123456,123456,gregorio@gaylord.com,52 Wall Street,New York,NY,Business Networkers
-Verlie Koepp,123456,123456,maida_grady@lubowitzkoepp.net,122 William Street,New York,NY,Young Parent
+name,password,password,email,street,city,state,category,latitude,longitude
+Chaim Rogahn,123456,123456,elisha_yost@dietrich.org,135 William Street,New York,NY,Post-Grad,40.7094706,-74.0067142
+Madie Rodriguez,123456,123456,susana_strosin@gibsonbins.net,48 Wall Street,New York,NY,Post-Grad,40.7063634,-74.0090963
+Scottie Sauer,123456,123456,amya@muller.name,120 William Street,New York,NY,Post-Grad,40.7091371,-74.0068346
+Justen Gerlach,123456,123456,athena.jenkins@stehrvon.org,121 William Street,New York,NY,Post-Grad,40.7090997,-74.0068716
+Hortense Kerluke,123456,123456,zoe_bradtke@ratke.info,50 Wall Street,New York,NY,Young Parent,40.7062777,-74.0093162
+Rachael Parker IV,123456,123456,jovani@stehr.biz,128 William Street,New York,NY,Post-Grad,40.7092288,-74.0067443
+Darrion West,123456,123456,cary_howell@lynch.com,12 William Street,New York,NY,Post-Grad,40.7051784,-74.0100329
+Dr. Romaine Jenkins,123456,123456,gregorio@gaylord.com,52 Wall Street,New York,NY,Business Networkers,40.7062007,-74.009173
+Verlie Koepp,123456,123456,maida_grady@lubowitzkoepp.net,122 William Street,New York,NY,Young Parent,40.70916,-74.006812
