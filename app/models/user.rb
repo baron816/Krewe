@@ -21,9 +21,7 @@ class User < ActiveRecord::Base
 	before_create { generate_token(:auth_token) }
 	before_save :downcase_email
 
-	geocoded_by :address
-
-	before_validation :geocode, if: :address_changed?
+	reverse_geocoded_by :latitude, :longitude
 
 	def find_or_create_group
 		group = Group.search(category: category, friend_ids: friend_ids, user: self, group_ids: dropped_group_ids)
