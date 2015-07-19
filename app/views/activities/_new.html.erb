@@ -9,5 +9,8 @@
 	</div>
 	<%= f.hidden_field :group_id, value: params[:group_id] %>
 	<%= f.hidden_field :proposer_id, value: current_user.id %>
+	<%= f.hidden_field :longitude %>
+	<%= f.hidden_field :latitude %>
+	<div id="map-canvas"></div>
 	<%= f.submit "Submit", class: 'btn btn-success' %>
 <% end %>
