@@ -2,3 +2,39 @@ $('#new_activity').hide().after('<%= j render("new") %>')
 $('#datetimepicker').datetimepicker({
 	format: 'YYYY-MM-DD hh:mm A'
 });
+
+$('#activity_location').change( function () {
+	activityAddress()
+})
+
+var geocoder;
+var map;
+function initialize() {
+	geocoder = new google.maps.Geocoder();
+	var latlng = new google.maps.LatLng('<%= current_user.latitude %>', '<%= current_user.longitude %>');
+	var mapOptions = {
+		zoom: 15,
+		center: latlng
+	}
+	map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions)
+}
+
+initialize()
+
+function activityAddress() {
+	var address = $('#activity_location').val()
+	geocoder.geocode({'address': address}, function(results, status) {
+		if (status == google.maps.GeocoderStatus.OK) {
+			var theSpot = results[0].geometry.location
+			map.setCenter(theSpot)
+			var marker = new google.maps.Marker({
+				map: map,
+				position: theSpot
+			})
+			$('#activity_latitude').val(theSpot.lat())
+			$('#activity_longitude').val(theSpot.lng())
+		} else {
+			console.log("error" + status);
+		}
+	})
+}
