@@ -10,7 +10,7 @@ class ActivitiesController < ApplicationController
 			@activity.users << @activity.proposer
 			redirect_to activity_path(@activity)
 		else
-			redirect_to group_path(@group), flash: { errors: @activity.errors.full_messages }
+			redirect_to group_path(@activity.group), flash: { errors: @activity.errors.full_messages }
 		end
 	end
 
