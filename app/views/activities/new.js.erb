@@ -6,7 +6,6 @@ $('#datetimepicker').datetimepicker({
 
 
 function initialize() {
-	var geocoder = new google.maps.Geocoder();
 	var mapOptions = {
 		center: new google.maps.LatLng('<%= current_user.latitude %>', '<%= current_user.longitude %>'),
 		zoom: 13
@@ -50,7 +49,6 @@ function initialize() {
 		$('#activity_latitude').val(place.geometry.location.lat());
 		$('#activity_longitude').val(place.geometry.location.lng());
 	})
-
 }
 
 initialize()
