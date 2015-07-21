@@ -38,7 +38,7 @@
 <div class="col-md-6">
 	<h2>Activities</h2>
 	<ul class="list-group">
-		<% @group.upcoming_activities.each do |activity| %>
+		<% @activities.each do |activity| %>
 		<li class="list-group-item clearfix">
 			<%= link_to activity.plan, activity_path(activity) %> <%= local_time(activity.appointment) %>
 			<% unless activity.user_going?(current_user) %>
