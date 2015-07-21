@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
   resources :users, except: [:index, :destroy] do
-    get 'public_profile'
-    post 'add_group'
+    get 'public_profile', on: :member
+    post 'add_group', on: :member
   end
 
   resources :groups, only: [:show] do
-    delete 'drop_user'
+    delete 'drop_user', on: :member
   	resources :messages, only: [:create]
     resources :drop_user_votes, only: [:create, :destroy]
   end
