@@ -11,8 +11,8 @@ Rails.application.routes.draw do
   end
 
   resources :activities, except: [:index, :destroy] do
-    post 'add_user'
-    delete 'remove_user'
+    post 'add_user', on: :member
+    delete 'remove_user', on: :member
   end
 
   get 'login' => 'sessions#new'
