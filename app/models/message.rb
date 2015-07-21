@@ -13,6 +13,14 @@ class Message < ActiveRecord::Base
 		send_notifications
 	end
 
+	auto_html_for :content do
+		html_escape
+		image
+		youtube(width: 400, height: 250)
+		link target: "_blank", rel: "nofollow"
+		simple_format
+	end
+
 	def send_notifications
 		group_users.each do |user|
 			self.notifications.create(user: user, poster: self.user) unless user == self.user

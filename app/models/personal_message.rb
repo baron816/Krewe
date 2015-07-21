@@ -9,6 +9,14 @@ class PersonalMessage < ActiveRecord::Base
 		send_notification
 	end
 
+	auto_html_for :content do
+		html_escape
+		image
+		youtube(width: 400, height: 250)
+		link target: "_blank", rel: "nofollow"
+		simple_format
+	end
+
 	def send_notification
 		self.notifications.create(user: receiver, poster: sender)
 	end
