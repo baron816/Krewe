@@ -19,7 +19,7 @@
 	<h3>People going</h3>
 		<ul class="list-group">
 		<% @activity.users.each do |user| %>
-			<li class="list-group-item"><%= link_to user.name, user_public_profile_path(user) %></li>
+			<li class="list-group-item"><%= link_to user.name, public_profile_user_path(user) %></li>
 		<% end %>
 		</ul>
 </div>
