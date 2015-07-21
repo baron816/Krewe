@@ -37,6 +37,9 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     arel (6.0.0)
+    auto_html (1.6.4)
+      redcarpet (~> 3.1)
+      rinku (~> 1.5.0)
     autoprefixer-rails (5.2.1)
       execjs
       json
@@ -146,6 +149,7 @@ GEM
     rdoc (4.2.0)
       json (~> 1.4)
     redcarpet (3.3.2)
+    rinku (1.5.1)
     rspec-core (3.1.7)
       rspec-support (~> 3.1.0)
     rspec-expectations (3.1.2)
@@ -212,6 +216,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  auto_html
   bcrypt (~> 3.1.7)
   bootstrap-sass (~> 3.3.4)
   bootstrap3-datetimepicker-rails (~> 4.7.14)
@@ -231,7 +236,6 @@ DEPENDENCIES
   pg
   rails (= 4.2.1)
   rails_12factor
-  redcarpet
   rspec-rails
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
