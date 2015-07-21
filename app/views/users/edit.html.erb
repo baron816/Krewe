@@ -12,11 +12,9 @@
 		</div>
 
 		<div class="form-group", id="address-info">
-			<div class="form-inline">
 			<%= f.text_field :street, placeholder: 'Street Address', class: 'form-control' %>
-				<%= f.text_field :city, placeholder: "City", class: 'form-control' %>
-				<%= f.select :state, us_states, {}, class: 'form-control' %>
-			</div>
+			<%= f.text_field :city, placeholder: "City", class: 'form-control' %>
+			<%= f.select :state, us_states, {}, class: 'form-control' %>
 		</div>
 
 		<%= f.hidden_field :latitude, id: "lat" %>
