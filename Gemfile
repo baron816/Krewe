@@ -20,6 +20,7 @@ gem 'bootstrap3-datetimepicker-rails', '~> 4.7.14'
 gem 'redcarpet'
 gem 'sweetalert-rails'
 gem 'sweet-alert-confirm'
+gem 'select2-rails'
 
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
