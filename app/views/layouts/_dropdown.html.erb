@@ -6,7 +6,7 @@
 		<% end %>
 
 		<% @notifications.unviewed_category_notifications("PersonalMessage").each do |note| %>
-			<li><%= link_to "#{note.poster_name} sent you a message", user_public_profile_path(note.poster) %></li>
+			<li><%= link_to "#{note.poster_name} sent you a message", public_profile_user_path(note.poster) %></li>
 		<% end %>
 
 		<% @notifications.unviewed_category_notifications("Group").each do |note| %>

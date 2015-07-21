@@ -1,5 +1,5 @@
 <h1><%= @user.name %></h1>
-<h5><%= link_to "Profile", user_public_profile_path(current_user), class: "btn btn-info" %> <%= link_to "Edit", edit_user_path, class: "btn btn-warning" %></h5>
+<h5><%= link_to "Profile", public_profile_user_path(current_user), class: "btn btn-info" %> <%= link_to "Edit", edit_user_path, class: "btn btn-warning" %></h5>
 
 <div class="col-md-6">
 	<h3>Friends</h3>
@@ -7,7 +7,7 @@
 		<% @user.unique_friends.each do |friend| %>
 			<% unless friend == current_user %>
 				<li class="list-group-item">
-					<%= link_to friend.name, user_public_profile_path(friend) %>
+					<%= link_to friend.name, public_profile_user_path(friend) %>
 					<span class='badge'><%= @notifications.unviewed_personal_notifications_from_user_count(friend) %></span>
 				</li>
 			<% end %>
@@ -24,7 +24,7 @@
 			</li>
 		<% end %>
 	</ul>
-	<h5><%= link_to '<i class="glyphicon glyphicon-plus"></i> Add Group'.html_safe, user_add_group_path(current_user), method: :post, class: 'btn btn-success' if @user.under_group_limit? %>
+	<h5><%= link_to '<i class="glyphicon glyphicon-plus"></i> Add Group'.html_safe, add_group_user_path(current_user), method: :post, class: 'btn btn-success' if @user.under_group_limit? %>
 	</h5>
 </div>
 
