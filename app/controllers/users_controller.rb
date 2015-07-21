@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
-	before_action :set_user_with_user_id, only: [:public_profile, :add_group]
-	before_action :set_user, only: [:edit, :update]
+	before_action :set_user, only: [:edit, :update, :public_profile, :add_group]
 	before_action :user_logged?, only: [:update, :edit]
 
 	def show
@@ -53,10 +52,6 @@ class UsersController < ApplicationController
 	end
 
 	private
-	def set_user_with_user_id
-		@user = User.find(params[:user_id])
-	end
-
 	def set_user
 		@user = User.find(params[:id])
 	end
