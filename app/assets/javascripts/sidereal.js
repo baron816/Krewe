@@ -14,6 +14,10 @@ $(document).ready(function(){
 	$('#address-info').change( function () {
 		codeAddress()
 	});
+
+	$("#user_state").select2({
+		placeholder: "Select a state"
+	})
 })
 
 function codeAddress() {
