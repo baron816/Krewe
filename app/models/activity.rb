@@ -36,8 +36,4 @@ class Activity < ActiveRecord::Base
 	def proposed_by?(user)
 		proposer == user
 	end
-
-	def message_maker
-	  "I made changes to [#{plan}](#{Rails.application.routes.url_helpers.activity_path(self)})"
-	end
 end
