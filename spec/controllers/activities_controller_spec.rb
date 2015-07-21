@@ -28,11 +28,11 @@ describe ActivitiesController do
   describe "PUT #add_user" do
 
     it "adds the activity to users activities" do
-    	expect { put :add_user, activity_id: @activity }.to change(@user.activities, :count).by(1)
+    	expect { put :add_user, id: @activity }.to change(@user.activities, :count).by(1)
     end
 
     it "finds the correct activity" do
-    	put :add_user, activity_id: @activity
+    	put :add_user, id: @activity
     	expect(assigns[:activity]).to eq(@activity)
     end
   end
@@ -57,7 +57,7 @@ describe ActivitiesController do
     end
 
     it "removes the user from the activity" do
-      expect { delete :remove_user, activity_id: @activity }.to change(@user.activities, :count).by(-1)
+      expect { delete :remove_user, id: @activity }.to change(@user.activities, :count).by(-1)
     end
   end
 
