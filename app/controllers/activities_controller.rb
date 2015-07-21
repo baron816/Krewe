@@ -1,6 +1,5 @@
 class ActivitiesController < ApplicationController
-	before_action :set_activity_with_activity_id, only: [:add_user, :remove_user]
-	before_action :set_activity, only: [:show, :edit, :update]
+	before_action :set_activity, only: [:show, :edit, :update, :add_user, :remove_user]
 	before_action :user_logged?, only: [:create, :update, :edit, :new]
 
 	def create
@@ -51,10 +50,6 @@ class ActivitiesController < ApplicationController
 	end
 
 	private
-	def set_activity_with_activity_id
-		@activity = Activity.find(params[:activity_id])
-	end
-
 	def set_activity
 		@activity = Activity.find(params[:id])
 	end
