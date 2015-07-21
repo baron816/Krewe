@@ -23,3 +23,5 @@
 //= require gmaps/google
 //= require_tree .
 //= require local_time
+//= require sweet-alert
+//= require sweet-alert-confirm
