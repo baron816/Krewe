@@ -23,7 +23,7 @@ describe UsersController do
 
   describe "GET #public_profile" do
     before do
-      get :public_profile, user_id: @user2.id
+      get :public_profile, id: @user2.id
       @message = PersonalMessage.create(sender: @user, receiver: @user2, content: "The message content")
     end
 
@@ -91,7 +91,7 @@ describe UsersController do
 
   describe "POST #add_group" do
     it "adds a group" do
-    	expect { post :add_group, user_id: @user.id }.to change(@user.groups, :count).by(1)
+    	expect { post :add_group, id: @user.id }.to change(@user.groups, :count).by(1)
     end
   end
 end
