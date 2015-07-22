@@ -37,10 +37,6 @@ class User < ActiveRecord::Base
 		group
 	end
 
-	def upcoming_activities
-		activities.future_activities.order(appointment: :asc)
-	end
-
 	def update_sign_in(ip)
 		self.last_sign_in_at = Time.now
 		self.sign_in_count += 1
