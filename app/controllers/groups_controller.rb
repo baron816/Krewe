@@ -1,12 +1,10 @@
 class GroupsController < ApplicationController
 	def show
-		@group = Group.find(params[:id])
-		@users = @group.users.includes(:drop_user_votes)
-		redirect_to user_path(current_user) unless @users.include?(current_user)
-		@notifications.dismiss_group_notifications_from_group(@group)
-		@messages = @group.messages.includes(:user).order(created_at: :desc).paginate(page: params[:page], per_page: 5)
-		@activities = @group.activities.future_activities.includes(:users)
-		@message = Message.new
+		group = Group.find(params[:id])
+		@group_show = GroupShow.new(group, params[:page])
+
+		redirect_to user_path(current_user) unless @group_show.includes_user?(current_user)
+		@notifications.dismiss_group_notifications_from_group(group)
 	end
 
 	def drop_user
