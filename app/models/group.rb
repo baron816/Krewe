@@ -22,10 +22,6 @@ class Group < ActiveRecord::Base
 	end
 
 
-	def upcoming_activities
-		activities.where('appointment > ?', Time.now).order(appointment: :asc)
-	end
-
 	def check_space
 		users_count = users.count
 		if users_count == user_limit - 1
@@ -47,7 +43,7 @@ class Group < ActiveRecord::Base
 	def kick_user(user)
 		drop_user(user) if user.group_drop_votes_count(self) >= 3
 	end
-	
+
 	#notification methods
 
 	def join_group_notifications(new_user)
