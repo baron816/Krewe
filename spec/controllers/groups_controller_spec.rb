@@ -23,10 +23,6 @@ describe GroupsController do
     it "has a new message" do
     	expect(assigns[:message]).to be_a_new(Message)
     end
-
-    it "has a new activity" do
-    	expect(assigns[:activity]).to be_a_new(Activity)
-    end
   end
 
   describe "DELETE #drop_user" do
