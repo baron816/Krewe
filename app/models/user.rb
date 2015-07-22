@@ -48,6 +48,10 @@ class User < ActiveRecord::Base
 		friends.uniq
 	end
 
+	def future_activities
+	  activities.future_activities.includes(:group)
+	end
+
 	def add_dropped_group(id)
 		dropped_group_ids << id
 		save
