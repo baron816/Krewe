@@ -21,6 +21,9 @@ class Group < ActiveRecord::Base
 		self.open_groups.category_groups(params[:category]).near(params[:user], 0.5).excluded_users(params[:friend_ids]).non_former_groups(params[:group_ids])[0]
 	end
 
+	def future_activities
+	  activities.future_activities
+	end
 
 	def check_space
 		users_count = users.count
