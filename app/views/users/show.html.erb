@@ -28,11 +28,11 @@
 	</h5>
 </div>
 
-<% if @activities.any? %>
+<% if @user.future_activities.any? %>
 	<div class="col-md-6">
 		<h3>Upcoming Activities</h3>
 		<ul class="list-group">
-			<% @activities.each do |activity| %>
+			<% @user.future_activities.each do |activity| %>
 				<li class="list-group-item">
 					<%= link_to activity.plan, activity_path(activity) %> with <%= activity.group_name %> <%= local_time_ago(activity.appointment) %>
 				</li>
