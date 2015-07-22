@@ -1,5 +1,5 @@
 class ActivitiesController < ApplicationController
-	before_action :set_activity, only: [:show, :edit, :update, :add_user, :remove_user]
+	before_action :set_activity, only: [:edit, :update, :add_user, :remove_user]
 	before_action :user_logged?, only: [:create, :update, :edit, :new]
 
 	def create
@@ -41,6 +41,7 @@ class ActivitiesController < ApplicationController
 	end
 
 	def show
+		@activity = Activity.includes(:group).find(params[:id])
 		@notifications.dismiss_activity_notification(@activity)
 	end
 
