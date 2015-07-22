@@ -4,6 +4,7 @@ class UsersController < ApplicationController
 
 	def show
 		@user = User.includes(:groups).find(params[:id])
+		@activities = @user.activities.future_activities.includes(:group)
 		check_user
 	end
 
