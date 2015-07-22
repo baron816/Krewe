@@ -48,10 +48,6 @@ class User < ActiveRecord::Base
 		friends.uniq
 	end
 
-	def self.one_user?
-	  count == 1
-	end
-
 	def add_dropped_group(id)
 		dropped_group_ids << id
 		save
