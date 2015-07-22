@@ -16,7 +16,7 @@ class ActivitiesController < ApplicationController
 	def add_user
 		@activity.users << current_user
 		respond_to do |format|
-			format.html { redirect_to activity_path(@activity.group, @activity) }
+			format.html { redirect_to activity_path(@activity) }
 			format.js
 		end
 	end
