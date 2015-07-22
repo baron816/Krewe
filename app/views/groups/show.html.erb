@@ -1,16 +1,16 @@
 <h1>
-	<%= @group.name %> <%= link_to "<i class='glyphicon glyphicon-trash'></i> Drop Group".html_safe, drop_user_group_path(@group), method: :delete, class: 'btn btn-danger', data: {confirm: "Are you sure you want to drop this group?", text: "You will not be able to rejoin it.", 'confirm-button-text': "Yeah, these guys are jerks"} %>
+	<%= @group_show.group.name %> <%= link_to "<i class='glyphicon glyphicon-trash'></i> Drop Group".html_safe, drop_user_group_path(@group_show.group), method: :delete, class: 'btn btn-danger', data: {confirm: "Are you sure you want to drop this group?", text: "You will not be able to rejoin it.", 'confirm-button-text': "Yeah, these guys are jerks"} %>
 </h1>
 
 
 <h2>Messages</h2>
 <div class="messages">
-	<% @messages.each do |message| %>
+	<% @group_show.messages.each do |message| %>
 		<%= render partial: "messages/show", locals: { message: message } %>
 	<% end %>
 </div>
 
-<%= will_paginate @messages, renderer: BootstrapPagination::Rails %>
+<%= will_paginate @group_show.messages, renderer: BootstrapPagination::Rails %>
 
 <h2>Write a new message</h2>
 <%= render "messages/new" %>
@@ -18,16 +18,16 @@
 <div class="col-md-6">
 	<h2>Members</h2>
 	<ul class="list-group">
-		<% if @users.one_user? %>
+		<% if @group_show.one_user? %>
 			<li class="list-group-item">No other users in the group yet. We'll let you know when they join.</li>
 		<% end %>
-		<% @users.each do |user| %>
+		<% @group_show.users.each do |user| %>
 			<li class="list-group-item clearfix"><%= link_to user.name, public_profile_user_path(user) %>
 				 <span class="pull-right">
 				 	<% if current_user.can_vote?(user) %>
-				 		<%= link_to "Remove from Group #{user.group_drop_votes_count(@group)}/3", group_drop_user_votes_path(@group, user_id: user), remote: true, method: :post, class: 'btn btn-danger', id: "remove-btn-#{user.id}", data: {confirm: "Vote to remove this user?", text: "Remove inactive users, but only if they're inactive."}%>
+				 		<%= link_to "Remove from Group #{user.group_drop_votes_count(@group_show.group)}/3", group_drop_user_votes_path(@group_show.group, user_id: user), remote: true, method: :post, class: 'btn btn-danger', id: "remove-btn-#{user.id}", data: {confirm: "Vote to remove this user?", text: "Remove inactive users, but only if they're inactive."}%>
 				 	<% elsif user != current_user %>
-				 		<%= link_to "Undo #{user.group_drop_votes_count(@group)}/3", group_drop_user_vote_path(@group, user.voter_vote(current_user)), remote: true, method: :delete, class: 'btn btn-warning', id: "undo-btn-#{user.id}" %>
+				 		<%= link_to "Undo #{user.group_drop_votes_count(@group_show.group)}/3", group_drop_user_vote_path(@group_show.group, user.voter_vote(current_user)), remote: true, method: :delete, class: 'btn btn-warning', id: "undo-btn-#{user.id}" %>
 				 	<% end %>
 				 </span>
 			 	</li>
@@ -38,7 +38,7 @@
 <div class="col-md-6">
 	<h2>Activities</h2>
 	<ul class="list-group">
-		<% @activities.each do |activity| %>
+		<% @group_show.activities.each do |activity| %>
 		<li class="list-group-item clearfix">
 			<%= link_to activity.plan, activity_path(activity) %> <%= local_time(activity.appointment) %>
 			<% unless activity.user_going?(current_user) %>
@@ -56,5 +56,5 @@
 		<% end %>
 	<% end %>
 
-	<%= link_to "Propose Activity", new_activity_path( group_id: @group.id ), id: 'new_activity', class: 'btn btn-primary', remote: true %>
+	<%= link_to "Propose Activity", new_activity_path( group_id: @group_show.group.id ), id: 'new_activity', class: 'btn btn-primary', remote: true %>
 </div>
