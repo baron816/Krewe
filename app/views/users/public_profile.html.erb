@@ -1,8 +1,8 @@
 <div class="well">
-	<h1><%= @user.user.name %></h1>
-	Email: <%= mail_to @user.user.email %> <br>
-	Location: <%= @user.user.city %>, <%= @user.user.state %> <br>
-	Category: <%= @user.user.category %>
+	<h1><%= @user.user_name %></h1>
+	Email: <%= mail_to @user.user_email %> <br>
+	Location: <%= @user.user_location %> <br>
+	Category: <%= @user.user_category %>
 </div>
 
 <% unless @user.own_profile? %>
