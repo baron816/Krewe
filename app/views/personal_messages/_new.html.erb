@@ -1,6 +1,6 @@
-<%= form_for(@personal_message, remote: true) do |f| %>
-	<%= f.text_area :content, placeholder: "Send #{@user.name} a message...", class: 'form-control message-box' %> <br>
+<%= form_for(@user.new_personal_message, remote: true) do |f| %>
+	<%= f.text_area :content, placeholder: "Send #{@user.user.name} a message...", class: 'form-control message-box' %> <br>
 	<%= f.hidden_field :sender_id, value: current_user.id %>
-	<%= f.hidden_field :receiver_id, value: @user.id %>
+	<%= f.hidden_field :receiver_id, value: @user.user.id %>
 	<%= f.submit "Submit", class: 'btn btn-primary disabled', id: 'new-message-submit' %>
 <% end %>

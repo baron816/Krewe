@@ -1,18 +1,18 @@
 <div class="well">
-	<h1><%= @user.name %></h1> 
-	Email: <%= mail_to @user.email %> <br>
-	Location: <%= @user.city %>, <%= @user.state %> <br>
-	Category: <%= @user.category %>
+	<h1><%= @user.user.name %></h1>
+	Email: <%= mail_to @user.user.email %> <br>
+	Location: <%= @user.user.city %>, <%= @user.user.state %> <br>
+	Category: <%= @user.user.category %>
 </div>
 
-<% unless current_user == @user %>
+<% unless @user.own_profile? %>
 	<div class="personal-messages">
-		<% @personal_messages.each do |message| %>
+		<% @user.personal_messages.each do |message| %>
 			<%= render partial: 'personal_messages/show', locals: {message: message} %>
 		<% end %>
 	</div>
 
-	<%= will_paginate @personal_messages, renderer: BootstrapPagination::Rails %>
+	<%= will_paginate @user.personal_messages, renderer: BootstrapPagination::Rails %>
 
 	<%= render 'personal_messages/new' %>
 <% end %>

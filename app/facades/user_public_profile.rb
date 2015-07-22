@@ -6,6 +6,22 @@ class UserPublicProfile
     @page = page
   end
 
+  def user_name
+    user.name
+  end
+
+  def user_email
+    user.email
+  end
+
+  def user_location
+    "#{user.city}, #{user.state}"
+  end
+
+  def user_category
+    user.category
+  end
+
   def personal_messages
     PersonalMessage.users_messages(first_user: user, second_user: current_user).includes(:sender).paginate(page: page, per_page: 5)
   end
