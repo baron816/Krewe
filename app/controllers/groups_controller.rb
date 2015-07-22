@@ -7,8 +7,6 @@ class GroupsController < ApplicationController
 		@messages = @group.messages.includes(:user).order(created_at: :desc).paginate(page: params[:page], per_page: 5)
 		@activities = @group.upcoming_activities.includes(:users)
 		@message = Message.new
-		@activity = Activity.new
-		@vote = DropUserVote.new
 	end
 
 	def drop_user
