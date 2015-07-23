@@ -8,9 +8,9 @@ class UsersController < ApplicationController
 	end
 
 	def public_profile
+		redirect_to root_path unless current_user.friends.include?(@user)
+		@notifications.dismiss_personal_notifications_from_user(@user)
 		@user = UserPublicProfile.new(@user, current_user, params[:page])
-		redirect_to root_path unless current_user.friends.include?(@user.user)
-		@notifications.dismiss_personal_notifications_from_user(@user.user)
 	end
 
 	def edit
