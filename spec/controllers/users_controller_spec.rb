@@ -32,7 +32,7 @@ describe UsersController do
     end
 
     it "returns the personal messages" do
-    	expect(assigns[:personal_messages]).to include(@message)
+    	expect(assigns[:user].personal_messages).to include(@message)
     end
   end
 

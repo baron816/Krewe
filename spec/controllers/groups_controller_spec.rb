@@ -17,11 +17,11 @@ describe GroupsController do
     end
 
     it "finds the correct group" do
-    	expect(assigns[:group]).to eq(@group)
+    	expect(assigns[:group_show].group).to eq(@group)
     end
 
     it "has a new message" do
-    	expect(assigns[:message]).to be_a_new(Message)
+    	expect(assigns[:group_show].new_message).to be_a_new(Message)
     end
   end
 
