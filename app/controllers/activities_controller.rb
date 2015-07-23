@@ -42,7 +42,7 @@ class ActivitiesController < ApplicationController
 
 	def show
 		@activity = Activity.includes(:group).find(params[:id])
-		@notifications.dismiss_activity_notification(@activity)
+		current_user.dismiss_activity_notification(@activity)
 	end
 
 	def new
