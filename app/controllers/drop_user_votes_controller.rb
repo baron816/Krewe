@@ -4,8 +4,7 @@ class DropUserVotesController < ApplicationController
 
 	def create
 		@user = User.find(params[:user_id])
-		@vote = @group.drop_user_votes.new(user: @user, voter: current_user)
-		@vote.save
+		@vote = @group.drop_user_votes.create(user: @user, voter: current_user)
 		@group.kick_user(@user)
 		respond_to do |format|
 			format.html { redirect_to @group }
