@@ -30,7 +30,7 @@ class UserPublicProfile
   end
 
   def new_personal_message
-    @personal_message = PersonalMessage.new
+    @personal_message ||= PersonalMessage.new
   end
 
   def own_profile?
