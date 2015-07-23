@@ -7,19 +7,19 @@ class GroupShow
   end
 
   def users
-    group.users.includes(:drop_user_votes)
+    @users ||= group.users.includes(:drop_user_votes)
   end
 
   def activities
-    group.future_activities.includes(:users)
+    @activities ||= group.future_activities.includes(:users)
   end
 
   def messages
-    group.messages.includes(:user).order(created_at: :desc).paginate(page: page, per_page: 5)
+    @messages ||= group.messages.includes(:user).order(created_at: :desc).paginate(page: page, per_page: 5)
   end
 
   def new_message
-    @message ||= Message.new
+    @message = Message.new
   end
 
   def includes_user?(user)
