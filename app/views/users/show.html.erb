@@ -8,7 +8,7 @@
 			<% unless friend == current_user %>
 				<li class="list-group-item">
 					<%= link_to friend.name, public_profile_user_path(friend) %>
-					<span class='badge'><%= @notifications.unviewed_personal_notifications_from_user_count(friend) %></span>
+					<span class='badge'><%= current_user.unviewed_personal_notifications_from_user_count(friend) %></span>
 				</li>
 			<% end %>
 		<% end %>
@@ -20,7 +20,7 @@
 	<ul class="list-group">
 		<% @user.groups.each do |group| %>
 			<li class="list-group-item"><%= link_to group.name, group_path(group) %>
-				<span class='badge'><%= @notifications.unviewed_group_notification_count(group) %></span>
+				<span class='badge'><%= current_user.unviewed_group_notification_count(group) %></span>
 			</li>
 		<% end %>
 	</ul>
