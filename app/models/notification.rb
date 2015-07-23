@@ -9,6 +9,8 @@ class Notification < ActiveRecord::Base
 	delegate :name, to: :notifiable, prefix: true
 	delegate :group, to: :notifiable, prefix: true
 
+	default_scope -> { includes(:poster) }
+
 	scope :unviewed_notifications, ->{ where(viewed: false) }
 	scope :category_notifications, ->(category) { where(notifiable_type: category) }
 	scope :poster_notifications, ->(poster) { where(poster_id: poster)}
@@ -27,7 +29,7 @@ class Notification < ActiveRecord::Base
 	def self.unviewed_category_notifications(category)
 		unviewed_notifications.category_notifications(category)
 	end
-	
+
 	#personal
 
 	def self.unviewed_personal_notifications_from_user(user)
