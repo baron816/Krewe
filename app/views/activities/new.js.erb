@@ -1,6 +1,7 @@
 $('#new_activity').hide().after('<%= j render("new") %>')
 $('#datetimepicker').datetimepicker({
-	format: 'YYYY-MM-DD hh:mm A'
+	format: 'YYYY-MM-DD hh:mm A',
+	minDate: new Date()
 });
 
 
