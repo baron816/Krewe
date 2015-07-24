@@ -45,7 +45,7 @@ class User < ActiveRecord::Base
 	end
 
 	def unique_friends
-		friends.uniq
+		friends.where.not(id: self).uniq
 	end
 
 	def future_activities
