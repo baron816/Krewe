@@ -1,9 +1,9 @@
 <%= form_for(@activity) do |f| %>
-	<%= f.text_field :plan, placeholder: "What's the plan?", class: 'form-control' %>
-	<%= f.text_field :location, placeholder: "Where?", class: 'form-control' %>
+	<%= f.text_field :plan, placeholder: "What's the plan?", class: 'form-control', required: true %>
+	<%= f.text_field :location, placeholder: "Where?", class: 'form-control', required: true %>
 	<div class="form-group">
 		<div class="input-group date" id='datetimepicker'>
-			<%= f.text_field :appointment, placeholder: 'When? Hit button -->', class: 'form-control' %>
+			<%= f.text_field :appointment, placeholder: 'When? Hit button -->', class: 'form-control', required: true %>
 			<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
 		</div>
 	</div>
