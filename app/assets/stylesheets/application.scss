@@ -41,6 +41,12 @@ body {
 	background: #3580d9;
 }
 
+li.list-group-item, .well, .form-control, .pagination li a, .pagination li.disabled span {
+	background: #FCC9B9;
+	border-color: #3580d9;
+}
+
+
 #logo {
 	max-width: 100px;
 	margin-top: -7px;
