@@ -5,6 +5,10 @@
 @import "select2";
 @import "select2-bootstrap";
 
+html {
+	height: 100%;
+}
+
 #home {
 	width: 100%;
 	height: 100%;
@@ -38,7 +42,10 @@
 }
 
 body {
-	background: #3580d9;
+	height: 100%;
+	background: linear-gradient(to bottom right, #3580d9, #89C4F4);
+	background-repeat: no-repeat;
+
 }
 
 li.list-group-item, .well, .form-control, .pagination li a, .pagination li.disabled span, .input-group-addon, #s2id_user_state a, .select2-results li div, .select2-search {
@@ -60,4 +67,44 @@ li.list-group-item, .well, .form-control, .pagination li a, .pagination li.disab
 #map {
 	width: 100%;
 	height: 600px;
+}
+
+.btn-primary {
+	background-color: #19B5FE;
+	border-color: #19B5FE;
+}
+
+.btn-primary:hover {
+	background: #4B77BE;
+	border-color: #4B77BE;
+}
+
+.btn-success {
+	background: #36D7B7;
+	border-color: #36D7B7;
+}
+
+.btn-success:hover {
+	background: #049372;
+	border-color: #049372;
+}
+
+.btn-danger {
+	background-color: #F22613;
+	border-color: #F22613;
+}
+
+.btn-warning {
+	background-color: #FFB94E;
+	border-color: #FFB94E;
+}
+
+.btn-info {
+	background-color: #A87CA0;
+	border-color: #A87CA0;
+}
+
+.btn-info:hover {
+	background-color: #763568;
+	border-color: #763568;
 }
