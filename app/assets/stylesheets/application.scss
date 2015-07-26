@@ -5,6 +5,9 @@
 @import "select2";
 @import "select2-bootstrap";
 
+$cherryblossom: #FCC9B9;
+$secondary: #3580d9;
+
 @font-face {
 	font-family: 'Josefin Sans';
 	src: url('JosefinSans-SemiBold.ttf') format('truetype');
@@ -14,10 +17,10 @@ html {
 	height: 100%;
 }
 
-h1, h2, h3, h4, h5, h6, p, div {
+h1, h2, h3, h4, h5, h6, p, div, .select2-chosen {
 	font-family: 'Josefin Sans';
 }
-
+// #s2id_user_state
 p {
 	font-size: 1.3em;
 }
@@ -54,24 +57,24 @@ a, a.btn {
 }
 
 .navbar-default .navbar-nav > li > a {
-   color: #FCC9B9;
+   color: $cherryblossom;
    text-shadow: 1px 1px black;
 }
 
 body {
 	height: 100%;
-	background: linear-gradient(to bottom right, #3580d9, #89C4F4);
+	background: linear-gradient(to bottom right,$secondary, #89C4F4);
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 }
 
-li.list-group-item, .well, .form-control, .pagination li a, .pagination li.disabled span, .input-group-addon, #s2id_user_state a, .select2-results li div, .select2-search, .dropdown-menu {
-	background-color: #FCC9B9;
-	border-color: #3580d9;
+li.list-group-item, .well, .form-control, .pagination li a, .pagination li.disabled span, .input-group-addon, #s2id_user_state a, .select2-results li div, .select2-search, .dropdown-menu, {
+	background-color: $cherryblossom;
+	border-color:$secondary;
 }
 
 .badge {
-	background-color: #3580d9;
+	background-color:$secondary;
 }
 
 #logo {
