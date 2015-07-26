@@ -54,7 +54,7 @@ a, a.btn {
 }
 
 .navbar-default .navbar-nav > li > a {
-   color: #3580d9;
+   color: #FCC9B9;
    text-shadow: 1px 1px black;
 }
 
@@ -65,11 +65,14 @@ body {
 	background-attachment: fixed;
 }
 
-li.list-group-item, .well, .form-control, .pagination li a, .pagination li.disabled span, .input-group-addon, #s2id_user_state a, .select2-results li div, .select2-search {
-	background: #FCC9B9;
+li.list-group-item, .well, .form-control, .pagination li a, .pagination li.disabled span, .input-group-addon, #s2id_user_state a, .select2-results li div, .select2-search, .dropdown-menu {
+	background-color: #FCC9B9;
 	border-color: #3580d9;
 }
 
+.badge {
+	background-color: #3580d9;
+}
 
 #logo {
 	max-width: 100px;
