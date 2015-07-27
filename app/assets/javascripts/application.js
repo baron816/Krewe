@@ -26,3 +26,4 @@
 //= require sweet-alert
 //= require sweet-alert-confirm
 //= require select2
+//= require skrollr

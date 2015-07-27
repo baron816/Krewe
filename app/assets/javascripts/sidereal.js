@@ -17,7 +17,9 @@ $(document).ready(function(){
 
 	$("#user_state").select2({
 		placeholder: "Select a state"
-	})
+	});
+
+	var s = skrollr.init();
 })
 
 function codeAddress() {
