@@ -20,6 +20,7 @@ gem 'sweetalert-rails'
 gem 'sweet-alert-confirm'
 gem 'select2-rails'
 gem 'auto_html'
+gem 'skrollr-rails'
 
 gem 'jquery-rails'
 gem 'jquery-turbolinks'
