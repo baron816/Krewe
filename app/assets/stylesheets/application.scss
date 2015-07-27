@@ -5,7 +5,7 @@
 @import "select2";
 @import "select2-bootstrap";
 
-$cherryblossom: #FCC9B9;
+$creamcan: #F5D76E;
 $secondary: #3580d9;
 
 @font-face {
@@ -44,7 +44,7 @@ a, a.btn {
 }
 
 .jumbotron {
-	background: rgba(134, 170, 207, 0.5);
+	background: rgba(252,201,185,0.7);
 }
 
 .navbar-default {
@@ -57,7 +57,7 @@ a, a.btn {
 }
 
 .navbar-default .navbar-nav > li > a {
-   color: $cherryblossom;
+   color: $creamcan;
    text-shadow: 1px 1px black;
 }
 
@@ -69,7 +69,7 @@ body {
 }
 
 li.list-group-item, .well, .form-control, .pagination li a, .pagination li.disabled span, .input-group-addon, #s2id_user_state a, .select2-results li div, .select2-search, .dropdown-menu, {
-	background-color: $cherryblossom;
+	background-color: $creamcan;
 	border-color:$secondary;
 }
 
