@@ -34,6 +34,7 @@ class ActivitiesController < ApplicationController
 		@group = @activity.group
 
 		if @activity.update(activity_params) && @activity.proposed_by?(current_user)
+			@activity.send_notifications("ActivityUpdate")
 			redirect_to activity_path(@activity)
 		else
 			redirect_to edit_activity_path(@activity), flash: { errors: @activity.errors.full_messages }
