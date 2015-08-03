@@ -23,7 +23,7 @@ class Message < ActiveRecord::Base
 
 	def send_notifications
 		group_users.each do |user|
-			self.notifications.create(user: user, poster: self.user) unless user == self.user
+			self.notifications.create(user: user, poster: self.user, notification_type: self.class.name) unless user == self.user
 		end
 	end
 end

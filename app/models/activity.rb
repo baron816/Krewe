@@ -27,9 +27,9 @@ class Activity < ActiveRecord::Base
 		end
 	end
 
-	def send_notifications
+	def send_notifications(type = self.class.name)
 		group.users.each do |user|
-			self.notifications.create(user: user, poster: self.proposer) unless user == proposer
+			self.notifications.create(user: user, poster: self.proposer, notification_type: type) unless user == proposer
 		end
 	end
 

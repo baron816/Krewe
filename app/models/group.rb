@@ -52,7 +52,7 @@ class Group < ActiveRecord::Base
 
 	def join_group_notifications(new_user)
 		users.each do |user|
-			self.notifications.create(user: user, poster: new_user) unless user == new_user
+			self.notifications.create(user: user, poster: new_user, notification_type: self.class.name) unless user == new_user
 		end
 	end
 

@@ -18,7 +18,7 @@ class PersonalMessage < ActiveRecord::Base
 	end
 
 	def send_notification
-		self.notifications.create(user: receiver, poster: sender)
+		self.notifications.create(user: receiver, poster: sender, notification_type: self.class.name)
 	end
 
 	def self.users_messages(params = {})
