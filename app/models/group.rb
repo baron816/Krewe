@@ -58,7 +58,7 @@ class Group < ActiveRecord::Base
 
 	private
 	def name_group
-		self.name = Faker::Commerce.color.capitalize
+		self.name = GroupNameHelper.constellations.sample
 	end
 
 	def self.user_friend_group_ids(friend_ids)
