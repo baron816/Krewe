@@ -7,7 +7,7 @@ RSpec.describe UserMailer, type: :mailer do
       @user.generate_token(:password_reset_token)
       @user.save
     end
-    
+
     let(:mail) { UserMailer.password_reset(@user) }
 
     it "renders the subject" do
