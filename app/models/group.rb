@@ -14,11 +14,11 @@ class Group < ActiveRecord::Base
 
 	scope :open_groups, -> { where(can_join: true) }
 	scope :category_groups, ->(category) { where(category: category) }
-	scope :excluded_users, ->(friend_ids) { includes(:users).where("users.id not in (?)", friend_ids).references(:users) }
+	scope :excluded_users, ->(friend_ids) { where.not(id: user_friend_group_ids(friend_ids)) }
 	scope :non_former_groups, ->(group_ids) { where.not(id: group_ids) }
 
 	def self.search(params)
-		self.open_groups.category_groups(params[:category]).near(params[:user], 0.5).excluded_users(params[:friend_ids]).non_former_groups(params[:group_ids])[0]
+		self.open_groups.category_groups(params[:category]).excluded_users(params[:friend_ids]).near(params[:user], 0.5).non_former_groups(params[:group_ids])[0]
 	end
 
 	def future_activities
@@ -59,5 +59,9 @@ class Group < ActiveRecord::Base
 	private
 	def name_group
 		self.name = Faker::Commerce.color.capitalize
+	end
+
+	def self.user_friend_group_ids(friend_ids)
+		self.includes(:users).references(:users).where("users.id in (?)", friend_ids).ids.uniq
 	end
 end
