@@ -1,0 +1,3 @@
+Hi <%= @user.name %>
+
+We're just writing you to let you know <%= link_to @poster.name, public_profile_user_url(@poster) %> has joined your group <%= link_to @group.name, group_url(@group) %>. Y'all should get together sometime soon, or at least introduce yourselves.
