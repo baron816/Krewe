@@ -53,6 +53,8 @@ class Group < ActiveRecord::Base
 	def join_group_notifications(new_user)
 		users.each do |user|
 			self.notifications.create(user: user, poster: new_user, notification_type: self.class.name) unless user == new_user
+			# needs testing -- uncomment when email set up
+			# GroupMailer.join_group({user: user, group: self, poster: new_user})
 		end
 	end
 
