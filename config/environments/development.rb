@@ -20,13 +20,12 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: 'smtp.gmail.com',
+    address: 'smtp.mailgun.org',
     port: 587,
     domain: 'localhost:3000',
-    user_name: ENV['GMAIL_USER_NAME'],
-    password: ENV['GMAIL_PASSWORD'],
-    authentication: 'plain',
-    enable_starttls_auto: true
+    user_name: ENV['MAILGUN_USER_NAME'],
+    password: ENV['MAILGUN_PASSWORD'],
+    authentication: 'plain'
   }
 
   # Print deprecation notices to the Rails logger.
@@ -52,8 +51,8 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
-  config.after_initialize do
-    Bullet.enable = true
-    Bullet.alert = true
-  end
+  # config.after_initialize do
+  #   Bullet.enable = true
+  #   Bullet.alert = true
+  # end
 end
