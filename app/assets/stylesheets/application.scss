@@ -20,13 +20,18 @@ html {
 h1, h2, h3, h4, h5, h6, p, div, .select2-chosen {
 	font-family: 'Josefin Sans';
 }
-// #s2id_user_state
+
 p {
 	font-size: 1.3em;
 }
 
 a {
 	font-size: 1.1em;
+}
+
+.logo {
+	color: $creamcan;
+	font-size: 2em;
 }
 
 #home {
@@ -68,8 +73,25 @@ a {
 
 .navbar-default .navbar-nav > li > a {
    color: $creamcan;
-   text-shadow: 1px 1px black;
+  //  text-shadow: 1px 1px black;
 }
+
+.navbar-default .navbar-toggle {
+	border-color: $creamcan;
+
+	.icon-bar {
+		background-color: $creamcan;
+	}
+}
+
+.navbar-default .navbar-nav .open .dropdown-menu > li > a {
+	color: black;
+}
+
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+	background-color: #4B77BE;
+}
+
 
 body {
 	height: 100%;
@@ -85,11 +107,6 @@ li.list-group-item, .well, .form-control, .pagination li a, .pagination li.disab
 
 .badge {
 	background-color:$secondary;
-}
-
-#logo {
-	max-width: 100px;
-	margin-top: -7px;
 }
 
 #map-canvas {
