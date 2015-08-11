@@ -19,7 +19,6 @@ $(document).ready(function(){
 		placeholder: "Select a state"
 	});
 
-	var s = skrollr.init();
 })
 
 function codeAddress() {
