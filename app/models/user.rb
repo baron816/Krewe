@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
 	before_create { generate_token(:auth_token) }
 	before_save :downcase_email
 
+	after_validation :geocode
 	reverse_geocoded_by :latitude, :longitude
 
 	def find_or_create_group
