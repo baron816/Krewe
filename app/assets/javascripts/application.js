@@ -21,7 +21,6 @@
 //= require bootstrap-datetimepicker
 //= require underscore
 //= require gmaps/google
-//= require sidereal
 //= require local_time
 //= require sweet-alert
 //= require sweet-alert-confirm
