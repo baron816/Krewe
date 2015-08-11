@@ -20,8 +20,8 @@
 		<%= f.hidden_field :longitude, id: 'lng' %>
 		<% categories.each do |category| %>
 			<div class="input-group">
-			<span class="input-group-addon"> <%= f.radio_button :category, category[:name] %></span>
-			<%= f.label :category, "#{category[:name]}: #{category[:description]}", class: 'form-control', required: true %>
+			<span class="input-group-addon"> <%= f.radio_button :category, category %></span>
+			<%= f.label :category, category, class: 'form-control', required: true %>
 			</div>
 		<% end %>
 		<%= f.password_field :password, placeholder: 'Password', class: "form-control", required: true %>
