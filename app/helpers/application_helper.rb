@@ -60,9 +60,12 @@ module ApplicationHelper
 
 	def categories
 		[
-			{name: 'Post-Grad', description: 'People just out of college'},
-			{name: 'Young Parent', description: 'Baby talkers'},
-			{name: 'Business Networkers', description: 'People looking to make business connections'}
+			'College Student',
+			'Post-Grad',
+			'Young Parent',
+			'Retiree',
+			'Traveler',
+			'Other'
 		]
 	end
 end
