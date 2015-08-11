@@ -13,7 +13,7 @@ $secondary: #3580d9;
 	src: font-url('JosefinSans-SemiBold.ttf') format('truetype');
 }
 
-html {
+html, body {
 	height: 100%;
 }
 
@@ -59,7 +59,11 @@ a {
 	left: 0;
 }
 
-
+.container {
+	min-height: 100%;
+	margin-bottom: -40px;
+	padding-bottom: 40px;
+}
 
 .navbar {
 	background: transparent;
