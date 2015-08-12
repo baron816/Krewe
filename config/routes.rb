@@ -29,4 +29,10 @@ Rails.application.routes.draw do
 
   root 'home#index'
   get "*any", via: :all, to: "errors#not_found"
+
+  namespace :api do
+    namespace :v1 do
+      resources :users, except: [:index, :destroy]
+    end
+  end
 end
