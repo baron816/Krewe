@@ -68,4 +68,42 @@ RSpec.describe Api::V1::UsersController, type: :controller do
       expect(response).to have_http_status(200)
     end
   end
+
+  describe "PUT/PATCH #update" do
+    before do
+      @user = create(:user_home)
+    end
+
+    context "when it's updated" do
+      before do
+        patch :update, {id: @user, user: { category: "Other"} }
+      end
+
+      it "renders the json representation for the updated user" do
+        expect(json_response[:category]).to eq("Other")
+      end
+
+      it "is successful" do
+        expect(response).to have_http_status(200)
+      end
+    end
+
+    context "when it fails" do
+      before do
+        patch :update, { id: @user, user: { email: 've'} }
+      end
+
+      it "renders an erros json" do
+        expect(json_response).to have_key(:errors)
+      end
+
+      it "explains why it wasn't updated" do
+        expect(json_response[:errors][:email]).to include "is invalid"
+      end
+
+      it "returns 422 error code" do
+        expect(response).to have_http_status(422)
+      end
+    end
+  end
 end
