@@ -106,4 +106,21 @@ RSpec.describe Api::V1::UsersController, type: :controller do
       end
     end
   end
+
+  describe "POST #add_group" do
+    before do
+      @user = create(:user_home)
+      cookies[:auth_token] = @user.auth_token
+      post :add_group, id: @user, format: :json
+    end
+
+    it "responds with a new group" do
+      p json_response
+      expect(json_response).to have_key(:user_limit)
+    end
+
+    it "is successful" do
+      expect(response).to have_http_status(200)
+    end
+  end
 end
