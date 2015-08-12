@@ -1,9 +1,9 @@
 class Api::V1::UsersController < ApplicationController
-  before_action :set_user, only: [:public_profile, :update]
+  before_action :set_user, only: [:public_profile, :update, :add_group, :show]
   respond_to :json
 
   def show
-    render json: User.find(params[:id])
+    render json: @user
   end
 
   def create
@@ -24,6 +24,15 @@ class Api::V1::UsersController < ApplicationController
       render json: @user, status: 200
     else
       render json: { errors: @user.errors }, status: 422
+    end
+  end
+
+  def add_group
+    if @user.under_group_limit?
+      group = @user.find_or_create_group
+      render json: group
+    else
+      render json: { errors: "Group limit already reached" }, status: 422
     end
   end
 
