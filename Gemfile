@@ -53,6 +53,10 @@ end
 
 gem 'bullet', group: 'development'
 
+gem 'active_model_serializers'
+
+gem 'responders'
+
 gem 'rails_12factor', group: :production
 
 gem 'rest-client'
