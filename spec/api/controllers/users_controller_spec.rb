@@ -50,4 +50,22 @@ RSpec.describe Api::V1::UsersController, type: :controller do
       end
     end
   end
+
+  describe "GET #public_profile" do
+    before do
+      @user = create(:user_home)
+      cookies[:auth_token] = @user.auth_token
+      @user2 = create(:user_wtc)
+      @message = PersonalMessage.create(sender: @user, receiver: @user2, content: "hello there")
+      get :public_profile, id: @user2, format: :json
+    end
+
+    it "renders the messages" do
+      expect(json_response).to have_key(:messages)
+    end
+
+    it "responds with HTTP status 200" do
+      expect(response).to have_http_status(200)
+    end
+  end
 end
