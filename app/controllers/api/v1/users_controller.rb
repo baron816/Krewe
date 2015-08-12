@@ -1,5 +1,5 @@
 class Api::V1::UsersController < ApplicationController
-  before_action :set_user, only: :public_profile
+  before_action :set_user, only: [:public_profile, :update]
   respond_to :json
 
   def show
@@ -17,6 +17,14 @@ class Api::V1::UsersController < ApplicationController
 
   def public_profile
     render json: { messages: PersonalMessage.users_messages(first_user: @user, second_user: current_user) }
+  end
+
+  def update
+    if @user.update(user_params)
+      render json: @user, status: 200
+    else
+      render json: { errors: @user.errors }, status: 422
+    end
   end
 
   private
