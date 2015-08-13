@@ -44,6 +44,7 @@ Rails.application.routes.draw do
       end
 
       resources :activities, only: [:create, :update, :show]
+      resources :sessions, only: [:create, :destroy]
     end
   end
 end
