@@ -1,5 +1,8 @@
 class Api::V1::ActivitiesController < ApplicationController
+  include Authenticable
+
   before_action :set_activity, only: [:show, :update, :add_user, :remove_user]
+  before_action :authenticate_with_token!, only: [:create, :update]
 
   def show
     render json: @activity

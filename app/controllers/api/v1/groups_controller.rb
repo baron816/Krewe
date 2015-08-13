@@ -1,4 +1,6 @@
 class Api::V1::GroupsController < ApplicationController
+  include Authenticable
+
   respond_to :json
   before_action :set_group
 
