@@ -20,4 +20,14 @@ RSpec.describe Api::V1::GroupsController, type: :controller do
       expect(json_response[:name]).to eq(@group.name)
     end
   end
+
+  describe "DELETE #drop_user" do
+    before do
+      delete :drop_user, id: @group
+    end
+
+    it "is successful" do
+      expect(response).to have_http_status(204)
+    end
+  end
 end
