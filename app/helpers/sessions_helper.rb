@@ -1,9 +1,9 @@
 module SessionsHelper
-	def log_in(user)
+	def log_in(user, params = {})
 		if params[:remember_me]
 			cookies.permanent[:auth_token] = user.auth_token
 		else
-			cookies[:auth_token] = user.auth_token		
+			cookies[:auth_token] = user.auth_token
 		end
 		user.update_sign_in(request.remote_ip)
 	end
