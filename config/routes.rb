@@ -37,7 +37,9 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :groups, only: :show
+      resources :groups, only: :show do
+        delete 'drop_user', on: :member
+      end
     end
   end
 end
