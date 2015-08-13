@@ -45,4 +45,40 @@ RSpec.describe Api::V1::ActivitiesController, type: :controller do
       end
     end
   end
+
+  before do
+    @activity = build(:activity)
+    @activity.group = @group
+    @activity.save
+  end
+
+  describe "GET #show" do
+    before do
+      get :show, id: @activity
+    end
+
+    it "is successful" do
+      expect(response).to have_http_status(200)
+    end
+
+    it "returns the json representation of the activity" do
+      expect(json_response[:location]).to eq("South Street Seaport")
+    end
+  end
+
+  describe "PUT/PATCH #update" do
+    context "when succsssfully updated" do
+      before do
+        patch :update, { id: @activity, activity: { location: "Empire State Building"} }
+      end
+
+      it "is successful" do
+        expect(response).to have_http_status(200)
+      end
+
+      it "renders the json representation with the updated activity" do
+        expect(json_response[:location]).to eq("Empire State Building")
+      end
+    end
+  end
 end
