@@ -5,7 +5,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
   describe "GET #show" do
     before do
       @user = create(:user_home)
-      cookies[:auth_token] = @user.auth_token
+      api_authorization_header(@user.auth_token)
       get :show, id: @user.id, format: :json
     end
 
@@ -54,7 +54,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
   describe "GET #public_profile" do
     before do
       @user = create(:user_home)
-      cookies[:auth_token] = @user.auth_token
+      api_authorization_header(@user.auth_token)
       @user2 = create(:user_wtc)
       @message = PersonalMessage.create(sender: @user, receiver: @user2, content: "hello there")
       get :public_profile, id: @user2, format: :json
@@ -110,12 +110,11 @@ RSpec.describe Api::V1::UsersController, type: :controller do
   describe "POST #add_group" do
     before do
       @user = create(:user_home)
-      cookies[:auth_token] = @user.auth_token
+      api_authorization_header(@user.auth_token)
       post :add_group, id: @user, format: :json
     end
 
     it "responds with a new group" do
-      p json_response
       expect(json_response).to have_key(:user_limit)
     end
 

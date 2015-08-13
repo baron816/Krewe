@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Api::V1::GroupsController, type: :controller do
   before do
     user = create(:user_home)
-    cookies[:auth_token] = user.auth_token
+    api_authorization_header(user.auth_token)
     @group = user.groups.first
   end
 
