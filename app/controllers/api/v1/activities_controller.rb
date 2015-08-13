@@ -1,4 +1,10 @@
 class Api::V1::ActivitiesController < ApplicationController
+  before_action :set_activity, only: [:show, :update, :add_user, :remove_user]
+
+  def show
+    render json: @activity
+  end
+
   def create
     activity = Activity.new(activity_params)
 
@@ -6,6 +12,14 @@ class Api::V1::ActivitiesController < ApplicationController
       render json: activity, status: 201
     else
       render json: { errors: activity.errors }, status: 422
+    end
+  end
+
+  def update
+    if @activity.update(activity_params)
+      render json: @activity, status: 200
+    else
+      render json: { errors: @activity.errors }, status: 422
     end
   end
 
