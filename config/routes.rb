@@ -30,12 +30,14 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :users, except: [:index, :destroy] do
+      resources :users, only: [:show, :update, :create] do
         member do
           get 'public_profile'
           post 'add_group'
         end
       end
+
+      resources :groups, only: :show
     end
   end
 end
