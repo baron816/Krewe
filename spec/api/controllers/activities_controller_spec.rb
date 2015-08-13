@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe Api::V1::ActivitiesController, type: :controller do
   before do
     @user = create(:user_home)
+    api_authorization_header(@user.auth_token)
     @group = @user.groups.first
-    cookies[:auth_token] = @user.auth_token
   end
 
   describe "POST #create" do
