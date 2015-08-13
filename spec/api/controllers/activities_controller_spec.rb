@@ -80,5 +80,23 @@ RSpec.describe Api::V1::ActivitiesController, type: :controller do
         expect(json_response[:location]).to eq("Empire State Building")
       end
     end
+
+    context "when update is unsuccessful" do
+      before do
+        patch :update, { id: @activity, activity: { location: nil } }
+      end
+
+      it "is not successful" do
+        expect(response).to have_http_status(422)
+      end
+
+      it "has an errors json" do
+        expect(json_response).to have_key(:errors)
+      end
+
+      it "says what the problem is" do
+        expect(json_response[:errors][:location]).to eq(["can't be blank"])
+      end
+    end
   end
 end
