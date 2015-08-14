@@ -114,7 +114,13 @@ RSpec.describe Api::V1::ActivitiesController, type: :controller do
     end
   end
 
-  describe "POST" do
+  describe "DELETE #remove_user" do
+    before do
+      delete :remove_user, { id: @activity }
+    end
 
+    it "is successful" do
+      expect(response).to have_http_status(204)
+    end
   end
 end
