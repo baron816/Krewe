@@ -41,7 +41,12 @@ Rails.application.routes.draw do
         delete 'drop_user', on: :member
       end
 
-      resources :activities, only: [:create, :update, :show]
+      resources :activities, only: [:create, :update, :show] do
+        member do
+          post 'add_user'
+        end
+      end
+
       resources :sessions, only: [:create, :destroy]
     end
   end
