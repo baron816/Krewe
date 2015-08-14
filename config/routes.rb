@@ -46,6 +46,7 @@ Rails.application.routes.draw do
       resources :activities, only: [:create, :update, :show] do
         member do
           post 'add_user'
+          delete 'remove_user'
         end
       end
 
