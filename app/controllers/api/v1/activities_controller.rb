@@ -1,7 +1,7 @@
 class Api::V1::ActivitiesController < ApplicationController
   include Authenticable
 
-  before_action :set_activity, only: [:show, :update, :add_user, :remove_user]
+  before_action :set_activity, except: :create
   before_action :authenticate_with_token!, only: [:create, :update]
 
   def show
@@ -24,6 +24,12 @@ class Api::V1::ActivitiesController < ApplicationController
     else
       render json: { errors: @activity.errors }, status: 422
     end
+  end
+
+  def add_user
+    @activity.users << current_user
+
+    render json: @activity, status: 201
   end
 
   private
