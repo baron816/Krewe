@@ -32,6 +32,12 @@ class Api::V1::ActivitiesController < ApplicationController
     render json: @activity, status: 201
   end
 
+  def remove_user
+    @activity.users.delete(current_user)
+
+    head 204
+  end
+
   private
   def set_activity
     @activity = Activity.find(params[:id])
