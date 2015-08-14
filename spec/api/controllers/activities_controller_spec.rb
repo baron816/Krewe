@@ -99,4 +99,22 @@ RSpec.describe Api::V1::ActivitiesController, type: :controller do
       end
     end
   end
+
+  describe "POST #add_user" do
+    before do
+      post :add_user, id: @activity
+    end
+
+    it "is successful" do
+      expect(response).to have_http_status(201)
+    end
+
+    it "returns the activity" do
+      expect(json_response[:location]).to eq("South Street Seaport")
+    end
+  end
+
+  describe "POST" do
+
+  end
 end
