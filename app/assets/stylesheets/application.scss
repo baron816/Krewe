@@ -65,6 +65,10 @@ a {
 	padding-bottom: 40px;
 }
 
+.modal-content {
+	background: linear-gradient(to bottom right,$secondary, #89C4F4);
+}
+
 .navbar {
 	background: transparent;
 	border: $secondary;
