@@ -1,10 +1,14 @@
 class SessionsController < ApplicationController
 	def new
+		respond_to do |format|
+		  format.html { redirect_to :new }
+		  format.js
+		end
 	end
 
 	def create
 		@user = User.find_by(email: user_params[:email].downcase).try(:authenticate, user_params[:password])
-		
+
 		if @user
 			log_in(@user)
 			redirect_to user_path(@user)
