@@ -16,6 +16,8 @@ class User < ActiveRecord::Base
 	has_many :activities, through: :user_activities
 	has_many :owned_activities, class_name: "Activity", foreign_key: "proposer_id"
 	has_many :drop_user_votes
+	has_many :available_days
+	has_many :excluded_days
 
 	after_create :find_or_create_group
 	before_create { generate_token(:auth_token) }
