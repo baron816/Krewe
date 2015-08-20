@@ -30,7 +30,9 @@ ActiveRecord::Schema.define(version: 20150819154159) do
 
   create_table "available_days", force: :cascade do |t|
     t.integer "day"
-    t.string  "times",   array: true
+    t.boolean "morning"
+    t.boolean "afternoon"
+    t.boolean "evening"
     t.integer "user_id"
   end
 
@@ -44,7 +46,9 @@ ActiveRecord::Schema.define(version: 20150819154159) do
 
   create_table "excluded_days", force: :cascade do |t|
     t.date    "excluded_date"
-    t.string  "times",         array: true
+    t.boolean "morning"
+    t.boolean "afternoon"
+    t.boolean "evening"
     t.integer "user_id"
   end
 
