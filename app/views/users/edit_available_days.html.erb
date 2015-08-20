@@ -1,0 +1,37 @@
+<%= form_for @user do |f| %>
+  <table class="table table-bordered">
+
+
+  <tbody>
+  <%= f.fields_for :available_days do |aday| %>
+    <tr>
+      <td>
+      <%= aday.label weekdays[aday.options[:child_index]][0] %>
+    <%= aday.hidden_field :day, value: weekdays[aday.options[:child_index]][1]  %>
+      </td>
+
+      <td>
+    <%= aday.label :morning %>
+
+    <%= aday.check_box :morning %>
+      </td>
+
+      <td>
+
+    <%= aday.label :afternoon %>
+    <%= aday.check_box :afternoon %>
+      </td>
+
+
+      <td>
+
+    <%= aday.label :evening %>
+    <%= aday.check_box :evening %>
+      </td>
+
+    </tr>
+  <% end %>
+
+  <%= f.submit %>
+  </tbody>
+<% end %>
