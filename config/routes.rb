@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     member do
       get 'public_profile'
       post 'add_group'
+      get 'edit_available_days'
     end
   end
 
