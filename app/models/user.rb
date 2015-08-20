@@ -19,7 +19,13 @@ class User < ActiveRecord::Base
 	has_many :available_days
 	has_many :excluded_days
 
-	after_create :find_or_create_group
+	accepts_nested_attributes_for :available_days
+
+	after_create do
+		find_or_create_group
+		create_available_days
+	end
+
 	before_create { generate_token(:auth_token) }
 	before_save :downcase_email
 
@@ -103,6 +109,16 @@ class User < ActiveRecord::Base
 
 	def password_reset_expired?
 		password_reset_sent_at < 1.hours.ago
+	end
+
+	def create_available_days
+	  7.times do |time|
+	    if time == 0 || time == 6
+	    	self.available_days.create(day: time, morning: true, afternoon: true, evening: true)
+			else
+				self.available_days.create(day: time, morning: false, afternoon: false, evening: true)
+	    end
+	  end
 	end
 
 	#notification delegations
