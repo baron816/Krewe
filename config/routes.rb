@@ -4,6 +4,8 @@ Rails.application.routes.draw do
       get 'public_profile'
       post 'add_group'
       get 'edit_available_days'
+      get 'new_excluded_days'
+      get 'edit_excluded_days'
     end
   end
 
