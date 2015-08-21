@@ -127,6 +127,23 @@ li.list-group-item, .well, .form-control, .pagination li a, .pagination li.disab
 	height: 600px;
 }
 
+.column {
+	float: left;
+}
+
+.box-row {
+	border: 2px solid $creamcan;
+	padding: 20px;
+}
+
+.header {
+	background-color: #19B5FE;
+}
+
+.box-button {
+	clear: both;
+}
+
 .btn-primary {
 	background-color: #19B5FE;
 	border-color: #19B5FE;
