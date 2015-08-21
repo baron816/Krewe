@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-	before_action :set_user, only: [:edit, :update, :public_profile, :add_group, :edit_available_days]
+	before_action :set_user, only: [:edit, :update, :public_profile, :add_group, :edit_available_days, :new_excluded_days, :edit_excluded_days]
 	before_action :user_logged?, only: [:update, :edit]
 
 	def show
@@ -53,6 +53,11 @@ class UsersController < ApplicationController
 	def edit_available_days
 	end
 
+	def new_excluded_days
+	end
+
+	def edit_excluded_days
+	end
 
 	private
 	def set_user
@@ -64,6 +69,6 @@ class UsersController < ApplicationController
 	end
 
 	def user_params
-		params.require(:user).permit(:name, :email, :address, :password, :password_confirmation, :street, :city, :state, :category, :latitude, :longitude, available_days_attributes: [:id, :morning, :afternoon, :evening])
+		params.require(:user).permit(:name, :email, :address, :password, :password_confirmation, :street, :city, :state, :category, :latitude, :longitude, available_days_attributes: [:id, :morning, :afternoon, :evening], excluded_days_attributes: [:id, :excluded_date, :morning, :afternoon, :evening])
 	end
 end
