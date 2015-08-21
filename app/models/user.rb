@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
 	has_many :available_days
 	has_many :excluded_days
 
-	accepts_nested_attributes_for :available_days
+	accepts_nested_attributes_for :available_days, :excluded_days
 
 	after_create do
 		find_or_create_group
