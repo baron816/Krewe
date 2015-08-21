@@ -1,0 +1,25 @@
+<%= form_for @user do |f| %>
+  <%= f.fields_for :excluded_days do |eday| %>
+    <div class="form-group">
+      <div class="input-group date datepicker">
+        <%= eday.text_field :excluded_date, placeholder: 'When? Hit button -->', class: 'form-control', required: true %>
+        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+      </div>
+    <%= eday.label :morning %>
+    <%= eday.check_box :morning %>
+
+    <%= eday.label :afternoon %>
+    <%= eday.check_box :afternoon %>
+
+    <%= eday.label :evening %>
+    <%= eday.check_box :evening %>
+    <% end %>
+    </div>
+  <%= f.submit 'Submit', class: 'btn btn-primary' %>
+<% end %>
+
+<%= javascript_tag do %>
+  $('.datepicker').datetimepicker({
+    format: 'YYYY-MM-DD'
+  });
+<% end %>
