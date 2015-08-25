@@ -18,7 +18,7 @@ class Group < ActiveRecord::Base
 	scope :non_former_groups, ->(group_ids) { where.not(id: group_ids) }
 
 	def self.search(params)
-		self.open_groups.category_groups(params[:category]).excluded_users(params[:friend_ids]).near(params[:user], 0.5).non_former_groups(params[:group_ids])[0]
+		self.open_groups.category_groups(params[:category]).excluded_users(params[:friend_ids]).near([params[:latitude], params[:longitude]], 0.5).non_former_groups(params[:group_ids])[0]
 	end
 
 	def future_activities
