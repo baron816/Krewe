@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
 	reverse_geocoded_by :latitude, :longitude
 
 	def find_or_create_group
-		group = Group.search(category: category, friend_ids: friends.ids, user: self, group_ids: dropped_group_ids)
+		group = Group.search(category: category, friend_ids: friends.ids, latitude: latitude, longitude: longitude, group_ids: dropped_group_ids)
 
 		if group
 			self.groups << group
