@@ -24,8 +24,6 @@
 			</li>
 		<% end %>
 	</ul>
-	<h5><%= link_to '<i class="glyphicon glyphicon-plus"></i> Add Group'.html_safe, add_group_user_path(current_user), method: :post, class: 'btn btn-success' if @user.under_group_limit? %>
-	</h5>
 </div>
 
 <% if @user.future_activities.any? %>
