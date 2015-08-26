@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   resources :users, except: [:index, :destroy] do
     member do
       get 'public_profile'
-      post 'add_group'
     end
   end
 
