@@ -88,10 +88,4 @@ describe UsersController do
     	expect(response).to render_template(:new)
     end
   end
-
-  describe "POST #add_group" do
-    it "adds a group" do
-    	expect { post :add_group, id: @user.id }.to change(@user.groups, :count).by(1)
-    end
-  end
 end
