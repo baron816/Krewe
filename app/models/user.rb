@@ -82,10 +82,6 @@ class User < ActiveRecord::Base
 		votes if votes
 	end
 
-	def under_group_limit?
-	  group_limit > group_count
-	end
-
 	def generate_token(column)
 		begin
 			self[column] = SecureRandom.urlsafe_base64
