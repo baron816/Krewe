@@ -28,28 +28,12 @@ ActiveRecord::Schema.define(version: 20150826143034) do
     t.float    "latitude"
   end
 
-  create_table "available_days", force: :cascade do |t|
-    t.integer "day"
-    t.boolean "morning"
-    t.boolean "afternoon"
-    t.boolean "evening"
-    t.integer "user_id"
-  end
-
   create_table "drop_user_votes", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "group_id"
     t.integer  "voter_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "excluded_days", force: :cascade do |t|
-    t.date    "excluded_date"
-    t.boolean "morning"
-    t.boolean "afternoon"
-    t.boolean "evening"
-    t.integer "user_id"
   end
 
   create_table "groups", force: :cascade do |t|
