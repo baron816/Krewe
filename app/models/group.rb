@@ -49,6 +49,12 @@ class Group < ActiveRecord::Base
 		drop_user(user) if user.group_drop_votes_count(self) >= 3
 	end
 
+	def expand_group
+	  group = find_mergable_group
+
+		Group.create(longitude: longitude, latitude: latitude, category: category, user_limit: new_group_user_limit, can_join: false, degree: new_degree).users << (users + group.users)
+	end
+
 	#notification methods
 
 	def join_group_notifications(new_user)
@@ -66,5 +72,17 @@ class Group < ActiveRecord::Base
 
 	def self.user_friend_group_ids(friend_ids)
 		self.includes(:users).references(:users).where("users.id in (?)", friend_ids).ids.uniq
+	end
+
+	def find_mergable_group
+	  self.class.category_groups(category).degree_groups(degree).where.not(id: id).near([latitude, longitude], 0.5).first
+	end
+
+	def new_group_user_limit
+	  user_limit * 2
+	end
+
+	def new_degree
+	  degree + 1
 	end
 end
