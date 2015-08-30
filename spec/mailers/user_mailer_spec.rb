@@ -11,7 +11,7 @@ RSpec.describe UserMailer, type: :mailer do
     let(:mail) { UserMailer.password_reset(@user) }
 
     it "renders the subject" do
-      expect(mail.subject).to eq("Reset Sidereal Password")
+      expect(mail.subject).to eq("Reset Krewe Password")
     end
 
     it "renders them recipient" do
@@ -19,7 +19,7 @@ RSpec.describe UserMailer, type: :mailer do
     end
 
     it "renders the sender" do
-      expect(mail.from).to eq(["no-reply@siderealapp.com"])
+      expect(mail.from).to eq(["no-reply@kreweapp.com"])
     end
   end
 
