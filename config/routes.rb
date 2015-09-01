@@ -25,6 +25,7 @@ Rails.application.routes.draw do
 
   resources :personal_messages, only: [:create]
   resources :password_resets, except: [:get, :destroy]
+  resources :newsletters, only: [:new, :create]
 
   root 'home#index'
 end
