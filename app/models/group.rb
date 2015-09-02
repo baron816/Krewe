@@ -55,8 +55,16 @@ class Group < ActiveRecord::Base
 		Group.create(longitude: longitude, latitude: latitude, category: category, user_limit: new_group_user_limit, can_join: false, degree: new_degree).users << (users + group.users)
 	end
 
-	def month_old?
-	  (Time.now - created_at) > 1.month
+	def aged?(period)
+	  (Time.now - created_at) > period
+	end
+
+	def well_attended_activity_count
+	  activities.attended_activities.size
+	end
+
+	def ripe_for_expansion?
+	  aged?(degree.month) && well_attended_activity_count > 4
 	end
 
 	def join_group_notifications(new_user)
