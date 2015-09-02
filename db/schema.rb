@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150902003323) do
+ActiveRecord::Schema.define(version: 20150902190845) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,13 @@ ActiveRecord::Schema.define(version: 20150902003323) do
     t.integer  "user_id"
     t.integer  "group_id"
     t.integer  "voter_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "expand_group_votes", force: :cascade do |t|
+    t.integer  "voter_id"
+    t.integer  "group_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
