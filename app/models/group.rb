@@ -55,7 +55,9 @@ class Group < ActiveRecord::Base
 		Group.create(longitude: longitude, latitude: latitude, category: category, user_limit: new_group_user_limit, can_join: false, degree: new_degree).users << (users + group.users)
 	end
 
-	#notification methods
+	def month_old?
+	  (Time.now - created_at) > 1.month
+	end
 
 	def join_group_notifications(new_user)
 		users.each do |user|
