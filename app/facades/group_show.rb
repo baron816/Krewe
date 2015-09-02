@@ -6,6 +6,10 @@ class GroupShow
     @page = page
   end
 
+  def user_expand_group_votes(user)
+    @group.expand_group_votes.user_votes(user)
+  end
+
   def users
     @users ||= group.users.includes(:drop_user_votes)
   end
