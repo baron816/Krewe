@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     delete 'drop_user', on: :member
   	resources :messages, only: [:create]
     resources :drop_user_votes, only: [:create, :destroy]
+    resources :expand_group_votes, only: [:create, :destroy]
   end
 
   resources :activities, except: [:index, :destroy] do
