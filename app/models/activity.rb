@@ -16,6 +16,8 @@ class Activity < ActiveRecord::Base
 	delegate :name, to: :group, prefix: true
 
 	scope :future_activities, -> { where('appointment > ?', Time.now).order(appointment: :asc) }
+	scope :past_activities, -> { where('appointment < ?', Time.now) }
+	scope :attended_activities, -> { where( well_attended: true )}
 
 	def user_going?(user)
 		users.include?(user)
@@ -30,6 +32,18 @@ class Activity < ActiveRecord::Base
 	def send_notifications(type = self.class.name)
 		group.users.each do |user|
 			self.notifications.create(user: user, poster: self.proposer, notification_type: type) unless user == proposer
+		end
+	end
+
+	def check_attendance
+	  users_count = users.size
+
+		if users_count == 3 && self.well_attended != true
+			self.well_attended = true
+			save
+		elsif users_count == 2 && self.well_attended != false
+			self.well_attended = false
+			save
 		end
 	end
 
