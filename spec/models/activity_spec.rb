@@ -49,7 +49,7 @@ describe Activity do
     end
   end
 
-  describe "#had_attended_activities?" do
+  describe "#attended_activities" do
     before do
 
       @activity2 = Activity.create(group_id: Group.first.id, proposer_id: @user1.id, appointment: (Time.now - 1.week), plan: "do things", location: "Seaport" )
@@ -58,14 +58,14 @@ describe Activity do
     end
 
     it "does not have any had_attended_activities" do
-      expect(Activity.had_attended_activities?.size).to eq(0)
+      expect(Activity.attended_activities.size).to eq(0)
     end
 
     it "has had_attended_activities once user is added" do
       @activity2.users << @user3
       @activity2.check_attendance
 
-      expect(Activity.had_attended_activities?.size).to eq(1)
+      expect(Activity.attended_activities.size).to eq(1)
     end
   end
 

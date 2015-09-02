@@ -17,8 +17,7 @@ class Activity < ActiveRecord::Base
 
 	scope :future_activities, -> { where('appointment > ?', Time.now).order(appointment: :asc) }
 	scope :past_activities, -> { where('appointment < ?', Time.now) }
-	scope :attended_activities, -> { where( well_attended: true ) }
-	scope :had_attended_activities?, -> { past_activities.attended_activities }
+	scope :attended_activities, -> { past_activities.where( well_attended: true ) }
 
 	def user_going?(user)
 		users.include?(user)
