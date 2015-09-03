@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150902190845) do
+ActiveRecord::Schema.define(version: 20150903161931) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,11 +49,12 @@ ActiveRecord::Schema.define(version: 20150902190845) do
     t.float    "longitude"
     t.float    "latitude"
     t.string   "category"
-    t.integer  "user_limit", default: 6
-    t.boolean  "can_join",   default: true
+    t.integer  "user_limit",      default: 6
+    t.boolean  "can_join",        default: true
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "degree",     default: 1
+    t.integer  "degree",          default: 1
+    t.boolean  "ready_to_expand", default: false
   end
 
   create_table "messages", force: :cascade do |t|
