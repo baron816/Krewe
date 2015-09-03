@@ -18,6 +18,7 @@ class Group < ActiveRecord::Base
 	scope :excluded_users, ->(friend_ids) { where.not(id: user_friend_group_ids(friend_ids)) }
 	scope :non_former_groups, ->(group_ids) { where.not(id: group_ids) }
 	scope :degree_groups, ->(degree) { where(degree: degree) }
+	scope :ready_groups, -> { where(ready_to_expand: true) }
 
 	def self.search(params)
 		self.open_groups.category_groups(params[:category]).excluded_users(params[:friend_ids]).degree_groups(1).near([params[:latitude], params[:longitude]], 0.5).non_former_groups(params[:group_ids])[0]
@@ -53,19 +54,16 @@ class Group < ActiveRecord::Base
 	def expand_group
 	  group = find_mergable_group
 
-		Group.create(longitude: longitude, latitude: latitude, category: category, user_limit: new_group_user_limit, can_join: false, degree: new_degree).users << (users + group.users)
-	end
-
-	def aged?(period)
-	  (Time.now - created_at) > period
-	end
-
-	def well_attended_activity_count
-	  activities.attended_activities.size
+		if group
+			Group.create(longitude: longitude, latitude: latitude, category: category, user_limit: new_group_user_limit, can_join: false, degree: new_degree).users << (users + group.users)
+		else
+			self.ready_to_expand = true
+			save
+		end
 	end
 
 	def ripe_for_expansion?
-	  aged?(degree.month) && well_attended_activity_count > 4
+	  aged?(degree.month) && well_attended_activity_count >= 4 && can_join == false
 	end
 
 	def join_group_notifications(new_user)
@@ -86,7 +84,15 @@ class Group < ActiveRecord::Base
 	end
 
 	def find_mergable_group
-	  self.class.category_groups(category).degree_groups(degree).where.not(id: id).near([latitude, longitude], 0.5).first
+	  self.class.category_groups(category).degree_groups(degree).where.not(id: id).near([latitude, longitude], 0.5).ready_groups.first
+	end
+
+	def aged?(period)
+		(Time.now - created_at) > period
+	end
+
+	def well_attended_activity_count
+		activities.attended_activities.size
 	end
 
 	def new_group_user_limit
