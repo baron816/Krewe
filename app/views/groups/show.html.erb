@@ -5,12 +5,10 @@
 	<%= link_to "<i class='glyphicon glyphicon-trash'></i> Drop Group".html_safe, drop_user_group_path(@group_show.group), method: :delete, class: 'btn btn-danger', data: {confirm: "Are you sure you want to drop this group?", text: "You will not be able to rejoin it.", 'confirm-button-text': "Yeah, these guys are jerks"} %>
 
 	<% unless @group_show.user_expand_group_votes(current_user) %>
-		<%= link_to "Expand Group", group_expand_group_votes_path(@group_show.group), method: :post, class: 'btn btn-success' %>
+		<%= link_to "Expand Group", group_expand_group_votes_path(@group_show.group), method: :post, class: 'btn btn-success', id: 'expand', remote: true %>
 	<% else %>
-		<%= link_to "Don't Expand", group_expand_group_vote_path(@group_show.group, @group_show.user_expand_group_votes(current_user)), method: :delete, class: 'btn btn-danger' %>
+		<%= link_to "Don't Expand", group_expand_group_vote_path(@group_show.group, @group_show.user_expand_group_votes(current_user)), method: :delete, class: 'btn btn-danger', remote: true, id: 'remain' %>
 	<% end %>
-
-
 </div>
 
 
