@@ -3,6 +3,15 @@ class ExpandGroupVotesController < ApplicationController
 
   def create
     @expand_vote = ExpandGroupVote.create(group_id: @group.id, voter_id: current_user.id)
+
+    if @group.voted_to_expand?
+      new_group = @group.expand_group
+
+      if new_group
+        return redirect_to group_path(new_group)
+      end
+    end
+
     respond_to do |format|
       format.html { redirect_to @group }
       format.js
