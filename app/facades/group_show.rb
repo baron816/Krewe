@@ -10,6 +10,10 @@ class GroupShow
     @group.expand_group_votes.user_votes(user)
   end
 
+  def not_almost_expandable?
+    !@group.almost_expandable?
+  end
+
   def users
     @users ||= group.users.includes(:drop_user_votes)
   end
