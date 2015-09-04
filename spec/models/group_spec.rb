@@ -90,6 +90,10 @@ describe Group do
 		  expect(Group.count).to eq(1)
 		end
 
+		it "returns nil when expanding" do
+		  expect(group1.expand_group).to eq(nil)
+		end
+
 		context "group1 expands" do
 			before do
 				group1.expand_group
@@ -117,8 +121,12 @@ describe Group do
 				expect(Group.count).to eq(2)
 			end
 
+			it "expanding group returns a new group" do
+			  expect(group2.expand_group).to be_a(Group)
+			end
+
 			it "expanding again creates a new group" do
-			  group2.expand_group
+				group2.expand_group
 				expect(Group.count).to eq(3)
 			end
 		end
