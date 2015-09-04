@@ -10,6 +10,10 @@ class GroupShow
     @group.ripe_for_expansion?
   end
 
+  def primary_group?
+    @group.degree == 1
+  end
+
   def user_expand_group_votes(user)
     @group.expand_group_votes.user_votes(user)
   end
