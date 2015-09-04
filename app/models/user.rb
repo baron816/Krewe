@@ -137,8 +137,4 @@ class User < ActiveRecord::Base
 	def downcase_email
 		self.email = email.downcase
 	end
-
-	def group_count
-	  groups.count
-	end
 end
