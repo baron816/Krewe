@@ -29,7 +29,6 @@ class Group < ActiveRecord::Base
 	end
 
 	def check_space
-		users_count = users.count
 		if users_count == user_limit - 1 && self.can_join != true
 			self.can_join = true
 			save
@@ -58,6 +57,9 @@ class Group < ActiveRecord::Base
 		if group
 			new_group = Group.create(longitude: longitude, latitude: latitude, category: category, user_limit: new_group_user_limit, can_join: false, degree: new_degree)
 			new_group.users << (users + group.users)
+			group.ready_to_expand = false
+			group.has_expanded, self.has_expanded = true, true
+			save
 		else
 			self.ready_to_expand = true
 			save
@@ -68,15 +70,19 @@ class Group < ActiveRecord::Base
 	end
 
 	def ripe_for_expansion?
-	  aged?(degree.month) && well_attended_activity_count >= 4 && can_join == false
+	  aged?(degree.month) && well_attended_activity_count >= 4 && can_join == false && has_expanded == false
 	end
 
 	def voted_to_expand?
 	  expand_group_votes.size == (degree * 6)
 	end
 
-	def almost_expandable?
-		expand_group_votes.size == (degree * 6) - 1
+	def expand_group_votes_count
+    expand_group_votes.size
+  end
+
+	def users_count
+	  @users_count ||= users.count
 	end
 
 	def join_group_notifications(new_user)
