@@ -51,30 +51,29 @@ class Group < ActiveRecord::Base
 	end
 
 	def expand_group
-	  group = find_mergable_group
 		new_group = nil
 
-		if group
+		if find_mergable_group
 			new_group = Group.create(longitude: longitude, latitude: latitude, category: category, user_limit: new_group_user_limit, can_join: false, degree: new_degree)
-			new_group.users << (users + group.users)
-			group.ready_to_expand = false
-			group.has_expanded, self.has_expanded = true, true
+			new_group.users << (users + find_mergable_group.users)
+			find_mergable_group.ready_to_expand = false
 			save
 		else
 			self.ready_to_expand = true
 			save
 		end
+		self.has_expanded = true
 		expand_group_votes.delete_all
 
 		new_group
 	end
 
 	def ripe_for_expansion?
-	  aged?(degree.month) && well_attended_activity_count >= 4 && can_join == false && has_expanded == false
+	  aged?(degree.month) && well_attended_activity_count >= 4 && can_join == false && has_expanded == false && ready_to_expand == false
 	end
 
 	def voted_to_expand?
-	  expand_group_votes.size == (degree * 6)
+	  expand_group_votes_count == users_count
 	end
 
 	def expand_group_votes_count
@@ -103,7 +102,7 @@ class Group < ActiveRecord::Base
 	end
 
 	def find_mergable_group
-	  self.class.category_groups(category).degree_groups(degree).where.not(id: id).near([latitude, longitude], 0.5).ready_groups.first
+	  @group ||= self.class.category_groups(category).degree_groups(degree).where.not(id: id).near([latitude, longitude], 0.5).ready_groups.first
 	end
 
 	def aged?(period)
