@@ -6,12 +6,20 @@ class GroupShow
     @page = page
   end
 
+  def ripe_for_expansion?
+    @group.ripe_for_expansion?
+  end
+
   def user_expand_group_votes(user)
     @group.expand_group_votes.user_votes(user)
   end
 
+  def expand_group_votes_count
+    @group.expand_group_votes_count
+  end
+
   def not_almost_expandable?
-    !@group.almost_expandable?
+    @group.expand_group_votes.size != (@group.degree * 6) - 1
   end
 
   def users
@@ -32,6 +40,10 @@ class GroupShow
 
   def includes_user?(user)
     users.include?(user)
+  end
+
+  def users_count
+    @group.users_count
   end
 
   def one_user?
