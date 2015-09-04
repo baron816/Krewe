@@ -23,7 +23,7 @@ class GroupShow
   end
 
   def not_almost_expandable?
-    @group.expand_group_votes.size != (@group.degree * 6) - 1
+    @group.expand_group_votes.size != @group.users_count - 1
   end
 
   def users
