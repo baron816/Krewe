@@ -53,17 +53,30 @@ class Group < ActiveRecord::Base
 
 	def expand_group
 	  group = find_mergable_group
+		new_group = nil
 
 		if group
-			Group.create(longitude: longitude, latitude: latitude, category: category, user_limit: new_group_user_limit, can_join: false, degree: new_degree).users << (users + group.users)
+			new_group = Group.create(longitude: longitude, latitude: latitude, category: category, user_limit: new_group_user_limit, can_join: false, degree: new_degree)
+			new_group.users << (users + group.users)
 		else
 			self.ready_to_expand = true
 			save
 		end
+		expand_group_votes.delete_all
+
+		new_group
 	end
 
 	def ripe_for_expansion?
 	  aged?(degree.month) && well_attended_activity_count >= 4 && can_join == false
+	end
+
+	def voted_to_expand?
+	  expand_group_votes.size == (degree * 6)
+	end
+
+	def almost_expandable?
+		expand_group_votes.size == (degree * 6) - 1
 	end
 
 	def join_group_notifications(new_user)
