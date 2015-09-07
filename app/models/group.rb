@@ -65,6 +65,7 @@ class Group < ActiveRecord::Base
 		end
 		self.has_expanded = true
 		save
+
 		expand_group_votes.delete_all
 
 		new_group
