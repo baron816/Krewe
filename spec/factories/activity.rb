@@ -4,7 +4,7 @@ FactoryGirl.define do
 		location { Faker::Lorem.sentence(3) }
 		longitude { Faker::Address.longitude }
 		latitude { Faker::Address.latitude }
-		group
+		group_id 15
 
 		factory :activity_future do
 			association :proposer, factory: :user_home
