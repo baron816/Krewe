@@ -125,9 +125,18 @@ describe Group do
 			  expect(group2.expand_group).to be_a(Group)
 			end
 
-			it "expanding again creates a new group" do
-				group2.expand_group
-				expect(Group.count).to eq(3)
+			context "after new group is created" do
+				before do
+					@group3 = group2.expand_group
+				end
+
+				it "expanding again creates a new group" do
+					expect(Group.count).to eq(3)
+				end
+
+				it "has all the users" do
+					expect(@group3.users).to eq(User.all)
+				end
 			end
 		end
 	end
