@@ -61,11 +61,15 @@ module ApplicationHelper
 	def categories
 		[
 			'College Student',
-			'Post-Grad',
+			'Recent-Grad',
 			'Young Parent',
 			'Retiree',
 			'Traveler',
 			'Other'
 		]
+	end
+
+	def self.mean(*args)
+	  args.inject(:+) / args.length.to_f
 	end
 end
