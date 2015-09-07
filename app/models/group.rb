@@ -51,18 +51,20 @@ class Group < ActiveRecord::Base
 	end
 
 	def expand_group
-		new_group = nil
-
 		if find_mergable_group
-			new_group = Group.create(longitude: longitude, latitude: latitude, category: category, user_limit: new_group_user_limit, can_join: false, degree: new_degree)
+			mid_lng = ApplicationHelper.mean(longitude, find_mergable_group.longitude)
+			mid_lat = ApplicationHelper.mean(latitude, find_mergable_group.latitude)
+
+			new_group = Group.create(longitude: mid_lng, latitude: mid_lat, category: category, user_limit: new_group_user_limit, can_join: false, degree: new_degree)
 			new_group.users << (users + find_mergable_group.users)
+
 			find_mergable_group.ready_to_expand = false
-			save
+			find_mergable_group.save
 		else
 			self.ready_to_expand = true
-			save
 		end
 		self.has_expanded = true
+		save
 		expand_group_votes.delete_all
 
 		new_group
