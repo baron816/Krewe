@@ -9,7 +9,7 @@ describe ActivitiesController do
 
   describe "POST #create" do
     before do
-      @activity_attributes = attributes_for(:activity)
+      @activity_attributes = attributes_for(:activity_future)
       @activity_attributes[:group_id] = @group.id
       @activity_attributes[:proposer_id] = @user.id
     end
@@ -20,7 +20,7 @@ describe ActivitiesController do
   end
 
 	before do
-	  @activity = build(:activity)
+	  @activity = build(:activity_future)
     @activity.group = @group
     @activity.save
 	end

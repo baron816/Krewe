@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150803181708) do
+ActiveRecord::Schema.define(version: 20150904132653) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20150803181708) do
     t.string   "location"
     t.float    "longitude"
     t.float    "latitude"
+    t.boolean  "well_attended", default: false
   end
 
   create_table "drop_user_votes", force: :cascade do |t|
@@ -36,15 +37,25 @@ ActiveRecord::Schema.define(version: 20150803181708) do
     t.datetime "updated_at"
   end
 
+  create_table "expand_group_votes", force: :cascade do |t|
+    t.integer  "voter_id"
+    t.integer  "group_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "groups", force: :cascade do |t|
     t.string   "name"
     t.float    "longitude"
     t.float    "latitude"
     t.string   "category"
-    t.integer  "user_limit", default: 6
-    t.boolean  "can_join",   default: true
+    t.integer  "user_limit",      default: 6
+    t.boolean  "can_join",        default: true
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "degree",          default: 1
+    t.boolean  "ready_to_expand", default: false
+    t.boolean  "has_expanded",    default: false
   end
 
   create_table "messages", force: :cascade do |t|

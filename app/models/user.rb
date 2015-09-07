@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
 	has_many :activities, through: :user_activities
 	has_many :owned_activities, class_name: "Activity", foreign_key: "proposer_id"
 	has_many :drop_user_votes
+	has_many :expand_group_votes
 
 	after_create :find_or_create_group
 	before_create { generate_token(:auth_token) }
@@ -25,7 +26,7 @@ class User < ActiveRecord::Base
 	reverse_geocoded_by :latitude, :longitude
 
 	def find_or_create_group
-		group = Group.search(category: category, friend_ids: friends.ids, user: self, group_ids: dropped_group_ids)
+		group = Group.search(category: category, friend_ids: friends.ids, latitude: latitude, longitude: longitude, group_ids: dropped_group_ids)
 
 		if group
 			self.groups << group
@@ -82,10 +83,6 @@ class User < ActiveRecord::Base
 		votes if votes
 	end
 
-	def under_group_limit?
-	  group_limit > group_count
-	end
-
 	def generate_token(column)
 		begin
 			self[column] = SecureRandom.urlsafe_base64
@@ -139,9 +136,5 @@ class User < ActiveRecord::Base
 	private
 	def downcase_email
 		self.email = email.downcase
-	end
-
-	def group_count
-	  groups.count
 	end
 end

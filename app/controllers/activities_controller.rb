@@ -15,6 +15,7 @@ class ActivitiesController < ApplicationController
 
 	def add_user
 		@activity.users << current_user
+		@activity.check_attendance
 		respond_to do |format|
 			format.html { redirect_to activity_path(@activity) }
 			format.js
@@ -23,7 +24,7 @@ class ActivitiesController < ApplicationController
 
 	def remove_user
 		@activity.users.delete(current_user)
-
+		@activity.check_attendance
 		redirect_to current_user
 	end
 

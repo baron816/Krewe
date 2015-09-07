@@ -58,10 +58,86 @@ describe Group do
 				  	expect(group1.can_join).to be true
 				  end
 			  end
+			end
+		end
+	end
 
+	describe "#ripe_for_expansion" do
+		let(:group4) { create(:old_group) }
+
+		it "does not indicate group is ripe for expansion" do
+		  expect(group4.ripe_for_expansion?).to eq(false)
+		end
+
+		it "is right for expansion with activities" do
+			4.times do
+				group4.activities << create(:activity_past)
+			end
+
+			expect(group4.ripe_for_expansion?).to eq(true)
+		end
+	end
+
+	describe "#expand_group" do
+		before do
+			create(:user_121)
+			create(:user_dbc)
+			create(:user_138)
+			create(:user_122)
+		end
+
+		it "starts with only one group" do
+		  expect(Group.count).to eq(1)
+		end
+
+		it "returns nil when expanding" do
+		  expect(group1.expand_group).to eq(nil)
+		end
+
+		context "group1 expands" do
+			before do
+				group1.expand_group
+			end
+
+			it "does not expand_group but sets ready_to_expand to true" do
+				expect(group1.ready_to_expand).to eq(true)
+			end
+
+			it "still only has one group" do
+			  expect(Group.count).to eq(1)
 			end
 		end
 
-	end
+		context "more users create new group" do
+			before do
+				group1.expand_group
+				create(:user_130)
+				create(:user_134)
+			end
 
+			let(:group2) { Group.second }
+
+			it "new users create more groups" do
+				expect(Group.count).to eq(2)
+			end
+
+			it "expanding group returns a new group" do
+			  expect(group2.expand_group).to be_a(Group)
+			end
+
+			context "after new group is created" do
+				before do
+					@group3 = group2.expand_group
+				end
+
+				it "expanding again creates a new group" do
+					expect(Group.count).to eq(3)
+				end
+
+				it "has all the users" do
+					expect(@group3.users).to eq(User.all)
+				end
+			end
+		end
+	end
 end
