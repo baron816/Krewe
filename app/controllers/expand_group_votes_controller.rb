@@ -7,9 +7,7 @@ class ExpandGroupVotesController < ApplicationController
     if @group.voted_to_expand? && @group.ripe_for_expansion?
       new_group = @group.expand_group
 
-      if new_group
-        return redirect_to group_path(new_group)
-      end
+      return redirect_to group_path(new_group) if new_group
     end
 
     respond_to do |format|
