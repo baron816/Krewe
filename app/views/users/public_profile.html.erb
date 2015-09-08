@@ -6,13 +6,11 @@
 </div>
 
 <% unless @user.own_profile? %>
-	<div class="personal-messages">
+	<div class="well messages">
 		<% @user.personal_messages.each do |message| %>
 			<%= render partial: 'personal_messages/show', locals: {message: message} %>
 		<% end %>
 	</div>
-
-	<%= will_paginate @user.personal_messages, renderer: BootstrapPagination::Rails %>
 
 	<%= render 'personal_messages/new' %>
 <% end %>
