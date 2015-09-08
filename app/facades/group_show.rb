@@ -37,6 +37,10 @@ class GroupShow
     @messages ||= group.messages.includes(:user)
   end
 
+  def any_messages?
+    messages.any?
+  end
+
   def new_message
     @message = Message.new
   end
