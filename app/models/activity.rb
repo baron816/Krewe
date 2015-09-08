@@ -47,6 +47,10 @@ class Activity < ActiveRecord::Base
 		end
 	end
 
+	def group_includes_user?(user)
+	  group.includes_user?(user)
+	end
+
 	def proposed_by?(user)
 		proposer == user
 	end
