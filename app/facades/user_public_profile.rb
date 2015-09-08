@@ -28,6 +28,10 @@ class UserPublicProfile
     @messages ||= PersonalMessage.users_messages(first_user: user, second_user: current_user).includes(:sender)
   end
 
+  def any_messages?
+    personal_messages.any?
+  end
+
   def new_personal_message
     @personal_message = PersonalMessage.new
   end
