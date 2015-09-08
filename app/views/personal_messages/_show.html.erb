@@ -1,4 +1,2 @@
-<div class="well">
-	<%= link_to message.sender_name, public_profile_user_path(message.sender) %> <%= local_time_ago(message.created_at) %>: <br>
-	<%= message.content_html %>
-</div>
+<%= link_to message.sender_name, public_profile_user_path(message.sender) %> <%= local_time_ago(message.created_at) %>: <br>
+<%= message.content_html %>
