@@ -63,13 +63,13 @@
 
 <div class="col-md-12">
 	<h2>Messages</h2>
-	<div class="messages">
+	<div class="well messages">
 		<% @group_show.messages.each do |message| %>
 			<%= render partial: "messages/show", locals: { message: message } %>
 		<% end %>
 	</div>
 
-	<%= will_paginate @group_show.messages, renderer: BootstrapPagination::Rails %>
+	<%# will_paginate @group_show.messages, renderer: BootstrapPagination::Rails %>
 
 	<%= render "messages/new" %>
 </div>
