@@ -22,6 +22,8 @@ $(document).ready(function(){
 	resize_window('.messages')
 
 	resize_window('#map')
+
+	$('.messages').scrollTop($('.messages').prop("scrollHeight"));
 })
 
 $(window).resize(function() {
