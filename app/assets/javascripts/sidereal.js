@@ -19,17 +19,19 @@ $(document).ready(function(){
 		placeholder: "Select a state"
 	});
 
-	resize_window()
+	resize_window('.messages')
+
+	resize_window('#map')
 })
 
 $(window).resize(function() {
-	resize_window()
+	resize_window('.messages')
 })
 
-function resize_window() {
+function resize_window(div) {
 	var window_height = $(window).height();
 	var content_height = window_height * .4;
-	$('.messages').height(content_height);
+	$(div).height(content_height);
 }
 
 function codeAddress() {
