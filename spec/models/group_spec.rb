@@ -168,11 +168,28 @@ describe Group do
 				expect(group6.users.count).to eq(12)
 			end
 
-			it "expanding last two groups creates a third degree group" do
-				group5.expand_group
-				new_group = group6.expand_group
-				expect(new_group).to be_a(Group)
-				expect(new_group.users.count).to eq(24)
+			context "expanding to third degree" do
+				before do
+					group5.expand_group
+				end
+
+				let(:group7) { group6.expand_group }
+
+				it "expanding last two groups creates a new group" do
+					expect(group7).to be_a(Group)
+				end
+
+				it "new group has 24 users " do
+					expect(group7.users.count).to eq(24)
+				end
+
+				it "new group has degree of 3" do
+				  expect(group7.degree).to eq(3)
+				end
+
+				it "does not create a new group when expanding group 7" do
+				  expect(group7.expand_group).to be(nil)
+				end
 			end
 		end
 	end
