@@ -1,7 +1,5 @@
-$('<%= j render partial: "show", locals: {message: @personal_message} %>').prependTo('.personal-messages').hide().slideDown("slow")
+$('<%= j render partial: "show", locals: {message: @personal_message} %>').appendTo('.messages').hide().slideDown("slow")
 
-if ($('.personal-messages > div').length >= 5){
-	$('.personal-messages div:last').remove()
-}
+$('.messages').animate({ scrollTop: $('.messages')[0].scrollHeight}, 1000);
 
 $('#personal_message_content').val('')
