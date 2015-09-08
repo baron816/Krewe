@@ -46,7 +46,7 @@ class UsersController < ApplicationController
 	end
 
 	def check_user
-		redirect_to root_path unless @user == current_user
+		redirect_to root_path, notice: "You don't have access to go there" unless @user == current_user
 	end
 
 	def user_params

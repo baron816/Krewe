@@ -7,6 +7,6 @@ class ApplicationController < ActionController::Base
   before_action :user_logged?, except: [:new, :index, :create, :edit, :update]
 
   def user_logged?
-    redirect_to root_path unless current_user
+    redirect_to root_path, notice: "Please log in first." unless current_user
   end
 end
