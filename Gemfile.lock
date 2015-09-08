@@ -106,6 +106,10 @@ GEM
     kgio (2.9.3)
     local_time (1.0.2)
       coffee-rails
+    lol_dba (2.0.0)
+      actionpack (>= 3.0, < 5.0)
+      activerecord (>= 3.0, < 5.0)
+      railties (>= 3.0, < 5.0)
     loofah (2.0.2)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
@@ -252,6 +256,7 @@ DEPENDENCIES
   jquery-rails
   jquery-turbolinks
   local_time
+  lol_dba
   momentjs-rails (>= 2.9.0)
   pg
   rails (= 4.2.1)
