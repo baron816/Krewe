@@ -43,7 +43,7 @@ class GroupShow
   end
 
   def includes_user?(user)
-    users.include?(user)
+    @group.includes_user?(user)
   end
 
   def users_count
