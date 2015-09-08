@@ -32,7 +32,7 @@ $(window).resize(function() {
 
 function resize_window(div) {
 	var window_height = $(window).height();
-	var content_height = window_height * .4;
+	var content_height = window_height * .25;
 	$(div).height(content_height);
 }
 
