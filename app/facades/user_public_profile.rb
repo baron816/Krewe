@@ -1,8 +1,7 @@
 class UserPublicProfile
-  def initialize(user, current_user, page)
+  def initialize(user, current_user)
     @user = user
     @current_user = current_user
-    @page = page
   end
 
   def user_name
@@ -26,7 +25,7 @@ class UserPublicProfile
   end
 
   def personal_messages
-    @messages ||= PersonalMessage.users_messages(first_user: user, second_user: current_user).includes(:sender).paginate(page: page, per_page: 5)
+    @messages ||= PersonalMessage.users_messages(first_user: user, second_user: current_user).includes(:sender)
   end
 
   def new_personal_message
