@@ -1,7 +1,5 @@
 $('<%= j render partial: "show", locals: {message: @message} %>').appendTo('.messages').hide().slideDown("slow")
 
-if ($('.messages > div').length >= 5){
-	$('.messages div:last').remove()
-}
+$('.messages').animate({ scrollTop: $('.messages')[0].scrollHeight}, 1000);
 
 $('#message_content').val('')
