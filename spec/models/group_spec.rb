@@ -139,5 +139,41 @@ describe Group do
 				end
 			end
 		end
+
+		context "third degree group" do
+			before do
+				18.times do
+					create(:user_dbc)
+				end
+
+				Group.find_each do |group|
+					group.expand_group
+				end
+			end
+
+			let(:group5) { Group.fifth }
+			let(:group6) { Group.last }
+
+			it "expanding every group creates two more groups" do
+				expect(Group.count).to eq(6)
+			end
+
+			it "last two groups are second degree groups" do
+			  expect(group5.degree).to eq(2)
+				expect(group6.degree).to eq(2)
+			end
+
+			it "last two groups have 12 users each" do
+				expect(group5.users.count).to eq(12)
+				expect(group6.users.count).to eq(12)
+			end
+
+			it "expanding last two groups creates a third degree group" do
+				group5.expand_group
+				new_group = group6.expand_group
+				expect(new_group).to be_a(Group)
+				expect(new_group.users.count).to eq(24)
+			end
+		end
 	end
 end
