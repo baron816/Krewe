@@ -23,6 +23,6 @@ class PersonalMessage < ActiveRecord::Base
 
 	def self.users_messages(params = {})
 		users = [params[:first_user], params[:second_user]]
-		where(sender: users).where(receiver: users).order(created_at: :desc)
+		where(sender: users).where(receiver: users)
 	end
 end
