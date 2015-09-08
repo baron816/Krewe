@@ -1,9 +1,8 @@
 class GroupShow
-  attr_reader :group, :page
+  attr_reader :group
 
-  def initialize(group, page)
+  def initialize(group)
     @group = group
-    @page = page
   end
 
   def ripe_for_expansion?
@@ -35,7 +34,7 @@ class GroupShow
   end
 
   def messages
-    @messages ||= group.messages.includes(:user).order(created_at: :desc).paginate(page: page, per_page: 5)
+    @messages ||= group.messages.includes(:user)
   end
 
   def new_message
