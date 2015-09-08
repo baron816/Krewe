@@ -19,7 +19,18 @@ $(document).ready(function(){
 		placeholder: "Select a state"
 	});
 
+	resize_window()
 })
+
+$(window).resize(function() {
+	resize_window()
+})
+
+function resize_window() {
+	var window_height = $(window).height();
+	var content_height = window_height * .4;
+	$('.messages').height(content_height);
+}
 
 function codeAddress() {
 	geocoder = new google.maps.Geocoder()
