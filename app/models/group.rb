@@ -52,14 +52,7 @@ class Group < ActiveRecord::Base
 
 	def expand_group
 		if find_mergable_group
-			mid_lng = ApplicationHelper.mean(longitude, find_mergable_group.longitude)
-			mid_lat = ApplicationHelper.mean(latitude, find_mergable_group.latitude)
-
-			new_group = Group.create(longitude: mid_lng, latitude: mid_lat, category: category, user_limit: new_group_user_limit, can_join: false, degree: new_degree)
-			new_group.users << (users + find_mergable_group.users)
-
-			find_mergable_group.ready_to_expand = false
-			find_mergable_group.save
+			new_group = merge_groups
 		else
 			self.ready_to_expand = true
 		end
@@ -111,6 +104,17 @@ class Group < ActiveRecord::Base
 
 	def find_mergable_group
 	  @group ||= self.class.category_groups(category).degree_groups(degree).where.not(id: id).near([latitude, longitude], 0.5).ready_groups.first
+	end
+
+	def merge_groups
+		mid_lng, mid_lat = ApplicationHelper.mean(longitude, find_mergable_group.longitude), ApplicationHelper.mean(latitude, find_mergable_group.latitude)
+
+		new_group = Group.create(longitude: mid_lng, latitude: mid_lat, category: category, user_limit: new_group_user_limit, can_join: false, degree: new_degree)
+		new_group.users << (users + find_mergable_group.users)
+
+		find_mergable_group.ready_to_expand = false
+		find_mergable_group.save
+		new_group
 	end
 
 	def aged?(period)
