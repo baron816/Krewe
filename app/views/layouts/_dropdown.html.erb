@@ -14,7 +14,7 @@
 		<% end %>
 
 		<% current_user.unviewed_category_notifications("Activity").each do |note| %>
-			<li><%= link_to "#{note.poster_name} proposed an activity", activity_path(note.notifiable) %></li>
+			<li><%= link_to "#{note.poster_name} proposed an activity", group_activity_path(note.notifiable.group, note.notifiable) %></li>
 		<% end %>
 
 		<% current_user.unviewed_category_notifications("ActivityUpdate").each do |note| %>

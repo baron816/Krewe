@@ -20,9 +20,9 @@
 	<ul class="list-group">
 		<% @group_show.activities.each do |activity| %>
 		<li class="list-group-item clearfix">
-			<%= link_to activity.plan, activity_path(activity) %> <%= local_time(activity.appointment) %>
+			<%= link_to activity.plan, group_activity_path(@group_show.group, activity) %> <%= local_time(activity.appointment) %>
 			<% unless activity.user_going?(current_user) %>
-				<span class="pull-right"><%= link_to "Go", add_user_activity_path(activity), method: :post, class: 'btn btn-success' %></span>
+				<span class="pull-right"><%= link_to "Go", add_user_group_activity_path(@group_show.group, activity), method: :post, class: 'btn btn-success' %></span>
 			<% end %>
 		</li>
 		<% end %>
@@ -36,7 +36,7 @@
 		<% end %>
 	<% end %>
 
-	<%= link_to "Propose Activity", new_activity_path( group_id: @group_show.group ), id: 'new_activity', class: 'btn btn-primary', remote: true %>
+	<%= link_to "Propose Activity", new_group_activity_path(@group_show.group), id: 'new_activity', class: 'btn btn-primary', remote: true %>
 </div>
 
 <div class="col-md-6">
