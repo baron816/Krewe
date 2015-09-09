@@ -28,4 +28,5 @@ Rails.application.routes.draw do
   resources :newsletters, only: [:new, :create]
 
   root 'home#index'
+  get "*any", via: :all, to: "errors#not_found"
 end
