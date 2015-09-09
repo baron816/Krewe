@@ -100,6 +100,10 @@ class User < ActiveRecord::Base
 		password_reset_sent_at < 1.hours.ago
 	end
 
+	def first_name
+	  name.split.first
+	end
+
 	#notification delegations
 	def dismiss_personal_notifications_from_user(user)
 	  notifications.dismiss_personal_notifications_from_user(user)
