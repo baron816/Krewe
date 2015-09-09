@@ -10,14 +10,14 @@ Rails.application.routes.draw do
   	resources :messages, only: [:create]
     resources :drop_user_votes, only: [:create, :destroy]
     resources :expand_group_votes, only: [:create, :destroy]
-  end
-
-  resources :activities, except: [:index, :destroy] do
-    member do
-      post 'add_user'
-      delete 'remove_user'
+    resources :activities, except: [:index, :destroy] do
+      member do
+        post 'add_user'
+        delete 'remove_user'
+      end
     end
   end
+
 
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
