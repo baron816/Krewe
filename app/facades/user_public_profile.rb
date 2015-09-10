@@ -6,11 +6,9 @@ class UserPublicProfile
 
   delegate :name, :email, :category, :id, to: :user, prefix: true
 
-
   def user_location
     "#{user.city}, #{user.state}"
   end
-
 
   def personal_messages
     @messages ||= PersonalMessage.users_messages(first_user: user, second_user: current_user).includes(:sender)
