@@ -96,7 +96,7 @@ class Group < ActiveRecord::Base
 
 	private
 	def name_group
-		self.name = GroupNameHelper.constellations.sample
+		self.name = GroupNameHelper.name.sample
 	end
 
 	def self.user_friend_group_ids(friend_ids)
