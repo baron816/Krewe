@@ -125,9 +125,13 @@ class Group < ActiveRecord::Base
 		new_group = Group.create(longitude: mid_lng, latitude: mid_lat, category: category, user_limit: new_group_user_limit, can_join: false, degree: new_degree)
 		new_group.users << (users + find_mergable_group.users)
 
+		set_ready_to_expand_to_false
+		new_group
+	end
+
+	def set_ready_to_expand_to_false
 		find_mergable_group.ready_to_expand = false
 		find_mergable_group.save
-		new_group
 	end
 
 	def aged?(period)
