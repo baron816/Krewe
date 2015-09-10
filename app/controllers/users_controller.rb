@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 	before_action :user_logged?, only: [:update, :edit]
 
 	def show
-		@user = User.includes(:groups).find(params[:id])
+		@user = User.includes(:groups).friendly.find(params[:id])
 		check_user
 	end
 
@@ -42,7 +42,7 @@ class UsersController < ApplicationController
 
 	private
 	def set_user
-		@user = User.find(params[:id])
+		@user = User.friendly.find(params[:id])
 	end
 
 	def check_user
