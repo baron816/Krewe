@@ -9,7 +9,7 @@ class UsersController < ApplicationController
 
 	def public_profile
 		redirect_to root_path unless current_user.friends.include?(@user)
-		current_user.dismiss_personal_notifications_from_user(@user)
+		user_notifications.dismiss_personal_notifications_from_user(@user)
 		@user = UserPublicProfile.new(@user, current_user)
 	end
 

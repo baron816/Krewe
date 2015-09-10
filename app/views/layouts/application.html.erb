@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
-  <title>Krewe <% if current_user && current_user.unviewed_notifications_count > 0 %>
-  	(<%= current_user.unviewed_notifications_count %>)
+  <title>Krewe <% if current_user && user_notifications.unviewed_notifications_count > 0 %>
+  	(<%= user_notifications.unviewed_notifications_count %>)
   <% end %>
   </title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>

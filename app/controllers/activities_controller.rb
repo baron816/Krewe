@@ -44,7 +44,7 @@ class ActivitiesController < ApplicationController
 	def show
 		@activity = Activity.includes(:group).find(params[:id])
 		redirect_to root_path unless @activity.group_includes_user?(current_user)
-		current_user.dismiss_activity_notification(@activity)
+		user_notifications.dismiss_activity_notification(@activity)
 	end
 
 	def new

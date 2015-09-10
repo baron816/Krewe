@@ -1,23 +1,23 @@
-<% if current_user.notifications && current_user.unviewed_notifications_count > 0 %>
+<% if user_notifications.notifications && user_notifications.unviewed_notifications_count > 0 %>
 	<a href="#" class="dropdown-toggle" data-toggle='dropdown' role='button' aria-expanded='false'>Notifications <span class='caret'></span></a>
 	<ul class="dropdown-menu" role='menu'>
-		<% current_user.unviewed_category_notifications("Message").each do |note| %>
+		<% user_notifications.unviewed_category_notifications("Message").each do |note| %>
 			<li><%= link_to "#{note.poster_name} wrote in #{note.notifiable.group_name}", group_path(note.notifiable_group) %></li>
 		<% end %>
 
-		<% current_user.unviewed_category_notifications("PersonalMessage").each do |note| %>
+		<% user_notifications.unviewed_category_notifications("PersonalMessage").each do |note| %>
 			<li><%= link_to "#{note.poster_name} sent you a message", public_profile_user_path(note.poster) %></li>
 		<% end %>
 
-		<% current_user.unviewed_category_notifications("Group").each do |note| %>
+		<% user_notifications.unviewed_category_notifications("Group").each do |note| %>
 			<li><%= link_to "#{note.poster_name} joined #{note.notifiable_name}", group_path(note.notifiable) %></li>
 		<% end %>
 
-		<% current_user.unviewed_category_notifications("Activity").each do |note| %>
+		<% user_notifications.unviewed_category_notifications("Activity").each do |note| %>
 			<li><%= link_to "#{note.poster_name} proposed an activity", group_activity_path(note.notifiable.group, note.notifiable) %></li>
 		<% end %>
 
-		<% current_user.unviewed_category_notifications("ActivityUpdate").each do |note| %>
+		<% user_notifications.unviewed_category_notifications("ActivityUpdate").each do |note| %>
 		  <li><%= link_to "#{note.poster_name} made changes to #{note.notifiable.plan}" %></li>
 		<% end %>
 	</ul>
