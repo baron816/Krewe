@@ -56,3 +56,5 @@ gem 'bullet', group: 'development'
 gem 'rails_12factor', group: :production
 
 gem 'rest-client'
+
+gem 'friendly_id'
