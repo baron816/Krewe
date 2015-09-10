@@ -4,25 +4,13 @@ class UserPublicProfile
     @current_user = current_user
   end
 
-  def user_name
-    user.name
-  end
+  delegate :name, :email, :category, :id, to: :user, prefix: true
 
-  def user_email
-    user.email
-  end
 
   def user_location
     "#{user.city}, #{user.state}"
   end
 
-  def user_category
-    user.category
-  end
-
-  def user_id
-    user.id
-  end
 
   def personal_messages
     @messages ||= PersonalMessage.users_messages(first_user: user, second_user: current_user).includes(:sender)
@@ -41,5 +29,5 @@ class UserPublicProfile
   end
 
   private
-  attr_reader :user, :current_user, :page
+  attr_reader :user, :current_user
 end
