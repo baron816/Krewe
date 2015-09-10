@@ -54,31 +54,17 @@ class Group < ActiveRecord::Base
 		drop_user(user) if user.group_drop_votes_count(self) >= 3
 	end
 
-	def expand_group
-		if find_mergable_group
-			new_group = merge_groups
-		else
-			self.ready_to_expand = true
-		end
-		self.has_expanded = true
-		save
-
-		expand_group_votes.delete_all
-
-		new_group
-	end
-
 	def ripe_for_expansion?
 	  aged?(degree.month) && well_attended_activity_count >= 4 && can_join == false && has_expanded == false && ready_to_expand == false
-	end
-
-	def voted_to_expand?
-	  expand_group_votes_count == users_count
 	end
 
 	def expand_group_votes_count
     expand_group_votes.size
   end
+
+	def voted_to_expand?
+		expand_group_votes_count == users_count
+	end
 
 	def users_count
 	  @users_count ||= users.count
@@ -100,12 +86,13 @@ class Group < ActiveRecord::Base
 		end
 	end
 
-	private
 	def slug_candidates
 		[
-			[:name, :id]
+			:name,
+			[:name, ]
 		]
 	end
+	private
 
 	def name_group
 		self.name = GroupNameHelper.name.sample
@@ -115,38 +102,11 @@ class Group < ActiveRecord::Base
 		self.includes(:users).references(:users).where("users.id in (?)", friend_ids).ids.uniq
 	end
 
-	def find_mergable_group
-	  @group ||= self.class.category_groups(category).degree_groups(degree).where.not(id: id).near([latitude, longitude], 0.5).ready_groups.first
-	end
-
-	def merge_groups
-		mid_lng, mid_lat = ApplicationHelper.mean(longitude, find_mergable_group.longitude), ApplicationHelper.mean(latitude, find_mergable_group.latitude)
-
-		new_group = Group.create(longitude: mid_lng, latitude: mid_lat, category: category, user_limit: new_group_user_limit, can_join: false, degree: new_degree)
-		new_group.users << (users + find_mergable_group.users)
-
-		set_ready_to_expand_to_false
-		new_group
-	end
-
-	def set_ready_to_expand_to_false
-		find_mergable_group.ready_to_expand = false
-		find_mergable_group.save
-	end
-
-	def aged?(period)
-		(Time.now - created_at) > period
-	end
-
 	def well_attended_activity_count
 		activities.attended_activities.size
 	end
 
-	def new_group_user_limit
-	  user_limit * 2
-	end
-
-	def new_degree
-	  degree + 1
+	def aged?(period)
+		(Time.now - created_at) > period
 	end
 end
