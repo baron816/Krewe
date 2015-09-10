@@ -3,7 +3,7 @@ FactoryGirl.define do
     name { Faker::Lorem.words }
     longitude { Faker::Address.longitude}
     latitude { Faker::Address.latitude }
-    category { GroupNameHelper.constellations.sample }
+    category { GroupNameHelper.name.sample }
 
     factory :old_group do
       can_join false
