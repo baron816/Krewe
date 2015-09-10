@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150909234141) do
+ActiveRecord::Schema.define(version: 20150910021149) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,7 +69,10 @@ ActiveRecord::Schema.define(version: 20150909234141) do
     t.integer  "degree",          default: 1
     t.boolean  "ready_to_expand", default: false
     t.boolean  "has_expanded",    default: false
+    t.string   "slug"
   end
+
+  add_index "groups", ["slug"], name: "index_groups_on_slug", using: :btree
 
   create_table "messages", force: :cascade do |t|
     t.integer  "group_id"
