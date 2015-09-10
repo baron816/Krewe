@@ -77,8 +77,12 @@ class User < ActiveRecord::Base
 		self != user
 	end
 
+	def has_not_voted?(user)
+		drop_user_votes.has_not_voted?(user)
+	end
+
 	def can_vote?(user)
-		not_self(user) && user.drop_user_votes.voter_votes(self).empty?
+		not_self(user) && user.has_not_voted?(self)
 	end
 
 	def voter_vote(user)
@@ -147,6 +151,8 @@ class User < ActiveRecord::Base
 			[:name, :id]
 		]
 	end
+
+
 
 	def should_generate_new_friendly_id?
 	  :name_changed? || super
