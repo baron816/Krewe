@@ -1,4 +1,7 @@
 class Group < ActiveRecord::Base
+	extend FriendlyId
+	friendly_id :slug_candidates, use: :slugged
+
 	has_many :user_groups
 	has_many :users, through: :user_groups
 	has_many :messages
@@ -95,6 +98,12 @@ class Group < ActiveRecord::Base
 	end
 
 	private
+	def slug_candidates
+		[
+			[:name, :id]
+		]
+	end
+	
 	def name_group
 		self.name = GroupNameHelper.name.sample
 	end
