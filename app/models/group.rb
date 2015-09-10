@@ -44,7 +44,7 @@ class Group < ActiveRecord::Base
 	def drop_user(user)
 		users.delete(user)
 		user.add_dropped_group(id)
-		user.find_or_create_group if degree == 1
+		user.find_or_create_group if primary_group?
 		drop_user_votes.delete_all_votes_from_voter(user)
 		check_space
 		self.delete if users.empty?
@@ -88,6 +88,9 @@ class Group < ActiveRecord::Base
 	  users.include?(user)
 	end
 
+	def primary_group?
+	  degree == 1
+	end
 
 	def join_group_notifications(new_user)
 		users.each do |user|
@@ -103,7 +106,7 @@ class Group < ActiveRecord::Base
 			[:name, :id]
 		]
 	end
-	
+
 	def name_group
 		self.name = GroupNameHelper.name.sample
 	end
