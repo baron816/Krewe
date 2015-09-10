@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+	extend FriendlyId
+	friendly_id :slug_candidates, use: :slugged
+
 	validates :name, presence: true, length: { minimum: 3, maximum: 50 }
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 	validates :email, presence: true, length: { maximum: 255}, format: { with: VALID_EMAIL_REGEX }, uniqueness: true
@@ -138,6 +141,17 @@ class User < ActiveRecord::Base
 	end
 
 	private
+	def slug_candidates
+	  [
+			:name,
+			[:name, :id]
+		]
+	end
+
+	def should_generate_new_friendly_id?
+	  :name_changed? || super
+	end
+
 	def downcase_email
 		self.email = email.downcase
 	end

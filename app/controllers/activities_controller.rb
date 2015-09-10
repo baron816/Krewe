@@ -4,7 +4,7 @@ class ActivitiesController < ApplicationController
 	before_action :user_logged?, only: [:create, :update, :edit, :new]
 
 	def create
-		@activity = Activity.new(activity_params)
+		@activity = @group.activities.new(activity_params)
 
 		if @activity.save
 			@activity.users << @activity.proposer
@@ -57,10 +57,10 @@ class ActivitiesController < ApplicationController
 	end
 
 	def set_group
-	  @group = Group.find(params[:group_id])
+	  @group = Group.friendly.find(params[:group_id])
 	end
 
 	def activity_params
-		params.require(:activity).permit(:plan, :proposer_id, :group_id, :appointment, :location, :latitude, :longitude)
+		params.require(:activity).permit(:plan, :proposer_id, :appointment, :location, :latitude, :longitude)
 	end
 end

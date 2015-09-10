@@ -28,6 +28,6 @@ class ExpandGroupVotesController < ApplicationController
 
   private
   def set_group
-    @group = Group.find(params[:group_id])
+    @group = Group.friendly.find(params[:group_id])
   end
 end
