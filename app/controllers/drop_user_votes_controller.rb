@@ -3,7 +3,7 @@ class DropUserVotesController < ApplicationController
 	before_action :user_logged?, only: [:create]
 
 	def create
-		@user = User.find(params[:user_id])
+		@user = User.friendly.find(params[:user_id])
 		@vote = @group.drop_user_votes.create(user: @user, voter: current_user)
 		@group.kick_user(@user)
 		respond_to do |format|
@@ -24,6 +24,6 @@ class DropUserVotesController < ApplicationController
 
 	private
 	def set_group
-		@group = Group.find(params[:group_id])
+		@group = Group.friendly.find(params[:group_id])
 	end
 end
