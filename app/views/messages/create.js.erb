@@ -1,3 +1,5 @@
+$('#intro').hide("fast")
+
 $('<%= j render partial: "show", locals: {message: @message} %>').appendTo('.messages').hide().slideDown("slow")
 
 $('.messages').animate({ scrollTop: $('.messages')[0].scrollHeight}, 1000);
