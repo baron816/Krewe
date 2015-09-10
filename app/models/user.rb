@@ -111,39 +111,6 @@ class User < ActiveRecord::Base
 	  name.split.first
 	end
 
-	#notification delegations
-	def dismiss_personal_notifications_from_user(user)
-	  notifications.dismiss_personal_notifications_from_user(user)
-	end
-
-	def unviewed_personal_notifications_from_user_count(friend)
-	  notifications.unviewed_personal_notifications_from_user_count(friend)
-	end
-
-	def unviewed_group_notification_count(group)
-	  notifications.unviewed_group_notification_count(group)
-	end
-
-	def dismiss_group_notifications_from_group(group)
-	  notifications.dismiss_group_notifications_from_group(group)
-	end
-
-	def unviewed_notifications
-	  notifications.unviewed_notifications
-	end
-
-	def unviewed_notifications_count
-	  notifications.unviewed_notifications_count
-	end
-
-	def unviewed_category_notifications(category)
-	  notifications.unviewed_category_notifications(category)
-	end
-
-	def dismiss_activity_notification(activity)
-	  notifications.dismiss_activity_notification(activity)
-	end
-
 	private
 	def slug_candidates
 	  [
@@ -151,8 +118,6 @@ class User < ActiveRecord::Base
 			[:name, :id]
 		]
 	end
-
-
 
 	def should_generate_new_friendly_id?
 	  :name_changed? || super
