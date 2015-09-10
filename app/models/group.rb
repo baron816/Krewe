@@ -89,7 +89,7 @@ class Group < ActiveRecord::Base
 	def slug_candidates
 		[
 			:name,
-			[:name, ]
+			[:name, :longitude, :latitude]
 		]
 	end
 	private
