@@ -12,10 +12,6 @@ class Group < ActiveRecord::Base
 
 	reverse_geocoded_by :latitude, :longitude
 
-	before_create do
-		name_group
-	end
-
 	scope :open_groups, -> { where(can_join: true) }
 	scope :category_groups, ->(category) { where(category: category) }
 	scope :excluded_users, ->(friend_ids) { where.not(id: user_friend_group_ids(friend_ids)) }
@@ -86,13 +82,23 @@ class Group < ActiveRecord::Base
 		end
 	end
 
+
+	private
 	def slug_candidates
+		name_group
 		[
 			:name,
-			[:name, :longitude, :latitude]
+			:slug_hex
 		]
 	end
-	private
+
+	def slug_hex
+		slug = normalize_friendly_id(name)
+		begin
+			hexed = "#{slug}-#{SecureRandom.hex(6)}"
+		end while Group.exists?(slug: hexed)
+		hexed
+	end
 
 	def name_group
 		self.name = GroupNameHelper.name.sample

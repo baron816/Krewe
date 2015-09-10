@@ -111,12 +111,21 @@ class User < ActiveRecord::Base
 	  name.split.first
 	end
 
+
 	private
 	def slug_candidates
 	  [
 			:name,
-			[:name, :longitude, :latitude]
+			[:slug_hex]
 		]
+	end
+
+	def slug_hex
+		slug = normalize_friendly_id(name)
+		begin
+			hexed = "#{slug}-#{SecureRandom.hex(3)}"
+		end while User.exists?(slug: hexed)
+		hexed
 	end
 
 	def should_generate_new_friendly_id?
