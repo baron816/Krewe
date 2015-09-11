@@ -59,7 +59,7 @@ describe ExpandGroupVotesController do
       end
 
       it "creates a new group when voting to expand and group2 has expanded" do
-        @group2.expand_group
+        ExpandGroup.new(@group2).expand_group
         expect { post :create, group_id: @group }.to change(Group, :count).by(1)
       end
     end

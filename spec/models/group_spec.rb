@@ -91,12 +91,12 @@ describe Group do
 		end
 
 		it "returns nil when expanding" do
-		  expect(group1.expand_group).to eq(nil)
+		  expect(ExpandGroup.new(group1).expand_group).to eq(nil)
 		end
 
 		context "group1 expands" do
 			before do
-				group1.expand_group
+				ExpandGroup.new(group1).expand_group
 			end
 
 			it "does not expand_group but sets ready_to_expand to true" do
@@ -110,7 +110,7 @@ describe Group do
 
 		context "more users create new group" do
 			before do
-				group1.expand_group
+				ExpandGroup.new(group1).expand_group
 				create(:user_130)
 				create(:user_134)
 			end
@@ -122,12 +122,12 @@ describe Group do
 			end
 
 			it "expanding group returns a new group" do
-			  expect(group2.expand_group).to be_a(Group)
+			  expect(ExpandGroup.new(group2).expand_group).to be_a(Group)
 			end
 
 			context "after new group is created" do
 				before do
-					@group3 = group2.expand_group
+					@group3 = ExpandGroup.new(group2).expand_group
 				end
 
 				it "expanding again creates a new group" do
@@ -147,7 +147,7 @@ describe Group do
 				end
 
 				Group.find_each do |group|
-					group.expand_group
+					ExpandGroup.new(group).expand_group
 				end
 			end
 
@@ -170,10 +170,10 @@ describe Group do
 
 			context "expanding to third degree" do
 				before do
-					group5.expand_group
+					ExpandGroup.new(group5).expand_group
 				end
 
-				let(:group7) { group6.expand_group }
+				let(:group7) { ExpandGroup.new(group6).expand_group }
 
 				it "expanding last two groups creates a new group" do
 					expect(group7).to be_a(Group)
@@ -188,7 +188,7 @@ describe Group do
 				end
 
 				it "does not create a new group when expanding group 7" do
-				  expect(group7.expand_group).to be(nil)
+				  expect(ExpandGroup.new(group7).expand_group).to be(nil)
 				end
 			end
 		end
