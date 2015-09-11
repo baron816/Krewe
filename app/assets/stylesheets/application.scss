@@ -29,9 +29,9 @@ a {
 	font-size: 1.1em;
 }
 
-.logo {
-	color: $creamcan;
-	font-size: 2em;
+#logo {
+	max-width: 150px;
+	margin-top: -25px;
 }
 
 #home {
