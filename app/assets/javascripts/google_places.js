@@ -4,23 +4,24 @@ function mapLocation(startingLat, startingLng) {
 		zoom: 15
 	};
 
-	var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+	map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
 	var input = document.getElementById('activity_location');
 
 	var autocomplete = new google.maps.places.Autocomplete(input);
-	var marker = new google.maps.Marker({
-		map: map,
-		anchorPoint: new google.maps.Point(0,-29)
-	})
 
 	var infowindow = new google.maps.InfoWindow();
 
-	markPlaces(mapOptions, map, infowindow)
+	markPlaces(mapOptions, infowindow)
 
 
 	google.maps.event.addListener(autocomplete, 'place_changed', function () {
 		var place = autocomplete.getPlace();
+
+  	var marker = new google.maps.Marker({
+  		map: map,
+  		anchorPoint: new google.maps.Point(0,-29)
+  	})
 		marker.setVisible(false);
 
 		if (!place.geometry) {
@@ -49,7 +50,43 @@ function mapLocation(startingLat, startingLng) {
 	})
 }
 
-function markPlaces(mapOptions, map, infowindow) {
+$(document).on('click', '.suggested button', function() {
+	var item = $(this);
+
+  var service = new google.maps.places.PlacesService(map)
+
+  service.getDetails({
+    placeId: item.data().placeid
+  }, function (place, status) {
+    if (status === google.maps.places.PlacesServiceStatus.OK) {
+      var marker = new google.maps.Marker({
+        map: map,
+        position: place.geometry.location
+      });
+
+      if (place.geometry.viewport) {
+        map.fitBounds(place.geometry.viewport)
+      } else {
+        map.setCenter(place.geometry.location);
+        map.setZoom(17);
+      }
+
+      marker.setIcon(/** @type {google.maps.Icon} */({
+        url: place.icon,
+        size: new google.maps.Size(71, 71),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(17, 34),
+        scaledSize: new google.maps.Size(35, 35)
+      }));
+
+      $('#activity_location').val(place.name)
+    	$('#activity_latitude').val(place.geometry.location.lat());
+    	$('#activity_longitude').val(place.geometry.location.lat());
+    }
+  })
+})
+
+function markPlaces(mapOptions, infowindow) {
 	var request = {
 		location: mapOptions.center,
 		types: ['bar'],
@@ -63,22 +100,21 @@ function markPlaces(mapOptions, map, infowindow) {
 	service.radarSearch(request, function(results, status){
 		if (status == google.maps.places.PlacesServiceStatus.OK) {
 			for (var i = 0; i < results.length; i++) {
-				createMarker(results[i], map, infowindow, service)
+				createMarker(results[i], infowindow, service)
 			}
 
       $('#spots').append('<li class="list-group-item">Suggested Places</li>')
       for (var i = 0; i < 3; i++) {
         service.getDetails(results[randomNum(results.length)], function (result, status) {
-          $('#spots').append('<li class="list-group-item suggested"><button type="button" class="btn btn-primary name"><span class="name">' + result.name + '</span><span class="hidden longitude" >' + result.geometry.location.lng() + '</span><span class="hidden latitude">' + result.geometry.location.lat() + '</span></button></li>')
+          var location = result.geometry.location
+          $('#spots').append('<li class="list-group-item suggested"><button type="button" class="btn btn-primary name" data-placeid="' + result.place_id + '">' + result.name + '</button></li>')
         })
       }
 		}
 	})
 }
 
-
-
-function createMarker(place, map, infowindow, service) {
+function createMarker(place, infowindow, service) {
 	var placeLoc = place.geometry.location;
 	var marker = new google.maps.Marker({
 		map: map,
