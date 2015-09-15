@@ -93,7 +93,7 @@ $(document).on('click', '.suggested button', function() {
 function markPlaces(type) {
 	var request = {
 		location: mapOptions.center,
-		types: [type],
+		types: [type || 'bar'],
     minPriceLevel: 1,
     maxPriceLevel: 2,
     radius: '800',
