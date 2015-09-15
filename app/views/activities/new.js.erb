@@ -5,10 +5,3 @@ $('#datetimepicker').datetimepicker({
 });
 
 mapLocation('<%= @group.latitude %>', '<%= @group.longitude %>')
-
-$(document).on('click', '.suggested button', function() {
-	var item = $(this);
-	document.getElementById('activity_location').value = item.find('.name')[0].innerHTML
-	document.getElementById('activity_longitude').value = item.find('.longitude')[0].innerHTML
-	document.getElementById('activity_latitude').value = item.find('.latitude')[0].innerHTML
-})
