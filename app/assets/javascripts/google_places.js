@@ -1,5 +1,7 @@
-function mapLocation(startingLat, startingLng) {
-	var mapOptions = {
+markers = [];
+
+function mapLocation(startingLat, startingLng, type) {
+	mapOptions = {
 		center: new google.maps.LatLng(startingLat, startingLng),
 		zoom: 15
 	};
@@ -10,9 +12,9 @@ function mapLocation(startingLat, startingLng) {
 
 	var autocomplete = new google.maps.places.Autocomplete(input);
 
-	var infowindow = new google.maps.InfoWindow();
+	infowindow = new google.maps.InfoWindow();
 
-	markPlaces(mapOptions, infowindow)
+	markPlaces(type)
 
 
 	google.maps.event.addListener(autocomplete, 'place_changed', function () {
@@ -22,6 +24,7 @@ function mapLocation(startingLat, startingLng) {
   		map: map,
   		anchorPoint: new google.maps.Point(0,-29)
   	})
+    markers.push(marker);
 		marker.setVisible(false);
 
 		if (!place.geometry) {
@@ -63,6 +66,7 @@ $(document).on('click', '.suggested button', function() {
         map: map,
         position: place.geometry.location
       });
+      markers.push(marker)
 
       if (place.geometry.viewport) {
         map.fitBounds(place.geometry.viewport)
@@ -86,10 +90,11 @@ $(document).on('click', '.suggested button', function() {
   })
 })
 
-function markPlaces(mapOptions, infowindow) {
+function markPlaces(type) {
 	var request = {
 		location: mapOptions.center,
-		types: ['bar'],
+		types: [type],
+    minPriceLevel: 1,
     maxPriceLevel: 2,
     radius: '800',
 		rankBy: google.maps.places.RankBy.DISTANCE
@@ -100,10 +105,9 @@ function markPlaces(mapOptions, infowindow) {
 	service.radarSearch(request, function(results, status){
 		if (status == google.maps.places.PlacesServiceStatus.OK) {
 			for (var i = 0; i < results.length; i++) {
-				createMarker(results[i], infowindow, service)
+				createMarker(results[i], service)
 			}
 
-      $('#spots').append('<li class="list-group-item">Suggested Places</li>')
       for (var i = 0; i < 3; i++) {
         service.getDetails(results[randomNum(results.length)], function (result, status) {
           var location = result.geometry.location
@@ -114,7 +118,14 @@ function markPlaces(mapOptions, infowindow) {
 	})
 }
 
-function createMarker(place, infowindow, service) {
+$(document).on('click', '.place-type', function () {
+    $('.suggested').remove()
+    clearMarkers()
+    map.setZoom(15)
+    markPlaces($(this).data().type);
+})
+
+function createMarker(place, service) {
 	var placeLoc = place.geometry.location;
 	var marker = new google.maps.Marker({
 		map: map,
@@ -125,7 +136,7 @@ function createMarker(place, infowindow, service) {
     scaledSize: new google.maps.Size(10, 17)
     }
 	})
-
+  markers.push(marker)
 
 	google.maps.event.addListener(marker, 'click', function() {
 		service.getDetails(place, function(result, status) {
@@ -141,6 +152,16 @@ function createMarker(place, infowindow, service) {
   		document.getElementById('activity_latitude').value = result.geometry.location.lat()
 		})
 	})
+}
+
+function setMapOnAll(map) {
+  for (var i = 0; i < markers.length; i++) {
+    markers[i].setMap(map);
+  }
+}
+
+function clearMarkers() {
+  setMapOnAll(null);
 }
 
 function randomNum(limit) {
