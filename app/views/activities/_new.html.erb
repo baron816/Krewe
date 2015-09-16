@@ -1,7 +1,7 @@
 <%= form_for([@group, @activity]) do |f| %>
 	<ul class="list-group" id="spots">
 		<li class="list-group-item">Suggested Places</li>
-		<li class="list-group-item"><button type="button" class="btn btn-info place-type" data-type='bar'>Bars</button> <button type="button" class="btn btn-info place-type" data-type='restaurant'>Restaurants</button> <button type="button" class="btn btn-info place-type" data-type='cafe'>Cafes</button></li>
+		<li class="list-group-item"><button type="button" class="btn btn-info place-type" data-type='bar' data-type='Get drinks'>Bars</button> <button type="button" class="btn btn-info place-type" data-type='restaurant' data-plan='Get food'>Restaurants</button> <button type="button" class="btn btn-info place-type" data-type='cafe' data-plan='Get coffee'>Cafes</button></li>
 	</ul>
 
 	<%= f.text_field :plan, placeholder: "What's the plan?", class: 'form-control', required: true %>
