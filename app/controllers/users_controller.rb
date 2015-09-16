@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-	before_action :set_user, only: [:edit, :update, :public_profile, :add_group]
+	before_action :set_user, only: [:edit, :update, :public_profile, :join_group]
 	before_action :user_logged?, only: [:update, :edit]
 
 	def show
@@ -38,6 +38,13 @@ class UsersController < ApplicationController
 		else
 			render :new
 		end
+	end
+
+	def join_group
+	  if @user.under_group_limit?
+	  	new_group = @user.find_or_create_group
+			redirect_to group_path(new_group)
+	  end
 	end
 
 	private
