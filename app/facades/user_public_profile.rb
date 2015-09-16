@@ -7,7 +7,7 @@ class UserPublicProfile
   delegate :name, :email, :category, :id, to: :user, prefix: true
 
   def user_location
-    "#{user.city}, #{user.state}"
+    user.address.split(',')[1..-1].join(',')
   end
 
   def personal_messages
