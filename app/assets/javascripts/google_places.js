@@ -122,6 +122,12 @@ $(document).on('click', '.place-type', function () {
     $('.suggested').remove()
     clearMarkers()
     map.setZoom(15)
+    var plan = $('#activity_plan')
+
+    if (plan !== "") {
+      plan.val($(this).data().plan)
+    }
+
     markPlaces($(this).data().type);
 })
 
