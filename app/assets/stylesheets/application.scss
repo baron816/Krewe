@@ -136,20 +136,6 @@ li.list-group-item, .well, .form-control, .pagination li a, .pagination li.disab
 	width:  100%;
 }
 
-.pac-container {
-    background-color: #FFF;
-    z-index: 20;
-    position: fixed;
-    display: inline-block;
-    float: left;
-}
-.modal{
-    z-index: 20;
-}
-.modal-backdrop{
-    z-index: 10;
-}​
-
 footer {
 	position: fixed;
 	bottom: 0;
@@ -193,4 +179,20 @@ footer {
 .btn-info:hover {
 	background-color: #763568;
 	border-color: #763568;
+}
+
+.pac-container {
+  background-color: #FFF;
+  z-index: 20;
+  position: fixed;
+  display: inline-block;
+  float: left;
+}
+
+.modal {
+  z-index: 20;
+}
+
+.modal-backdrop {
+	z-index: 10;
 }
