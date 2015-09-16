@@ -1,0 +1,31 @@
+<%= form_for(@user) do |f| %>
+		<% if @user.errors.any? %>
+			<% @user.errors.full_messages.each do |msg| %>
+				<div class="alert alert-danger"><%= msg %></div>
+			<% end %>
+		<% end %>
+
+		<%= f.text_field :name, placeholder: "Name", class: 'form-control', required: true %>
+		<%= f.email_field :email, placeholder: 'Email', class: 'form-control', required: true %>
+
+    <div class="form-group">
+  		<%= f.text_field :address, placeholder: 'Address', class: 'form-control', required: true %>
+
+  		<%= f.hidden_field :latitude, id: "lat" %>
+  		<%= f.hidden_field :longitude, id: 'lng' %>
+
+  		<%= f.select(:category, categories, {}, class: 'form-control', required: true) %>
+    </div>
+
+		<%= f.password_field :password, placeholder: 'Password', class: "form-control", required: true %>
+		<%= f.password_field :password_confirmation, placeholder: 'Confirm Password', class: "form-control", required: true %>
+		<%= f.submit :Submit, class: 'btn btn-primary form-control' %>
+<% end %>
+
+<%= javascript_tag do %>
+	initAutoComplete()
+
+  $("#user_category").select2({
+    placeholder: "Select a category that describes you best"
+  });
+<% end %>
