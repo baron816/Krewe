@@ -1,33 +1,27 @@
 <%= form_for(@user) do |f| %>
-	<div class="col-md-9 col-md-offset-1">
-		<% if @user.errors.any? %>
-			<% @user.errors.full_messages.each do |msg| %>
-				<div class="alert alert-danger">	<%= msg %> </div>
-			<% end %>
+<div class="col-md-9 col-md-offset-1">
+	<% if @user.errors.any? %>
+		<% @user.errors.full_messages.each do |msg| %>
+			<div class="alert alert-danger">	<%= msg %> </div>
 		<% end %>
+	<% end %>
+	<div class="form-group">
+		<%= f.text_field :name, placeholder: "Name", class: 'form-control', required: true %>
+		<%= f.email_field :email, placeholder: 'Email', class: 'form-control', required: true %>
 
-		<div class="form-group">
-			<%= f.text_field :name, placeholder: "Name", class: 'form-control' %>
-			<%= f.email_field :email, placeholder: 'Email', class: 'form-control' %>
-		</div>
+	<%= f.text_field :address, placeholder: 'Address', class: 'form-control', required: true %>
 
-		<div class="form-group", id="address-info">
-			<%= f.text_field :street, placeholder: 'Street Address', class: 'form-control' %>
-			<%= f.text_field :city, placeholder: "City", class: 'form-control' %>
-			<%= f.select :state, us_states, {}, class: 'form-control' %>
-		</div>
+	<%= f.hidden_field :latitude, id: "lat" %>
+	<%= f.hidden_field :longitude, id: 'lng' %>
 
-		<%= f.hidden_field :latitude, id: "lat" %>
-		<%= f.hidden_field :longitude, id: 'lng' %>
+	<%= f.select(:category, categories, {}, class: 'form-control', required: true) %>
 
-		<% categories.each do |category| %>
-			<div class="input-group">
-			<span class="input-group-addon"> <%= f.radio_button :category, category %></span>
-			<%= f.label :category, category, class: 'form-control' %>
-			</div>
-		<% end %>
 		<%= f.hidden_field :password, value: :password %>
 		<%= f.hidden_field :password_confirmation, value: :password %>
 		<%= f.submit "Submit", class: 'btn btn-primary form-control' %>
 	</div>
+<% end %>
+
+<%= javascript_tag do %>
+	initAutoComplete()
 <% end %>
