@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 	validates :email, presence: true, length: { maximum: 255}, format: { with: VALID_EMAIL_REGEX }, uniqueness: true
 	validates :password, presence: true, length: { minimum: 6 }, on: :create
-	validates_presence_of :longitude, :latitude, :street, :city, :state, :category
+	validates_presence_of :longitude, :latitude, :address, :category
 
 	has_secure_password
 	has_many :user_groups
@@ -59,14 +59,6 @@ class User < ActiveRecord::Base
 	def add_dropped_group(id)
 		dropped_group_ids << id
 		save
-	end
-
-	def address
-		[street, city, state].join(', ')
-	end
-
-	def address_changed?
-		street_changed? || city_changed? || state_changed?
 	end
 
 	def group_drop_votes_count(group)
