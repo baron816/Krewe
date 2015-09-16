@@ -11,6 +11,8 @@ $(document).ready(function(){
 		placeholder: "Select a state"
 	});
 
+	$("#user_category").select2();
+
 	resize_window('.messages')
 
 	resize_window('#map')
