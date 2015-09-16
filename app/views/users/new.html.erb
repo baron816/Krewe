@@ -18,12 +18,9 @@
 
 		<%= f.hidden_field :latitude, id: "lat" %>
 		<%= f.hidden_field :longitude, id: 'lng' %>
-		<% categories.each do |category| %>
-			<div class="input-group">
-			<span class="input-group-addon"> <%= f.radio_button :category, category %></span>
-			<%= f.label :category, category, class: 'form-control', required: true %>
-			</div>
-		<% end %>
+
+		<%= f.select(:category, categories, {}, class: 'form-control', required: true) %>
+
 		<%= f.password_field :password, placeholder: 'Password', class: "form-control", required: true %>
 		<%= f.password_field :password_confirmation, placeholder: 'Confirm Password', class: "form-control", required: true %>
 		<%= f.submit :Submit, class: 'btn btn-primary form-control' %>
