@@ -103,6 +103,9 @@ class User < ActiveRecord::Base
 	  name.split.first
 	end
 
+	def under_group_limit?
+	  groups.count < group_limit
+	end
 
 	private
 	def slug_candidates
