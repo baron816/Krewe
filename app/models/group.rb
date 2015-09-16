@@ -40,7 +40,7 @@ class Group < ActiveRecord::Base
 	def drop_user(user)
 		users.delete(user)
 		user.add_dropped_group(id)
-		user.find_or_create_group if primary_group?
+
 		drop_user_votes.delete_all_votes_from_voter(user)
 		check_space
 		self.delete if users.empty?
