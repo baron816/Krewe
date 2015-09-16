@@ -3,10 +3,6 @@ $(document).ready(function(){
 		format: 'YYYY-MM-DD hh:mm A'
 	});
 
-	$("#user_category").select2({
-		placeholder: "Select a category that describes you best"
-	});
-
 	resize_window('.messages')
 
 	resize_window('#map')
