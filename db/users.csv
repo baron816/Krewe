@@ -1,42 +1,42 @@
-name,password,password,email,street,city,state,category,latitude,longitude
-Chaim Rogahn,123456,123456,elisha_yost@dietrich.org,135 William Street,New York,NY,Post-Grad,40.7094706,-74.0067142
-Madie Rodriguez,123456,123456,susana_strosin@gibsonbins.net,48 Wall Street,New York,NY,Post-Grad,40.7063634,-74.0090963
-Scottie Sauer,123456,123456,amya@muller.name,120 William Street,New York,NY,Post-Grad,40.7091371,-74.0068346
-Justen Gerlach,123456,123456,athena.jenkins@stehrvon.org,121 William Street,New York,NY,Post-Grad,40.7090997,-74.0068716
-Hortense Kerluke,123456,123456,zoe_bradtke@ratke.info,50 Wall Street,New York,NY,Young Parent,40.7062777,-74.0093162
-Rachael Parker IV,123456,123456,jovani@stehr.biz,128 William Street,New York,NY,Post-Grad,40.7092288,-74.0067443
-Darrion West,123456,123456,cary_howell@lynch.com,12 William Street,New York,NY,Post-Grad,40.7051784,-74.0100329
-Dr. Romaine Jenkins,123456,123456,gregorio@gaylord.com,52 Wall Street,New York,NY,Business Networkers,40.7062007,-74.009173
-Verlie Koepp,123456,123456,maida_grady@lubowitzkoepp.net,122 William Street,New York,NY,Young Parent,40.70916,-74.006812
-Dude McDude,123456,123456,dude@mail.com,135 William Street,New York,NY,Post-Grad,40.7094706,-74.0067142
-Guy McGuy,123456,123456,guy@mail.com,135 William Street,New York,NY,Post-Grad,40.7094706,-74.0067142
-Man McDude,123456,123456,man@mail.com,135 William Street,New York,NY,Post-Grad,40.7094706,-74.0067142
-Heymitch Sweet,123456,123456,hey@mail.com,135 William Street,New York,NY,Post-Grad,40.7094706,-74.0067142
-Day Man,123456,123456,day@mail.com,135 William Street,New York,NY,Post-Grad,40.7094706,-74.0067142
-Night Man,123456,123456,night@mail.com,135 William Street,New York,NY,Post-Grad,40.7094706,-74.0067142
-Boys Hole,123456,123456,troll@mail.com,135 William Street,New York,NY,Post-Grad,40.7094706,-74.0067142
-Rick Sanchez,123456,123456,rick@mail.com,135 William Street,New York,NY,Post-Grad,40.7094706,-74.0067142
-Morty Messese,123456,123456,morty@mail.com,135 William Street,New York,NY,Post-Grad,40.7094706,-74.0067142
-Dick Bottom,123456,123456,dick@mail.com,135 William Street,New York,NY,Post-Grad,40.7094706,-74.0067142
-Bob Mcbob,123456,123456,bob@mail.com,135 William Street,New York,NY,Post-Grad,40.7094706,-74.0067142
-Tits Mcgee,123456,123456,tits@mail.com,135 William Street,New York,NY,Post-Grad,40.7094706,-74.0067142
-Groin McGroin,123456,123456,groin@mail.com,135 William Street,New York,NY,Post-Grad,40.7094706,-74.0067142
-Booty McBooterson,123456,123456,booty@mail.com,135 William Street,New York,NY,Post-Grad,40.7094706,-74.0067142
-Boots McBooterson,123456,123456,boots@mail.com,135 William Street,New York,NY,Post-Grad,40.7094706,-74.0067142
-Tim McLee,123456,123456,Tim@mail.com,135 William Street,New York,NY,Post-Grad,40.7094706,-74.0067142
-Lady McLee,123456,123456,lady@mail.com,135 William Street,New York,NY,Post-Grad,40.7094706,-74.0067142
-Girl McLee,123456,123456,girl@mail.com,135 William Street,New York,NY,Post-Grad,40.7094706,-74.0067142
-Boobs McLee,123456,123456,boobs@mail.com,135 William Street,New York,NY,Post-Grad,40.7094706,-74.0067142
-Tim McLee,123456,123456,Tim@mail.com,135 William Street,New York,NY,Post-Grad,40.7094706,-74.0067142
-Noot McLee,123456,123456,Noot@mail.com,135 William Street,New York,NY,Post-Grad,40.7094706,-74.0067142
-Roots McLee,123456,123456,Roots@mail.com,135 William Street,New York,NY,Post-Grad,40.7094706,-74.0067142
-Hoots McLee,123456,123456,Hoots@mail.com,135 William Street,New York,NY,Post-Grad,40.7094706,-74.0067142
-Coots McLee,123456,123456,Coots@mail.com,135 William Street,New York,NY,Post-Grad,40.7094706,-74.0067142
-Shoots McLee,123456,123456,Shoots@mail.com,135 William Street,New York,NY,Post-Grad,40.7094706,-74.0067142
-Foots McLee,123456,123456,Foots@mail.com,135 William Street,New York,NY,Post-Grad,40.7094706,-74.0067142
-Lats McLee,123456,123456,Lats@mail.com,135 William Street,New York,NY,Post-Grad,40.7094706,-74.0067142
-Fatss McLee,123456,123456,Fatss@mail.com,135 William Street,New York,NY,Post-Grad,40.7094706,-74.0067142
-Hatts McLee,123456,123456,Hatts@mail.com,135 William Street,New York,NY,Post-Grad,40.7094706,-74.0067142
-Catts McLee,123456,123456,Catts@mail.com,135 William Street,New York,NY,Post-Grad,40.7094706,-74.0067142
-Watts McLee,123456,123456,Watts@mail.com,135 William Street,New York,NY,Post-Grad,40.7094706,-74.0067142
-Pat McLee,123456,123456,Pat@mail.com,135 William Street,New York,NY,Post-Grad,40.7094706,-74.0067142
+name,password,password,email,address,category,latitude,longitude
+Chaim Rogahn,123456,123456,elisha_yost@dietrich.org,"135 William Street,New York,NY",Recent-Grad,40.7094706,-74.0067142
+Madie Rodriguez,123456,123456,susana_strosin@gibsonbins.net,"48 Wall Street,New York,NY",Recent-Grad,40.7063634,-74.0090963
+Scottie Sauer,123456,123456,amya@muller.name,"120 William Street,New York,NY",Recent-Grad,40.7091371,-74.0068346
+Justen Gerlach,123456,123456,athena.jenkins@stehrvon.org,"121 William Street,New York,NY",Recent-Grad,40.7090997,-74.0068716
+Hortense Kerluke,123456,123456,zoe_bradtke@ratke.info,"50 Wall Street,New York,NY",Young Parent,40.7062777,-74.0093162
+Rachael Parker IV,123456,123456,jovani@stehr.biz,"128 William Street,New York,NY",Recent-Grad,40.7092288,-74.0067443
+Darrion West,123456,123456,cary_howell@lynch.com,"12 William Street,New York,NY",Recent-Grad,40.7051784,-74.0100329
+Dr. Romaine Jenkins,123456,123456,gregorio@gaylord.com,"52 Wall Street,New York,NY",Business Networkers,40.7062007,-74.009173
+Verlie Koepp,123456,123456,maida_grady@lubowitzkoepp.net,"122 William Street,New York,NY",Young Parent,40.70916,-74.006812
+Dude McDude,123456,123456,dude@mail.com,"135 William Street,New York,NY",Recent-Grad,40.7094706,-74.0067142
+Guy McGuy,123456,123456,guy@mail.com,"135 William Street,New York,NY",Recent-Grad,40.7094706,-74.0067142
+Man McDude,123456,123456,man@mail.com,"135 William Street,New York,NY",Recent-Grad,40.7094706,-74.0067142
+Heymitch Sweet,123456,123456,hey@mail.com,"135 William Street,New York,NY",Recent-Grad,40.7094706,-74.0067142
+Day Man,123456,123456,day@mail.com,"135 William Street,New York,NY",Recent-Grad,40.7094706,-74.0067142
+Night Man,123456,123456,night@mail.com,"135 William Street,New York,NY",Recent-Grad,40.7094706,-74.0067142
+Boys Hole,123456,123456,troll@mail.com,"135 William Street,New York,NY",Recent-Grad,40.7094706,-74.0067142
+Rick Sanchez,123456,123456,rick@mail.com,"135 William Street,New York,NY",Recent-Grad,40.7094706,-74.0067142
+Morty Messese,123456,123456,morty@mail.com,"135 William Street,New York,NY",Recent-Grad,40.7094706,-74.0067142
+Dick Bottom,123456,123456,dick@mail.com,"135 William Street,New York,NY",Recent-Grad,40.7094706,-74.0067142
+Bob Mcbob,123456,123456,bob@mail.com,"135 William Street,New York,NY",Recent-Grad,40.7094706,-74.0067142
+Tits Mcgee,123456,123456,tits@mail.com,"135 William Street,New York,NY",Recent-Grad,40.7094706,-74.0067142
+Groin McGroin,123456,123456,groin@mail.com,"135 William Street,New York,NY",Recent-Grad,40.7094706,-74.0067142
+Booty McBooterson,123456,123456,booty@mail.com,"135 William Street,New York,NY",Recent-Grad,40.7094706,-74.0067142
+Boots McBooterson,123456,123456,boots@mail.com,"135 William Street,New York,NY",Recent-Grad,40.7094706,-74.0067142
+Tim McLee,123456,123456,Tim@mail.com,"135 William Street,New York,NY",Recent-Grad,40.7094706,-74.0067142
+Lady McLee,123456,123456,lady@mail.com,"135 William Street,New York,NY",Recent-Grad,40.7094706,-74.0067142
+Girl McLee,123456,123456,girl@mail.com,"135 William Street,New York,NY",Recent-Grad,40.7094706,-74.0067142
+Boobs McLee,123456,123456,boobs@mail.com,"135 William Street,New York,NY",Recent-Grad,40.7094706,-74.0067142
+Tim McLee,123456,123456,Tim@mail.com,"135 William Street,New York,NY",Recent-Grad,40.7094706,-74.0067142
+Noot McLee,123456,123456,Noot@mail.com,"135 William Street,New York,NY",Recent-Grad,40.7094706,-74.0067142
+Roots McLee,123456,123456,Roots@mail.com,"135 William Street,New York,NY",Recent-Grad,40.7094706,-74.0067142
+Hoots McLee,123456,123456,Hoots@mail.com,"135 William Street,New York,NY",Recent-Grad,40.7094706,-74.0067142
+Coots McLee,123456,123456,Coots@mail.com,"135 William Street,New York,NY",Recent-Grad,40.7094706,-74.0067142
+Shoots McLee,123456,123456,Shoots@mail.com,"135 William Street,New York,NY",Recent-Grad,40.7094706,-74.0067142
+Foots McLee,123456,123456,Foots@mail.com,"135 William Street,New York,NY",Recent-Grad,40.7094706,-74.0067142
+Lats McLee,123456,123456,Lats@mail.com,"135 William Street,New York,NY",Recent-Grad,40.7094706,-74.0067142
+Fatss McLee,123456,123456,Fatss@mail.com,"135 William Street,New York,NY",Recent-Grad,40.7094706,-74.0067142
+Hatts McLee,123456,123456,Hatts@mail.com,"135 William Street,New York,NY",Recent-Grad,40.7094706,-74.0067142
+Catts McLee,123456,123456,Catts@mail.com,"135 William Street,New York,NY",Recent-Grad,40.7094706,-74.0067142
+Watts McLee,123456,123456,Watts@mail.com,"135 William Street,New York,NY",Recent-Grad,40.7094706,-74.0067142
+Pat McLee,123456,123456,Pat@mail.com,"135 William Street,New York,NY",Recent-Grad,40.7094706,-74.0067142
