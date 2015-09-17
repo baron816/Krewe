@@ -16,7 +16,6 @@ function mapLocation(startingLat, startingLng, type) {
 
 	markPlaces(type)
 
-
 	google.maps.event.addListener(autocomplete, 'place_changed', function () {
 		var place = autocomplete.getPlace();
 
@@ -158,6 +157,11 @@ function createMarker(place, service) {
   		document.getElementById('activity_latitude').value = result.geometry.location.lat()
 		})
 	})
+}
+
+function resize(lat, lng) {
+	google.maps.event.trigger(map, 'resize')
+	map.setCenter(new google.maps.LatLng(lat, lng))
 }
 
 function setMapOnAll(map) {
