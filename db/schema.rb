@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150916151029) do
+ActiveRecord::Schema.define(version: 20150916220159) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,9 @@ ActiveRecord::Schema.define(version: 20150916151029) do
     t.boolean  "well_attended", default: false
   end
 
+  add_index "activities", ["group_id"], name: "index_activities_on_group_id", using: :btree
+  add_index "activities", ["proposer_id"], name: "index_activities_on_proposer_id", using: :btree
+
   create_table "drop_user_votes", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "group_id"
@@ -37,12 +40,19 @@ ActiveRecord::Schema.define(version: 20150916151029) do
     t.datetime "updated_at"
   end
 
+  add_index "drop_user_votes", ["group_id"], name: "index_drop_user_votes_on_group_id", using: :btree
+  add_index "drop_user_votes", ["user_id"], name: "index_drop_user_votes_on_user_id", using: :btree
+  add_index "drop_user_votes", ["voter_id"], name: "index_drop_user_votes_on_voter_id", using: :btree
+
   create_table "expand_group_votes", force: :cascade do |t|
     t.integer  "voter_id"
     t.integer  "group_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "expand_group_votes", ["group_id"], name: "index_expand_group_votes_on_group_id", using: :btree
+  add_index "expand_group_votes", ["voter_id"], name: "index_expand_group_votes_on_voter_id", using: :btree
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
@@ -75,12 +85,15 @@ ActiveRecord::Schema.define(version: 20150916151029) do
   add_index "groups", ["slug"], name: "index_groups_on_slug", using: :btree
 
   create_table "messages", force: :cascade do |t|
-    t.integer  "group_id"
-    t.integer  "user_id"
+    t.integer  "poster_id"
     t.string   "content"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "messageable_id"
+    t.string   "messageable_type"
   end
+
+  add_index "messages", ["poster_id"], name: "index_messages_on_poster_id", using: :btree
 
   create_table "notifications", force: :cascade do |t|
     t.integer  "notifiable_id"
@@ -93,23 +106,25 @@ ActiveRecord::Schema.define(version: 20150916151029) do
     t.string   "notification_type"
   end
 
-  create_table "personal_messages", force: :cascade do |t|
-    t.integer  "sender_id"
-    t.integer  "receiver_id"
-    t.string   "content"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+  add_index "notifications", ["user_id"], name: "index_notifications_on_user_id", using: :btree
 
   create_table "user_activities", force: :cascade do |t|
     t.integer "activity_id"
     t.integer "user_id"
   end
 
+  add_index "user_activities", ["activity_id", "user_id"], name: "index_user_activities_on_activity_id_and_user_id", using: :btree
+  add_index "user_activities", ["activity_id"], name: "index_user_activities_on_activity_id", using: :btree
+  add_index "user_activities", ["user_id"], name: "index_user_activities_on_user_id", using: :btree
+
   create_table "user_groups", force: :cascade do |t|
     t.integer "user_id"
     t.integer "group_id"
   end
+
+  add_index "user_groups", ["group_id", "user_id"], name: "index_user_groups_on_group_id_and_user_id", using: :btree
+  add_index "user_groups", ["group_id"], name: "index_user_groups_on_group_id", using: :btree
+  add_index "user_groups", ["user_id"], name: "index_user_groups_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name",                                null: false
