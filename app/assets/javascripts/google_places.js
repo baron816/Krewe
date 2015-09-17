@@ -85,7 +85,7 @@ $(document).on('click', '.suggested button', function() {
 
       $('#activity_location').val(place.name)
     	$('#activity_latitude').val(place.geometry.location.lat());
-    	$('#activity_longitude').val(place.geometry.location.lat());
+    	$('#activity_longitude').val(place.geometry.location.lng());
     }
   })
 })
