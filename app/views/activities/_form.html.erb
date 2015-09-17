@@ -1,0 +1,28 @@
+<%= form_for([@group, @activity]) do |f| %>
+  <ul class="list-group" id="spots">
+    <li class="list-group-item">Suggested Places</li>
+    <li class="list-group-item"><button type="button" class="btn btn-info place-type" data-type='bar' data-plan='Get drinks'>Bars</button> <button type="button" class="btn btn-info place-type" data-type='restaurant' data-plan='Get food'>Restaurants</button> <button type="button" class="btn btn-info place-type" data-type='cafe' data-plan='Get coffee'>Cafes</button></li>
+  </ul>
+
+  <%= f.text_field :plan, placeholder: "What's the plan?", class: 'form-control', required: true %>
+  <%= f.text_field :location, placeholder: "Where?", class: 'form-control', required: true %>
+  <div class="form-group">
+    <div class="input-group date" id='datetimepicker'>
+      <%= f.text_field :appointment, placeholder: 'When? Hit button -->', class: 'form-control', required: true %>
+      <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+    </div>
+  </div>
+  <%= f.hidden_field :proposer_id, value: current_user.id %>
+  <%= f.hidden_field :longitude %>
+  <%= f.hidden_field :latitude %>
+  <div id="map-canvas"></div> <br>
+  <%= f.submit "Submit", class: 'btn btn-success' %>
+<% end %>
+
+<%= javascript_tag do %>
+  $('#datetimepicker').datetimepicker({
+    format: 'YYYY-MM-DD hh:mm A',
+    minDate: new Date()
+  });
+  mapLocation('<%= @group.latitude %>', '<%= @group.longitude %>')
+<% end %>
