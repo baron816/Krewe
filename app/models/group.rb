@@ -4,7 +4,7 @@ class Group < ActiveRecord::Base
 
 	has_many :user_groups
 	has_many :users, through: :user_groups
-	has_many :messages
+	has_many :messages, as: :messageable
 	has_many :notifications, as: :notifiable
 	has_many :activities
 	has_many :drop_user_votes
