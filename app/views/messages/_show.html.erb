@@ -1,2 +1,2 @@
-	<%= link_to message.user_name, public_profile_user_path(message.user) %> <%= local_time_ago(message.created_at) %>: <br>
+	<%= link_to message.poster_name, public_profile_user_path(message.poster) %> <%= local_time_ago(message.created_at) %>: <br>
 	<%= message.content_html %>
