@@ -8,6 +8,8 @@ class Message < ActiveRecord::Base
 
 	validates :content, presence: true, length: { minimum: 3 }
 
+	after_create :send_notifications
+
 	scope :users_messages, -> { where(messageable_type: "User")  }
 	scope :poster_messages,  -> (poster){ where(poster: poster)  }
 	scope :messageable_messages, -> (poster){ where(messageable: poster)  }
@@ -24,9 +26,19 @@ class Message < ActiveRecord::Base
 		simple_format
 	end
 
-	# def send_notifications(type)
-	# 	messageable_users.each do |user|
-	# 		self.notifications.create(user: user, poster: self.user, notification_type: type) unless user == self.user
-	# 	end
-	# end
+	def send_notifications
+		case messageable_type
+		when 'Group'
+			messageable_users.each do |user|
+				 create_notification(user) unless user == self.poster
+			end
+		when 'User'
+			create_notification(messageable)
+		end
+	end
+
+	private
+	def create_notification(user)
+	  self.notifications.create(user: user, poster: self.poster, notification_type: "#{messageable_type}Message")
+	end
 end
