@@ -1,7 +1,7 @@
-$('#new_activity').hide().after('<%= j render("new") %>')
-$('#datetimepicker').datetimepicker({
-	format: 'YYYY-MM-DD hh:mm A',
-	minDate: new Date()
-});
+$('#new-activity').html("<%= j render partial: "new" %>")
 
-mapLocation('<%= @group.latitude %>', '<%= @group.longitude %>')
+$('#activityModal').modal('show')
+
+google.maps.event.addListener(map, 'idle', function () {
+	resize('<%= @group.latitude %>', '<%= @group.longitude %>')
+})
