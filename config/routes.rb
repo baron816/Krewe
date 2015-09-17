@@ -8,7 +8,6 @@ Rails.application.routes.draw do
 
   resources :groups, only: [:show] do
     delete 'drop_user', on: :member
-  	resources :messages, only: [:create]
     resources :drop_user_votes, only: [:create, :destroy]
     resources :expand_group_votes, only: [:create, :destroy]
     resources :activities, except: [:index, :destroy] do
@@ -24,7 +23,7 @@ Rails.application.routes.draw do
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
 
-  resources :personal_messages, only: [:create]
+  resources :messages, only: [:create]
   resources :password_resets, except: [:get, :destroy]
   resources :newsletters, only: [:new, :create]
 
