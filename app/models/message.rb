@@ -1,16 +1,19 @@
 class Message < ActiveRecord::Base
-	belongs_to :user
-	belongs_to :group
+	belongs_to :poster, class_name: "User"
+	belongs_to :messageable, polymorphic: true
 	has_many :notifications, as: :notifiable
 
-	delegate :name, to: :user, prefix: true
-	delegate :name, to: :group, prefix: true
-	delegate :users, to: :group, prefix: true
+	delegate :name, to: :poster, prefix: true
+	delegate :users, to: :messageable, prefix: true
 
 	validates :content, presence: true, length: { minimum: 3 }
 
-	after_create do
-		send_notifications
+	scope :users_messages, -> { where(messageable_type: "User")  }
+	scope :poster_messages,  -> (poster){ where(poster: poster)  }
+	scope :messageable_messages, -> (poster){ where(messageable: poster)  }
+
+	def self.messages_from_poster(poster)
+	  users_messages.poster_messages(poster).messageable_messages(poster)
 	end
 
 	auto_html_for :content do
@@ -21,9 +24,9 @@ class Message < ActiveRecord::Base
 		simple_format
 	end
 
-	def send_notifications
-		group_users.each do |user|
-			self.notifications.create(user: user, poster: self.user, notification_type: self.class.name) unless user == self.user
-		end
-	end
+	# def send_notifications(type)
+	# 	messageable_users.each do |user|
+	# 		self.notifications.create(user: user, poster: self.user, notification_type: type) unless user == self.user
+	# 	end
+	# end
 end
