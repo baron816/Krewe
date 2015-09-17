@@ -58,7 +58,7 @@ class Notification < ActiveRecord::Base
 	end
 
 	def self.unviewed_message_notifications_from_group(group)
-		unviewed_notifications.includes(:message).where("messages.messageable_id" => group)
+		unviewed_notifications.includes(:message).where("messages.messageable_id" => group.id)
 	end
 
 	def self.dismiss_group_notifications_from_group(group)
