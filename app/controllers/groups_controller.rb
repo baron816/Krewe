@@ -1,7 +1,7 @@
 class GroupsController < ApplicationController
 	def show
 		group = Group.friendly.find(params[:id])
-		@group_show = GroupShow.new(group)
+		@group_show = GroupShow.new(group, current_user)
 
 		redirect_to user_path(current_user) unless @group_show.includes_user?(current_user)
 		user_notifications.dismiss_group_notifications_from_group(group)

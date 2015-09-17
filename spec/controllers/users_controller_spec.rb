@@ -24,7 +24,7 @@ describe UsersController do
   describe "GET #public_profile" do
     before do
       get :public_profile, id: @user2.id
-      @message = PersonalMessage.create(sender: @user, receiver: @user2, content: "The message content")
+      @message = Message.create(poster: @user, messageable: @user2, content: "The message content")
     end
 
     it "renders public_profile template" do

@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
 	has_secure_password
 	has_many :user_groups
 	has_many :groups, through: :user_groups
-	has_many :messages
+	has_many :messages, as: :messageable
 	has_many :notifications
 	has_many :friends, through: :groups, source: :users
 	has_many :personal_messages

@@ -73,5 +73,5 @@
 		<% end %>
 	</div>
 
-	<%= render "messages/new" %>
+	<%= render partial: "messages/new", locals: { message: @group_show.new_message} %>
 </div>
