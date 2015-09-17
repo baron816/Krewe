@@ -5,9 +5,6 @@ class Notification < ActiveRecord::Base
 	belongs_to :poster, class_name: 'User'
 
 	delegate :name, to: :poster, prefix: true
-	delegate :name, to: :group, prefix: true
-	delegate :name, to: :notifiable, prefix: true
-	delegate :group, to: :notifiable, prefix: true
 
 	default_scope -> { includes(:poster) }
 
@@ -16,6 +13,9 @@ class Notification < ActiveRecord::Base
 	scope :poster_notifications, ->(poster) { where(poster_id: poster)}
 	scope :notifiable_notifications, ->(id) { where(notifiable_id: id)}
 
+	def group_name
+	  notifiable.messageable.name
+	end
 
 	def dismiss
 		self.viewed = true if viewed == false
