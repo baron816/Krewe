@@ -9,12 +9,12 @@
 	<div class="well messages">
 		<% if @user.any_messages? %>
 			<% @user.personal_messages.each do |message| %>
-				<%= render partial: 'personal_messages/show', locals: {message: message} %>
+				<%= render partial: 'messages/show', locals: {message: message} %>
 			<% end %>
 		<% else %>
 			<h3 id="intro">No messages yet. Why don't you say hi?</h3>
 		<% end %>
 	</div>
 
-	<%= render 'personal_messages/new' %>
+	<%= render partial: 'messages/new', locals: {message: @user.new_message} %>
 <% end %>
