@@ -33,7 +33,7 @@ class Notification < ActiveRecord::Base
 	#personal
 
 	def self.unviewed_personal_notifications_from_user(user)
-		unviewed_category_notifications("PersonalMessage").poster_notifications(user)
+		unviewed_category_notifications("UserMessage").poster_notifications(user)
 	end
 
 	def self.unviewed_personal_notifications_from_user_count(user)
@@ -49,7 +49,7 @@ class Notification < ActiveRecord::Base
 	#group
 
 	def self.unviewed_group_notifications_from_group(group)
-		unviewed_category_notifications("Group").notifiable_notifications(group)
+		unviewed_category_notifications("Join").notifiable_notifications(group.id)
 	end
 
 	def self.unviewed_group_notification_count(group)
@@ -58,7 +58,7 @@ class Notification < ActiveRecord::Base
 	end
 
 	def self.unviewed_message_notifications_from_group(group)
-		unviewed_notifications.includes(:message).where("messages.group_id" => group)
+		unviewed_notifications.includes(:message).where("messages.messageable_id" => group)
 	end
 
 	def self.dismiss_group_notifications_from_group(group)
