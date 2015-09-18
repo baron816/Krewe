@@ -33,6 +33,7 @@
 			<% @user.future_activities.each do |activity| %>
 				<li class="list-group-item">
 					<%= link_to activity.plan, group_activity_path(activity.group, activity) %> with <%= activity.group_name %> <%= local_time_ago(activity.appointment) %>
+					<span class='badge'><%= user_notifications.unviewed_activity_notifications_count(activity) %></span>
 				</li>
 			<% end %>
 		</ul>
