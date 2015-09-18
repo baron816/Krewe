@@ -1,4 +1,4 @@
-<div class="col-md-6 col-md-offset-3">
+<div class="col-md-12">
   <h1>Edit Activity</h1>
   <% if flash[:errors] %>
     <% flash[:errors].each do |msg| %>
@@ -8,9 +8,5 @@
     <% end %>
   <% end %>
 
-  <%= render 'activities/new' %>
+  <%= render 'activities/form' %>
 </div>
-
-<%= javascript_tag do %>
-  mapLocation('<%= current_user.latitude %>', '<%= current_user.longitude %>')
-<% end %>
