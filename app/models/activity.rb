@@ -4,6 +4,7 @@ class Activity < ActiveRecord::Base
 	has_many :user_activities
 	has_many :users, through: :user_activities
 	has_many :notifications, as: :notifiable
+	has_many :messages, as: :messageable
 
 	reverse_geocoded_by :latitude, :longitude
 
