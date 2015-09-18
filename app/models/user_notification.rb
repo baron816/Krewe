@@ -36,4 +36,8 @@ class UserNotification
   def dismiss_activity_notification(activity)
     notifications.dismiss_activity_notification(activity)
   end
+
+  def unviewed_activity_notifications_count(activity)
+    notifications.unviewed_activity_notifications_count(activity)
+  end
 end
