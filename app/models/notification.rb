@@ -68,12 +68,25 @@ class Notification < ActiveRecord::Base
 
 	#activity
 
+	def self.unviewed_activity_message_notifications(activity)
+	  unviewed_notifications.includes(:message).where("messages.messageable_id" => activity.id)
+	end
+
+	def self.unviewed_activity_update_notifications_from_activity(activity)
+	  unviewed_category_notifications("ActivityUpdate").notifiable_notifications(activity)
+	end
+
+	def self.unviewed_activity_notifications_count(activity)
+	  count = unviewed_activity_message_notifications(activity).count + unviewed_activity_update_notifications_from_activity(activity).count
+		count if count > 0
+	end
+
 	def self.unviewed_activity_notifications(activity)
 		unviewed_notifications.notifiable_notifications(activity)
 	end
 
 	def self.dismiss_activity_notification(activity)
-		activity_note = unviewed_activity_notifications(activity).take
-		activity_note.dismiss if activity_note
+		activity_notes = unviewed_activity_notifications(activity) + unviewed_activity_update_notifications_from_activity(activity) + unviewed_activity_message_notifications(activity)
+		activity_notes.each(&:dismiss) if activity_notes.any?
 	end
 end
