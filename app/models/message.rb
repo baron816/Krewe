@@ -28,7 +28,7 @@ class Message < ActiveRecord::Base
 
 	def send_notifications
 		case messageable_type
-		when 'Group'
+		when 'Group', 'Activity'
 			messageable_users.each do |user|
 				 create_notification(user) unless user == self.poster
 			end
