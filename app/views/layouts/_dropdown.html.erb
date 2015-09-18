@@ -17,8 +17,12 @@
 			<li><%= link_to "#{note.poster_name} proposed an activity", group_activity_path(note.notifiable.group, note.notifiable) %></li>
 		<% end %>
 
+		<% user_notifications.unviewed_category_notifications("ActivityMessage").each do |note| %>
+			<li><%= link_to "#{note.poster_name} wrote in #{note.notifiable.messageable.plan}", group_activity_path(note.notifiable.messageable.group, note.notifiable.messageable) %></li>
+		<% end %>
+
 		<% user_notifications.unviewed_category_notifications("ActivityUpdate").each do |note| %>
-		  <li><%= link_to "#{note.poster_name} made changes to #{note.notifiable.plan}" %></li>
+		  <li><%= link_to "#{note.poster_name} made changes to #{note.notifiable.plan}", group_activity_path(note.notifiable.group, note.notifiable) %></li>
 		<% end %>
 	</ul>
 <% end %>
