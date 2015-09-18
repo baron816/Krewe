@@ -1,5 +1,5 @@
 class ActivitiesController < ApplicationController
-	before_action :set_activity, only: [:edit, :update, :add_user, :remove_user]
+	before_action :set_activity, only: [:edit, :update, :add_user, :remove_user, :show]
 	before_action :set_group
 	before_action :user_logged?, only: [:create, :update, :edit, :new]
 
@@ -42,9 +42,10 @@ class ActivitiesController < ApplicationController
 	end
 
 	def show
-		@activity = Activity.includes(:group).find(params[:id])
+		@activity = ActivityShow.new(@activity, current_user)
+
 		redirect_to root_path unless @activity.group_includes_user?(current_user)
-		user_notifications.dismiss_activity_notification(@activity)
+		user_notifications.dismiss_activity_notification(@activity.activity)
 	end
 
 	def new
