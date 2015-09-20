@@ -6,7 +6,7 @@ class Message < ActiveRecord::Base
 	delegate :name, to: :poster, prefix: true
 	delegate :users, to: :messageable, prefix: true
 
-	validates :content, presence: true, length: { minimum: 3 }
+	validates :content, presence: true, length: { minimum: 2 }
 
 	after_create :send_notifications
 
