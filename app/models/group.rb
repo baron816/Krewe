@@ -84,7 +84,7 @@ class Group < ActiveRecord::Base
 
 	def user_names_hash
 		users.map do |user|
-			Hash[:slug, user.slug, :first_name, user.first_name, :full_name, user.name]
+			Hash[:name, user.first_name, :slug, user.slug, :full_name, user.name]
 		end
 	end
 
