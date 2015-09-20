@@ -1,7 +1,18 @@
 <%= form_for(message, remote: true) do |f| %>
-	<%= f.text_area :content, class: 'form-control message-box', placeholder: 'Send a message...', required: true %> <br>
+	<div class="well new-message", contenteditable="true"></div>
+	<%= f.hidden_field :content, required: true %>
 	<%= f.hidden_field :messageable_id, value: message.messageable_id %>
 	<%= f.hidden_field :messageable_type, value: message.messageable_type %>
 	<%= f.hidden_field :poster_id, value: current_user.id %>
 	<%= f.submit "Submit", class: 'btn btn-primary', id: 'new-message-submit' %>
+<% end %>
+
+<%= javascript_tag do %>
+  $('.new-message').on('keyup', function(){
+		$('#message_content').val($('.new-message').html())
+	})
+
+	$('#new-message-submit').click(function(){
+		$('.new-message').empty()
+	})
 <% end %>
