@@ -19,9 +19,8 @@ class Message < ActiveRecord::Base
 	end
 
 	auto_html_for :content do
-		html_escape
 		image
-		youtube(width: 400, height: 250)
+		youtube
 		link target: "_blank", rel: "nofollow"
 		simple_format
 	end
