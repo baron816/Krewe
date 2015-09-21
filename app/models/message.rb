@@ -48,6 +48,7 @@ class Message < ActiveRecord::Base
 			end
 		when 'User'
 			create_notification(messageable)
+			UserMailer.user_message_alert(self).deliver_now
 		end
 	end
 
