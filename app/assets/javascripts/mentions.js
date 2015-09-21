@@ -4,14 +4,7 @@ function mentioning(dataHash) {
     at: "@",
     displayTpl: "<li>${name} <small>${full_name}</small></li>",
     insertTpl: '<a href="/users/${slug}/public_profile" data-name="${slug}">@${name}</a>',
-    data: data,
-    callbacks: {
-      beforeInsert: function (value, item) {
-        var slug = item.data().itemData.slug
-        $('#new_message').append('<input type="hidden" name=slug_names[] value=' + slug + '>')
-        return value;
-      }
-    }
+    data: data
   }
 
   $('.new-message').atwho(at_config);
