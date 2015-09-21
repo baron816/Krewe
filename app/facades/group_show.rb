@@ -7,6 +7,10 @@ class GroupShow
     @user = user
   end
 
+  def names_data
+    group.user_names_hash.to_json.html_safe
+  end
+
   def user_expand_group_votes(user)
     group.expand_group_votes.user_votes(user)
   end

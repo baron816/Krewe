@@ -82,6 +82,11 @@ class Group < ActiveRecord::Base
 		end
 	end
 
+	def user_names_hash
+		users.map do |user|
+			Hash[:name, user.first_name, :slug, user.slug, :full_name, user.name]
+		end
+	end
 
 	private
 	def slug_candidates

@@ -10,7 +10,7 @@
 		<% end %>
 
 		<% user_notifications.unviewed_category_notifications("Join").each do |note| %>
-			<li><%= link_to "#{note.poster_name} joined #{note.notifiable_name}", group_path(note.notifiable) %></li>
+			<li><%= link_to "#{note.poster_name} joined #{note.notifiable.name}", group_path(note.notifiable) %></li>
 		<% end %>
 
 		<% user_notifications.unviewed_category_notifications("Activity").each do |note| %>

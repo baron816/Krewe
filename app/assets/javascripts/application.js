@@ -27,3 +27,4 @@
 //= require sweet-alert-confirm
 //= require select2
 //= require skrollr
+//= require jquery.atwho

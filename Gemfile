@@ -58,3 +58,5 @@ gem 'rails_12factor', group: :production
 gem 'rest-client'
 
 gem 'friendly_id'
+
+gem 'jquery-atwho-rails'

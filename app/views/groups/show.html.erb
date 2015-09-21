@@ -77,3 +77,7 @@
 
 	<%= render partial: "messages/new", locals: { message: @group_show.new_message} %>
 </div>
+
+<%= javascript_tag do %>
+	mentioning(<%= @group_show.names_data %>)
+<% end %>
