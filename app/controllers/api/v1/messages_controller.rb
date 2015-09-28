@@ -9,7 +9,7 @@ class Api::V1::MessagesController < ApplicationController
     if message.save
       render json: message, status: 201
     else
-      render json: { errors: message.errors }, response: 422
+      render json: { errors: message.errors }, status: 422
     end
   end
 
