@@ -9,7 +9,7 @@ RSpec.describe Api::V1::GroupsController, type: :controller do
 
   describe "GET #show" do
     before do
-      get :show, id: @group
+      get :show, id: @group.id
     end
 
     it "is successful" do
@@ -23,7 +23,7 @@ RSpec.describe Api::V1::GroupsController, type: :controller do
 
   describe "DELETE #drop_user" do
     before do
-      delete :drop_user, id: @group
+      delete :drop_user, id: @group.id
     end
 
     it "is successful" do
