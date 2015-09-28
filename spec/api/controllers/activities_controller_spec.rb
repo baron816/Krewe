@@ -13,7 +13,7 @@ RSpec.describe Api::V1::ActivitiesController, type: :controller do
         @activity_attributes = attributes_for(:activity_future)
         @activity_attributes[:group_id] = @group.id
         @activity_attributes[:proposer_id] = @user.id
-        post :create, { activity: @activity_attributes }
+        post :create, { activity: @activity_attributes, group_id: @group }
       end
 
       it "is successful" do
@@ -29,7 +29,7 @@ RSpec.describe Api::V1::ActivitiesController, type: :controller do
       before do
         @activity_attributes = attributes_for(:activity_future)
         @activity_attributes[:location] = nil
-        post :create, { activity: @activity_attributes}
+        post :create, { activity: @activity_attributes, group_id: @group}
       end
 
       it "is not succsssful" do
@@ -54,7 +54,7 @@ RSpec.describe Api::V1::ActivitiesController, type: :controller do
 
   describe "GET #show" do
     before do
-      get :show, id: @activity
+      get :show, id: @activity, group_id: @group
     end
 
     it "is successful" do
@@ -69,7 +69,7 @@ RSpec.describe Api::V1::ActivitiesController, type: :controller do
   describe "PUT/PATCH #update" do
     context "when succsssfully updated" do
       before do
-        patch :update, { id: @activity, activity: { location: "Empire State Building"} }
+        patch :update, { id: @activity, group_id: @group, activity: { location: "Empire State Building"} }
       end
 
       it "is successful" do
@@ -83,7 +83,7 @@ RSpec.describe Api::V1::ActivitiesController, type: :controller do
 
     context "when update is unsuccessful" do
       before do
-        patch :update, { id: @activity, activity: { location: nil } }
+        patch :update, { id: @activity, group_id: @group, activity: { location: nil } }
       end
 
       it "is not successful" do
@@ -102,7 +102,7 @@ RSpec.describe Api::V1::ActivitiesController, type: :controller do
 
   describe "POST #add_user" do
     before do
-      post :add_user, id: @activity
+      post :add_user, id: @activity, group_id: @group
     end
 
     it "is successful" do
@@ -116,7 +116,7 @@ RSpec.describe Api::V1::ActivitiesController, type: :controller do
 
   describe "DELETE #remove_user" do
     before do
-      delete :remove_user, { id: @activity }
+      delete :remove_user, { id: @activity, group_id: @group }
     end
 
     it "is successful" do

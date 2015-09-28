@@ -3,13 +3,14 @@ class Api::V1::ActivitiesController < ApplicationController
 
   before_action :set_activity, except: :create
   before_action :authenticate_with_token!, only: [:create, :update]
+  before_action :set_group, only: :create
 
   def show
     render json: @activity
   end
 
   def create
-    activity = Activity.new(activity_params)
+    activity = @group.activities.new(activity_params)
 
     if activity.save
       render json: activity, status: 201
@@ -41,6 +42,10 @@ class Api::V1::ActivitiesController < ApplicationController
   private
   def set_activity
     @activity = Activity.find(params[:id])
+  end
+
+  def set_group
+    @group = Group.friendly.find(params[:group_id])
   end
 
   def activity_params
