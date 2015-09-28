@@ -15,6 +15,6 @@ class Api::V1::GroupsController < ApplicationController
 
   private
   def set_group
-    @group = Group.find(params[:id])
+    @group = Group.friendly.find(params[:id])
   end
 end
