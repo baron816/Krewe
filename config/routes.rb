@@ -50,6 +50,7 @@ Rails.application.routes.draw do
         end
       end
 
+      resources :messages, only: :create
       resources :sessions, only: [:create, :destroy]
     end
   end
