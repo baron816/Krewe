@@ -24,6 +24,25 @@ RSpec.describe Api::V1::MessagesController, type: :controller do
           expect(json_response[:content]).to eq('hello there')
         end
       end
+
+      context "it fails" do
+        before do
+          @bad_message = {poster_id: @user.id, messageable_id: @user2.id, content: "hello there"}
+          post :create, { message: @bad_message}
+        end
+
+        it "is not successful" do
+          expect(response).to have_http_status(422)
+        end
+
+        it "return errors json" do
+          expect(json_response).to have_key(:errors)
+        end
+
+        it "explains the error" do
+          expect(json_response[:errors][:messageable_type]).to eq(["can't be blank"])
+        end
+      end
     end
   end
 end
