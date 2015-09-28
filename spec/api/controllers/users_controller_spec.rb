@@ -56,8 +56,8 @@ RSpec.describe Api::V1::UsersController, type: :controller do
       @user = create(:user_home)
       api_authorization_header(@user.auth_token)
       @user2 = create(:user_wtc)
-      @message = PersonalMessage.create(sender: @user, receiver: @user2, content: "hello there")
-      get :public_profile, id: @user2, format: :json
+      @message = Message.create(poster: @user, messageable: @user2, content: "hello there")
+      get :public_profile, id: @user2.id, format: :json
     end
 
     it "renders the messages" do
@@ -76,7 +76,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
 
     context "when it's updated" do
       before do
-        patch :update, {id: @user, user: { category: "Other"} }
+        patch :update, {id: @user.id, user: { category: "Other"} }
       end
 
       it "renders the json representation for the updated user" do
@@ -90,7 +90,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
 
     context "when it fails" do
       before do
-        patch :update, { id: @user, user: { email: 've'} }
+        patch :update, { id: @user.id, user: { email: 've'} }
       end
 
       it "renders an erros json" do
@@ -110,8 +110,9 @@ RSpec.describe Api::V1::UsersController, type: :controller do
   describe "POST #add_group" do
     before do
       @user = create(:user_home)
+      @user.groups.delete_all
       api_authorization_header(@user.auth_token)
-      post :add_group, id: @user, format: :json
+      post :add_group, id: @user.id, format: :json
     end
 
     it "responds with a new group" do
