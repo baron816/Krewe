@@ -45,10 +45,6 @@ describe ActivitiesController do
     it "renders the show template" do
     	expect(response).to render_template(:show)
     end
-
-    it "gets the correct activity" do
-    	expect(assigns[:activity]).to eql(@activity)
-    end
   end
 
   describe "DELETE #remove_user" do
