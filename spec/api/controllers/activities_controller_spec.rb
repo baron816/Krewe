@@ -10,7 +10,7 @@ RSpec.describe Api::V1::ActivitiesController, type: :controller do
   describe "POST #create" do
     context "when successful" do
       before do
-        @activity_attributes = attributes_for(:activity)
+        @activity_attributes = attributes_for(:activity_future)
         @activity_attributes[:group_id] = @group.id
         @activity_attributes[:proposer_id] = @user.id
         post :create, { activity: @activity_attributes }
@@ -21,13 +21,13 @@ RSpec.describe Api::V1::ActivitiesController, type: :controller do
       end
 
       it "returns the created activity" do
-        expect(json_response[:location]).to eq("South Street Seaport")
+        expect(json_response[:location]).to eq(@activity_attributes[:location])
       end
     end
 
     context "when not successful" do
       before do
-        @activity_attributes = attributes_for(:activity)
+        @activity_attributes = attributes_for(:activity_future)
         @activity_attributes[:location] = nil
         post :create, { activity: @activity_attributes}
       end
@@ -47,7 +47,7 @@ RSpec.describe Api::V1::ActivitiesController, type: :controller do
   end
 
   before do
-    @activity = build(:activity)
+    @activity = build(:activity_future)
     @activity.group = @group
     @activity.save
   end
@@ -62,7 +62,7 @@ RSpec.describe Api::V1::ActivitiesController, type: :controller do
     end
 
     it "returns the json representation of the activity" do
-      expect(json_response[:location]).to eq("South Street Seaport")
+      expect(json_response[:location]).to eq(@activity.location)
     end
   end
 
@@ -110,7 +110,7 @@ RSpec.describe Api::V1::ActivitiesController, type: :controller do
     end
 
     it "returns the activity" do
-      expect(json_response[:location]).to eq("South Street Seaport")
+      expect(json_response[:location]).to eq(@activity.location)
     end
   end
 
