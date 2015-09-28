@@ -25,6 +25,12 @@ class Message < ActiveRecord::Base
 		simple_format
 	end
 
+	def self.personal_messages(first_user, second_user)
+		t = Message.arel_table
+
+		Message.where(t[:poster_id].in([first_user.id, second_user.id]).and(t[:messageable_id].in([first_user.id, second_user.id])))
+	end
+
 	private
 	def mentioned_user_slugs
 	  content.scan(/\b(?<=data-name=\")[^"]+(?=\")/)

@@ -11,9 +11,7 @@ class UserPublicProfile
   end
 
   def personal_messages
-    t = Message.arel_table
-
-    @messages ||= Message.where(t[:poster_id].in([user.id, current_user.id]).and(t[:messageable_id].in([user.id, current_user.id])))
+    @messages ||= Message.personal_messages(user, current_user)
   end
 
   def any_messages?
