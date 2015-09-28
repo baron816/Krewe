@@ -18,7 +18,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def public_profile
-    render json: { messages: PersonalMessage.users_messages(first_user: @user, second_user: current_user) }
+    render json: { messages: Message.personal_messages(@user, current_user) }
   end
 
   def update
