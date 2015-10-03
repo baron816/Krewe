@@ -12,34 +12,35 @@
 		<% end %>
 	<% end %>
 
-</div>
-
-
-<div class="col-md-6">
-	<h2>Activities</h2>
-	<ul class="list-group">
-		<% @group_show.activities.each do |activity| %>
-		<li class="list-group-item clearfix">
-			<%= link_to activity.plan, group_activity_path(@group_show.group, activity) %> <%= local_time(activity.appointment) %>
-			<% unless activity.user_going?(current_user) %>
-				<span class="pull-right"><%= link_to "Go", add_user_group_activity_path(@group_show.group, activity), method: :post, class: 'btn btn-success' %></span>
-			<% end %>
-		</li>
-		<% end %>
-	</ul>
-
-	<% if flash[:errors] %>
-		<% flash[:errors].each do |msg| %>
-		<div class="alert alert-danger">
-			<%= msg %>
-		</div>
-		<% end %>
-	<% end %>
-
 	<%= link_to "Propose Activity", new_group_activity_path(@group_show.group), id: 'new_activity', class: 'btn btn-primary', remote: true %>
-
-	<div id='new-activity'></div>
 </div>
+
+<% if @group_show.activities_any? %>
+	<div class="col-md-6">
+		<h2>Activities</h2>
+		<ul class="list-group">
+			<% @group_show.activities.each do |activity| %>
+			<li class="list-group-item clearfix">
+				<%= link_to activity.plan, group_activity_path(@group_show.group, activity) %> <%= local_time(activity.appointment) %>
+				<% unless activity.user_going?(current_user) %>
+					<span class="pull-right"><%= link_to "Go", add_user_group_activity_path(@group_show.group, activity), method: :post, class: 'btn btn-success' %></span>
+				<% end %>
+			</li>
+			<% end %>
+		</ul>
+
+		<% if flash[:errors] %>
+			<% flash[:errors].each do |msg| %>
+			<div class="alert alert-danger">
+				<%= msg %>
+			</div>
+			<% end %>
+		<% end %>
+
+	</div>
+<% end %>
+
+<div id='new-activity'></div>
 
 <div class="col-md-6">
 	<h2>Members</h2>
@@ -66,7 +67,7 @@
 <div class="col-md-12">
 	<h2>Messages</h2>
 	<div class="well messages">
-		<% if @group_show.any_messages? %>
+		<% if @group_show.messages_any? %>
 			<% @group_show.messages.each do |message| %>
 				<%= render partial: "messages/show", locals: { message: message } %>
 			<% end %>
