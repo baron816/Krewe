@@ -29,4 +29,29 @@ Rails.application.routes.draw do
 
   root 'home#index'
   get "*any", via: :all, to: "errors#not_found"
+
+  namespace :api do
+    namespace :v1 do
+      resources :users, only: [:show, :update, :create] do
+        member do
+          get 'public_profile'
+          post 'add_group'
+        end
+      end
+
+      resources :groups, only: :show do
+        delete 'drop_user', on: :member
+        resources :activities, only: [:create, :update, :show] do
+          member do
+            post 'add_user'
+            delete 'remove_user'
+          end
+        end
+      end
+
+
+      resources :messages, only: :create
+      resources :sessions, only: [:create, :destroy]
+    end
+  end
 end

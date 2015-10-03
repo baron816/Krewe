@@ -7,6 +7,7 @@ class Message < ActiveRecord::Base
 	delegate :users, to: :messageable, prefix: true
 
 	validates :content, presence: true, length: { minimum: 2 }
+	validates_presence_of :messageable, :messageable_type, :poster
 
 	after_create :send_notifications, :send_mention_email_alerts
 
@@ -23,6 +24,12 @@ class Message < ActiveRecord::Base
 		youtube
 		link target: "_blank", rel: "nofollow"
 		simple_format
+	end
+
+	def self.personal_messages(first_user, second_user)
+		t = Message.arel_table
+
+		Message.where(t[:poster_id].in([first_user.id, second_user.id]).and(t[:messageable_id].in([first_user.id, second_user.id])))
 	end
 
 	private
@@ -48,6 +55,7 @@ class Message < ActiveRecord::Base
 			end
 		when 'User'
 			create_notification(messageable)
+			UserMailer.user_message_alert(self).deliver_now
 		end
 	end
 
