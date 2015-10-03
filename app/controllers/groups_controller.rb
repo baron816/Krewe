@@ -4,7 +4,7 @@ class GroupsController < ApplicationController
 		@group_show = GroupShow.new(group, current_user)
 
 		redirect_to user_path(current_user) unless @group_show.includes_user?(current_user)
-		user_notifications.dismiss_group_notifications_from_group(group)
+		current_user.dismiss_group_notifications_from_group(group)
 	end
 
 	def drop_user

@@ -28,6 +28,9 @@ class User < ActiveRecord::Base
 	after_validation :geocode
 	reverse_geocoded_by :latitude, :longitude
 
+	delegate :unviewed_notifications, :unviewed_notifications_count, :dismiss_personal_notifications_from_user, :unviewed_personal_notifications_from_user_count, :unviewed_group_notification_count, :dismiss_group_notifications_from_group, :unviewed_category_notifications, :dismiss_activity_notification, :unviewed_activity_notifications_count, to: :notifications
+	
+
 	def find_or_create_group
 		group = Group.search(category: category, friend_ids: friends.ids, latitude: latitude, longitude: longitude, group_ids: dropped_group_ids)
 

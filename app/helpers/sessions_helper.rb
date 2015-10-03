@@ -16,8 +16,4 @@ module SessionsHelper
 	def current_user
 		@current_user ||= User.find_by(auth_token: cookies[:auth_token]) if cookies[:auth_token]
 	end
-
-	def user_notifications
-	  @user_notifications ||= UserNotification.new(current_user)
-	end
 end

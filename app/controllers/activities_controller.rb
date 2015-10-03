@@ -45,7 +45,7 @@ class ActivitiesController < ApplicationController
 		@activity = ActivityShow.new(@activity, current_user)
 
 		redirect_to root_path unless @activity.group_includes_user?(current_user)
-		user_notifications.dismiss_activity_notification(@activity.activity)
+		current_user.dismiss_activity_notification(@activity.activity)
 	end
 
 	def new
