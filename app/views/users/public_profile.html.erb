@@ -7,7 +7,7 @@
 
 <% unless @user.own_profile? %>
 	<div class="well messages">
-		<% if @user.any_messages? %>
+		<% if @user.personal_messages_any? %>
 			<% @user.personal_messages.each do |message| %>
 				<%= render partial: 'messages/show', locals: {message: message} %>
 			<% end %>
