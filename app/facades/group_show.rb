@@ -1,6 +1,8 @@
 class GroupShow
   attr_reader :group, :user
   delegate :ripe_for_expansion?, :primary_group?, :users_count, :expand_group_votes_count, :includes_user?, to: :group
+  delegate :any?, to: :activities, prefix: true
+  delegate :any?, to: :messages, prefix: true
 
   def initialize(group, user)
     @group = group
@@ -29,10 +31,6 @@ class GroupShow
 
   def messages
     @messages ||= group.messages.includes(:poster)
-  end
-
-  def any_messages?
-    messages.any?
   end
 
   def new_message
