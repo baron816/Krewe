@@ -5,6 +5,7 @@ class UserPublicProfile
   end
 
   delegate :name, :email, :category, :id, to: :user, prefix: true
+  delegate :any?, to: :personal_messages, prefix: true
 
   def user_location
     user.address.split(',')[1..-1].join(',')
@@ -12,10 +13,6 @@ class UserPublicProfile
 
   def personal_messages
     @messages ||= Message.personal_messages(user, current_user)
-  end
-
-  def any_messages?
-    personal_messages.any?
   end
 
   def new_message
