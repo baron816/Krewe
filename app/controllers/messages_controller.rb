@@ -7,7 +7,7 @@ class MessagesController < ApplicationController
 		@message.save
 
 		respond_to do |format|
-			format.html { redirect_to(@message.group) }
+			format.html { redirect_to(current_user) }
 			format.js
 		end
 	end
