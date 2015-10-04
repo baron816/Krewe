@@ -1,6 +1,6 @@
 class GroupShow
   attr_reader :group, :user
-  delegate :ripe_for_expansion?, :primary_group?, :users_count, :expand_group_votes_count, :includes_user?, to: :group
+  delegate :ripe_for_expansion?, :primary_group?, :users_count, :expand_group_votes_size, :includes_user?, to: :group
   delegate :any?, to: :activities, prefix: true
   delegate :any?, to: :messages, prefix: true
 

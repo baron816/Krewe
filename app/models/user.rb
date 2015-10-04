@@ -29,7 +29,9 @@ class User < ActiveRecord::Base
 	reverse_geocoded_by :latitude, :longitude
 
 	delegate :unviewed_notifications, :unviewed_notifications_count, :dismiss_personal_notifications_from_user, :unviewed_personal_notifications_from_user_count, :unviewed_group_notification_count, :dismiss_group_notifications_from_group, :unviewed_category_notifications, :dismiss_activity_notification, :unviewed_activity_notifications_count, to: :notifications
-	
+
+	delegate :has_not_voted?, :group_drop_votes_count, to: :drop_user_votes
+	delegate :future_activities, to: :activities
 
 	def find_or_create_group
 		group = Group.search(category: category, friend_ids: friends.ids, latitude: latitude, longitude: longitude, group_ids: dropped_group_ids)
@@ -55,25 +57,13 @@ class User < ActiveRecord::Base
 		friends.where.not(id: self).uniq
 	end
 
-	def future_activities
-	  activities.future_activities.includes(:group)
-	end
-
 	def add_dropped_group(id)
 		dropped_group_ids << id
 		save
 	end
 
-	def group_drop_votes_count(group)
-		drop_user_votes.group_votes(group).count
-	end
-
 	def not_self(user)
 		self != user
-	end
-
-	def has_not_voted?(user)
-		drop_user_votes.has_not_voted?(user)
 	end
 
 	def can_vote?(user)

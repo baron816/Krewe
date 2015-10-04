@@ -14,11 +14,12 @@ class Activity < ActiveRecord::Base
 	validates_presence_of :location, :appointment, :group_id, :proposer_id
 	validate :is_a_time?
 
-	delegate :name, to: :group, prefix: true
+	delegate :name, :users, to: :group, prefix: true
 
-	scope :future_activities, -> { where('appointment > ?', Time.now).order(appointment: :asc) }
+	scope :future_activities, -> { where('appointment > ?', Time.now).order(appointment: :asc).includes(:group) }
 	scope :past_activities, -> { where('appointment < ?', Time.now) }
 	scope :attended_activities, -> { past_activities.where( well_attended: true ) }
+	scope :attended_activities_count, -> { attended_activities.size }
 
 	def user_going?(user)
 		users.include?(user)
@@ -31,7 +32,7 @@ class Activity < ActiveRecord::Base
 	end
 
 	def send_notifications(type = self.class.name)
-		group.users.each do |user|
+		group_users.each do |user|
 			self.notifications.create(user: user, poster: self.proposer, notification_type: type) unless user == proposer
 		end
 	end

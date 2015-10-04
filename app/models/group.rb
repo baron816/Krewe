@@ -12,6 +12,9 @@ class Group < ActiveRecord::Base
 
 	reverse_geocoded_by :latitude, :longitude
 
+	delegate :size, to: :expand_group_votes, prefix: true
+	delegate :attended_activities_count, to: :activities
+
 	scope :open_groups, -> { where(can_join: true) }
 	scope :category_groups, ->(category) { where(category: category) }
 	scope :excluded_users, ->(friend_ids) { where.not(id: user_friend_group_ids(friend_ids)) }
@@ -51,15 +54,11 @@ class Group < ActiveRecord::Base
 	end
 
 	def ripe_for_expansion?
-	  aged?(degree.month) && well_attended_activity_count >= 4 && can_join == false && has_expanded == false && ready_to_expand == false
+	  aged?(degree.month) && attended_activities_count >= 4 && can_join == false && has_expanded == false && ready_to_expand == false
 	end
 
-	def expand_group_votes_count
-    expand_group_votes.size
-  end
-
 	def voted_to_expand?
-		expand_group_votes_count == users_count
+		expand_group_votes_size == users_count
 	end
 
 	def users_count
@@ -110,10 +109,6 @@ class Group < ActiveRecord::Base
 
 	def self.user_friend_group_ids(friend_ids)
 		self.includes(:users).references(:users).where("users.id in (?)", friend_ids).ids.uniq
-	end
-
-	def well_attended_activity_count
-		activities.attended_activities.size
 	end
 
 	def aged?(period)

@@ -6,9 +6,9 @@
 
 	<% if @group_show.ripe_for_expansion? %>
 		<% unless @group_show.user_expand_group_votes(current_user) %>
-			<%= link_to "Expand Group #{@group_show.expand_group_votes_count}/#{@group_show.users_count}", group_expand_group_votes_path(@group_show.group), method: :post, class: 'btn btn-success', id: 'expand', remote: @group_show.not_almost_expandable? %>
+			<%= link_to "Expand Group #{@group_show.expand_group_votes_size}/#{@group_show.users_count}", group_expand_group_votes_path(@group_show.group), method: :post, class: 'btn btn-success', id: 'expand', remote: @group_show.not_almost_expandable? %>
 		<% else %>
-			<%= link_to "Don't Expand #{@group_show.expand_group_votes_count}/#{@group_show.users_count}", group_expand_group_vote_path(@group_show.group, @group_show.user_expand_group_votes(current_user)), method: :delete, class: 'btn btn-danger', remote: true, id: 'remain' %>
+			<%= link_to "Don't Expand #{@group_show.expand_group_votes_size}/#{@group_show.users_count}", group_expand_group_vote_path(@group_show.group, @group_show.user_expand_group_votes(current_user)), method: :delete, class: 'btn btn-danger', remote: true, id: 'remain' %>
 		<% end %>
 	<% end %>
 
