@@ -13,7 +13,7 @@ class Group < ActiveRecord::Base
 	reverse_geocoded_by :latitude, :longitude
 
 	delegate :size, to: :expand_group_votes, prefix: true
-	delegate :attended_activities_count, to: :activities
+	delegate :attended_activities_count, :future_activities, to: :activities
 
 	scope :open_groups, -> { where(can_join: true) }
 	scope :category_groups, ->(category) { where(category: category) }
@@ -24,10 +24,6 @@ class Group < ActiveRecord::Base
 
 	def self.search(params)
 		self.open_groups.category_groups(params[:category]).excluded_users(params[:friend_ids]).degree_groups(1).near([params[:latitude], params[:longitude]], 0.5).non_former_groups(params[:group_ids])[0]
-	end
-
-	def future_activities
-	  activities.future_activities
 	end
 
 	def check_space
@@ -75,8 +71,10 @@ class Group < ActiveRecord::Base
 
 	def join_group_notifications(new_user)
 		users.each do |user|
-			self.notifications.create(user: user, poster: new_user, notification_type: "Join") unless user == new_user
-			GroupMailer.join_group({user: user, group: self, poster: new_user}).deliver_now
+			unless user == new_user
+				self.notifications.create(user: user, poster: new_user, notification_type: "Join")
+				GroupMailer.join_group({user: user, group: self, poster: new_user}).deliver_now
+			end
 		end
 	end
 

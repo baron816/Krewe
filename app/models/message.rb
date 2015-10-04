@@ -37,12 +37,8 @@ class Message < ActiveRecord::Base
 	  content.scan(/\b(?<=data-name=\")[^"]+(?=\")/)
 	end
 
-	def mentioned_users
-	  User.where(slug: mentioned_user_slugs)
-	end
-
 	def send_mention_email_alerts
-	  mentioned_users.each do |user|
+	  User.users_by_slug(mentioned_user_slugs).each do |user|
 	    UserMailer.mention_alert(self, user).deliver_now
 	  end
 	end

@@ -33,6 +33,8 @@ class User < ActiveRecord::Base
 	delegate :has_not_voted?, :group_drop_votes_count, :voter_vote, to: :drop_user_votes
 	delegate :future_activities, to: :activities
 
+	scope :users_by_slug, -> (slugs) { where(slug: slugs)  }
+
 	def find_or_create_group
 		group = Group.search(category: category, friend_ids: friends.ids, latitude: latitude, longitude: longitude, group_ids: dropped_group_ids)
 
