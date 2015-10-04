@@ -34,8 +34,7 @@ describe "Notification" do
   	context "group message" do
 		before do
 		  Message.create(messageable: Group.first, poster: @user, content: Faker::Lorem.sentence(5, true, 8))
-			@user_notifications = @user.notifications
-			@user2_notifications = @user2.notifications
+			@user2 = @user2.notifications
 		end
 
 	  	it "new message creates notifications" do
@@ -43,25 +42,22 @@ describe "Notification" do
 	  	end
 
 	  	it "@user doesnt get notifications for its message" do
-	  		expect(@user_notifications.unviewed_category_notifications('GroupMessage').count).to eql(0)
+	  		expect(@user.unviewed_category_notifications('GroupMessage').count).to eql(0)
 	  	end
 
 	  	it "@user2 gets notification for @users message" do
-	  		expect(@user2_notifications .unviewed_category_notifications('GroupMessage').count).to eql(1)
+	  		expect(@user2.unviewed_category_notifications('GroupMessage').count).to eql(1)
 	  	end
 
 	  	it "@user2 can dismiss notification" do
-	  		@user2_notifications .dismiss_group_notifications_from_group(Group.first)
-	  		expect(@user2_notifications .unviewed_category_notifications('GroupMessage').count).to eql(0)
+	  		@user2.dismiss_group_notifications_from_group(Group.first)
+	  		expect(@user2.unviewed_category_notifications('GroupMessage').count).to eql(0)
 	  	end
   	end
 
   	context "personal message" do
   		before do
   			Message.create(messageable: User.second, poster: @user, content: Faker::Lorem.sentence(5, true, 8))
-  			@user_notifications = @user.notifications
-  			@user2_notifications = @user2.notifications
-  			@user3_notifications = @user3.notifications
   		end
 
 	  	it "new personal message creates notification" do
@@ -69,26 +65,26 @@ describe "Notification" do
 	  	end
 
 	  	it "@user doesn't receive notification from its message" do
-	  		expect(@user_notifications.unviewed_category_notifications('UserMessage').count).to eql(0)
+	  		expect(@user.unviewed_category_notifications('UserMessage').count).to eql(0)
 	  	end
 
 	  	it "@user3 doesn't receive notification from message not sent to it" do
-	  		expect(@user3_notifications.unviewed_category_notifications('UserMessage').count).to eql(0)
+	  		expect(@user3.unviewed_category_notifications('UserMessage').count).to eql(0)
 	  	end
 
 	  	it "@user2 does receive notification from message" do
-	  		expect(@user2_notifications.unviewed_category_notifications('UserMessage').count).to eql(1)
+	  		expect(@user2.unviewed_category_notifications('UserMessage').count).to eql(1)
 	  	end
 
 	  	describe "dismiss_notifications" do
 	  	  before do
 	  	    Message.create(messageable: User.second, poster: @user3, content: Faker::Lorem.sentence(5, true, 8))
-	  	  	@user2_notifications = @user2.notifications
+	  	  	@user2 = @user2.notifications
 	  	  end
 
 	  	  it "@user2 can dismiss @user's notification without dismissing @user3's" do
-	  	  	@user2_notifications.dismiss_personal_notifications_from_user(@user)
-	  	  	expect(@user2_notifications.unviewed_category_notifications('UserMessage').count).to eql(1)
+	  	  	@user2.dismiss_personal_notifications_from_user(@user)
+	  	  	expect(@user2.unviewed_category_notifications('UserMessage').count).to eql(1)
 	  	  end
 	  	end
   	end
@@ -96,25 +92,24 @@ describe "Notification" do
   	context "activity" do
   		before do
   		  @activity = Activity.create(group_id: @group.id, plan: "go somewhere", appointment: Time.now, proposer_id: @user.id, location: "World Trade Center")
-				@notifications = @user2.notifications
   		end
 
   		it "creates a activity notifications" do
-  			expect(@notifications.unviewed_category_notifications("Activity").count).to eql(1)
+  			expect(@user2.unviewed_category_notifications("Activity").count).to eql(1)
   		end
 
   		it "creates a notification for the second user" do
-  			expect(@notifications.unviewed_category_notifications("Activity").count).to eql(1)
+  			expect(@user2.unviewed_category_notifications("Activity").count).to eql(1)
   		end
 
   		describe "dismiss_activity_notification" do
   		  it "dismisses the users activity notification" do
-	  		  @notifications.dismiss_activity_notification(@activity)
-	  		  expect(@notifications.unviewed_category_notifications("Activity").count).to eql(0)
+	  		  @user2.dismiss_activity_notification(@activity)
+	  		  expect(@user2.unviewed_category_notifications("Activity").count).to eql(0)
   		  end
 
   		  it "does not dismiss second users notification" do
-  		  	expect(@notifications.unviewed_category_notifications("Activity").count).to eql(1)
+  		  	expect(@user2.unviewed_category_notifications("Activity").count).to eql(1)
   		  end
   		end
   	end
