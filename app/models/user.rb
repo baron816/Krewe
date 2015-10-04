@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
 
 	delegate :unviewed_notifications, :unviewed_notifications_count, :dismiss_personal_notifications_from_user, :unviewed_personal_notifications_from_user_count, :unviewed_group_notification_count, :dismiss_group_notifications_from_group, :unviewed_category_notifications, :dismiss_activity_notification, :unviewed_activity_notifications_count, to: :notifications
 
-	delegate :has_not_voted?, :group_drop_votes_count, to: :drop_user_votes
+	delegate :has_not_voted?, :group_drop_votes_count, :voter_vote, to: :drop_user_votes
 	delegate :future_activities, to: :activities
 
 	def find_or_create_group
@@ -67,12 +67,7 @@ class User < ActiveRecord::Base
 	end
 
 	def can_vote?(user)
-		not_self(user) && user.has_not_voted?(self)
-	end
-
-	def voter_vote(user)
-		votes = drop_user_votes(user).take
-		votes if votes
+		not_self(user) && !user.voter_vote(self)
 	end
 
 	def generate_token(column)
