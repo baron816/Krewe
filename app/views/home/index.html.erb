@@ -1,28 +1,30 @@
 <div data-0="background-image:linear-gradient(0deg, rgb(53,128,217), rgb(252,201,185);" data-2000="background-image:linear-gradient(360deg, rgb(252,201,185), rgb(53,128,217);" id="home"></div>
 
-<div class="jumbotron" data-0="opacity:1;" data-500="opacity:0;">
+<div class="jumbotron" data-0="opacity:1; top:30%;" data-500="opacity:0;">
 	<h1>Welcome to Krewe</h1>
 </div>
 
 
-<div class="jumbotron" id="info-tron" data-0="opacity:0; top:100%;" data-500="opacity:1; top:5%;" data-1000="opacity:0;">
+<div class="jumbotron" id="info-tron" data-0="opacity:0; top:100%;" data-500="opacity:1; top:30%;" data-1000="opacity:0;">
 	<h2>What is Krewe?</h2>
 	<p>Krewe will help you form lasting friendships and build a massive, interconnected network.</p>
 </div>
 
-<div class="jumbotron" id="info-tron" data-500="opacity:0; top:100%;" data-1000="opacity:1; top:5%;" data-1500="opacity:0">
+<div class="jumbotron" id="info-tron" data-500="opacity:0; top:100%;" data-1000="opacity:1; top:30%;" data-1500="opacity:0">
 	<h2>How does it work?</h2>
 	<p>Krewe will place you in a group of six people, each of whom live within a half mile of you. This means you will be easily able to get together frequently, making it easy to bond with them.</p>
 </div>
 
-<div class="jumbotron" id="info-tron" data-1000="opacity:0; top:100%;" data-1500="opacity:1; top:5%;">
+<div class="jumbotron" id="info-tron" data-1000="opacity:0; top:100%;" data-1500="opacity:1; top:30%;">
 	<h2>Then what?</h2>
 	<p>Once the group becomes close enough, we'll combine you with other local groups, helping you form even more connections. We also give you the tools to make it easy to see when everyone is available and to set up things to do together.</p>
 </div>
 
 <footer class='jumbotron' data-0="opacity:0;" data-500="opacity:1;">
-	<%= link_to "Log In", login_path, remote: true%><br>
-  <%= link_to "Sign Up", new_user_path %><br>
+	<% unless current_user %>
+		<%= link_to "Log In", login_path, remote: true%><br>
+	  <%= link_to "Sign Up", new_user_path %><br>
+	<% end %>
 	<%= link_to "Sign Up for Newsletter", new_newsletter_path %>
 </footer>
 
