@@ -68,12 +68,21 @@
 	<h2>Messages</h2>
 	<div class="well messages">
 		<% if @group_show.messages_any? %>
-			<% @group_show.messages.each do |message| %>
-				<%= render partial: "messages/show", locals: { message: message } %>
+		<button type="button" class="btn btn-primary more-messages">Load More</button>
+
+		<div class="individual-messages">
+			<% @group_show.messages.reverse_each do |message| %>
+				<%= render partial: "messages/message", locals: { message: message } %>
 			<% end %>
+
+		</div>
 		<% else %>
 			<h3 id="intro">No messages, yet. Say, something...</h3>
 		<% end %>
+	</div>
+
+	<div class="infinite-scrolling">
+		<%= will_paginate @group_show.messages %>
 	</div>
 
 	<%= render partial: "messages/new", locals: { message: @group_show.new_message} %>
