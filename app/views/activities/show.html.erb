@@ -28,7 +28,7 @@
 	<h3>Messages</h3>
 	<div class="messages well">
 		<% @activity.messages.each do |message| %>
-		  <%= render partial: 'messages/show', locals: {message: message} %>
+		  <%= render partial: 'messages/message', locals: {message: message} %>
 		<% end %>
 	</div>
 
