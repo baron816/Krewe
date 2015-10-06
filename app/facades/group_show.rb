@@ -24,7 +24,7 @@ class GroupShow
   end
 
   def users
-    @users ||= group.users.includes(:drop_user_votes)
+    @users ||= group.users
   end
 
   def activities
