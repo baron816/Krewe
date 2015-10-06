@@ -1,7 +1,9 @@
 class UserPublicProfile
-  def initialize(user, current_user)
+  attr_reader :user, :current_user, :page
+  def initialize(user, current_user, page)
     @user = user
     @current_user = current_user
+    @page = page
   end
 
   delegate :name, :email, :category, :id, to: :user, prefix: true
@@ -12,7 +14,7 @@ class UserPublicProfile
   end
 
   def personal_messages
-    @messages ||= Message.personal_messages(user, current_user)
+    @messages ||= Message.personal_messages(user, current_user).paginate(page: page, per_page: 5)
   end
 
   def new_message
@@ -22,7 +24,4 @@ class UserPublicProfile
   def own_profile?
     @user == current_user
   end
-
-  private
-  attr_reader :user, :current_user
 end
