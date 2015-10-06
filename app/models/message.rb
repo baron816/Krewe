@@ -29,7 +29,7 @@ class Message < ActiveRecord::Base
 	def self.personal_messages(first_user, second_user)
 		t = Message.arel_table
 
-		Message.where(t[:poster_id].in([first_user.id, second_user.id]).and(t[:messageable_id].in([first_user.id, second_user.id])))
+		Message.where(t[:poster_id].in([first_user.id, second_user.id]).and(t[:messageable_id].in([first_user.id, second_user.id])), messageable_type: "User").order(created_at: :desc)
 	end
 
 	private
