@@ -54,8 +54,11 @@ a {
 }
 
 .jumbotron {
-	background: rgba(252,201,185,0.7);
+	background: rgba(252,201,185,0.0);
 	position: fixed;
+	text-align: center;
+	color: $creamcan;
+	text-shadow: 1px 1px black;
 	right: 0;
 	left: 0;
 }
@@ -82,7 +85,6 @@ a {
 
 .navbar-default .navbar-nav > li > a {
    color: $creamcan;
-  //  text-shadow: 1px 1px black;
 }
 
 .navbar-default .navbar-toggle {
@@ -144,6 +146,10 @@ li.list-group-item, .well, .form-control, .pagination li a, .pagination li.disab
 footer {
 	position: fixed;
 	bottom: 0;
+
+	a {
+		color: $creamcan;
+	}
 }
 
 .btn-primary {
