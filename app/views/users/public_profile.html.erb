@@ -8,7 +8,11 @@
 <% unless @user.own_profile? %>
 	<div class="well messages">
 		<% if @user.personal_messages_any? %>
-			<button type="button" class="btn btn-primary more-messages">Load More</button>
+			<% if @user.multiple_pages? %>
+				<div class="text-center">
+					<button type="button" class="btn btn-primary more-messages">Load More</button>
+				</div>
+			<% end %>
 			<div class="individual-messages">
 
 			<% @user.personal_messages.reverse_each do |message| %>
