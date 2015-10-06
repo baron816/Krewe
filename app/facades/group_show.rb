@@ -1,12 +1,13 @@
 class GroupShow
-  attr_reader :group, :user
+  attr_reader :group, :user, :page
   delegate :ripe_for_expansion?, :primary_group?, :users_count, :expand_group_votes_size, :includes_user?, to: :group
   delegate :any?, to: :activities, prefix: true
   delegate :any?, to: :messages, prefix: true
 
-  def initialize(group, user)
+  def initialize(group, user, page)
     @group = group
     @user = user
+    @page = page
   end
 
   def names_data
@@ -30,7 +31,7 @@ class GroupShow
   end
 
   def messages
-    @messages ||= group.messages.includes(:poster)
+    @messages ||= group.messages.includes(:poster).paginate(page: page, per_page: 5).order(created_at: :desc)
   end
 
   def new_message
