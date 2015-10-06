@@ -1,0 +1,7 @@
+$('.individual-messages').prepend('<%= j render @group_show.messages.reverse %>')
+<% if @group_show.messages.next_page %>
+  $('.pagination').replaceWith('<%= j will_paginate @group_show.messages %>')
+<% else %>
+  $('.more-messages').remove();
+  $('.pagination').remove();
+<% end %>
