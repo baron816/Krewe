@@ -8,12 +8,20 @@
 <% unless @user.own_profile? %>
 	<div class="well messages">
 		<% if @user.personal_messages_any? %>
-			<% @user.personal_messages.each do |message| %>
-				<%= render partial: 'messages/show', locals: {message: message} %>
+			<button type="button" class="btn btn-primary more-messages">Load More</button>
+			<div class="individual-messages">
+
+			<% @user.personal_messages.reverse_each do |message| %>
+				<%= render partial: 'messages/message', locals: {message: message} %>
 			<% end %>
+			</div>
 		<% else %>
 			<h3 id="intro">No messages yet. Why don't you say hi?</h3>
 		<% end %>
+	</div>
+
+	<div class="infinite-scrolling">
+		<%= will_paginate @user.personal_messages %>
 	</div>
 
 	<%= render partial: 'messages/new', locals: {message: @user.new_message} %>
