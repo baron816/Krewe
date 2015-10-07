@@ -13,10 +13,7 @@ class ExpandGroup
     else
       group.ready_to_expand = true
     end
-    group.has_expanded = true
-    group.save
-
-    group.expand_group_votes.delete_all
+    set_expanded
 
     new_group
   end
@@ -39,6 +36,13 @@ class ExpandGroup
   def set_ready_to_expand_to_false
     find_mergable_group.ready_to_expand = false
     find_mergable_group.save
+  end
+
+  def set_expanded
+    group.has_expanded = true
+    group.save
+
+    group.expand_group_votes.delete_all
   end
 
   def new_group_user_limit
