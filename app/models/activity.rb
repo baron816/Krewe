@@ -14,7 +14,7 @@ class Activity < ActiveRecord::Base
 	validates_presence_of :location, :appointment, :group_id, :proposer_id
 	validate :is_a_time?
 
-	delegate :name, :users, to: :group, prefix: true
+	delegate :name, :users, :includes_user?, to: :group, prefix: true
 
 	scope :future_activities, -> { where('appointment > ?', Time.now).order(appointment: :asc) }
 	scope :past_activities, -> { where('appointment < ?', Time.now) }
@@ -47,10 +47,6 @@ class Activity < ActiveRecord::Base
 			self.well_attended = false
 			save
 		end
-	end
-
-	def group_includes_user?(user)
-	  group.includes_user?(user)
 	end
 
 	def proposed_by?(user)
