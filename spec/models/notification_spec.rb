@@ -13,28 +13,23 @@ describe "Notification" do
   	end
 
   	it "user has unviewed_notifications" do
-  		expect(@user.notifications.unviewed_notifications.count).to eql(2)
+  		expect(@user.unviewed_notifications_count).to eql(2)
   	end
 
   	context "join notification" do
-	  	before do
-	  	  @notifications = @user.notifications
-	  	end
-
 	  	it "user has active notifications for join" do
-	  		expect(@notifications.unviewed_category_notifications('Join').count).to eql(2)
+	  		expect(@user.unviewed_group_notification_count(@group)).to eql(2)
 	  	end
 
 	  	it "can dismiss all group notifications for a user" do
-	  		@notifications.dismiss_group_notifications_from_group(@group)
-	  		expect(@notifications.unviewed_category_notifications('Join').count).to eql(0)
+	  		@user.dismiss_group_notifications_from_group(@group)
+	  		expect(@user.unviewed_group_notification_count(@group)).to eql(nil)
 	  	end
   	end
 
   	context "group message" do
 		before do
 		  Message.create(messageable: Group.first, poster: @user, content: Faker::Lorem.sentence(5, true, 8))
-			@user2 = @user2.notifications
 		end
 
 	  	it "new message creates notifications" do
@@ -53,6 +48,10 @@ describe "Notification" do
 	  		@user2.dismiss_group_notifications_from_group(Group.first)
 	  		expect(@user2.unviewed_category_notifications('GroupMessage').count).to eql(0)
 	  	end
+
+		  it "has a group name" do
+		    expect(@user2.unviewed_category_notifications('GroupMessage').first.group_name).to eq(@group.name)
+		  end
   	end
 
   	context "personal message" do
@@ -75,6 +74,10 @@ describe "Notification" do
 	  	it "@user2 does receive notification from message" do
 	  		expect(@user2.unviewed_category_notifications('UserMessage').count).to eql(1)
 	  	end
+
+			it "@user2 has unviewed notifications from @user" do
+				expect(@user2.unviewed_personal_notifications_from_user_count(@user)).to eql(1)
+			end
 
 	  	describe "dismiss_notifications" do
 	  	  before do
@@ -112,5 +115,20 @@ describe "Notification" do
   		  	expect(@user2.unviewed_category_notifications("Activity").count).to eql(1)
   		  end
   		end
+
+			context "activity message" do
+				before do
+				  @activity.users << [@user, @user2, @user3]
+					@activity.messages.create!(poster: @user, content: Faker::Lorem.sentence(5, true, 8))
+				end
+
+				it "does not send a notification to @user" do
+					expect(@user.unviewed_category_notifications("ActivityMessage").count).to eq(0)
+				end
+
+				it "does send a notification to @user2" do
+				  expect(@user2.unviewed_category_notifications("ActivityMessage").count).to eq(1)
+				end
+			end
   	end
 end
