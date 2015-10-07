@@ -22,6 +22,38 @@ describe Activity do
     expect(@activity.well_attended).to eq(false)
   end
 
+  describe "#user_going?" do
+    it "@user is not going" do
+      expect(@activity.user_going?(@user1)).to eq(false)
+    end
+
+    it "@user is going when its going" do
+      @activity.users << @user1
+      expect(@activity.user_going?(@user1)).to eq(true)
+    end
+  end
+
+  describe "#proposed_by?" do
+    it "was not proposed by user2" do
+      expect(@activity.proposed_by?(@user2)).to eq(false)
+    end
+
+    it "was proposed by user1" do
+      expect(@activity.proposed_by?(@user1)).to eq(true)
+    end
+  end
+
+  describe "#group_includes_user?" do
+    it "includes @user1 and @user2" do
+      expect(@activity.group_includes_user?(@user1)).to eq(true)
+    end
+
+    it "does not include a user not in the group" do
+      @user4 = create(:user_stucco)
+      expect(@activity.group_includes_user?(@user4)).to eq(false)
+    end
+  end
+
   describe "#check_attendance" do
     before do
       @activity.users << [@user1, @user2]
