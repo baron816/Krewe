@@ -32,6 +32,7 @@ class User < ActiveRecord::Base
 
 	delegate :has_not_voted?, :group_drop_votes_count, :voter_vote, to: :drop_user_votes
 	delegate :future_activities, to: :activities
+	delegate :count, to: :groups, prefix: true
 
 	scope :users_by_slug, -> (slugs) { where(slug: slugs)  }
 
@@ -56,7 +57,11 @@ class User < ActiveRecord::Base
 	end
 
 	def unique_friends
-		friends.where.not(id: self).uniq
+		@unique_friends ||= friends.where.not(id: self).uniq
+	end
+
+	def is_friends_with?(user)
+	  unique_friends.include?(user)
 	end
 
 	def add_dropped_group(id)
@@ -69,7 +74,7 @@ class User < ActiveRecord::Base
 	end
 
 	def can_vote?(user)
-		not_self(user) && !user.voter_vote(self)
+		not_self(user) && !user.voter_vote(self) && self.is_friends_with?(user)
 	end
 
 	def generate_token(column)
@@ -94,7 +99,7 @@ class User < ActiveRecord::Base
 	end
 
 	def under_group_limit?
-	  groups.count < group_limit
+	  groups_count < group_limit
 	end
 
 	private
