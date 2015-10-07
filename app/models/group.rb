@@ -14,6 +14,7 @@ class Group < ActiveRecord::Base
 
 	delegate :size, to: :expand_group_votes, prefix: true
 	delegate :attended_activities_count, :future_activities, to: :activities
+	delegate :count, to: :users, prefix: true
 
 	scope :open_groups, -> { where(can_join: true) }
 	scope :category_groups, ->(category) { where(category: category) }
@@ -55,10 +56,6 @@ class Group < ActiveRecord::Base
 
 	def voted_to_expand?
 		expand_group_votes_size == users_count
-	end
-
-	def users_count
-	  @users_count ||= users.count
 	end
 
 	def includes_user?(user)
