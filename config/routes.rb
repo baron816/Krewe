@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :users, except: [:index, :destroy] do
+  resources :users, except: [:index] do
     member do
       get 'public_profile'
       post 'join_group'
