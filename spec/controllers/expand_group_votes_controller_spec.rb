@@ -37,8 +37,8 @@ describe ExpandGroupVotesController do
           @group2.activities.create(location: "South Street", appointment: Time.now - 1.month, proposer_id: @user.id, plan: "drinks", well_attended: true)
         end
 
-        @group.check_space
-        @group2.check_space
+        @group.check_space(@user)
+        @group2.check_space(@user)
       end
 
       it "starts with only two groups" do

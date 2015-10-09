@@ -55,7 +55,7 @@ class UsersController < ApplicationController
 	def destroy
 		group = @user.degree_groups(1).take
 		@user.destroy
-		group.check_space
+		group.check_space(@user)
 		redirect_to root_path
 	end
 

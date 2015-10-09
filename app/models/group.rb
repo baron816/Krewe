@@ -3,7 +3,7 @@ class Group < ActiveRecord::Base
 	friendly_id :slug_candidates, use: :slugged
 
 	has_many :user_groups
-	has_many :users, through: :user_groups, after_add: :check_space, after_remove: :check_space
+	has_many :users, through: :user_groups, after_add: [:check_space, :join_group_notifications], after_remove: :check_space
 	has_many :messages, as: :messageable
 	has_many :notifications, as: :notifiable
 	has_many :activities
@@ -35,11 +35,6 @@ class Group < ActiveRecord::Base
 			self.can_join = false
 			save
 		end
-	end
-
-	def add_user(user)
-		group.users << user
-		group.join_group_notifications(user)
 	end
 
 	def drop_user(user)
