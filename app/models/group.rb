@@ -3,7 +3,7 @@ class Group < ActiveRecord::Base
 	friendly_id :slug_candidates, use: :slugged
 
 	has_many :user_groups
-	has_many :users, through: :user_groups
+	has_many :users, through: :user_groups, after_add: :check_space, after_remove: :check_space
 	has_many :messages, as: :messageable
 	has_many :notifications, as: :notifiable
 	has_many :activities
@@ -14,7 +14,7 @@ class Group < ActiveRecord::Base
 
 	delegate :size, to: :expand_group_votes, prefix: true
 	delegate :attended_activities_count, :future_activities, to: :activities
-	delegate :count, to: :users, prefix: true
+	delegate :count, :empty?, to: :users, prefix: true
 
 	scope :open_groups, -> { where(can_join: true) }
 	scope :category_groups, ->(category) { where(category: category) }
@@ -27,7 +27,7 @@ class Group < ActiveRecord::Base
 		self.open_groups.category_groups(params[:category]).excluded_users(params[:friend_ids]).degree_groups(1).near([params[:latitude], params[:longitude]], 0.5).non_former_groups(params[:group_ids])[0]
 	end
 
-	def check_space
+	def check_space(user)
 		if users_count == user_limit - 1 && self.can_join != true
 			self.can_join = true
 			save
@@ -42,8 +42,7 @@ class Group < ActiveRecord::Base
 		user.add_dropped_group(id)
 
 		user.votes_to_drop_delete_all
-		check_space
-		self.delete if users.empty?
+		self.delete if users_empty?
 	end
 
 	def kick_user(user)
