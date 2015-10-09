@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-	before_action :set_user, only: [:edit, :update, :public_profile, :join_group]
+	before_action :set_user, only: [:edit, :update, :public_profile, :join_group, :destroy]
 	before_action :user_logged?, only: [:update, :edit]
 
 	def show
@@ -50,6 +50,13 @@ class UsersController < ApplicationController
 	  	new_group = @user.find_or_create_group
 			redirect_to group_path(new_group)
 	  end
+	end
+
+	def destroy
+		group = @user.degree_groups(1).take
+		@user.destroy
+		group.check_space
+		redirect_to root_path
 	end
 
 	private
