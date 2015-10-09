@@ -4,6 +4,7 @@ describe UsersController do
   before do
     @user = create(:user_home)
     @user2 = create(:user_wtc)
+    @group = Group.first
     cookies[:auth_token] = @user.auth_token
   end
 
@@ -86,6 +87,26 @@ describe UsersController do
 
     it "renders new template" do
     	expect(response).to render_template(:new)
+    end
+  end
+
+  describe "#DELETE #destroy" do
+    before do
+      @user.expand_group_votes.create(group_id: @group.id)
+      @user.votes_to_drop.create(group_id: @group.id, user_id: @user2.id)
+      delete :destroy, { id: @user }
+    end
+
+    it "deletes the user" do
+      expect(User.count).to eq(1)
+    end
+
+    it "deletes expand group vote" do
+      expect(ExpandGroupVote.count).to eq(0)
+    end
+
+    it "deletes their votes to drop user" do
+      expect(DropUserVote.count).to eq(0)
     end
   end
 end
