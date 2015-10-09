@@ -9,10 +9,6 @@ class DropUserVote < ActiveRecord::Base
 	scope :group_votes, -> (group){ where(group_id: group) }
 	scope :group_drop_votes_count, -> (group){ group_votes(group).count }
 
-	def self.delete_all_votes_from_voter(id)
-	  where(voter_id: id).delete_all
-	end
-
 	def self.voter_vote(voter)
 	  find_by(voter_id: voter)
 	end
