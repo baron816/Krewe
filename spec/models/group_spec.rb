@@ -135,7 +135,7 @@ describe Group do
 				end
 
 				it "has all the users" do
-					expect(@group3.users).to eq(User.all)
+					expect(@group3.users.count).to eq(User.count)
 				end
 			end
 		end
