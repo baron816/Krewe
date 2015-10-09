@@ -41,7 +41,7 @@ class User < ActiveRecord::Base
 		group = Group.search(category: category, friend_ids: friends.ids, latitude: latitude, longitude: longitude, group_ids: dropped_group_ids)
 
 		if group
-			group.user << self
+			group.users << self
 		else
 			group = self.groups.create(longitude: longitude, latitude: latitude, category: category)
 		end
