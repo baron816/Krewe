@@ -1,28 +1,21 @@
 <% if current_user.notifications && current_user.unviewed_notifications_count > 0 %>
 	<a href="#" class="dropdown-toggle" data-toggle='dropdown' role='button' aria-expanded='false'>Notifications <span class='caret'></span></a>
 	<ul class="dropdown-menu" role='menu'>
-		<% current_user.unviewed_category_notifications("GroupMessage").each do |note| %>
-			<li><%= link_to "#{note.poster_name} wrote in #{note.group_name}", group_path(note.notifiable.messageable) %></li>
-		<% end %>
-
-		<% current_user.unviewed_category_notifications("UserMessage").each do |note| %>
-			<li><%= link_to "#{note.poster_name} sent you a message", public_profile_user_path(note.poster) %></li>
-		<% end %>
-
-		<% current_user.unviewed_category_notifications("Join").each do |note| %>
-			<li><%= link_to "#{note.poster_name} joined #{note.notifiable.name}", group_path(note.notifiable) %></li>
-		<% end %>
-
-		<% current_user.unviewed_category_notifications("Activity").each do |note| %>
-			<li><%= link_to "#{note.poster_name} proposed an activity", group_activity_path(note.notifiable.group, note.notifiable) %></li>
-		<% end %>
-
-		<% current_user.unviewed_category_notifications("ActivityMessage").each do |note| %>
-			<li><%= link_to "#{note.poster_name} wrote in #{note.notifiable.messageable.plan}", group_activity_path(note.notifiable.messageable.group, note.notifiable.messageable) %></li>
-		<% end %>
-
-		<% current_user.unviewed_category_notifications("ActivityUpdate").each do |note| %>
-		  <li><%= link_to "#{note.poster_name} made changes to #{note.notifiable.plan}", group_activity_path(note.notifiable.group, note.notifiable) %></li>
+		<% current_user.unviewed_notifications.each do |note| %>
+			<% case note.notification_type %>
+			<% when "GroupMessage" %>
+				<li><%= link_to "#{note.poster_name} wrote in #{note.group_name}", group_path(note.notifiable.messageable) %></li>
+			<% when "UserMessage" %>
+				<li><%= link_to "#{note.poster_name} sent you a message", public_profile_user_path(note.poster) %></li>
+			<% when "Join" %>
+				<li><%= link_to "#{note.poster_name} joined #{note.notifiable.name}", group_path(note.notifiable) %></li>
+			<% when "Activity" %>
+				<li><%= link_to "#{note.poster_name} proposed an activity", group_activity_path(note.notifiable.group, note.notifiable) %></li>
+			<% when "ActivityMessage" %>
+				<li><%= link_to "#{note.poster_name} wrote in #{note.notifiable.messageable.plan}", group_activity_path(note.notifiable.messageable.group, note.notifiable.messageable) %></li>
+			<% when "ActivityUpdate" %>
+		  	<li><%= link_to "#{note.poster_name} made changes to #{note.notifiable.plan}", group_activity_path(note.notifiable.group, note.notifiable) %></li>
+			<% end %>
 		<% end %>
 	</ul>
 <% end %>
