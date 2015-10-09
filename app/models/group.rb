@@ -41,7 +41,7 @@ class Group < ActiveRecord::Base
 		users.delete(user)
 		user.add_dropped_group(id)
 
-		drop_user_votes.delete_all_votes_from_voter(user)
+		user.votes_to_drop_delete_all
 		check_space
 		self.delete if users.empty?
 	end
