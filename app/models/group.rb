@@ -37,6 +37,11 @@ class Group < ActiveRecord::Base
 		end
 	end
 
+	def add_user(user)
+		group.users << user
+		group.join_group_notifications(user)
+	end
+
 	def drop_user(user)
 		users.delete(user)
 		user.add_dropped_group(id)
