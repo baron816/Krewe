@@ -12,14 +12,14 @@ class User < ActiveRecord::Base
 	has_many :user_groups
 	has_many :groups, through: :user_groups
 	has_many :messages, as: :messageable
-	has_many :notifications
+	has_many :notifications, dependent: :destroy
 	has_many :friends, through: :groups, source: :users
-	has_many :personal_messages
 	has_many :user_activities
 	has_many :activities, through: :user_activities
 	has_many :owned_activities, class_name: "Activity", foreign_key: "proposer_id"
 	has_many :drop_user_votes
-	has_many :expand_group_votes
+	has_many :votes_to_drop, class_name: "DropUserVote", foreign_key: "voter_id", dependent: :destroy
+	has_many :expand_group_votes, foreign_key: "voter_id", dependent: :destroy
 
 	after_create :find_or_create_group
 	before_create { generate_token(:auth_token) }
@@ -29,10 +29,11 @@ class User < ActiveRecord::Base
 	reverse_geocoded_by :latitude, :longitude
 
 	delegate :unviewed_notifications, :unviewed_notifications_count, :dismiss_personal_notifications_from_user, :unviewed_personal_notifications_from_user_count, :unviewed_group_notification_count, :dismiss_group_notifications_from_group, :unviewed_category_notifications, :dismiss_activity_notification, :unviewed_activity_notifications_count, to: :notifications
-
 	delegate :has_not_voted?, :group_drop_votes_count, :voter_vote, to: :drop_user_votes
 	delegate :future_activities, to: :activities
 	delegate :count, to: :groups, prefix: true
+	delegate :degree_groups, to: :groups
+	delegate :delete_all, to: :votes_to_drop, prefix: true
 
 	scope :users_by_slug, -> (slugs) { where(slug: slugs)  }
 
