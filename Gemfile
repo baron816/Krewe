@@ -10,7 +10,6 @@ gem 'bootstrap-sass', '~> 3.3.4'
 gem 'autoprefixer-rails'
 
 gem 'underscore-rails'
-gem 'gmaps4rails'
 gem 'geocoder'
 gem 'local_time'
 gem 'browser-timezone-rails'
