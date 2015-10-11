@@ -9,9 +9,7 @@
 	<h2><%= local_time(@activity.appointment) %></h2>
 	<h2><%= @activity.location %></h2>
 
-	<div id="map">
-
-	</div>
+	<div id="map-canvas"></div>
 	<%= link_to "Edit Activity", edit_group_activity_path(@activity.group, @activity.activity), class: 'btn btn-warning' if @activity.proposed_by?(current_user) %>
 </div>
 
@@ -35,17 +33,6 @@
 	<%= render partial: 'messages/new', locals: {message: @activity.new_message} %>
 </div>
 
-<script>
-	handler = Gmaps.build('Google');
-	handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
-	markers = handler.addMarkers([
-		{
-			"lat": <%= @activity.latitude %>,
-			"lng": <%= @activity.longitude %>
-		}
-	]);
-	handler.bounds.extendWith(markers);
-	handler.fitMapToBounds();
-	handler.getMap().setZoom(17);
-	});
-</script>
+<%= javascript_tag do %>
+	mapActivityLocation('<%= @activity.latitude %>', ' <%= @activity.longitude %>')
+<% end %>
