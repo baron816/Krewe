@@ -1,4 +1,5 @@
 markers = [];
+var plan;
 
 function mapLocation(startingLat, startingLng) {
 	mapOptions = {
@@ -102,6 +103,8 @@ $(document).on('click', '.suggested button', function() {
       $('#activity_location').val(place.name)
     	$('#activity_latitude').val(place.geometry.location.lat());
     	$('#activity_longitude').val(place.geometry.location.lng());
+
+			$('#activity_plan').val(plan || 'Get Drinks')
     }
   })
 })
@@ -138,11 +141,7 @@ $(document).on('click', '.place-type', function () {
     $('.suggested').remove()
     clearMarkers()
     map.setZoom(15)
-    var plan = $('#activity_plan')
-
-    if (plan !== "") {
-      plan.val($(this).data().plan)
-    }
+    plan = $(this).data().plan
 
     markPlaces($(this).data().type);
 })
