@@ -1,6 +1,6 @@
 markers = [];
 
-function mapLocation(startingLat, startingLng, type) {
+function mapLocation(startingLat, startingLng) {
 	mapOptions = {
 		center: new google.maps.LatLng(startingLat, startingLng),
 		zoom: 15
@@ -14,7 +14,7 @@ function mapLocation(startingLat, startingLng, type) {
 
 	infowindow = new google.maps.InfoWindow();
 
-	markPlaces(type)
+	markPlaces()
 
 	google.maps.event.addListener(autocomplete, 'place_changed', function () {
 		var place = autocomplete.getPlace();
@@ -49,6 +49,23 @@ function mapLocation(startingLat, startingLng, type) {
 		marker.setVisible(true);
 		$('#activity_latitude').val(place.geometry.location.lat());
 		$('#activity_longitude').val(place.geometry.location.lng());
+	})
+}
+
+function mapActivityLocation(startingLat, startingLng) {
+	var latLng = new google.maps.LatLng(startingLat, startingLng)
+
+	mapOptions = {
+		center: latLng,
+		zoom: 17
+	};
+
+	map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+	var marker = new google.maps.Marker({
+		position: latLng,
+		map: map,
+		anchorPoint: new google.maps.Point(0,-29)
 	})
 }
 
