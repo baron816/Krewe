@@ -69,6 +69,15 @@ module ApplicationHelper
 		]
 	end
 
+	def reasons_for_leaving
+	  [
+			"Didn't form connection with others in group",
+			"Interface was too confusing",
+			"Too busy to meet people",
+			"Too many email notifications"
+		]
+	end
+
 	def self.mean(*args)
 	  args.inject(:+) / args.length.to_f
 	end
