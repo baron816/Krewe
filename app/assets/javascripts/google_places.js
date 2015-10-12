@@ -126,12 +126,13 @@ function markPlaces(type) {
 			for (var i = 0; i < results.length; i++) {
 				createMarker(results[i], service)
 			}
+			var resultsSample = _.sample(results, 3)
 
       for (var i = 0; i < 3; i++) {
-        service.getDetails(results[randomNum(results.length)], function (result, status) {
+      	service.getDetails(resultsSample[i], function(result, status){
           var location = result.geometry.location
           $('#spots').append('<li class="list-group-item suggested"><button type="button" class="btn btn-primary name" data-placeid="' + result.place_id + '">' + result.name + '</button></li>')
-        })
+				})
       }
 		}
 	})
@@ -188,8 +189,4 @@ function setMapOnAll(map) {
 
 function clearMarkers() {
   setMapOnAll(null);
-}
-
-function randomNum(limit) {
-  return Math.floor((Math.random() * limit) + 1)
 }
