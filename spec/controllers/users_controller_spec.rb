@@ -108,5 +108,9 @@ describe UsersController do
     it "deletes their votes to drop user" do
       expect(DropUserVote.count).to eq(0)
     end
+
+    it "rediects to a new survey" do
+      expect(response).to redirect_to new_survey_path
+    end
   end
 end
