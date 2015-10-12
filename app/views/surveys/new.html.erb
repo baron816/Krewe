@@ -3,7 +3,7 @@
 
     <%= render 'shared/errors', object: @survey %>
 
-    <%= f.hidden_field :email %>
+    <%= f.hidden_field :email, value: params[:email] %>
     <% reasons_for_leaving.each do |reason| %>
       <div class="input-group">
         <span class="input-group-addon">
