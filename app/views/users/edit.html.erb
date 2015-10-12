@@ -3,11 +3,8 @@
 
 <br><br>
 	<%= form_for(@user) do |f| %>
-		<% if @user.errors.any? %>
-			<% @user.errors.full_messages.each do |msg| %>
-				<div class="alert alert-danger">	<%= msg %> </div>
-			<% end %>
-		<% end %>
+		<%= render 'shared/errors', object: @user %>
+
 		<div class="form-group">
 			<%= f.text_field :name, placeholder: "Name", class: 'form-control', required: true %>
 			<%= f.email_field :email, placeholder: 'Email', class: 'form-control', required: true %>

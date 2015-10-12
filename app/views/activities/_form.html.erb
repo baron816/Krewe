@@ -1,4 +1,6 @@
 <%= form_for([@group, @activity]) do |f| %>
+  <%= render 'shared/errors', object: @activity %>
+
   <ul class="list-group" id="spots">
     <li class="list-group-item">Suggested Places</li>
     <li class="list-group-item">
