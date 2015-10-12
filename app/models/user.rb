@@ -11,15 +11,16 @@ class User < ActiveRecord::Base
 	has_secure_password
 	has_many :user_groups
 	has_many :groups, through: :user_groups
-	has_many :messages, as: :messageable
+	has_many :messages, as: :messageable, dependent: :destroy
 	has_many :notifications, dependent: :destroy
 	has_many :friends, through: :groups, source: :users
 	has_many :user_activities
 	has_many :activities, through: :user_activities
 	has_many :owned_activities, class_name: "Activity", foreign_key: "proposer_id"
-	has_many :drop_user_votes
+	has_many :drop_user_votes, dependent: :destroy
 	has_many :votes_to_drop, class_name: "DropUserVote", foreign_key: "voter_id", dependent: :destroy
 	has_many :expand_group_votes, foreign_key: "voter_id", dependent: :destroy
+	has_many :posted_notifications, class_name: "Notification", foreign_key: "poster_id", dependent: :destroy
 
 	after_create :find_or_create_group
 	before_create { generate_token(:auth_token) }
