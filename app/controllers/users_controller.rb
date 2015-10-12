@@ -19,7 +19,7 @@ class UsersController < ApplicationController
 
 	def update
 		if @user.update(user_params)
-			redirect_to user_path(@user)
+			redirect_to user_path(@user, params: {hello: "hey"})
 		else
 			render :edit
 		end
@@ -56,7 +56,7 @@ class UsersController < ApplicationController
 		group = @user.degree_groups(1).take
 		@user.destroy
 		group.check_space(@user)
-		redirect_to root_path
+		redirect_to new_survey_path(params: { email: @user.email })
 	end
 
 	private
