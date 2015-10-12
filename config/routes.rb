@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   resources :messages, only: [:create]
   resources :password_resets, except: [:get, :destroy]
   resources :newsletters, only: [:new, :create]
+  resources :surveys, only: [:new, :create]
 
   root 'home#index'
   get "*any", via: :all, to: "errors#not_found"
