@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
 	has_secure_password
 	has_many :user_groups
 	has_many :groups, through: :user_groups
-	has_many :messages, as: :messageable, dependent: :destroy
+	has_many :posted_messages, class_name: "Message", foreign_key: "poster_id", dependent: :destroy
 	has_many :notifications, dependent: :destroy
 	has_many :friends, through: :groups, source: :users
 	has_many :user_activities
