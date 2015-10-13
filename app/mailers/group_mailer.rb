@@ -10,6 +10,6 @@ class GroupMailer < ApplicationMailer
     @group = params[:group]
     @poster = params[:poster]
 
-    mail to: @user.email, subject: "Krewe: #{@poster.name} joined group #{@group.name}"
+    mail to: @user.email, subject: "#{@poster.name} joined group #{@group.name}"
   end
 end
