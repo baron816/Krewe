@@ -110,7 +110,7 @@ describe UsersController do
     end
 
     it "rediects to a new survey" do
-      expect(response).to redirect_to new_survey_path
+      expect(response).to redirect_to new_survey_path(email: @user.email)
     end
   end
 end
