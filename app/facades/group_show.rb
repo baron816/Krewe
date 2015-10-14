@@ -5,6 +5,7 @@ class GroupShow
   delegate :any?, :count, to: :messages, prefix: true
   delegate :users, to: :group
   delegate :count, to: :users, prefix: true
+  delegate :name, to: :group, prefix: true
 
   def initialize(group, user, page)
     @group = group
