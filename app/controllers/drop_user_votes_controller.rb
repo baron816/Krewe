@@ -1,10 +1,11 @@
 class DropUserVotesController < ApplicationController
 	before_action :set_group
-	before_action :user_logged?, only: [:create]
+	before_action :user_logged?
 
 	def create
 		@user = User.friendly.find(params[:user_id])
-		@vote = @group.drop_user_votes.create(user: @user, voter: current_user)
+
+		@vote = @group.drop_user_votes.create(user: @user, voter: current_user) if current_user.can_vote?(@user)
 		@group.kick_user(@user)
 		respond_to do |format|
 			format.html { redirect_to @group }
