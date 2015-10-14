@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :users, except: [:index] do
+    resources :messages, only: :create
     member do
       get 'public_profile'
       post 'join_group'
@@ -10,7 +11,9 @@ Rails.application.routes.draw do
     delete 'drop_user', on: :member
     resources :drop_user_votes, only: [:create, :destroy]
     resources :expand_group_votes, only: [:create, :destroy]
-    resources :activities, except: [:index, :destroy] do
+    resources :messages, only: :create
+    resources :activities, shallow: true, except: [:index, :destroy] do
+      resources :messages, only: :create
       member do
         post 'add_user'
         delete 'remove_user'
@@ -23,7 +26,7 @@ Rails.application.routes.draw do
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
 
-  resources :messages, only: [:create]
+
   resources :password_resets, except: [:get, :destroy]
   resources :newsletters, only: [:new, :create]
   resources :surveys, only: [:new, :create]
