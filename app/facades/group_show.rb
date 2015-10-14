@@ -3,6 +3,8 @@ class GroupShow
   delegate :ripe_for_expansion?, :primary_group?, :users_count, :expand_group_votes_size, :includes_user?, to: :group
   delegate :any?, to: :activities, prefix: true
   delegate :any?, :count, to: :messages, prefix: true
+  delegate :users, to: :group
+  delegate :count, to: :users, prefix: true
 
   def initialize(group, user, page)
     @group = group
@@ -23,10 +25,6 @@ class GroupShow
     group.expand_group_votes.size != group.users_count - 1
   end
 
-  def users
-    @users ||= group.users
-  end
-
   def activities
     @activities ||= group.future_activities.includes(:users)
   end
@@ -40,7 +38,7 @@ class GroupShow
   end
 
   def one_user?
-    users.count == 1
+    users_count == 1
   end
 
   def multiple_pages?
