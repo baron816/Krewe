@@ -34,7 +34,7 @@ class GroupShow
   end
 
   def new_message
-    @message ||= Message.new(messageable_id: group.id, poster_id: user, messageable_type: group.class)
+    @message ||= Message.new
   end
 
   def one_user?
