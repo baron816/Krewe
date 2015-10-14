@@ -28,5 +28,5 @@
 		<%= will_paginate @user.personal_messages %>
 	</div>
 
-	<%= render partial: 'messages/new', locals: {message: @user.new_message} %>
+	<%= render partial: 'messages/new', locals: {messageable: @user.user, message: @user.new_message} %>
 <% end %>
