@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 	end
 
 	def public_profile
-		if current_user.is_friends_with?(@user)
+		if current_user.is_friends_with?(@user) || current_user == @user
 			current_user.dismiss_personal_notifications_from_user(@user)
 			@user = UserPublicProfile.new(@user, current_user, params[:page])
 		else
@@ -21,7 +21,7 @@ class UsersController < ApplicationController
 	end
 
 	def update
-		unless @user.not_self?(current_user)
+		if @user == current_user
 			if @user.update(user_params)
 				redirect_to user_path(@user, params: {hello: "hey"})
 			else
@@ -60,7 +60,7 @@ class UsersController < ApplicationController
 	end
 
 	def destroy
-		unless @user.not_self?(current_user)
+		if @user == current_user
 			group = @user.degree_groups(1).take
 			@user.destroy
 			group.check_space(@user)
