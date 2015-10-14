@@ -1,6 +1,4 @@
-class Api::V1::SessionsController < ApplicationController
-  include Authenticable
-
+class Api::V1::SessionsController < ApiController
   def create
     user_password = params[:session][:password]
     user_email = params[:session][:email]

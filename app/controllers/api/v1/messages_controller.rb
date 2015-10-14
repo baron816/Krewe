@@ -1,6 +1,4 @@
-class Api::V1::MessagesController < ApplicationController
-  include Authenticable
-
+class Api::V1::MessagesController < ApiController
   respond_to :json
 
   def create

@@ -1,6 +1,4 @@
-class Api::V1::UsersController < ApplicationController
-  include Authenticable
-
+class Api::V1::UsersController < ApiController
   before_action :set_user, only: [:public_profile, :update, :add_group, :show]
   respond_to :json
 

@@ -1,6 +1,4 @@
-class Api::V1::ActivitiesController < ApplicationController
-  include Authenticable
-
+class Api::V1::ActivitiesController < ApiController
   before_action :set_activity, except: :create
   before_action :authenticate_with_token!, only: [:create, :update]
   before_action :set_group, only: :create
