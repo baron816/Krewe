@@ -8,9 +8,12 @@ class UsersController < ApplicationController
 	end
 
 	def public_profile
-		redirect_to root_path unless current_user.friends.include?(@user)
-		current_user.dismiss_personal_notifications_from_user(@user)
-		@user = UserPublicProfile.new(@user, current_user, params[:page])
+		if current_user.is_friends_with?(@user)
+			current_user.dismiss_personal_notifications_from_user(@user)
+			@user = UserPublicProfile.new(@user, current_user, params[:page])
+		else
+			message_root_redirect("You do not know that person.")
+		end
 	end
 
 	def edit
@@ -18,10 +21,14 @@ class UsersController < ApplicationController
 	end
 
 	def update
-		if @user.update(user_params)
-			redirect_to user_path(@user, params: {hello: "hey"})
+		unless @user.not_self?(current_user)
+			if @user.update(user_params)
+				redirect_to user_path(@user, params: {hello: "hey"})
+			else
+				render :edit
+			end
 		else
-			render :edit
+			message_root_redirect("You do not have access to do that.")
 		end
 	end
 
@@ -53,10 +60,14 @@ class UsersController < ApplicationController
 	end
 
 	def destroy
-		group = @user.degree_groups(1).take
-		@user.destroy
-		group.check_space(@user)
-		redirect_to new_survey_path(params: { email: @user.email })
+		unless @user.not_self?(current_user)
+			group = @user.degree_groups(1).take
+			@user.destroy
+			group.check_space(@user)
+			redirect_to new_survey_path(params: { email: @user.email })
+		else
+			message_root_redirect("You do not have access to do that.")
+		end
 	end
 
 	private
@@ -65,7 +76,7 @@ class UsersController < ApplicationController
 	end
 
 	def check_user
-		redirect_to root_path, notice: "You don't have access to go there" unless @user == current_user
+		message_root_redirect("You do not have access to go there.") unless @user == current_user
 	end
 
 	def user_params
