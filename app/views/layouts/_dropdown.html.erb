@@ -10,11 +10,11 @@
 			<% when "Join" %>
 				<li><%= link_to "#{note.poster_name} joined #{note.notifiable.name}", group_path(note.notifiable) %></li>
 			<% when "Activity" %>
-				<li><%= link_to "#{note.poster_name} proposed an activity", group_activity_path(note.notifiable.group, note.notifiable) %></li>
+				<li><%= link_to "#{note.poster_name} proposed an activity", activity_path(note.notifiable) %></li>
 			<% when "ActivityMessage" %>
-				<li><%= link_to "#{note.poster_name} wrote in #{note.notifiable.messageable.plan}", group_activity_path(note.notifiable.messageable.group, note.notifiable.messageable) %></li>
+				<li><%= link_to "#{note.poster_name} wrote in #{note.notifiable.messageable.plan}", activity_path(note.notifiable.messageable) %></li>
 			<% when "ActivityUpdate" %>
-		  	<li><%= link_to "#{note.poster_name} made changes to #{note.notifiable.plan}", group_activity_path(note.notifiable.group, note.notifiable) %></li>
+		  	<li><%= link_to "#{note.poster_name} made changes to #{note.notifiable.plan}", activity_path(note.notifiable) %></li>
 			<% end %>
 		<% end %>
 	</ul>
