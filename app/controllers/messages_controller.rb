@@ -18,8 +18,8 @@ class MessagesController < ApplicationController
 	end
 
 	def load_messageable
-	  if params[:group_id]
-	  	@messageable = Group.friendly.find(params[:group_id])
+	  if params[:topic_id]
+	  	@messageable = Topic.find(params[:topic_id])
 		elsif params[:user_id]
 			@messageable = User.friendly.find(params[:user_id])
 	  elsif params[:activity_id]
