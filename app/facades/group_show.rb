@@ -3,7 +3,7 @@ class GroupShow
   delegate :ripe_for_expansion?, :primary_group?, :users_count, :expand_group_votes_size, :includes_user?, to: :group
   delegate :any?, to: :activities, prefix: true
   delegate :any?, :count, to: :messages, prefix: true
-  delegate :users, to: :group
+  delegate :users, :names_data, to: :group
   delegate :count, to: :users, prefix: true
   delegate :name, to: :group, prefix: true
 
@@ -12,10 +12,6 @@ class GroupShow
     @user = user
     @page = page
     @per_page = 5
-  end
-
-  def names_data
-    group.user_names_hash.to_json.html_safe
   end
 
   def user_expand_group_votes(user)
@@ -30,12 +26,12 @@ class GroupShow
     @activities ||= group.future_activities.includes(:users)
   end
 
-  def messages
-    @messages ||= group.messages.includes(:poster).paginate(page: page, per_page: per_page).order(created_at: :desc)
+  def topics
+    @topics ||= group.topics.order(updated_at: :desc)
   end
 
-  def new_message
-    @message ||= Message.new
+  def topic
+    @topic ||= TopicShow.new(topics.first, page)
   end
 
   def one_user?
