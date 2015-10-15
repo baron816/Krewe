@@ -5,6 +5,7 @@ class Group < ActiveRecord::Base
 	has_many :user_groups
 	has_many :users, through: :user_groups, after_add: [:check_space, :join_group_notifications], after_remove: :check_space
 	has_many :messages, as: :messageable
+	has_many :topics
 	has_many :notifications, as: :notifiable
 	has_many :activities
 	has_many :drop_user_votes
@@ -74,13 +75,17 @@ class Group < ActiveRecord::Base
 		end
 	end
 
+	def names_data
+		user_names_hash.to_json.html_safe
+	end
+
+	private
 	def user_names_hash
 		users.map do |user|
 			Hash[:name, user.first_name, :slug, user.slug, :full_name, user.name]
 		end
 	end
 
-	private
 	def slug_candidates
 		name_group
 		[
