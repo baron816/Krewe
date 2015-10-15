@@ -1,0 +1,8 @@
+console.log('hello');
+$('.individual-messages').prepend('<%= j render @topic.messages.reverse %>')
+<% if @topic.messages.next_page %>
+  $('.pagination').replaceWith('<%= j will_paginate @topic.messages %>')
+<% else %>
+  $('.more-messages').remove();
+  $('.pagination').remove();
+<% end %>
