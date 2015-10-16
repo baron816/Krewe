@@ -9,15 +9,6 @@ $(document).ready(function(){
 
 	$('.messages').scrollTop($('.messages').prop("scrollHeight"));
 
-	if ($('.infinite-scrolling').size() > 0) {
-		$('.more-messages').on('click', function () {
-			more_messages_url = $('.pagination a.next_page').attr('href');
-			if (more_messages_url) {
-				$.getScript(more_messages_url);
-			}
-		})
-	}
-
 })
 
 $(window).resize(function() {
