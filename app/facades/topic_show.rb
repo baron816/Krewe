@@ -10,7 +10,7 @@ class TopicShow
   delegate :names_data, to: :this_topic
 
   def messages
-    @messages ||= this_topic.messages.includes(:poster).paginate(page: page, per_page: per_page).order(created_at: :desc)
+    @messages ||= this_topic.messages.includes(:poster).page(page).per(per_page).order(created_at: :desc)
   end
 
   def new_message
