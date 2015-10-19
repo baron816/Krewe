@@ -43,7 +43,6 @@ function resize_window(div) {
 
 function paginator() {
 	$('.more-messages').on('click', function () {
-		console.log('hey');
 	  more_messages_url = $('a.pagination').attr('href');
 	  if (more_messages_url) {
 	    $.getScript(more_messages_url);
