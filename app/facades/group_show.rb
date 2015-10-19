@@ -34,6 +34,10 @@ class GroupShow
     @topic ||= TopicShow.new(topics.first, page)
   end
 
+  def new_topic
+    @new_topic ||= Topic.new
+  end
+
   def one_user?
     users_count == 1
   end
