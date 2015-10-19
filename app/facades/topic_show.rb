@@ -8,9 +8,14 @@ class TopicShow
 
   delegate :any?, to: :messages, prefix: true
   delegate :names_data, :id, to: :this_topic
+  delegate :count, to: :found_messages, prefix: true
 
   def messages
-    @messages ||= this_topic.messages.includes(:poster).page(page).per(per_page).order(created_at: :desc)
+    @messages ||= found_messages.page(page).per(per_page).order(created_at: :desc)
+  end
+
+  def found_messages
+    @found_messages ||= this_topic.messages.includes(:poster)
   end
 
   def new_message
@@ -18,6 +23,6 @@ class TopicShow
   end
 
   def multiple_pages?
-    this_topic.messages_count > per_page
+    found_messages_count > per_page
   end
 end
