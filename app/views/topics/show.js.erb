@@ -1,3 +1,7 @@
-$('.message-group').html('<%= j render partial: "topic", locals: { topic: @topic } %>')
-resize_window('.messages');
-mentioning(<%= @topic.names_data %>)
+$('.individual-messages').prepend('<%= j render @topic.messages.reverse %>')
+<% if @topic.messages.next_page %>
+  $('.pagination').replaceWith('<%= j link_to_next_page @topic.messages, "Next Page", params: {controller: "topics", action: "show", id: @topic.id}, class: "pagination" %>')
+<% else %>
+  $('.more-messages').remove();
+  $('.pagination').remove();
+<% end %>
