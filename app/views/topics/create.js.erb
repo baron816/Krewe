@@ -1,0 +1,5 @@
+$('.topics').prepend('<%= j link_to @topic.name, change_topic_path(@topic), class: "btn btn-info", remote: true %>')
+$('.message-group').html('<%= j render partial: "topic", locals: { topic: @topic_show } %>')
+
+resize_window('.messages');
+mentioning(<%= @topic.names_data %>)
