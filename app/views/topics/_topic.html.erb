@@ -1,8 +1,10 @@
 <div class="well messages">
   <% if topic.messages_any? %>
-      <div class="text-center">
-        <%= link_to_next_page topic.messages, "Load More", remote: true,  class: "btn btn-primary more-messages" %>
-      </div>
+      <% if topic.multiple_pages? %>
+        <div class="text-center">
+          <button type="button" class="btn btn-primary more-messages">Load More</button>
+        </div>
+      <% end %>
 
     <div class="individual-messages">
       <% topic.messages.reverse_each do |message| %>
@@ -15,6 +17,6 @@
   <% end %>
 </div>
 
-
+<%= link_to_next_page topic.messages, "Next Page", params: {controller: 'topics', action: 'show', id: topic.id}, class: "pagination" %>
 
 <%= render partial: "messages/new", locals: { messageable: topic.this_topic, message: topic.new_message} %>
