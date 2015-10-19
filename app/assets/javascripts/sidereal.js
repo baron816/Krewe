@@ -9,6 +9,8 @@ $(document).ready(function(){
 
 	$('.messages').scrollTop($('.messages').prop("scrollHeight"));
 
+	paginator();
+
 })
 
 $(window).resize(function() {
@@ -37,4 +39,14 @@ function resize_window(div) {
 	var window_height = $(window).height();
 	var content_height = window_height * .25;
 	$(div).height(content_height);
+}
+
+function paginator() {
+	$('.more-messages').on('click', function () {
+		console.log('hey');
+	  more_messages_url = $('a.pagination').attr('href');
+	  if (more_messages_url) {
+	    $.getScript(more_messages_url);
+	  }
+	})
 }
