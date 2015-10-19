@@ -1,7 +1,7 @@
 <div class="well messages">
   <% if topic.messages_any? %>
       <div class="text-center">
-        <button type="button" class="btn btn-primary more-messages">Load More</button>
+        <%= link_to_next_page topic.messages, "Load More", remote: true,  class: "btn btn-primary more-messages" %>
       </div>
 
     <div class="individual-messages">
@@ -15,8 +15,6 @@
   <% end %>
 </div>
 
-<div class="infinite-scrolling">
-  <%= will_paginate topic.messages %>
-</div>
+
 
 <%= render partial: "messages/new", locals: { messageable: topic.this_topic, message: topic.new_message} %>
