@@ -24,9 +24,7 @@
 		<% end %>
 	</div>
 
-	<div class="infinite-scrolling">
-		<%= will_paginate @user.personal_messages %>
-	</div>
+	<%= link_to_next_page @user.personal_messages, "Next Page", class: 'pagination' %>
 
 	<%= render partial: 'messages/new', locals: {messageable: @user.user, message: @user.new_message} %>
 <% end %>
