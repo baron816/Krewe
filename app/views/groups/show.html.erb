@@ -66,7 +66,8 @@
 
 <div class="col-md-12">
 	<h2>Messages</h2>
-	<div class="btn-group" role="group" aria-label="threads">
+	<%= render partial: 'topics/new', locals: { group: @group_show.group, topic: @group_show.new_topic } %>
+	<div class="btn-group topics" role="group" aria-label="topics">
 		<% @group_show.topics.each do |topic| %>
 			<%= link_to topic.name, change_topic_path(topic), class: "btn btn-info", remote: true %>
 		<% end %>
