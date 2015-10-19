@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     resources :expand_group_votes, only: [:create, :destroy]
     resources :topics, shallow: true, only: [:create, :show] do
       resources :messages, only: :create
+      get 'change', on: :member
     end
     resources :activities, shallow: true, except: [:index, :destroy] do
       resources :messages, only: :create
