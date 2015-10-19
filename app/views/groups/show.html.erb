@@ -68,7 +68,7 @@
 	<h2>Messages</h2>
 	<div class="btn-group" role="group" aria-label="threads">
 		<% @group_show.topics.each do |topic| %>
-			<%= link_to topic.name, topic_path(topic), class: "btn btn-info", remote: true %>
+			<%= link_to topic.name, change_topic_path(topic), class: "btn btn-info", remote: true %>
 		<% end %>
 	</div>
 
