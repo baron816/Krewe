@@ -7,7 +7,7 @@ class TopicShow
   end
 
   delegate :any?, to: :messages, prefix: true
-  delegate :names_data, to: :this_topic
+  delegate :names_data, :id, to: :this_topic
 
   def messages
     @messages ||= this_topic.messages.includes(:poster).page(page).per(per_page).order(created_at: :desc)
@@ -15,5 +15,9 @@ class TopicShow
 
   def new_message
     @message ||= Message.new
+  end
+
+  def multiple_pages?
+    this_topic.messages_count > per_page
   end
 end
