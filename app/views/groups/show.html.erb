@@ -66,14 +66,18 @@
 
 <div class="col-md-12">
 	<h2>Messages</h2>
-	<%= render partial: 'topics/new', locals: { group: @group_show.group, topic: @group_show.new_topic } %>
-	<ul class="nav nav-tabs nav-justified topics">
-		<% @group_show.topics.each do |topic| %>
-			<li><%= link_to topic.name, change_topic_path(topic), class: "btn btn-info", "data-toggle": "tab", remote: true %></li>
-		<% end %>
-	</ul>
+	<div class="col-md-8 row">
+		<ul class="nav nav-tabs nav-justified topics">
+			<% @group_show.topics.each do |topic| %>
+				<li><%= link_to topic.name, change_topic_path(topic), class: "btn btn-info", remote: true %></li>
+			<% end %>
+		</ul>
+	</div>
+	<div class="col-md-4">
+		<%= render partial: 'topics/new', locals: { group: @group_show.group, topic: @group_show.new_topic } %>
+	</div>
 
-	<div class="message-group">
+	<div class="col-md-12 row message-group">
 		<%= render partial: 'topics/topic', locals: { topic: @group_show.topic } %>
 	</div>
 </div>
