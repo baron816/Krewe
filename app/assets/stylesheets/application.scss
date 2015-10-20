@@ -107,6 +107,13 @@ a {
 	overflow: scroll;
 }
 
+#new_topic {
+	width: 30%;
+}
+
+.topics	{
+	overflow: scroll;
+}
 
 body {
 	height: 100%;
@@ -197,6 +204,10 @@ footer {
 .btn-info:hover {
 	background-color: #763568;
 	border-color: #763568;
+}
+
+.nav-tabs-justified > li > a {
+	background-color: #763568;
 }
 
 .pac-container {
