@@ -16,6 +16,7 @@ class Group < ActiveRecord::Base
 	delegate :size, to: :expand_group_votes, prefix: true
 	delegate :attended_activities_count, :future_activities, to: :activities
 	delegate :count, :empty?, to: :users, prefix: true
+	delegate :ids, to: :topics, prefix: true
 
 	scope :open_groups, -> { where(can_join: true) }
 	scope :category_groups, ->(category) { where(category: category) }
