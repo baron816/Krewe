@@ -14,7 +14,7 @@ class Notification < ActiveRecord::Base
 	scope :notifiable_notifications, ->(id) { where(notifiable_id: id)}
 
 	def group_name
-	  notifiable.messageable.name
+	  notifiable.messageable_group.name
 	end
 
 	def dismiss
@@ -58,7 +58,7 @@ class Notification < ActiveRecord::Base
 	end
 
 	def self.unviewed_message_notifications_from_group(group)
-		unviewed_notifications.includes(:message).where("messages.messageable_id" => group.id)
+		unviewed_notifications.includes(:message).where("messages.messageable_id" => group.topics_ids)
 	end
 
 	def self.dismiss_group_notifications_from_group(group)
