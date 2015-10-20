@@ -4,7 +4,7 @@ class Message < ActiveRecord::Base
 	has_many :notifications, as: :notifiable
 
 	delegate :name, to: :poster, prefix: true
-	delegate :users, to: :messageable, prefix: true
+	delegate :users, :group, to: :messageable, prefix: true
 
 	validates :content, presence: true, length: { minimum: 2 }
 	validates_presence_of :messageable, :messageable_type, :poster
@@ -45,7 +45,7 @@ class Message < ActiveRecord::Base
 
 	def send_notifications
 		case messageable_type
-		when 'Group', 'Activity'
+		when 'Activity', 'Topic'
 			messageable_users.each do |user|
 				 create_notification(user) unless user == self.poster
 			end
