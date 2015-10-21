@@ -13,6 +13,8 @@ class Group < ActiveRecord::Base
 
 	reverse_geocoded_by :latitude, :longitude
 
+	after_create :create_general_topic
+
 	delegate :size, to: :expand_group_votes, prefix: true
 	delegate :attended_activities_count, :future_activities, to: :activities
 	delegate :count, :empty?, to: :users, prefix: true
@@ -81,6 +83,10 @@ class Group < ActiveRecord::Base
 	end
 
 	private
+	def create_general_topic
+	  self.topics.create(name: "General")
+	end
+
 	def user_names_hash
 		users.map do |user|
 			Hash[:name, user.first_name, :slug, user.slug, :full_name, user.name]
