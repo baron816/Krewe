@@ -27,7 +27,7 @@ class GroupShow
   end
 
   def topics
-    @topics ||= group.topics.order(updated_at: :desc)
+    @topics ||= group.topics.order(updated_at: :desc).page(page).per(5)
   end
 
   def topic
