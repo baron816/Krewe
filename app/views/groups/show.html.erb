@@ -67,11 +67,7 @@
 <div class="col-md-12">
 	<h2>Messages</h2>
 	<div class="col-md-8 row">
-		<ul class="nav nav-tabs nav-justified topics">
-			<% @group_show.topics.each do |topic| %>
-				<li><%= link_to topic.name, change_topic_path(topic), class: "btn btn-info", remote: true %></li>
-			<% end %>
-		</ul>
+			<%= render partial: 'topics/topics', locals: { topics: @group_show.topics } %>
 	</div>
 	<div class="col-md-4">
 		<%= render partial: 'topics/new', locals: { group: @group_show.group, topic: @group_show.new_topic } %>
