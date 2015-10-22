@@ -1,0 +1,7 @@
+<ul class="nav nav-tabs nav-justified topics">
+  <% topics.each do |topic| %>
+    <li><%= link_to topic.name, change_topic_path(topic), class: "btn btn-info", remote: true %></li>
+  <% end %>
+
+  <li><%= link_to_next_page topics, "Older Threads", remote: true, class: "btn btn-info next-topic" %></li>
+</ul>
