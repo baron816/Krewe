@@ -1,0 +1,4 @@
+$('.next-topic').replaceWith('<%= j render partial: "topics/topics", locals: { topics: @group_show.topics}  %>')
+<% unless @group_show.topics.next_page %>
+  $('.next-topic').remove();
+<% end %>
