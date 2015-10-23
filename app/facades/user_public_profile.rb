@@ -9,18 +9,14 @@ class UserPublicProfile
 
   delegate :name, :email, :category, :id, to: :user, prefix: true
   delegate :any?, :count, to: :personal_messages, prefix: true
-  delegate :count, to: :found_messages, prefix: true
+  delegate :next_page, to: :personal_messages
 
   def user_location
     user.address.split(',')[1..-1].join(',')
   end
 
   def personal_messages
-    @personal_messages ||= found_messages.page(page).per(per_page)
-  end
-
-  def found_messages
-    @messages ||= Message.personal_messages(user, current_user).includes(:poster)
+    @personal_messages ||= Message.personal_messages(user, current_user).includes(:poster).page(page).per(per_page)
   end
 
   def new_message
@@ -29,9 +25,5 @@ class UserPublicProfile
 
   def own_profile?
     @user == current_user
-  end
-
-  def multiple_pages?
-    found_messages_count > per_page
   end
 end
