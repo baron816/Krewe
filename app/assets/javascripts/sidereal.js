@@ -11,7 +11,6 @@ $(document).ready(function(){
 
 	$('.topics > li:first-child').addClass('selected-topic')
 
-	paginator();
 	highlightTopic();
 })
 
@@ -41,15 +40,6 @@ function resize_window(div) {
 	var window_height = $(window).height();
 	var content_height = window_height * .25;
 	$(div).height(content_height);
-}
-
-function paginator() {
-	$('.more-messages').on('click', function () {
-	  more_messages_url = $('a.pagination').attr('href');
-	  if (more_messages_url) {
-	    $.getScript(more_messages_url);
-	  }
-	})
 }
 
 function highlightTopic() {
