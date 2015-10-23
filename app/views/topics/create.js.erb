@@ -2,5 +2,8 @@ $('.topics').prepend('<li><%= j link_to @topic.name, change_topic_path(@topic), 
 $('.message-group').html('<%= j render partial: "topic", locals: { topic: @topic_show } %>')
 $('#topic_name').val("")
 
+$('.topics > li').removeClass('selected-topic')
+$('.topics > li:first-child').addClass('selected-topic')
+
 resize_window('.messages');
 mentioning(<%= @topic.names_data %>)
