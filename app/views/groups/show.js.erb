@@ -2,4 +2,6 @@ $('li.next-topic').replaceWith('<%= j render partial: "topics/topics", locals: {
 <% unless @group_show.next_page %>
   $('.next-topic').remove();
 <% end %>
+
+$('.topics').animate({ scrollLeft: $(this).width() }, 1000)
 highlightTopic()
