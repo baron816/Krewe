@@ -67,7 +67,9 @@
 <div class="col-md-12">
 	<h2>Messages</h2>
 	<div class="col-md-8 row">
+		<ul class="nav nav-tabs nav-justified topics">
 			<%= render partial: 'topics/topics', locals: { topics: @group_show.topics } %>
+		</ul>
 	</div>
 	<div class="col-md-4">
 		<%= render partial: 'topics/new', locals: { group: @group_show.group, topic: @group_show.new_topic } %>
