@@ -9,8 +9,10 @@ $(document).ready(function(){
 
 	$('.messages').scrollTop($('.messages').prop("scrollHeight"));
 
-	paginator();
+	$('.topics > li:first-child').addClass('selected-topic')
 
+	paginator();
+	highlightTopic();
 })
 
 $(window).resize(function() {
@@ -47,5 +49,13 @@ function paginator() {
 	  if (more_messages_url) {
 	    $.getScript(more_messages_url);
 	  }
+	})
+}
+
+function highlightTopic() {
+
+	$('.topics > li').on('click', function () {
+		$('.topics > li').removeClass('selected-topic')
+		$(this).addClass('selected-topic')
 	})
 }
