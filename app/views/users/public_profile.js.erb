@@ -1,7 +1,6 @@
 $('.individual-messages').prepend('<%= j render @user.personal_messages.reverse %>')
-<% if @user.personal_messages.next_page %>
-  $('.pagination').replaceWith('<%= j will_paginate @user.personal_messages %>')
+<% if @user.next_page %>
+  $('.more-messages').replaceWith('<%= j link_to_next_page @user.personal_messages, "Load More", remote: true, class: 'btn btn-primary more-messages' %>')
 <% else %>
   $('.more-messages').remove();
-  $('.pagination').remove();
 <% end %>
