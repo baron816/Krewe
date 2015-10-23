@@ -9,15 +9,9 @@ $(document).ready(function(){
 
 	$('.messages').scrollTop($('.messages').prop("scrollHeight"));
 
-	if ($('.infinite-scrolling').size() > 0) {
-		$('.more-messages').on('click', function () {
-			more_messages_url = $('.pagination a.next_page').attr('href');
-			if (more_messages_url) {
-				$.getScript(more_messages_url);
-			}
-		})
-	}
+	$('.topics > li:first-child').addClass('selected-topic')
 
+	highlightTopic();
 })
 
 $(window).resize(function() {
@@ -46,4 +40,11 @@ function resize_window(div) {
 	var window_height = $(window).height();
 	var content_height = window_height * .25;
 	$(div).height(content_height);
+}
+
+function highlightTopic() {
+	$('.topics > li').not(".next-topic").on('click', function () {
+		$('.topics > li').removeClass('selected-topic')
+		$(this).addClass('selected-topic')
+	})
 }

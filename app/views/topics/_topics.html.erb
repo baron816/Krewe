@@ -1,0 +1,5 @@
+  <% topics.each do |topic| %>
+    <li><%= link_to topic.name, change_topic_path(topic), class: "btn btn-info", remote: true %></li>
+  <% end %>
+
+  <li class="next-topic"><%= link_to_next_page topics, "Older Threads", remote: true, class: "btn btn-info" %></li>

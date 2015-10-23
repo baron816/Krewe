@@ -29,7 +29,7 @@ describe "Notification" do
 
   	context "group message" do
 		before do
-		  Message.create(messageable: Group.first, poster: @user, content: Faker::Lorem.sentence(5, true, 8))
+		  Message.create(messageable: Topic.first, poster: @user, content: Faker::Lorem.sentence(5, true, 8))
 		end
 
 	  	it "new message creates notifications" do
@@ -37,20 +37,20 @@ describe "Notification" do
 	  	end
 
 	  	it "@user doesnt get notifications for its message" do
-	  		expect(@user.unviewed_category_notifications('GroupMessage').count).to eql(0)
+	  		expect(@user.unviewed_category_notifications('TopicMessage').count).to eql(0)
 	  	end
 
 	  	it "@user2 gets notification for @users message" do
-	  		expect(@user2.unviewed_category_notifications('GroupMessage').count).to eql(1)
+	  		expect(@user2.unviewed_category_notifications('TopicMessage').count).to eql(1)
 	  	end
 
 	  	it "@user2 can dismiss notification" do
 	  		@user2.dismiss_group_notifications_from_group(Group.first)
-	  		expect(@user2.unviewed_category_notifications('GroupMessage').count).to eql(0)
+	  		expect(@user2.unviewed_category_notifications('TopicMessage').count).to eql(0)
 	  	end
 
 		  it "has a group name" do
-		    expect(@user2.unviewed_category_notifications('GroupMessage').first.group_name).to eq(@group.name)
+		    expect(@user2.unviewed_category_notifications('TopicMessage').first.group_name).to eq(@group.name)
 		  end
   	end
 

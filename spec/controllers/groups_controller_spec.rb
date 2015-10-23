@@ -20,8 +20,8 @@ describe GroupsController do
     	expect(assigns[:group_show].group).to eq(@group)
     end
 
-    it "has a new message" do
-    	expect(assigns[:group_show].new_message).to be_a_new(Message)
+    it "has a new topic" do
+    	expect(assigns[:group_show].new_topic).to be_a_new(Topic)
     end
   end
 

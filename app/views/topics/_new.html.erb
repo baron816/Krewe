@@ -1,0 +1,6 @@
+<%= form_for([group, topic], remote: true) do |f| %>
+  <div class="input-group">
+    <%= f.text_field :name, class: "form-control", placeholder: "New Thread" %>
+    <span class="input-group-btn"><%= f.submit "Submit", class: "btn btn-success" %></span>
+  </div>
+<% end %>

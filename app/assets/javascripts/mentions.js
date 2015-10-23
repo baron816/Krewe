@@ -7,5 +7,6 @@ function mentioning(dataHash) {
     data: data
   }
 
+  $('.atwho-container').remove()
   $('.new-message').atwho(at_config);
 }

@@ -8,11 +8,10 @@
 <% unless @user.own_profile? %>
 	<div class="well messages">
 		<% if @user.personal_messages_any? %>
-			<% if @user.multiple_pages? %>
-				<div class="text-center">
-					<button type="button" class="btn btn-primary more-messages">Load More</button>
-				</div>
-			<% end %>
+			<div class="text-center">
+				<%= link_to_next_page @user.personal_messages, "Load More", remote: true, class: 'btn btn-primary more-messages' %>
+			</div>
+
 			<div class="individual-messages">
 
 			<% @user.personal_messages.reverse_each do |message| %>
@@ -24,9 +23,7 @@
 		<% end %>
 	</div>
 
-	<div class="infinite-scrolling">
-		<%= will_paginate @user.personal_messages %>
-	</div>
+
 
 	<%= render partial: 'messages/new', locals: {messageable: @user.user, message: @user.new_message} %>
 <% end %>

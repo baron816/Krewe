@@ -1,7 +1,7 @@
-$('.individual-messages').prepend('<%= j render @group_show.messages.reverse %>')
-<% if @group_show.messages.next_page %>
-  $('.pagination').replaceWith('<%= j will_paginate @group_show.messages %>')
-<% else %>
-  $('.more-messages').remove();
-  $('.pagination').remove();
+$('li.next-topic').replaceWith('<%= j render partial: "topics/topics", locals: { topics: @group_show.topics}  %>')
+<% unless @group_show.next_page %>
+  $('.next-topic').remove();
 <% end %>
+
+$('.topics').animate({ scrollLeft: $(this).width() }, 1000)
+highlightTopic()

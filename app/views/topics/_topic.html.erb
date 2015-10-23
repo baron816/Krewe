@@ -1,0 +1,19 @@
+<div class="well messages">
+  <% if topic.messages_any? %>
+    <div class="text-center">
+      <%= link_to_next_page topic.messages, "Next Page", params: {controller: 'topics', action: 'show', id: topic.id}, remote:true, class: "btn btn-primary more-messages" %>
+    </div>
+
+    <div class="individual-messages">
+      <% topic.messages.reverse_each do |message| %>
+        <%= render partial: "messages/message", locals: { message: message } %>
+      <% end %>
+
+    </div>
+  <% else %>
+    <h3 id="intro">No messages, yet. Say, something...</h3>
+  <% end %>
+</div>
+
+
+<%= render partial: "messages/new", locals: { messageable: topic.this_topic, message: topic.new_message} %>

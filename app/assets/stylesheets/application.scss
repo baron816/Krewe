@@ -107,6 +107,9 @@ a {
 	overflow: scroll;
 }
 
+.topics	{
+	overflow: scroll;
+}
 
 body {
 	height: 100%;
@@ -144,10 +147,6 @@ li.list-group-item, .well, .form-control, .pagination li a, .pagination li.disab
 
 .more-messages {
 	margin-bottom: 10px;
-}
-
-.pagination {
-	display: none;
 }
 
 footer {
@@ -197,6 +196,19 @@ footer {
 .btn-info:hover {
 	background-color: #763568;
 	border-color: #763568;
+}
+
+.nav-tabs-justified > li > a {
+	background-color: #763568;
+}
+
+.nav-tabs-justified > li.next-topic > a {
+	background-color: #A87CA0;
+}
+
+.nav-tabs-justified > li.selected-topic > a {
+	background-color: $creamcan;
+	color: black;
 }
 
 .pac-container {

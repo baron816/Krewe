@@ -3,8 +3,8 @@
 	<ul class="dropdown-menu" role='menu'>
 		<% current_user.unviewed_notifications.each do |note| %>
 			<% case note.notification_type %>
-			<% when "GroupMessage" %>
-				<li><%= link_to "#{note.poster_name} wrote in #{note.group_name}", group_path(note.notifiable.messageable) %></li>
+			<% when "TopicMessage" %>
+				<li><%= link_to "#{note.poster_name} wrote in #{note.group_name}", group_path(note.notifiable.messageable_group) %></li>
 			<% when "UserMessage" %>
 				<li><%= link_to "#{note.poster_name} sent you a message", public_profile_user_path(note.poster) %></li>
 			<% when "Join" %>
