@@ -43,8 +43,7 @@ function resize_window(div) {
 }
 
 function highlightTopic() {
-
-	$('.topics > li').on('click', function () {
+	$('.topics > li').not(".next-topic").on('click', function () {
 		$('.topics > li').removeClass('selected-topic')
 		$(this).addClass('selected-topic')
 	})
