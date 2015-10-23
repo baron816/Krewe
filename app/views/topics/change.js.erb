@@ -1,5 +1,3 @@
 $('.message-group').html('<%= j render partial: "topic", locals: { topic: @topic } %>')
 resize_window('.messages');
 mentioning(<%= @topic.names_data %>)
-
-paginator()
