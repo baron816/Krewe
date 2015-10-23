@@ -206,6 +206,15 @@ footer {
 	background-color: #763568;
 }
 
+.nav-tabs-justified > li.next-topic > a {
+	background-color: #A87CA0;
+}
+
+.nav-tabs-justified > li.selected-topic > a {
+	background-color: $creamcan;
+	color: black;
+}
+
 .pac-container {
   background-color: #FFF;
   z-index: 20;
