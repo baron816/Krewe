@@ -1,7 +1,8 @@
 class TopicShow
-  attr_reader :this_topic, :page, :per_page
-  def initialize(topic, page)
+  attr_reader :this_topic, :page, :per_page, :user
+  def initialize(topic, page, user)
     @this_topic = topic
+    @user = user
     @page = page
     @per_page = 5
   end
@@ -17,5 +18,9 @@ class TopicShow
 
   def new_message
     @message ||= Message.new
+  end
+
+  def dismiss_notifications
+    user.dismiss_topic_notifications_from_topic(this_topic)
   end
 end
