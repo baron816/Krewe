@@ -62,10 +62,23 @@ class Notification < ActiveRecord::Base
 	end
 
 	def self.dismiss_group_notifications_from_group(group)
-		group_notes = unviewed_group_notifications_from_group(group) + unviewed_message_notifications_from_group(group)
+		group_notes = unviewed_group_notifications_from_group(group)
 		group_notes.each(&:dismiss) if group_notes.any?
 	end
 
+	def self.unviewed_message_notifications_from_topic(topic)
+	  unviewed_notifications.includes(:message).where("messages.messageable_id" => topic.id)
+	end
+
+	def self.unviewed_message_notifications_from_topic_count(topic)
+	  count = unviewed_message_notifications_from_topic(topic).count
+		count if count > 0
+	end
+
+	def self.dismiss_topic_notifications_from_topic(topic)
+	  topic_notes = unviewed_message_notifications_from_topic(topic)
+		topic_notes.each(&:dismiss) if topic_notes.any?
+	end
 	#activity
 
 	def self.unviewed_activity_message_notifications(activity)
