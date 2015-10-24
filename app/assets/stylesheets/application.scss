@@ -126,8 +126,9 @@ li.list-group-item, .well, .form-control, .pagination li a, .pagination li.disab
 	border-color:$secondary;
 }
 
-.badge {
+.btn-info .badge, .badge {
 	background-color:$secondary;
+	color: white;
 }
 
 #map-canvas {
