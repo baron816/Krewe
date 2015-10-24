@@ -33,7 +33,7 @@ class GroupShow
   end
 
   def topic
-    @topic ||= TopicShow.new(topics.first, page, user)
+    @topic ||= TopicShow.new(topics.first, page)
   end
 
   def dismiss_first_topic_notifications
