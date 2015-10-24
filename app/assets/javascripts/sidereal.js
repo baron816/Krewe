@@ -45,6 +45,7 @@ function resize_window(div) {
 function highlightTopic() {
 	$('.topics > li').not(".next-topic").on('click', function () {
 		$('.topics > li').removeClass('selected-topic')
+		$(this).find('a span').remove()
 		$(this).addClass('selected-topic')
 	})
 }
