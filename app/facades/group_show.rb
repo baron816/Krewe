@@ -13,6 +13,7 @@ class GroupShow
     @user = user
     @page = page
     @per_page = 5
+    dismiss_first_topic_notifications
   end
 
   def user_expand_group_votes(user)
@@ -32,7 +33,11 @@ class GroupShow
   end
 
   def topic
-    @topic ||= TopicShow.new(topics.first, page)
+    @topic ||= TopicShow.new(topics.first, page, user)
+  end
+
+  def dismiss_first_topic_notifications
+    user.dismiss_topic_notifications_from_topic(topics.first)
   end
 
   def new_topic
