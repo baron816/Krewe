@@ -45,7 +45,7 @@ describe "Notification" do
 	  	end
 
 	  	it "@user2 can dismiss notification" do
-	  		@user2.dismiss_group_notifications_from_group(Group.first)
+	  		@user2.dismiss_topic_notifications_from_topic(Topic.first)
 	  		expect(@user2.unviewed_category_notifications('TopicMessage').count).to eql(0)
 	  	end
 
