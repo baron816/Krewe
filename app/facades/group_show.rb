@@ -33,7 +33,8 @@ class GroupShow
   end
 
   def topic
-    @topic ||= TopicShow.new(topics.first, page)
+    first_topic = topics.first
+    @topic ||= TopicShow.new(first_topic, page, user.unviewed_message_notifications_from_topic_count(first_topic))
   end
 
   def dismiss_first_topic_notifications
