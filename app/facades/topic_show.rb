@@ -1,9 +1,9 @@
 class TopicShow
   attr_reader :this_topic, :page, :per_page
-  def initialize(topic, page)
+  def initialize(topic, page, per_page)
     @this_topic = topic
     @page = page
-    @per_page = 5
+    @per_page = per_page || 0 > 5 ? per_page : 5
   end
 
   delegate :any?, to: :messages, prefix: true
