@@ -26,9 +26,6 @@
 <% end %>
 
 <%= javascript_tag do %>
-  $('#datetimepicker').datetimepicker({
-    format: 'YYYY-MM-DD hh:mm A',
-    minDate: new Date()
-  });
-  mapLocation('<%= @group.latitude %>', '<%= @group.longitude %>')
+  dateTime();
+  mapLocation('<%= @group.latitude %>', '<%= @group.longitude %>');
 <% end %>
