@@ -51,7 +51,8 @@ class Message < ActiveRecord::Base
 			end
 		when 'User'
 			create_notification(messageable)
-			UserMailer.user_message_alert(self).deliver_now
+			SendMailJob.set(wait: 20.seconds).perform_later(self)
+			
 		end
 	end
 
