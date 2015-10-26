@@ -38,8 +38,8 @@ class Message < ActiveRecord::Base
 	end
 
 	def send_mention_email_alerts
-	  User.users_by_slug(mentioned_user_slugs).each do |user|
-	    UserMailer.mention_alert(self, user).deliver_now
+	  messageable_users.users_by_slug(mentioned_user_slugs).each do |user|
+			SendMentionEmailJobJob.set(wait: 20.seconds).perform_later(self, user)
 	  end
 	end
 
@@ -51,8 +51,7 @@ class Message < ActiveRecord::Base
 			end
 		when 'User'
 			create_notification(messageable)
-			SendMailJob.set(wait: 20.seconds).perform_later(self)
-			
+			SendPersonalEmailJob.set(wait: 20.seconds).perform_later(self)
 		end
 	end
 
