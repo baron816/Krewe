@@ -63,3 +63,5 @@ gem 'rest-client'
 gem 'friendly_id'
 
 gem 'jquery-atwho-rails'
+
+gem 'delayed_job_active_record'
