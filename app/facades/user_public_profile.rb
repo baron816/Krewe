@@ -1,10 +1,9 @@
 class UserPublicProfile
-  attr_reader :user, :current_user, :page, :per_page
+  attr_reader :user, :current_user, :page
   def initialize(user, current_user, page)
     @user = user
     @current_user = current_user
     @page = page
-    @per_page = 5
   end
 
   delegate :name, :email, :category, :id, to: :user, prefix: true
@@ -25,5 +24,16 @@ class UserPublicProfile
 
   def own_profile?
     @user == current_user
+  end
+
+  private
+  def per_page
+    note_count = current_user.unviewed_personal_notifications_from_user_count(user)
+    dismiss_notifications
+    (note_count || 0) >= 5 ? note_count : 5
+  end
+
+  def dismiss_notifications
+    current_user.dismiss_personal_notifications_from_user(user)
   end
 end
