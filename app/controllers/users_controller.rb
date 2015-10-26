@@ -9,7 +9,6 @@ class UsersController < ApplicationController
 
 	def public_profile
 		if current_user.is_friends_with?(@user) || current_user == @user
-			current_user.dismiss_personal_notifications_from_user(@user)
 			@user = UserPublicProfile.new(@user, current_user, params[:page])
 		else
 			message_root_redirect("You do not know that person.")
