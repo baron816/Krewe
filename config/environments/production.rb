@@ -88,4 +88,6 @@ Rails.application.configure do
     password: ENV['MAILGUN_PASSWORD'],
     authentication: 'plain'
   }
+
+  config.active_job.queue_adapter = :delayed_job
 end
