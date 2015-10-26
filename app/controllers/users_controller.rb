@@ -22,7 +22,7 @@ class UsersController < ApplicationController
 	def update
 		if @user == current_user
 			if @user.update(user_params)
-				redirect_to user_path(@user, params: {hello: "hey"})
+				redirect_to user_path(@user)
 			else
 				render :edit
 			end
