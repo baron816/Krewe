@@ -28,15 +28,6 @@
 			</li>
 			<% end %>
 		</ul>
-
-		<% if flash[:errors] %>
-			<% flash[:errors].each do |msg| %>
-			<div class="alert alert-danger">
-				<%= msg %>
-			</div>
-			<% end %>
-		<% end %>
-
 	</div>
 <% end %>
 
