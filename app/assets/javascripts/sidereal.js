@@ -1,13 +1,9 @@
 $(document).ready(function(){
-	$('#datetimepicker').datetimepicker({
-		format: 'YYYY-MM-DD hh:mm A'
-	});
-
 	resize_window('.messages')
 
 	resize_window('#map')
 
-	$('.messages').scrollTop($('.messages').prop("scrollHeight"));
+	scrollBottom()
 
 	$('.topics > li:first-child').addClass('selected-topic')
 
@@ -19,6 +15,17 @@ $(window).resize(function() {
 })
 
 var autocomplete;
+
+function dateTime() {
+	$('#datetimepicker').datetimepicker({
+		format: 'YYYY-MM-DD hh:mm A',
+		minDate: new Date()
+	});
+}
+
+function scrollBottom() {
+	$('.messages').scrollTop($('.messages').prop("scrollHeight"));
+}
 
 function initAutoComplete() {
 	autocomplete = new google.maps.places.Autocomplete(
