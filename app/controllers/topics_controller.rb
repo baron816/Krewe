@@ -3,13 +3,11 @@ class TopicsController < ApplicationController
   before_action :get_group, only: :create
 
   def show
-    @topic = TopicShow.new(@topic, params[:page], current_user.unviewed_message_notifications_from_topic_count(@topic))
-    current_user.dismiss_topic_notifications_from_topic(@topic)
+    @topic = TopicShow.new(@topic, params[:page], current_user)
   end
 
   def change
-    @topic = TopicShow.new(@topic, params[:page], current_user.unviewed_message_notifications_from_topic_count(@topic))
-    current_user.dismiss_topic_notifications_from_topic(@topic)
+    @topic = TopicShow.new(@topic, params[:page], current_user)
   end
 
   def create
