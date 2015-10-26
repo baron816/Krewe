@@ -16,9 +16,7 @@
 
 		<%= f.select(:category, categories, {}, class: 'form-control', required: true) %>
 
-			<%= f.hidden_field :password, value: :password %>
-			<%= f.hidden_field :password_confirmation, value: :password %>
-			<%= f.submit "Submit", class: 'btn btn-primary form-control' %>
+		<%= f.submit "Submit", class: 'btn btn-primary form-control' %>
 <% end %>
 </div>
 
