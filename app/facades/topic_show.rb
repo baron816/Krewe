@@ -1,8 +1,9 @@
 class TopicShow
-  attr_reader :this_topic, :page, :per_page
-  def initialize(topic, page, per_page)
+  attr_reader :this_topic, :page, :per_page, :user
+  def initialize(topic, page, current_user)
     @this_topic = topic
     @page = page
+    @user = current_user
     @per_page = per_page || 0 > 5 ? per_page : 5
   end
 
@@ -17,5 +18,16 @@ class TopicShow
 
   def new_message
     @message ||= Message.new
+  end
+
+  private
+  def per_page
+    note_count = user.unviewed_message_notifications_from_topic_count(this_topic)
+    dismiss_notifications
+    (note_count || 0) >= 5 ? note_count : 5
+  end
+
+  def dismiss_notifications
+    user.dismiss_topic_notifications_from_topic(this_topic)
   end
 end
