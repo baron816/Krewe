@@ -1,4 +1,4 @@
-class SendMailJob < ActiveJob::Base
+class SendPersonalEmailJob < ActiveJob::Base
   queue_as :default
 
   def perform(message)
