@@ -34,11 +34,13 @@ class Message < ActiveRecord::Base
 
 	private
 	def mentioned_user_slugs
-	  content.scan(/\b(?<=data-name=\")[^"]+(?=\")/)
+	  @mentionted_users ||= content.scan(/\b(?<=data-name=\")[^"]+(?=\")/)
 	end
 
 	def send_mention_email_alerts
-	  messageable_users.users_by_slug(mentioned_user_slugs).each do |user|
+		send_to_users = mentioned_user_slugs.include?("group") ? messageable_users : messageable_users.users_by_slug(mentioned_user_slugs)
+
+		send_to_users.each do |user|
 			SendMentionEmailJobJob.set(wait: 20.seconds).perform_later(self, user)
 	  end
 	end
