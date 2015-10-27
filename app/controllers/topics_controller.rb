@@ -15,7 +15,7 @@ class TopicsController < ApplicationController
 
     @topic.save
 
-    @topic_show = TopicShow.new(@topic, params[:page])
+    @topic_show = TopicShow.new(@topic, params[:page], current_user)
 
     respond_to do |format|
       format.html { redirect_to(@group) }

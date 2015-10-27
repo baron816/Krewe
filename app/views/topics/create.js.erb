@@ -6,4 +6,4 @@ $('.topics > li').removeClass('selected-topic')
 $('.topics > li:first-child').addClass('selected-topic')
 
 resize_window('.messages');
-mentioning(<%= @topic.names_data %>)
+mentioning(<%= @topic.names_data(current_user) %>)
