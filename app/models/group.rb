@@ -78,8 +78,8 @@ class Group < ActiveRecord::Base
 		end
 	end
 
-	def names_data
-		user_names_hash.to_json.html_safe
+	def names_data(current_user)
+		user_names_hash(current_user).to_json.html_safe
 	end
 
 	private
@@ -87,10 +87,14 @@ class Group < ActiveRecord::Base
 	  self.topics.create(name: "General")
 	end
 
-	def user_names_hash
+	def user_names_hash(current_user)
 		users.map do |user|
-			Hash[:name, user.first_name, :slug, user.slug, :full_name, user.name]
-		end
+			Hash[:name, user.first_name, :slug, user.slug, :full_name, user.name] unless user == current_user
+		end.compact << group_hash
+	end
+
+	def group_hash
+	  Hash[:name, "Group", :slug, "group", :full_name, name]
 	end
 
 	def slug_candidates
