@@ -115,7 +115,7 @@ function markPlaces(type) {
 		types: [type || 'bar'],
     minPriceLevel: 1,
     maxPriceLevel: 2,
-    radius: '800',
+    radius: '1600',
 		rankBy: google.maps.places.RankBy.DISTANCE
 	}
 
