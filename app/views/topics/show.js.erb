@@ -1,6 +1,6 @@
 $('<%= j render @topic.messages.reverse %>').hide().prependTo($('.individual-messages')).fadeIn(1500)
 <% if @topic.next_page %>
-  $('.more-messages').replaceWith('<%= j link_to_next_page @topic.messages, "Next Page", params: {controller: "topics", action: "show", id: @topic.id}, remote: true, class: "btn btn-primary more-messages"  %>')
+  $('.more-messages').replaceWith('<%= j link_to_next_page @topic.messages, "See More", params: {controller: "topics", action: "show", id: @topic.id}, remote: true, class: "btn btn-primary more-messages"  %>')
 <% else %>
   $('.more-messages').remove();
 <% end %>
