@@ -3,5 +3,5 @@
 <%= @message.content.html_safe %>
 
 <p>
-Click <%= link_to "here", group_url(@message.messageable) %> to view.
+Click <%= link_to "here", group_url(@message.messageable.group) %> to view.
 </p>
