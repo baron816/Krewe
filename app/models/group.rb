@@ -73,7 +73,7 @@ class Group < ActiveRecord::Base
 		users.each do |user|
 			unless user == new_user
 				self.notifications.create(user: user, poster: new_user, notification_type: "Join")
-				GroupMailer.join_group({user: user, group: self, poster: new_user}).deliver_now
+				GroupMailer.delay.join_group({user: user, group: self, poster: new_user})
 			end
 		end
 	end
