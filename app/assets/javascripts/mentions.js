@@ -3,7 +3,7 @@ function mentioning(dataHash) {
   at_config = {
     at: "@",
     displayTpl: "<li>${name} <small>${full_name}</small></li>",
-    insertTpl: '@${name}',
+    insertTpl: '<span data-name="${slug}">@${name}</span>',
     data: data
   }
 
