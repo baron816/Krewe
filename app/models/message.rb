@@ -15,10 +15,6 @@ class Message < ActiveRecord::Base
 	scope :poster_messages,  -> (poster){ where(poster: poster)  }
 	scope :messageable_messages, -> (poster){ where(messageable: poster)  }
 
-	def self.messages_from_poster(poster)
-	  users_messages.poster_messages(poster).messageable_messages(poster)
-	end
-
 	auto_html_for :content do
 		image
 		youtube
