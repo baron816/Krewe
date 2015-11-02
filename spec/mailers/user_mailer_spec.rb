@@ -19,7 +19,7 @@ RSpec.describe UserMailer, type: :mailer do
     end
 
     it "renders the sender" do
-      expect(mail.from).to eq(["no-reply@kreweapp.com"])
+      expect(mail.from).to eq(["no-reply@gokrewe.com"])
     end
   end
 

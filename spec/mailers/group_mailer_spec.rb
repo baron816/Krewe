@@ -13,7 +13,7 @@ RSpec.describe GroupMailer, :type => :mailer do
     it "renders the headers" do
       expect(mail.subject).to eq("#{@poster.name} joined group #{@group.name}")
       expect(mail.to).to eq([@user.email])
-      expect(mail.from).to eq(["no-reply@kreweapp.com"])
+      expect(mail.from).to eq(["no-reply@gokrewe.com"])
     end
 
   end

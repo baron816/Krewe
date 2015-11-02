@@ -7,6 +7,7 @@ class UserMailer < ApplicationMailer
   end
 
   def mention_alert(message, user)
+    p "{{{{{{{{{success}}}}}}}}}"
     @user = user
     @message = message
 

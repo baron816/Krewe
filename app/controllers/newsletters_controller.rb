@@ -6,7 +6,7 @@ class NewslettersController < ApplicationController
     email = params[:newsletter][:email]
     begin
       RestClient.post("https://api:key-#{ENV['MAILGUN_API_KEY']}" \
-                  "@api.mailgun.net/v3/lists/thelist@kreweapp.com/members",
+                  "@api.mailgun.net/v3/lists/thelist@mg.gokrewe.com/members",
                   subscribed: true,
                   address: email)
 
