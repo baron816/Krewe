@@ -1,16 +1,16 @@
 require 'rails_helper'
 
 describe UsersController do
+  let!(:user) { create(:user_home)}
+  let!(:user2) { create(:user_wtc) }
+  let!(:group) { Group.first }
   before do
-    @user = create(:user_home)
-    @user2 = create(:user_wtc)
-    @group = Group.first
-    cookies[:auth_token] = @user.auth_token
+    cookies[:auth_token] = user.auth_token
   end
 
   describe "GET #show" do
     before do
-      get :show, id: @user.id
+      get :show, id: user.id
     end
 
     it "renders the show template" do
@@ -18,14 +18,14 @@ describe UsersController do
     end
 
     it "locates the user" do
-    	expect(assigns[:user]).to eql(@user)
+    	expect(assigns[:user]).to eql(user)
     end
   end
 
   describe "GET #public_profile" do
+    let!(:message) {  Message.create(poster: user, messageable: user2, content: "The message content") }
     before do
-      get :public_profile, id: @user2.id
-      @message = Message.create(poster: @user, messageable: @user2, content: "The message content")
+      get :public_profile, id: user2.id
     end
 
     it "renders public_profile template" do
@@ -33,13 +33,13 @@ describe UsersController do
     end
 
     it "returns the personal messages" do
-    	expect(assigns[:user].personal_messages).to include(@message)
+    	expect(assigns[:user].personal_messages).to include(message)
     end
   end
 
   describe "GET #edit" do
     before do
-      get :edit, id: @user.id
+      get :edit, id: user.id
     end
 
     it "renders the edit template" do
@@ -47,13 +47,13 @@ describe UsersController do
     end
 
     it "finds the correct_user" do
-    	expect(assigns[:user]).to eql(@user)
+    	expect(assigns[:user]).to eql(user)
     end
   end
 
   describe "PATCH/PUT #update" do
     before do
-      put :update, { id: @user.id, user: { category: "Young Parent" } }
+      put :update, { id: user.id, user: { category: "Young Parent" } }
     end
 
     it "changes user category to young parent" do
@@ -62,16 +62,14 @@ describe UsersController do
   end
 
   describe "POST #create" do
-    before do
-      @user_attributes = attributes_for(:user_121)
-    end
+    let!(:user_attributes) { attributes_for(:user_121) }
 
     it "creates a user" do
-    	expect { post :create, user: @user_attributes }.to change(User, :count).by(1)
+    	expect { post :create, user: user_attributes }.to change(User, :count).by(1)
     end
 
     it "redirects to user" do
-    	post :create, user: @user_attributes
+    	post :create, user: user_attributes
     	expect(response).to redirect_to user_path(assigns[:user])
     end
   end
@@ -92,9 +90,9 @@ describe UsersController do
 
   describe "#DELETE #destroy" do
     before do
-      @user.expand_group_votes.create(group_id: @group.id)
-      @user.votes_to_drop.create(group_id: @group.id, user_id: @user2.id)
-      delete :destroy, { id: @user }
+      user.expand_group_votes.create(group_id: group.id)
+      user.votes_to_drop.create(group_id: group.id, user_id: user2.id)
+      delete :destroy, { id: user }
     end
 
     it "deletes the user" do
@@ -110,7 +108,7 @@ describe UsersController do
     end
 
     it "rediects to a new survey" do
-      expect(response).to redirect_to new_survey_path(email: @user.email)
+      expect(response).to redirect_to new_survey_path(email: user.email)
     end
   end
 end

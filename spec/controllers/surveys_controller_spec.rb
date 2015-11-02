@@ -17,16 +17,14 @@ describe SurveysController do
 
   describe "POST #create" do
     context "when successful" do
-      before do
-        @survey_attributes = {reasons: ["didn't like it", "too confusing"], email: "bob@mail.com"}
-      end
+      let!(:survey_attributes) { {reasons: ["didn't like it", "too confusing"], email: "bob@mail.com"} }
 
       it "creates a survey" do
-        expect { post :create, survey: @survey_attributes }.to change(Survey, :count).by(1)
+        expect { post :create, survey: survey_attributes }.to change(Survey, :count).by(1)
       end
 
       it "redirects to root" do
-        post :create, survey: @survey_attributes
+        post :create, survey: survey_attributes
         expect(response).to redirect_to root_path
       end
     end
