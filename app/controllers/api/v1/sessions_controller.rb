@@ -5,7 +5,6 @@ class Api::V1::SessionsController < ApiController
     user = User.find_by(email: user_email.downcase).try(:authenticate, user_password)
 
     if user
-      log_in(user)
       user.generate_token(:auth_token)
       user.save
       render json: user, status: 200
