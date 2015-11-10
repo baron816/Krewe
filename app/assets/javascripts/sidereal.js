@@ -8,6 +8,8 @@ $(document).ready(function(){
 	$('.topics > li:first-child').addClass('selected-topic')
 
 	highlightTopic();
+
+	$(".dropdown-button").dropdown();
 })
 
 $(window).resize(function() {
