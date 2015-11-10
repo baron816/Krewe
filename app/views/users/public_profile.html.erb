@@ -1,11 +1,11 @@
-<div class="well">
+<div>
 	<h1><%= @user.user_name %></h1>
 	Location: <%= @user.user_location %> <br>
 	Category: <%= @user.user_category %>
 </div>
 
 <% unless @user.own_profile? %>
-	<div class="well messages">
+	<div class="messages">
 		<% if @user.personal_messages_any? %>
 			<div class="text-center">
 				<%= link_to_next_page @user.personal_messages, "Load More", remote: true, class: 'btn btn-primary more-messages' %>

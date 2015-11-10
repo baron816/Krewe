@@ -1,8 +1,8 @@
 $('#new-activity').html("<%= j render partial: "new" %>")
 
-$('#activityModal').modal('show')
+$('#new-activity').openModal();
 
-var listener = google.maps.event.addListener(map, 'idle', function () {
-	resize('<%= @group.latitude %>', '<%= @group.longitude %>')
-	google.maps.event.removeListener(listener)
-})
+// var listener = google.maps.event.addListener(map, 'idle', function () {
+// 	resize('<%= @group.latitude %>', '<%= @group.longitude %>')
+// 	google.maps.event.removeListener(listener)
+// })

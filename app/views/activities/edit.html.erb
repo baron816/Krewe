@@ -1,12 +1,14 @@
 <%= form_for(@activity) do |f| %>
   <%= render 'shared/errors', object: @activity %>
 
-  <ul class="list-group" id="spots">
-    <li class="list-group-item">Suggested Places</li>
-    <li class="list-group-item">
-      <div class="btn-group" role="group" aria-label="suggestion type">
-        <button type="button" class="btn btn-info place-type" data-type='bar' data-plan='Get drinks'>Bars</button> <button type="button" class="btn btn-info place-type" data-type='restaurant' data-plan='Get food'>Restaurants</button> <button type="button" class="btn btn-info place-type" data-type='cafe' data-plan='Get coffee'>Cafes</button>
-      </div>
+  <ul class="collection" id="spots">
+    <li class="collection-item">Suggested Places</li>
+    <li class="collection-item">
+        <button type="button" class="btn btn-info place-type" data-type='bar' data-plan='Get drinks'>Bars</button>
+
+        <button type="button" class="btn btn-info place-type" data-type='restaurant' data-plan='Get food'>Restaurants</button>
+
+        <button type="button" class="btn btn-info place-type" data-type='cafe' data-plan='Get coffee'>Cafes</button>
     </li>
   </ul>
 
@@ -26,6 +28,5 @@
 <% end %>
 
 <%= javascript_tag do %>
-  dateTime();
   mapLocation('<%= @activity.latitude %>', '<%= @activity.longitude %>');
 <% end %>

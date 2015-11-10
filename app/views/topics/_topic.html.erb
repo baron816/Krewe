@@ -1,6 +1,6 @@
-<div class="well messages">
+<div class="messages">
   <% if topic.messages_any? %>
-    <div class="text-center">
+    <div class="center-align">
       <%= link_to_next_page topic.messages, "See More", params: {controller: 'topics', action: 'show', id: topic.id}, remote:true, class: "btn btn-primary more-messages" %>
     </div>
 

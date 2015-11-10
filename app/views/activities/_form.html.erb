@@ -1,31 +1,37 @@
 <%= form_for([@group, @activity]) do |f| %>
   <%= render 'shared/errors', object: @activity %>
 
-  <ul class="list-group" id="spots">
-    <li class="list-group-item">Suggested Places</li>
-    <li class="list-group-item">
-      <div class="btn-group" role="group" aria-label="suggestion type">
-        <button type="button" class="btn btn-info place-type" data-type='bar' data-plan='Get drinks'>Bars</button> <button type="button" class="btn btn-info place-type" data-type='restaurant' data-plan='Get food'>Restaurants</button> <button type="button" class="btn btn-info place-type" data-type='cafe' data-plan='Get coffee'>Cafes</button>
-      </div>
-    </li>
-  </ul>
+  <div class="row">
+    <div class="col s12 m6">
 
-  <%= f.text_field :plan, placeholder: "What's the plan?", class: 'form-control', required: true %>
-  <%= f.text_field :location, placeholder: "Where?", class: 'form-control', required: true %>
-  <div class="form-group">
-    <div class="input-group date" id='datetimepicker'>
-      <%= f.text_field :appointment, placeholder: 'When? Hit button -->', class: 'form-control', required: true %>
-      <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+
+      <ul class="collection" id="spots">
+        <li class="collection-item">Suggested Places</li>
+        <li class="collection-item">
+            <button type="button" class="btn btn-info place-type" data-type='bar' data-plan='Get drinks'>Bars</button> <button type="button" class="btn btn-info place-type" data-type='restaurant' data-plan='Get food'>Restaurants</button> <button type="button" class="btn btn-info place-type" data-type='cafe' data-plan='Get coffee'>Cafes</button>
+        </li>
+      </ul>
     </div>
+
+  <div class="col s12 m6">
+    <div class="input-field">
+      <%= f.label "What's the plan?" %>
+      <%= f.text_field :plan, required: true %>
+    </div>
+    <div class="input-field">
+      <%= f.label "Where?" %>
+      <%= f.text_field :location, required: true %>
+    </div>
+
+      <%= f.datetime_select :appointment %>
   </div>
-  <%= f.hidden_field :proposer_id, value: current_user.id %>
   <%= f.hidden_field :longitude %>
   <%= f.hidden_field :latitude %>
   <div id="map-canvas"></div> <br>
   <%= f.submit "Submit", class: 'btn btn-success' %>
+  </div>
 <% end %>
 
 <%= javascript_tag do %>
-  dateTime();
   mapLocation('<%= @group.latitude %>', '<%= @group.longitude %>');
 <% end %>

@@ -1,27 +1,41 @@
 <%= form_for(@user) do |f| %>
 		<%= render 'shared/errors', object: @user %>
 
-		<%= f.text_field :name, placeholder: "Name", class: 'form-control', required: true %>
-		<%= f.email_field :email, placeholder: 'Email', class: 'form-control', required: true %>
+		<div class="input-field">
+			<%= f.label :name %>
+			<%= f.text_field :name %>
+		</div>
+		<div class="input-field">
+			<%= f.label :email  %>
+			<%= f.email_field :email, class: 'validate' %>
+		</div>
 
-    <div class="form-group">
-  		<%= f.text_field :address, placeholder: 'Address', class: 'form-control', required: true %>
-
-  		<%= f.hidden_field :latitude, id: "lat" %>
-  		<%= f.hidden_field :longitude, id: 'lng' %>
-
-  		<%= f.select(:category, categories, {}, class: 'form-control', required: true) %>
+    <div class="input-field">
+			<%= f.label :address %>
+			<%= f.text_field :address, required: true %>
     </div>
 
-		<%= f.password_field :password, placeholder: 'Password', class: "form-control", required: true %>
-		<%= f.password_field :password_confirmation, placeholder: 'Confirm Password', class: "form-control", required: true %>
+		<div class="input-field">
+			<%= f.select(:category, categories, include_blank: true, required: true) %>
+			<label>Select Your Category</label>
+		</div>
+
+		<div class="input-field">
+			<%= f.label :password %>
+			<%= f.password_field :password, required: true %>
+		</div>
+
+		<div class="input-field">
+			<%= f.label :password_confirmation %>
+			<%= f.password_field :password_confirmation, required: true %>
+		</div>
+
+		<%= f.hidden_field :latitude, id: "lat" %>
+		<%= f.hidden_field :longitude, id: 'lng' %>
+
 		<%= f.submit :Submit, class: 'btn btn-primary form-control' %>
 <% end %>
 
 <%= javascript_tag do %>
 	initAutoComplete()
-
-  $("#user_category").select2({
-    placeholder: "Select a category that describes you best"
-  });
 <% end %>

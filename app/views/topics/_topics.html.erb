@@ -1,5 +1,5 @@
   <% topics.each do |topic| %>
-    <li><%= link_to "#{topic.name} <span class='badge'>#{current_user.unviewed_message_notifications_from_topic_count(topic)}</span>".html_safe, change_topic_path(topic), class: "btn btn-info", remote: true %></li>
+    <li class="tab col s3"><%= link_to "#{topic.name} <span class='badge'>#{current_user.unviewed_message_notifications_from_topic_count(topic)}</span>".html_safe, change_topic_path(topic), remote: true %></li>
   <% end %>
 
   <li class="next-topic"><%= link_to_next_page topics, "Older Threads", remote: true, class: "btn btn-info" %></li>

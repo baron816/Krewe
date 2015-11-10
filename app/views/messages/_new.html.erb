@@ -1,5 +1,5 @@
 <%= form_for([messageable, message], remote: true) do |f| %>
-	<div class="well new-message", contenteditable="true"></div>
+	<div class="new-message", contenteditable="true"></div>
 	<%= f.hidden_field :content, required: true %>
 	<%= f.submit "Submit", class: 'btn btn-primary', id: 'new-message-submit' %>
 <% end %>
