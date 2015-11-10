@@ -10,7 +10,7 @@
 		<ul id="nav-mobile" class="right hide-on-med-and-down">
 			<% if current_user %>
 				<li> <%= link_to "Home", user_path(current_user)%></li>
-				<li><a class="dropdown-button" href="#!" data-activates="dropdown">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
+				<li><a class="dropdown-button" href="#!" data-activates="dropdown">Notifications<i class="material-icons right">arrow_drop_down</i></a></li>
 				<li> <%=  link_to 'Log Out', logout_path, method: :delete %></li>
 
 			<% else %>

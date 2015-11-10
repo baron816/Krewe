@@ -1,11 +1,11 @@
-<div>
-	<h1><%= @user.user_name %></h1>
+<div class="card z-depth-2">
+	<h2><%= @user.user_name %></h2>
 	Location: <%= @user.user_location %> <br>
 	Category: <%= @user.user_category %>
 </div>
 
 <% unless @user.own_profile? %>
-	<div class="messages">
+	<div class="messages card z-depth-2">
 		<% if @user.personal_messages_any? %>
 			<div class="text-center">
 				<%= link_to_next_page @user.personal_messages, "Load More", remote: true, class: 'btn btn-primary more-messages' %>

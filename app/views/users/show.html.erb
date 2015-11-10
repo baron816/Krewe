@@ -9,8 +9,7 @@
 			<h3>Friends</h3>
 			<div class="collection">
 				<% @user.unique_friends.each do |friend| %>
-						<%= link_to friend.name, public_profile_user_path(friend), class: "collection-item" %>
-							<span class='badge'><%= current_user.unviewed_personal_notifications_from_user_count(friend) %></span>
+						<%= link_to "#{friend.name} <span class='new badge'>#{current_user.unviewed_personal_notifications_from_user_count(friend)}</span>".html_safe, public_profile_user_path(friend), class: "collection-item" %>
 				<% end %>
 			</div>
 		</div>
@@ -20,8 +19,8 @@
 		<h3>Groups</h3>
 		<div class="collection">
 			<% @user.groups.each do |group| %>
-				<%= link_to group.name, group_path(group), class: "collection-item" %>
-					<span class='badge'><%= current_user.unviewed_group_notification_count(group) %></span>
+				<%= link_to "#{group.name} <span class='new badge'>#{current_user.unviewed_group_notification_count(group)}</span>".html_safe, group_path(group), class: "collection-item" %>
+
 			<% end %>
 		</div>
 	</div>

@@ -1,4 +1,4 @@
-$('.topics').prepend('<li class="tab col s3"><%= j link_to @topic.name, change_topic_path(@topic), remote: true %></li>')
+$('.topics').prepend('<%= j link_to @topic.name, change_topic_path(@topic), class: "waves-effect btn", remote: true %>')
 $('.message-group').html('<%= j render partial: "topic", locals: { topic: @topic_show } %>')
 $('#topic_name').val("")
 

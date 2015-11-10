@@ -1,14 +1,14 @@
 <div class="row">
-	<div class="col s12">
-		<h1><%= @activity.plan %></h1>
+	<div class="col s12 card-panel z-depth-2">
+		<h3><%= @activity.plan %></h3>
 		<% if @activity.user_going?(current_user) %>
 			<%= link_to "Can't go", remove_user_activity_path(@activity.activity), method: :delete, class: 'btn btn-danger' %>
 		<% else %>
 			<%= link_to "Go", add_user_activity_path(@activity.activity), remote: true, method: :post, class: 'btn btn-success', id: "activity-go" %>
 		<% end %>
-		<h1><%= link_to @activity.group_name, @activity.group %></h1>
-		<h2><%= local_time(@activity.appointment) %></h2>
-		<h2><%= @activity.location %></h2>
+		<h3><%= link_to @activity.group_name, @activity.group %></h3>
+		<h4><%= local_time(@activity.appointment) %></h4>
+		<h4><%= @activity.location %></h4>
 
 		<div id="map-canvas"></div>
 		<%= link_to "Edit Activity", edit_activity_path(@activity.activity), class: 'btn btn-warning' if @activity.proposed_by?(current_user) %>
@@ -25,7 +25,7 @@
 
 	<div class="col s12 m6">
 		<h3>Messages</h3>
-		<div class="messages">
+		<div class="messages z-depth-2">
 			<% @activity.messages.each do |message| %>
 			  <%= render partial: 'messages/message', locals: {message: message} %>
 			<% end %>
