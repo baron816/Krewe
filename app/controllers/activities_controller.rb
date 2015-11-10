@@ -62,6 +62,6 @@ class ActivitiesController < ApplicationController
 	end
 
 	def activity_params
-		params.require(:activity).permit(:plan, :proposer_id, :appointment, :location, :latitude, :longitude)
+		params.require(:activity).permit(:plan, :appointment, :location, :latitude, :longitude).merge(proposer_id: current_user.id)
 	end
 end
