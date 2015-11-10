@@ -16,13 +16,6 @@ $(window).resize(function() {
 
 var autocomplete;
 
-function dateTime() {
-	$('#datetimepicker').datetimepicker({
-		format: 'YYYY-MM-DD hh:mm A',
-		minDate: new Date()
-	});
-}
-
 function scrollBottom() {
 	$('.messages').scrollTop($('.messages').prop("scrollHeight"));
 }
