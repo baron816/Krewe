@@ -1,0 +1,34 @@
+	<%= link_to "Delete Account", user_path(@user), data: {confirm: "Are you sure you want to delete your account?", text: "This cannot be undone. All account information and connections will be permanently destroyed."}, method: :delete, class: "btn btn-danger" %>
+
+	<br><br>
+		<%= form_for(@user) do |f| %>
+			<%= render 'shared/errors', object: @user %>
+
+			<div class="input-field">
+				<%= f.label :name, class: "active" %>
+				<%= f.text_field :name, required: true %>
+			</div>
+
+			<div class="input-field">
+				<%= f.label :email, class: "active" %>
+				<%= f.email_field :email, placeholder: 'Email', class: 'form-control', required: true %>
+			</div>
+
+			<div class="input-field">
+				<%= f.label :address, class: 'active' %>
+				<%= f.text_field :address, required: true %>
+			</div>
+
+			<div class="input-field col s12">
+				<%= f.select(:category, categories, {}, required: true) %>
+			</div>
+
+			<%= f.hidden_field :latitude, id: "lat" %>
+			<%= f.hidden_field :longitude, id: 'lng' %>
+			<%= f.submit "Submit", class: 'btn btn-primary form-control' %>
+	<% end %>
+
+<%= javascript_tag do %>
+	initAutoComplete()
+	$('select').material_select();
+<% end %>
