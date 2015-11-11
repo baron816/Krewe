@@ -1,5 +1,5 @@
 <div class="row group-page">
-	<div class="col-md-12">
+	<div class="col s12">
 	<h3>
 		<%= @group_show.group_name %>
 	</h3>
@@ -14,64 +14,75 @@
 		<% end %>
 
 		<%= link_to "Propose Activity", new_group_activity_path(@group_show.group), id: 'new_activity', class: 'waves-effect waves-light btn modal-trigger', remote: true %>
+
+		<a href="#members" class="waves-effect btn modal-trigger">Members <%= @group_show.users_count %></a>
+		<a href="#new-topic" class="waves-effect btn btn-info modal-trigger">New Thread</a>
 	</div>
 
-	<% if @group_show.activities_any? %>
-		<div class="col s12 m6">
-			<h4>Activities</h4>
-			<ul class="collection">
-				<% @group_show.activities.each do |activity| %>
-				<li class="collection-item">
-					<%= link_to activity.plan, activity_path(activity) %> <%= local_time(activity.appointment) %>
-					<% unless activity.user_going?(current_user) %>
-						<%= link_to "Go", add_user_activity_path(activity), method: :post, class: 'btn btn-success secondary-content' %>
-					<% end %>
-				</li>
-				<% end %>
-			</ul>
-		</div>
-	<% end %>
-
-	<div id='new-activity' class="modal"></div>
-
-	<div class="col s12 m6">
-		<h4>Members</h4>
-		<ul class="collection">
-			<% if @group_show.one_user? %>
-				<li class="collection-item">No other users in the group yet. We'll let you know when they join.</li>
-			<% end %>
-			<% @group_show.users.each do |user| %>
-				<li class="collection-item avatar">
-					<i class="material-icons circle green">face</i>
-					<span class="title"><%= link_to user.name, public_profile_user_path(user) %></span>
-					 <% if @group_show.primary_group? %>
-						 	<% if current_user.can_vote?(user) %>
-						 		<%= link_to "<i class='material-icons'>cancel</i> #{user.group_drop_votes_count(@group_show.group)}/3".html_safe, group_drop_user_votes_path(@group_show.group, user_id: user), remote: true, method: :post, class: 'btn btn-danger secondary-content', id: "remove-btn-#{user.id}", data: {confirm: "Vote to remove this user?", text: "Remove inactive users, but only if they're inactive."} %>
-						 	<% elsif user.not_self(current_user) %>
-						 		<%= link_to "Undo #{user.group_drop_votes_count(@group_show.group)}/3", group_drop_user_vote_path(@group_show.group, user.voter_vote(current_user)), remote: true, method: :delete, class: 'btn btn-warning secondary-content', id: "undo-btn-#{user.id}" %>
-						 	<% end %>
-					 <% end %>
-				 	</li>
-			<% end %>
-		</ul>
-	</div>
-
-	<div class="col s12">
+	<div class="col s12 m9">
 		<h4>Messages</h4>
-		<div class="row">
 			<div class="col s12">
 				<ul class="tabs topics">
 					<%= render partial: 'topics/topics', locals: { topics: @group_show.topics } %>
 				</ul>
 			</div>
 
-		</div>
 			<%= render partial: 'topics/new', locals: { group: @group_show.group, topic: @group_show.new_topic } %>
 
-		<div class="col s12 message-group">
+		<div class="message-group">
 			<%= render partial: 'topics/topic', locals: { topic: @group_show.topic } %>
 		</div>
 	</div>
+
+	<% if @group_show.activities_any? %>
+		<div class="col s12 m3">
+			<h4>Activities</h4>
+				<% @group_show.activities.each do |activity| %>
+				<div class="card">
+					<div class="card-content">
+						<span class="card-title"><%= link_to activity.plan, activity_path(activity) %></span>
+						<p>
+							<%= activity.location %>
+							<%= local_time(activity.appointment) %>
+						</p>
+					</div>
+					<% unless activity.user_going?(current_user) %>
+						<div class="card-action">
+							<%= link_to "Go", add_user_activity_path(activity), method: :post %>
+						</div>
+					<% end %>
+				</div>
+				<% end %>
+		</div>
+	<% end %>
+
+	<div id='new-activity' class="modal"></div>
+
+	<div class="modal" id="members">
+		<div class="modal-content">
+			<h4>Members</h4>
+			<ul class="collection">
+				<% if @group_show.one_user? %>
+					<li class="collection-item">No other users in the group yet. We'll let you know when they join.</li>
+				<% end %>
+				<% @group_show.users.each do |user| %>
+					<li class="collection-item avatar">
+						<i class="material-icons circle green">face</i>
+						<span class="title"><%= link_to user.name, public_profile_user_path(user) %></span>
+						 <% if @group_show.primary_group? %>
+							 	<% if current_user.can_vote?(user) %>
+							 		<%= link_to "<i class='material-icons'>cancel</i> #{user.group_drop_votes_count(@group_show.group)}/3".html_safe, group_drop_user_votes_path(@group_show.group, user_id: user), remote: true, method: :post, class: 'btn btn-danger secondary-content', id: "remove-btn-#{user.id}", data: {confirm: "Vote to remove this user?", text: "Remove inactive users, but only if they're inactive."} %>
+							 	<% elsif user.not_self(current_user) %>
+							 		<%= link_to "Undo #{user.group_drop_votes_count(@group_show.group)}/3", group_drop_user_vote_path(@group_show.group, user.voter_vote(current_user)), remote: true, method: :delete, class: 'btn btn-warning secondary-content', id: "undo-btn-#{user.id}" %>
+							 	<% end %>
+						 <% end %>
+					 	</li>
+				<% end %>
+			</ul>
+		</div>
+	</div>
+
+
 </div>
 
 <%= javascript_tag do %>
