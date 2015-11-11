@@ -9,7 +9,11 @@ $(document).ready(function(){
 
 	highlightTopic();
 
+	$('.modal-trigger').leanModal();
+
 	$(".dropdown-button").dropdown();
+
+	$(".button-collapse").sideNav();
 })
 
 $(window).resize(function() {
@@ -40,7 +44,7 @@ function setCoordinates() {
 
 function resize_window(div) {
 	var window_height = $(window).height();
-	var content_height = window_height * .25;
+	var content_height = window_height * .45;
 	$(div).height(content_height);
 }
 
