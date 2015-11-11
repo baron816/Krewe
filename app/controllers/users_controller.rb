@@ -17,6 +17,11 @@ class UsersController < ApplicationController
 
 	def edit
 		check_user
+
+		respond_to do |format|
+		  format.html
+		  format.js
+		end
 	end
 
 	def update
