@@ -1,9 +1,5 @@
-@import "bootstrap-sprockets";
-@import "bootstrap";
-@import "bootstrap-datetimepicker";
+@import "materialize";
 @import "sweet-alert";
-@import "select2";
-@import "select2-bootstrap";
 @import "jquery.atwho";
 
 $creamcan: #F5D76E;
@@ -14,11 +10,7 @@ $secondary: #3580d9;
 	src: font-url('JosefinSans-SemiBold.ttf') format('truetype');
 }
 
-html, body {
-	height: 100%;
-}
-
-h1, h2, h3, h4, h5, h6, p, div, .select2-chosen {
+h1, h2, h3, h4, h5, h6, p, div {
 	font-family: 'Josefin Sans';
 }
 
@@ -32,7 +24,6 @@ a {
 
 #logo {
 	max-width: 150px;
-	margin-top: -25px;
 }
 
 #home {
@@ -69,67 +60,15 @@ a {
 	padding-bottom: 40px;
 }
 
-.modal-content {
-	background: linear-gradient(to bottom right,$secondary, #89C4F4);
+
+nav {
+	background: $secondary;
 }
 
-.navbar {
-	background: transparent;
-	border: $secondary;
-}
-
-
-.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
-	color: white;
-}
-
-.navbar-default .navbar-nav > li > a {
-   color: $creamcan;
-}
-
-.navbar-default .navbar-toggle {
-	border-color: $creamcan;
-
-	.icon-bar {
-		background-color: $creamcan;
-	}
-}
-
-.navbar-default .navbar-nav .open .dropdown-menu > li > a {
-	color: black;
-}
-
-.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
-	background-color: #4B77BE;
-}
-
-.messages {
+.messages, .topics {
 	overflow: scroll;
 }
 
-.topics	{
-	overflow: scroll;
-}
-
-body {
-	height: 100%;
-	background: -webkit-linear-gradient(to bottom right,$secondary, #89C4F4); /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(to bottom right,$secondary, #89C4F4); /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(to bottom right,$secondary, #89C4F4); /* For Firefox 3.6 to 15 */
-	background: linear-gradient(to bottom right,$secondary, #89C4F4);
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-}
-
-li.list-group-item, .well, .form-control, .pagination li a, .pagination li.disabled span, .input-group-addon, #s2id_user_category a, .select2-results li div, .select2-search, .dropdown-menu, {
-	background-color: $creamcan;
-	border-color:$secondary;
-}
-
-.btn-info .badge, .badge {
-	background-color:$secondary;
-	color: white;
-}
 
 #map-canvas {
 	width: 100%;
@@ -199,31 +138,19 @@ footer {
 	border-color: #763568;
 }
 
-.nav-tabs-justified > li > a {
-	background-color: #763568;
-}
 
-.nav-tabs-justified > li.next-topic > a {
-	background-color: #A87CA0;
-}
+// .pac-container {
+//   background-color: #FFF;
+//   z-index: 20;
+//   position: fixed;
+//   display: inline-block;
+//   float: left;
+// }
 
-.nav-tabs-justified > li.selected-topic > a {
-	background-color: $creamcan;
-	color: black;
-}
-
-.pac-container {
-  background-color: #FFF;
-  z-index: 20;
-  position: fixed;
-  display: inline-block;
-  float: left;
-}
-
-.modal {
-  z-index: 20;
-}
-
-.modal-backdrop {
-	z-index: 10;
-}
+// .modal {
+//   z-index: 20;
+// }
+//
+// .modal-backdrop {
+// 	z-index: 10;
+// }
