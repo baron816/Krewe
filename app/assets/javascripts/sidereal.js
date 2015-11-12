@@ -56,3 +56,9 @@ function highlightTopic() {
 		$(this).addClass('selected-topic')
 	})
 }
+
+function setActivityAppointment() {
+	var time = $("#time_field").val();
+	var date = $("#date_field").val();
+	$("#activity_appointment").val(date + " " + time);
+}
