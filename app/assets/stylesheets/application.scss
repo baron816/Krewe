@@ -1,6 +1,7 @@
 @import "materialize";
 @import "sweet-alert";
 @import "jquery.atwho";
+@import "clockpicker";
 
 $creamcan: #F5D76E;
 $secondary: #3580d9;
@@ -139,18 +140,6 @@ footer {
 }
 
 
-// .pac-container {
-//   background-color: #FFF;
-//   z-index: 20;
-//   position: fixed;
-//   display: inline-block;
-//   float: left;
-// }
-
-// .modal {
-//   z-index: 20;
-// }
-//
-// .modal-backdrop {
-// 	z-index: 10;
-// }
+.pac-container {
+  z-index: 1050 !important;
+}
