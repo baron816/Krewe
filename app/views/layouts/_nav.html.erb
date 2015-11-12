@@ -27,10 +27,12 @@
 			<% if current_user %>
 				<li> <%= link_to "Home", user_path(current_user)%></li>
 				<li> <%=  link_to 'Log Out', logout_path, method: :delete %></li>
-				<li><%= link_to "Settings".html_safe, edit_user_path(current_user), class: "btn-warning", remote: true %></li>
+				<%= link_to "Settings".html_safe, edit_user_path(current_user), class: "btn btn-warning", remote: true %>
 				<% if @group_show %>
 					<%= render "groups/buttons" %>
+					<%= link_to "Propose Activity", new_group_activity_path(@group_show.group), id: 'new_activity', class: 'waves-effect waves-light btn' %>
 				<% end %>
+
 			<% else %>
 				<li><%= link_to "Log In", login_path, class: "modal-trigger", remote: true %></li>
 				<li><%= link_to "Sign Up", new_user_path, class: "modal-trigger", remote: true %></li>
