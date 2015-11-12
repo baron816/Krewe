@@ -105,6 +105,9 @@ $(document).on('click', '.suggested', function() {
     	$('#activity_longitude').val(place.geometry.location.lng());
 
 			$('#activity_plan').val(plan || 'Get Drinks')
+
+			$('label[for="activity_plan"]').addClass("active")
+			$('label[for="activity_location"]').addClass("active")
     }
   })
 })
