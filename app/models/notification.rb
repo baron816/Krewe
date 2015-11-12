@@ -72,7 +72,7 @@ class Notification < ActiveRecord::Base
 
 	def self.unviewed_message_notifications_from_topic_count(topic)
 	  count = unviewed_message_notifications_from_topic(topic).count
-		count if count > 0
+		"(#{count})" if count > 0
 	end
 
 	def self.dismiss_topic_notifications_from_topic(topic)
