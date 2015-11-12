@@ -8,7 +8,7 @@
   <% end %>
 <% end %>
 
-<%= link_to "Propose Activity", new_group_activity_path(@group_show.group), id: 'new_activity', class: 'waves-effect waves-light btn modal-trigger', remote: true %>
+<%= link_to "Propose Activity", new_group_activity_path(@group_show.group), id: 'new_activity', class: 'waves-effect waves-light btn' %>
 
 <a href="#members" class="waves-effect btn modal-trigger">Members <%= @group_show.users_count %></a>
 <a href="#new-topic" class="waves-effect btn btn-info modal-trigger">New Thread</a>
