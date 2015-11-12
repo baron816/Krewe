@@ -9,11 +9,12 @@ $(document).ready(function(){
 
 	highlightTopic();
 
-	$('.modal-trigger').leanModal();
 
 	$(".dropdown-button").dropdown();
-
-	$(".button-collapse").sideNav();
+	$(".button-collapse").sideNav({
+		closeOnClick: true
+	});
+	$('.modal-trigger').leanModal();
 })
 
 $(window).resize(function() {
