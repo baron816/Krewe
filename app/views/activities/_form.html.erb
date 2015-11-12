@@ -8,23 +8,36 @@
       <ul class="collection" id="spots">
         <li class="collection-item">Suggested Places</li>
         <li class="collection-item">
-            <button type="button" class="btn btn-info place-type" data-type='bar' data-plan='Get drinks'>Bars</button> <button type="button" class="btn btn-info place-type" data-type='restaurant' data-plan='Get food'>Restaurants</button> <button type="button" class="btn btn-info place-type" data-type='cafe' data-plan='Get coffee'>Cafes</button>
+            <button type="button" class="btn btn-info place-type" data-type='bar' data-plan='Get drinks'><i class="material-icons">local_bar</i></button>
+            <button type="button" class="btn btn-info place-type" data-type='restaurant' data-plan='Get food'><i class="material-icons">local_dining</i></button>
+            <button type="button" class="btn btn-info place-type" data-type='cafe' data-plan='Get coffee'><i class="material-icons">local_cafe</i></button>
         </li>
       </ul>
     </div>
 
   <div class="col s12 m6">
     <div class="input-field">
-      <%= f.label "What's the plan?" %>
-      <%= f.text_field :plan, required: true %>
+      <%= f.text_field :plan, class: "validate", required: true %>
+      <%= f.label :plan, "What's the plan?" %>
     </div>
     <div class="input-field">
-      <%= f.label "Where?" %>
-      <%= f.text_field :location, required: true %>
+      <%= f.text_field :location, placeholder: "",class: "validate", required: true %>
+      <%= f.label :location, "Where?" %>
     </div>
 
-      <%= f.datetime_select :appointment %>
+    <div class="input-field">
+      <%= text_field_tag :day, "", class: "datepicker", id: "date_field", required: true %>
+      <%= label_tag :date_field, "What day?" %>
+    </div>
+
+    <div class="input-field">
+      <%= text_field_tag :time, "", id: "time_field", required: true %>
+      <%= label_tag :time_field, "What time?" %>
+    </div>
+
+      <%= f.hidden_field :appointment %>
   </div>
+
   <%= f.hidden_field :longitude %>
   <%= f.hidden_field :latitude %>
   <div id="map-canvas"></div> <br>
@@ -34,4 +47,13 @@
 
 <%= javascript_tag do %>
   mapLocation('<%= @group.latitude %>', '<%= @group.longitude %>');
+  $('.datepicker').pickadate()
+  $('#time_field').pickatime({
+    twelvehour: true
+  })
+
+  $('#date_field, #time_field').change(function(){
+    setActivityAppointment()
+  })
+
 <% end %>
