@@ -10,6 +10,7 @@
 		<a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
 		<ul class="right hide-on-med-and-down">
 			<% if current_user %>
+
 				<li> <%= link_to "Home", user_path(current_user)%></li>
 				<% if current_user.notifications && current_user.unviewed_notifications_count > 0 %>
 					<li><a class="dropdown-button" href="#!" data-activates="note-alerts">Notifications<i class="material-icons right">arrow_drop_down</i></a></li>
@@ -26,7 +27,10 @@
 			<% if current_user %>
 				<li> <%= link_to "Home", user_path(current_user)%></li>
 				<li> <%=  link_to 'Log Out', logout_path, method: :delete %></li>
-
+				<li><%= link_to "Settings".html_safe, edit_user_path(current_user), class: "btn-warning", remote: true %></li>
+				<% if @group_show %>
+					<%= render "groups/buttons" %>
+				<% end %>
 			<% else %>
 				<li><%= link_to "Log In", login_path, class: "modal-trigger", remote: true %></li>
 				<li><%= link_to "Sign Up", new_user_path, class: "modal-trigger", remote: true %></li>
@@ -34,3 +38,7 @@
 		</ul>
 	</div>
 </nav>
+
+<div id='edit-user' class="modal">
+	<div class="modal-content"></div>
+</div>
