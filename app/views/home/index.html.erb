@@ -4,13 +4,13 @@
 			<br><br>
 			<h1 class="header center">Krewe</h1>
 			<div class="row center">
-				<h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
+				<h5 class="header col s12 light">The best way to form your social network</h5>
 			</div>
 			<div class="row center">
 				<% if current_user %>
-					<%= link_to "Log In", login_path, class: "modal-trigger", class: 'btn-large waves-effect btn-primary', remote: true %>
+					<%= link_to "Home", user_path(current_user), class: "modal-trigger", class: 'btn-large waves-effect blue' %>
 				<% else %>
-					<%= link_to "Sign Up", new_user_path, class: "modal-trigger",  class: 'btn-large waves-effect btn-primary', remote: true %>
+					<%= link_to "Sign Up", new_user_path, class: "modal-trigger",  class: 'btn-large waves-effect blue', remote: true %>
 				<% end %>
 			</div>
 			<br><br>
@@ -28,28 +28,28 @@
 		<div class="row">
 			<div class="col s12 m4">
 				<div class="icon-block">
-					<h2 class="center brown-text"><i class="material-icons">flash_on</i></h2>
-					<h5 class="center">Speeds up development</h5>
-
-					<p class="light">We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally, we refined animations and transitions to provide a smoother experience for developers.</p>
-				</div>
-			</div>
-
-			<div class="col s12 m4">
-				<div class="icon-block">
 					<h2 class="center brown-text"><i class="material-icons">group</i></h2>
-					<h5 class="center">User Experience Focused</h5>
+					<h5 class="center">Krewe connects you with a group of people</h5>
 
-					<p class="light">By utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. Additionally, a single underlying responsive system across all platforms allow for a more unified user experience.</p>
+					<p class="light">No more profiles to browse through and superficial judgements. No swiping like you're everyday dating app. You just start off with a group of at most six people. We want you to feel as comfortable as possible and we belive that being in a small group will make that possible. </p>
 				</div>
 			</div>
 
 			<div class="col s12 m4">
 				<div class="icon-block">
-					<h2 class="center brown-text"><i class="material-icons">settings</i></h2>
-					<h5 class="center">Easy to work with</h5>
+					<h2 class="center brown-text"><i class="material-icons">my_location</i></h2>
+					<h5 class="center">Everyone lives in your neighborhood</h5>
 
-					<p class="light">We have provided detailed documentation as well as specific code examples to help new users get started. We are also always open to feedback and can answer any questions a user may have about Materialize.</p>
+					<p class="light">We get that you're busy. Therefore, we only connect you with people who live close by so that going to hang out with them is not a big ordeal. With Krewe, getting together after a busy work day at a local bar or coffee shop is easy as everyone is within walking distance.</p>
+				</div>
+			</div>
+
+			<div class="col s12 m4">
+				<div class="icon-block">
+					<h2 class="center brown-text"><i class="material-icons">insert_invitation</i></h2>
+					<h5 class="center">Meeting up is easy</h5>
+
+					<p class="light">We provide you the tools to make it really easy to set up things to do and get everyone involved. Doing thing over and over again with your group is simple and fun, helping your form strong bonds and connections.</p>
 				</div>
 			</div>
 		</div>
@@ -62,11 +62,11 @@
 	<div class="section no-pad-bot">
 		<div class="container">
 			<div class="row center">
-				<h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
+				<!-- <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5> -->
 			</div>
 		</div>
 	</div>
-	<div class="parallax"><%= video_tag 'beers.mp4', autoplay: true, loop: true %></div>
+	<div class="parallax"><%= image_tag "people" %></div>
 </div>
 
 <div class="container">
@@ -88,14 +88,14 @@
 	<div class="section no-pad-bot">
 		<div class="container">
 			<div class="row center">
-				<h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
+				<!-- <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5> -->
 			</div>
 		</div>
 	</div>
-	<div class="parallax"><%= image_tag "people" %></div>
+	<div class="parallax"><%= video_tag 'beers.mp4', autoplay: true, loop: true %></div>
 </div>
 
-<footer class="page-footer">
+<footer class="page-footer blue">
 	<div class="container">
 		<div class="row">
 			<div class="col l6 s12">
@@ -103,7 +103,7 @@
 				<p class="grey-text text-lighten-4">Founded by Baron M. Willeford all by his lonesome self without any help from stupid douche bags.</p>
 			</div>
 
-			<div class="col l6 s12 right-align">
+			<div class="col l6 s12">
 				<h5 class="white-text">Connect</h5>
 				<ul>
 					<li><a class="white-text" href="#!">Link 1</a></li>
@@ -123,7 +123,6 @@
 
 
 <%= javascript_tag do %>
-
 	$(document).ready(function(){
 		if ('<%= notice %>') {
 			sweetAlert('<%= notice %>')
