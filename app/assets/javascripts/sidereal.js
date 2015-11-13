@@ -15,6 +15,7 @@ $(document).ready(function(){
 		closeOnClick: true
 	});
 	$('.modal-trigger').leanModal();
+	$('.parallax').parallax();
 })
 
 $(window).resize(function() {
