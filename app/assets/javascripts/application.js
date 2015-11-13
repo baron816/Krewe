@@ -23,5 +23,4 @@
 //= require local_time
 //= require sweet-alert
 //= require sweet-alert-confirm
-//= require skrollr
 //= require jquery.atwho
