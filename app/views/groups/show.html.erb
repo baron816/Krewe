@@ -6,7 +6,7 @@
 		<div class="hide-on-med-and-down">
 			<%= render "groups/buttons" %>
 
-			<%= link_to "Propose Activity", new_group_activity_path(@group_show.group), id: 'new_activity', class: 'waves-effect waves-light btn', remote: true %>
+			<%= link_to "Propose Activity", new_group_activity_path(@group_show.group), id: 'new_activity', class: 'waves-effect waves-light btn purple', remote: true %>
 		</div>
 	</div>
 
@@ -62,9 +62,9 @@
 						<span class="title"><%= link_to user.name, public_profile_user_path(user) %></span>
 						 <% if @group_show.primary_group? %>
 							 	<% if current_user.can_vote?(user) %>
-							 		<%= link_to "<i class='material-icons'>cancel</i> #{user.group_drop_votes_count(@group_show.group)}/3".html_safe, group_drop_user_votes_path(@group_show.group, user_id: user), remote: true, method: :post, class: 'btn btn-danger secondary-content', id: "remove-btn-#{user.id}", data: {confirm: "Vote to remove this user?", text: "Remove inactive users, but only if they're inactive."} %>
+							 		<%= link_to "<i class='material-icons'>cancel</i> #{user.group_drop_votes_count(@group_show.group)}/3".html_safe, group_drop_user_votes_path(@group_show.group, user_id: user), remote: true, method: :post, class: 'btn red secondary-content', id: "remove-btn-#{user.id}", data: {confirm: "Vote to remove this user?", text: "Remove inactive users, but only if they're inactive."} %>
 							 	<% elsif user.not_self(current_user) %>
-							 		<%= link_to "Undo #{user.group_drop_votes_count(@group_show.group)}/3", group_drop_user_vote_path(@group_show.group, user.voter_vote(current_user)), remote: true, method: :delete, class: 'btn btn-warning secondary-content', id: "undo-btn-#{user.id}" %>
+							 		<%= link_to "Undo #{user.group_drop_votes_count(@group_show.group)}/3", group_drop_user_vote_path(@group_show.group, user.voter_vote(current_user)), remote: true, method: :delete, class: 'btn orange secondary-content', id: "undo-btn-#{user.id}" %>
 							 	<% end %>
 						 <% end %>
 					 	</li>

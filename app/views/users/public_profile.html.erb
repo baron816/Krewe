@@ -9,7 +9,7 @@
 		<div class="messages card-panel z-depth-2">
 			<% if @user.personal_messages_any? %>
 				<div class="text-center">
-					<%= link_to_next_page @user.personal_messages, "Load More", remote: true, class: 'btn btn-primary more-messages' %>
+					<%= link_to_next_page @user.personal_messages, "Load More", remote: true, class: 'btn blue more-messages' %>
 				</div>
 
 				<div class="individual-messages">

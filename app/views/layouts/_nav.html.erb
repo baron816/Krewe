@@ -1,5 +1,5 @@
 <nav>
-	<div class="nav-wrapper">
+	<div class="nav-wrapper blue">
 		<ul id="dropdown" class="dropdown-content">
 			<li><%= render 'layouts/dropdown' %></li>
 		</ul>
@@ -11,7 +11,7 @@
 		<ul class="right hide-on-med-and-down">
 			<% if current_user %>
 
-				<li> <%= link_to "Home", user_path(current_user)%></li>
+				<li> <%= link_to "Home", user_path(current_user) %></li>
 				<% if current_user.notifications && current_user.unviewed_notifications_count > 0 %>
 					<li><a class="dropdown-button" href="#!" data-activates="note-alerts">Notifications<i class="material-icons right">arrow_drop_down</i></a></li>
 				<% end %>
@@ -25,12 +25,12 @@
 
 		<ul id="nav-mobile" class="side-nav">
 			<% if current_user %>
-				<li> <%= link_to "Home", user_path(current_user)%></li>
-				<li> <%=  link_to 'Log Out', logout_path, method: :delete %></li>
-				<%= link_to "Settings".html_safe, edit_user_path(current_user), class: "btn btn-warning", remote: true %>
+				<%= link_to "Home", user_path(current_user), class: "btn cyan" %>
+				<%= link_to 'Log Out', logout_path, method: :delete, class: "btn lime" %>
+				<%= link_to "Settings".html_safe, edit_user_path(current_user), class: "btn orange", remote: true %>
 				<% if @group_show %>
 					<%= render "groups/buttons" %>
-					<%= link_to "Propose Activity", new_group_activity_path(@group_show.group), id: 'new_activity', class: 'waves-effect waves-light btn' %>
+					<%= link_to "Propose Activity", new_group_activity_path(@group_show.group), id: 'new_activity', class: 'waves-effect waves-light btn purple' %>
 				<% end %>
 
 			<% else %>

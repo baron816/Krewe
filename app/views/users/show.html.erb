@@ -2,9 +2,9 @@
 	<div class="col m12">
 	<h1><%= @user.name %></h1>
 		<div class="hide-on-med-and-down">
-			<%= link_to "<i class='material-icons medium'>settings</i> Settings".html_safe, edit_user_path, class: "btn btn-warning", remote: true %>
+			<%= link_to "<i class='material-icons medium'>settings</i> Settings".html_safe, edit_user_path, class: "btn orange", remote: true %>
 		</div>
-		<%= link_to "Join Group", join_group_user_path, class: "btn btn-success", method: :post if @user.under_group_limit? %></h5>
+		<%= link_to "Join Group", join_group_user_path, class: "btn green", method: :post if @user.under_group_limit? %></h5>
 	</div>
 
 		<div class="col s12 m6">

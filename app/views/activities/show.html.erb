@@ -2,11 +2,11 @@
 	<div class="col s12 card-panel z-depth-2">
 		<h3><%= @activity.plan %></h3>
 		<% if @activity.user_going?(current_user) %>
-			<%= link_to "Can't go", remove_user_activity_path(@activity.activity), method: :delete, class: 'btn btn-danger' %>
+			<%= link_to "Can't go", remove_user_activity_path(@activity.activity), method: :delete, class: 'btn red' %>
 		<% else %>
-			<%= link_to "Go", add_user_activity_path(@activity.activity), remote: true, method: :post, class: 'btn btn-success', id: "activity-go" %>
+			<%= link_to "Go", add_user_activity_path(@activity.activity), remote: true, method: :post, class: 'btn green', id: "activity-go" %>
 		<% end %>
-		<%= link_to "Edit Activity", edit_activity_path(@activity.activity), class: 'btn btn-warning' if @activity.proposed_by?(current_user) %>
+		<%= link_to "Edit Activity", edit_activity_path(@activity.activity), class: 'btn orange' if @activity.proposed_by?(current_user) %>
 		<h3><%= link_to @activity.group_name, @activity.group %></h3>
 		<h4><%= local_time(@activity.appointment) %></h4>
 		<h4><%= @activity.location %></h4>

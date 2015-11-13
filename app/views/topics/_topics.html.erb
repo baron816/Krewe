@@ -1,5 +1,5 @@
 <% topics.each do |topic| %>
-  <%= link_to "#{topic.name} #{current_user.unviewed_message_notifications_from_topic_count(topic)}", change_topic_path(topic), class: "waves-effect btn", remote: true %>
+  <%= link_to "#{topic.name} #{current_user.unviewed_message_notifications_from_topic_count(topic)}", change_topic_path(topic), class: "waves-effect btn indigo", remote: true %>
 <% end %>
 
-<%= link_to_next_page topics, "Older Threads", remote: true, class: "waves-effect btn btn-info next-topic" %>
+<%= link_to_next_page topics, "Older Threads", remote: true, class: "waves-effect btn orange next-topic" %>
