@@ -18,7 +18,6 @@ gem 'momentjs-rails', '>= 2.9.0'
 gem 'sweetalert-rails'
 gem 'sweet-alert-confirm'
 gem 'auto_html'
-gem 'skrollr-rails'
 
 gem 'jquery-rails'
 gem 'jquery-turbolinks'
