@@ -4,14 +4,16 @@
   <div class="row">
     <div class="col s12 m6">
 
+      <div class="row">
+        <ul class="tabs">
+          <li class="tab col s2"><a href="#" class="active place-type" data-type='bar' data-plan='Get drinks'><i class="material-icons">local_bar</i></a></li>
+          <li class="tab col s2"><a href="#" class="place-type" data-type='restaurant' data-plan='Get food'><i class="material-icons">local_dining</i></a></li>
+          <li class="tab col s2"><a href="#" class="place-type" data-type='cafe' data-plan='Get coffee'><i class="material-icons">local_cafe</i></a></li>
+        </ul>
+      </div>
 
       <ul class="collection" id="spots">
-        <li class="collection-item">Suggested Places</li>
-        <li class="collection-item">
-            <button type="button" class="btn waves-effect waves-light purple place-type" data-type='bar' data-plan='Get drinks'><i class="material-icons">local_bar</i></button>
-            <button type="button" class="btn waves-effect waves-light purple place-type" data-type='restaurant' data-plan='Get food'><i class="material-icons">local_dining</i></button>
-            <button type="button" class="btn waves-effect waves-light purple place-type" data-type='cafe' data-plan='Get coffee'><i class="material-icons">local_cafe</i></button>
-        </li>
+        <li class="collection-item">Some places nearby...</li>
       </ul>
     </div>
 
@@ -40,8 +42,11 @@
 
   <%= f.hidden_field :longitude %>
   <%= f.hidden_field :latitude %>
-  <div id="map-canvas"></div> <br>
-  <%= f.submit "Submit", class: 'btn green' %>
+  <div id="map-canvas"></div>
+
+  <div class="modal-footer">
+    <%= f.submit "Submit", class: 'btn green' %>
+  </div>
   </div>
 <% end %>
 
@@ -55,5 +60,5 @@
   $('#date_field, #time_field').change(function(){
     setActivityAppointment()
   })
-
+  $('ul.tabs').tabs();
 <% end %>
