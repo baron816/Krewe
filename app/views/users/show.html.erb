@@ -7,7 +7,7 @@
 		<%= link_to "Join Group", join_group_user_path, class: "btn green", method: :post if @user.under_group_limit? %></h5>
 	</div>
 
-		<div class="col s12 m6">
+		<div class="col s12 l6">
 		<h3>Groups</h3>
 		<div class="collection">
 			<% @user.groups.each do |group| %>
@@ -15,17 +15,22 @@
 			<% end %>
 		</div>
 
-		<% if @user.unique_friends.any? %>
-			<h3>Friends</h3>
-			<div class="collection">
-				<% @user.unique_friends.each do |friend| %>
-						<%= link_to "#{friend.name} <span class='badge'>#{current_user.unviewed_personal_notifications_from_user_count(friend)}</span>".html_safe, public_profile_user_path(friend), class: "collection-item" %>
-				<% end %>
-			</div>
-		<% end %>
+		<div class="hide-on-med-and-down">
+			<% if @user.unique_friends.any? %>
+				<h3>Friends</h3>
+				<%= render partial: "users/friends", locals: { friends: @user.unique_friends } %>
+			<% end %>
+		</div>
 	</div>
 
-	<div class="col s12 m6">
+	<div class="col s12 l6">
 		<%= render partial: "activities/activities", locals: { activities: @user.future_activities, group: @user.groups.first } %>
+	</div>
+</div>
+
+<div class="modal" id="friends">
+	<div class="modal-content">
+		<h4>Friends</h4>
+		<%= render partial: "users/friends", locals: { friends: @user.unique_friends } %>
 	</div>
 </div>
