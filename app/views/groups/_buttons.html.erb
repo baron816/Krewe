@@ -1,4 +1,4 @@
-<%= link_to "Drop Group", drop_user_group_path(@group_show.group), method: :delete, class: 'btn red', data: {confirm: "Are you sure you want to drop this group?", text: "You will not be able to rejoin it.", 'confirm-button-text': "Yeah, these guys are jerks"} %>
+<%= link_to "Drop Group", drop_user_group_path(@group_show.group), method: :delete, class: 'btn red white-text', data: {confirm: "Are you sure you want to drop this group?", text: "You will not be able to rejoin it.", 'confirm-button-text': "Yeah, these guys are jerks"} %>
 
 <% if @group_show.ripe_for_expansion? %>
   <% unless @group_show.user_expand_group_votes(current_user) %>
@@ -9,5 +9,5 @@
 <% end %>
 
 
-<a href="#members" class="waves-effect btn pink modal-trigger">Members (<%= @group_show.users_count %>)</a>
-<a href="#new-topic" class="waves-effect btn brown modal-trigger">New Thread</a>
+<a href="#members" class="waves-effect btn pink modal-trigger white-text">Members (<%= @group_show.users_count %>)</a>
+<a href="#new-topic" class="waves-effect btn indigo modal-trigger white-text">New Thread</a>
