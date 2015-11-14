@@ -3,8 +3,8 @@ class UsersController < ApplicationController
 	before_action :user_logged?, only: [:update, :edit]
 
 	def show
-		@user = User.includes(:groups).friendly.find(params[:id])
-		check_user
+		@user_show = User.includes(:groups).friendly.find(params[:id])
+		message_root_redirect("You do not have access to go there.") unless @user_show == current_user
 	end
 
 	def public_profile
@@ -75,10 +75,6 @@ class UsersController < ApplicationController
 	private
 	def set_user
 		@user = User.friendly.find(params[:id])
-	end
-
-	def check_user
-		message_root_redirect("You do not have access to go there.") unless @user == current_user
 	end
 
 	def user_params
