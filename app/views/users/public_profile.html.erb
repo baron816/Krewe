@@ -1,28 +1,28 @@
-<div class="well">
-	<h1><%= @user.user_name %></h1>
-	Location: <%= @user.user_location %> <br>
-	Category: <%= @user.user_category %>
-</div>
-
-<% unless @user.own_profile? %>
-	<div class="well messages">
-		<% if @user.personal_messages_any? %>
-			<div class="text-center">
-				<%= link_to_next_page @user.personal_messages, "Load More", remote: true, class: 'btn btn-primary more-messages' %>
-			</div>
-
-			<div class="individual-messages">
-
-			<% @user.personal_messages.reverse_each do |message| %>
-				<%= render partial: 'messages/message', locals: {message: message} %>
-			<% end %>
-			</div>
-		<% else %>
-			<h3 id="intro">No messages yet. Why don't you say hi?</h3>
-		<% end %>
+<div class="container">
+	<div class="card-panel z-depth-2">
+		<h2><%= @user.user_name %></h2>
+		Location: <%= @user.user_location %> <br>
+		Category: <%= @user.user_category %>
 	</div>
 
+	<% unless @user.own_profile? %>
+		<div class="messages card-panel z-depth-2">
+			<% if @user.personal_messages_any? %>
+				<div class="text-center">
+					<%= link_to_next_page @user.personal_messages, "Load More", remote: true, class: 'btn blue more-messages' %>
+				</div>
 
+				<div class="individual-messages">
 
+				<% @user.personal_messages.reverse_each do |message| %>
+					<%= render partial: 'messages/message', locals: {message: message} %>
+				<% end %>
+				</div>
+			<% else %>
+				<h3 id="intro">No messages yet. Why don't you say hi?</h3>
+			<% end %>
+		</div>
 	<%= render partial: 'messages/new', locals: {messageable: @user.user, message: @user.new_message} %>
 <% end %>
+
+</div>

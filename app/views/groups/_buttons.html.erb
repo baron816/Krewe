@@ -1,0 +1,13 @@
+<%= link_to "Drop Group", drop_user_group_path(@group_show.group), method: :delete, class: 'btn red white-text', data: {confirm: "Are you sure you want to drop this group?", text: "You will not be able to rejoin it.", 'confirm-button-text': "Yeah, these guys are jerks"} %>
+
+<% if @group_show.ripe_for_expansion? %>
+  <% unless @group_show.user_expand_group_votes(current_user) %>
+    <%= link_to "<i class='glyphicon glyphicon-plus-sign'></i> Expand Group #{@group_show.expand_group_votes_size}/#{@group_show.users_count}".html_safe, group_expand_group_votes_path(@group_show.group), method: :post, class: 'btn indigo', id: 'expand', remote: @group_show.not_almost_expandable? %>
+  <% else %>
+    <%= link_to "Don't Expand #{@group_show.expand_group_votes_size}/#{@group_show.users_count}", group_expand_group_vote_path(@group_show.group, @group_show.user_expand_group_votes(current_user)), method: :delete, class: 'btn red', remote: true, id: 'remain' %>
+  <% end %>
+<% end %>
+
+
+<a href="#members" class="waves-effect btn pink modal-trigger white-text">Members (<%= @group_show.users_count %>)</a>
+<a href="#new-topic" class="waves-effect btn indigo modal-trigger white-text">New Thread</a>

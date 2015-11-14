@@ -1,29 +1,52 @@
-<nav class="navbar navbar-default">
-	<div class="container">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#right-section" aria-expanded="false">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
+<nav>
+	<div class="nav-wrapper blue">
+		<ul id="dropdown" class="dropdown-content">
+			<li><%= render 'layouts/dropdown' %></li>
+		</ul>
 
-			<a href="/" class="navbar-brand">
-				<%= image_tag 'krewe', id: 'logo' %>
-			</a>
-		</div>
-		<div class="navbar-collapse collapse" id="right-section">
-			<ul class="nav navbar-nav navbar-right">
-				<% if current_user %>
-					<li> <%= link_to "Home", user_path(current_user)%></li>
-					<li class="dropdown"><%= render 'layouts/dropdown' %></li>
-					<li> <%=  link_to 'Log Out', logout_path, method: :delete %></li>
+		<a href="/" class="brand-logo">
+			<%= image_tag 'krewe', id: 'logo' %>
+		</a>
+		<a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+		<ul class="right hide-on-med-and-down">
+			<% if current_user %>
 
-				<% else %>
-					<li><%= link_to "Log In", login_path, remote: true %></li>
-					<li><%= link_to "Sign Up", new_user_path, remote: true %></li>
+				<li> <%= link_to "Home", user_path(current_user) %></li>
+				<% if current_user.notifications && current_user.unviewed_notifications_count > 0 %>
+					<li><a class="dropdown-button" href="#!" data-activates="note-alerts">Notifications<i class="material-icons right">arrow_drop_down</i></a></li>
 				<% end %>
-			</ul>
-		</div>
+				<li> <%=  link_to 'Log Out', logout_path, method: :delete %></li>
+
+			<% else %>
+				<li><%= link_to "Log In", login_path, class: "modal-trigger", remote: true %></li>
+				<li><%= link_to "Sign Up", new_user_path, class: "modal-trigger", remote: true %></li>
+			<% end %>
+		</ul>
+
+		<ul id="nav-mobile" class="side-nav">
+			<% if current_user %>
+				<%= link_to "Home", user_path(current_user), class: "btn blue white-text" %>
+				<%= link_to 'Log Out', logout_path, method: :delete, class: "btn lime white-text" %>
+				<%= link_to "Settings".html_safe, edit_user_path(current_user), class: "btn orange white-text", remote: true %>
+
+				<% if @user_show %>
+				  <a href="#friends" class="waves-effect btn cyan modal-trigger white-text">Friends (<%= @user_show.unique_friends_count %>)</a>
+				<% end %>
+
+				<% if @group_show %>
+					<%= render "groups/buttons" %>
+					<a href="#activities" class="waves-effect btn light-blue modal-trigger white-text">Upcoming Activities (<%= @group_show.activities_count %>)</a>
+					<%= link_to "Propose Activity", new_group_activity_path(@group_show.group), id: 'new_activity', class: 'waves-effect waves-light btn purple white-text' %>
+				<% end %>
+
+			<% else %>
+				<li><%= link_to "Log In", login_path, class: "modal-trigger", remote: true %></li>
+				<li><%= link_to "Sign Up", new_user_path, class: "modal-trigger", remote: true %></li>
+			<% end %>
+		</ul>
 	</div>
 </nav>
+
+<div id='edit-user' class="modal">
+	<div class="modal-content"></div>
+</div>

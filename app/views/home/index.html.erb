@@ -1,37 +1,128 @@
-<div data-0="background-image:linear-gradient(0deg, rgb(53,128,217), rgb(252,201,185);" data-2000="background-image:linear-gradient(360deg, rgb(252,201,185), rgb(53,128,217);" id="home"></div>
+<div id="index-banner" class="parallax-container">
+	<div class="section no-pad-bot">
+		<div class="container">
+			<br><br>
+			<h1 class="header center">Krewe</h1>
+			<div class="row center">
+				<h5 class="header col s12 light">The best way to form your social network</h5>
+			</div>
+			<div class="row center">
+				<% if current_user %>
+					<%= link_to "Home", user_path(current_user), class: "modal-trigger", class: 'btn-large waves-effect blue' %>
+				<% else %>
+					<%= link_to "Sign Up", new_user_path, class: "modal-trigger",  class: 'btn-large waves-effect blue', remote: true %>
+				<% end %>
+			</div>
+			<br><br>
 
-<div class="jumbotron" data-0="opacity:1; top:30%;" data-500="opacity:0;">
-	<h1>Welcome to Krewe</h1>
+		</div>
+	</div>
+	<div class="parallax"><%= video_tag 'diner.mp4', autoplay: true, loop: true %></div>
 </div>
 
 
-<div class="jumbotron" id="info-tron" data-0="opacity:0; top:100%;" data-500="opacity:1; top:30%;" data-1000="opacity:0;">
-	<h2>What is Krewe?</h2>
-	<p>Krewe will help you form lasting friendships and build a massive, interconnected network.</p>
+<div class="container">
+	<div class="section">
+
+		<!--   Icon Section   -->
+		<div class="row">
+			<div class="col s12 m4">
+				<div class="icon-block">
+					<h2 class="center brown-text"><i class="material-icons">group</i></h2>
+					<h5 class="center">Krewe connects you with a group of people</h5>
+
+					<p class="light">No more profiles to browse through and superficial judgements. No swiping like you're everyday dating app. You just start off with a group of at most six people. We want you to feel as comfortable as possible and we belive that being in a small group will make that possible. </p>
+				</div>
+			</div>
+
+			<div class="col s12 m4">
+				<div class="icon-block">
+					<h2 class="center brown-text"><i class="material-icons">my_location</i></h2>
+					<h5 class="center">Everyone lives in your neighborhood</h5>
+
+					<p class="light">We get that you're busy. Therefore, we only connect you with people who live close by so that going to hang out with them is not a big ordeal. With Krewe, getting together after a busy work day at a local bar or coffee shop is easy as everyone is within walking distance.</p>
+				</div>
+			</div>
+
+			<div class="col s12 m4">
+				<div class="icon-block">
+					<h2 class="center brown-text"><i class="material-icons">insert_invitation</i></h2>
+					<h5 class="center">Meeting up is easy</h5>
+
+					<p class="light">We provide you the tools to make it really easy to set up things to do and get everyone involved. Doing thing over and over again with your group is simple and fun, helping your form strong bonds and connections.</p>
+				</div>
+			</div>
+		</div>
+
+	</div>
 </div>
 
-<div class="jumbotron" id="info-tron" data-500="opacity:0; top:100%;" data-1000="opacity:1; top:30%;" data-1500="opacity:0">
-	<h2>How does it work?</h2>
-	<p>Krewe will place you in a group of six people, each of whom live within a half mile of you. This means you will be easily able to get together frequently, making it easy to bond with them.</p>
+
+<div class="parallax-container valign-wrapper">
+	<div class="section no-pad-bot">
+		<div class="container">
+			<div class="row center">
+				<!-- <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5> -->
+			</div>
+		</div>
+	</div>
+	<div class="parallax"><%= image_tag "people" %></div>
 </div>
 
-<div class="jumbotron" id="info-tron" data-1000="opacity:0; top:100%;" data-1500="opacity:1; top:30%;">
-	<h2>Then what?</h2>
-	<p>Once the group becomes close enough, we'll combine you with other local groups, helping you form even more connections. We also give you the tools to make it easy to see when everyone is available and to set up things to do together.</p>
+<div class="container">
+	<div class="section">
+
+		<div class="row">
+			<div class="col s12 center">
+				<h3><i class="mdi-content-send brown-text"></i></h3>
+				<h4>Contact Us</h4>
+				<p class="left-align light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque id nunc nec volutpat. Etiam pellentesque tristique arcu, non consequat magna fermentum ac. Cras ut ultricies eros. Maecenas eros justo, ullamcorper a sapien id, viverra ultrices eros. Morbi sem neque, posuere et pretium eget, bibendum sollicitudin lacus. Aliquam eleifend sollicitudin diam, eu mattis nisl maximus sed. Nulla imperdiet semper molestie. Morbi massa odio, condimentum sed ipsum ac, gravida ultrices erat. Nullam eget dignissim mauris, non tristique erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;</p>
+			</div>
+		</div>
+
+	</div>
 </div>
 
-<footer class='jumbotron' data-0="opacity:0;" data-500="opacity:1;">
-	<% unless current_user %>
-		<%= link_to "Log In", login_path, remote: true%><br>
-	  <%= link_to "Sign Up", new_user_path %><br>
-	<% end %>
-	<%= link_to "Sign Up for Newsletter", new_newsletter_path %>
+
+<div class="parallax-container valign-wrapper">
+	<div class="section no-pad-bot">
+		<div class="container">
+			<div class="row center">
+				<!-- <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5> -->
+			</div>
+		</div>
+	</div>
+	<div class="parallax"><%= video_tag 'beers.mp4', autoplay: true, loop: true %></div>
+</div>
+
+<footer class="page-footer blue">
+	<div class="container">
+		<div class="row">
+			<div class="col l6 s12">
+				<h5 class="white-text">About Us</h5>
+				<p class="grey-text text-lighten-4">Founded by Baron M. Willeford all by his lonesome self without any help from stupid douche bags.</p>
+			</div>
+
+			<div class="col l6 s12">
+				<h5 class="white-text">Connect</h5>
+				<ul>
+					<li><a class="white-text" href="#!">Link 1</a></li>
+					<li><a class="white-text" href="#!">Link 2</a></li>
+					<li><a class="white-text" href="#!">Link 3</a></li>
+					<li><a class="white-text" href="#!">Link 4</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="footer-copyright">
+		<div class="container">
+		<a class="brown-text text-lighten-3" href="http://gokrewe.com">Krewe Incorporated © 2014</a>
+		</div>
+	</div>
 </footer>
 
 
 <%= javascript_tag do %>
-	var s = skrollr.init()
-
 	$(document).ready(function(){
 		if ('<%= notice %>') {
 			sweetAlert('<%= notice %>')

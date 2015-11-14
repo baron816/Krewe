@@ -1,7 +1,7 @@
-<div class="well messages">
+<div class="messages card-panel z-depth-2">
   <% if topic.messages_any? %>
-    <div class="text-center">
-      <%= link_to_next_page topic.messages, "See More", params: {controller: 'topics', action: 'show', id: topic.id}, remote:true, class: "btn btn-primary more-messages" %>
+    <div class="center-align">
+      <%= link_to_next_page topic.messages, "See More", params: {controller: 'topics', action: 'show', id: topic.id}, remote:true, class: "btn blue more-messages" %>
     </div>
 
     <div class="individual-messages">

@@ -1,6 +1,13 @@
-<%= form_for([group, topic], remote: true) do |f| %>
-  <div class="input-group">
-    <%= f.text_field :name, class: "form-control", placeholder: "New Thread", required: true %>
-    <span class="input-group-btn"><%= f.submit "Create", class: "btn btn-success" %></span>
+<div class="modal" id="new-topic">
+  <div class="modal-content">
+    <h4>New Thread</h4>
+    <%= form_for([group, topic], remote: true) do |f| %>
+      <div class="input-field">
+        <%= f.text_field :name, required: true %>
+      </div>
+      <div class="modal-footer">
+        <%= f.submit "Create", class: "modal-action modal-close btn green" %>
+      </div>
+  <% end %>
   </div>
-<% end %>
+</div>

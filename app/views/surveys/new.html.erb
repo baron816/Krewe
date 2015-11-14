@@ -1,25 +1,25 @@
-<div class="col-md-6 col-md-offset-3">
-  <h4 class="well">Please let us know why you're deleting your account:</h4>
-  <%= form_for @survey do |f| %>
+<div class="container">
+  <div class="card-panel">
+    <h3>Please let us know why you're deleting your account:</h3>
+    <%= form_for @survey do |f| %>
 
-    <%= render 'shared/errors', object: @survey %>
+      <%= render 'shared/errors', object: @survey %>
 
-    <%= f.hidden_field :email, value: params[:email] %>
-    <% reasons_for_leaving.each do |reason| %>
-      <div class="input-group">
-        <span class="input-group-addon">
-          <%= f.check_box :reasons, {multiple: true}, reason, nil  %>
-        </span>
-        <%= label_tag :reasons, reason, class: "form-control" %>
+      <%= f.hidden_field :email, value: params[:email] %>
+
+      <% reasons_for_leaving.each_with_index do |reason, index| %>
+        <p>
+          <%= f.check_box(:reasons, {multiple: true, id: "box-#{index}"}, reason, nil)  %>
+          <%= label_tag "box-#{index}", reason %>
+        </p>
+      <% end %>
+
+      <div class="input-field">
+        <%= f.text_area :reasons, class: "materialize-textarea", id: "text-area-input", multiple: true %>
+        <%= f.label :reasons, "Other:" %>
       </div>
-    <% end %>
 
-    <div class="input-group">
-      <span class="input-group-addon">
-        <%= label_tag :reasons, "Other:" %>
-      </span>
-      <%= f.text_area :reasons, class: "form-control", multiple: true %>
-    </div>
-    <%= f.submit :Submit, class: "btn btn-primary" %>
-  <% end %>
+      <%= f.submit :Submit, class: "btn blue" %>
+    <% end %>
+  </div>
 </div>

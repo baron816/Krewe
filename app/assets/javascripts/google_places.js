@@ -70,7 +70,7 @@ function mapActivityLocation(startingLat, startingLng) {
 	})
 }
 
-$(document).on('click', '.suggested button', function() {
+$(document).on('click', '.suggested', function() {
 	var item = $(this);
 
   var service = new google.maps.places.PlacesService(map)
@@ -105,6 +105,9 @@ $(document).on('click', '.suggested button', function() {
     	$('#activity_longitude').val(place.geometry.location.lng());
 
 			$('#activity_plan').val(plan || 'Get Drinks')
+
+			$('label[for="activity_plan"]').addClass("active")
+			$('label[for="activity_location"]').addClass("active")
     }
   })
 })
@@ -129,7 +132,7 @@ function markPlaces(type) {
       for (var i = 0; i < 3; i++) {
       	service.getDetails(resultsSample[i], function(result, status){
           var location = result.geometry.location
-          $('#spots').append('<li class="list-group-item suggested"><button type="button" class="btn btn-primary name" data-placeid="' + result.place_id + '">' + result.name + '</button></li>')
+          $('#spots').append('<a href="#" class="collection-item suggested" data-placeid="' + result.place_id + '">' + result.name + '</a>')
 				})
       }
 		}

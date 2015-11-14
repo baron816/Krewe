@@ -15,15 +15,12 @@
 //= require jstz
 //= require browser_timezone_rails/set_time_zone
 //= require jquery_ujs
-//= require bootstrap-sprockets
+//= require materialize-sprockets
 //= require jquery.turbolinks
 //= require moment
-//= require bootstrap-datetimepicker
 //= require underscore
 //= require_tree
 //= require local_time
 //= require sweet-alert
 //= require sweet-alert-confirm
-//= require select2
-//= require skrollr
 //= require jquery.atwho

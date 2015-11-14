@@ -1,0 +1,5 @@
+<div class="collection">
+  <% friends.each do |friend| %>
+      <%= link_to "#{friend.name} <span class='badge'>#{current_user.unviewed_personal_notifications_from_user_count(friend)}</span>".html_safe, public_profile_user_path(friend), class: "collection-item" %>
+  <% end %>
+</div>

@@ -1,43 +1,36 @@
-<div class="col-md-12">
-<h1><%= @user.name %></h1>
-<h5><%= link_to "Profile", public_profile_user_path(current_user), class: "btn btn-info" %> <%= link_to "Edit", edit_user_path, class: "btn btn-warning" %> <%= link_to "Join Group", join_group_user_path, class: "btn btn-success", method: :post if @user.under_group_limit? %></h5>
+<div class="row">
+	<div class="col m12">
+	<h1><%= @user_show.name %></h1>
+		<div class="hide-on-med-and-down">
+			<%= link_to "<i class='material-icons medium'>settings</i> Settings".html_safe, edit_user_path, class: "btn orange", remote: true %>
+		</div>
+		<%= link_to "Join Group", join_group_user_path, class: "btn green", method: :post if @user_show.under_group_limit? %></h5>
+	</div>
+
+		<div class="col s12 l6">
+		<h3>Groups</h3>
+		<div class="collection">
+			<% @user_show.groups.each do |group| %>
+				<%= link_to "#{group.name} <span class='badge'>#{current_user.unviewed_group_notification_count(group)}</span>".html_safe, group_path(group), class: "collection-item" %>
+			<% end %>
+		</div>
+
+		<div class="hide-on-med-and-down">
+			<% if @user_show.unique_friends.any? %>
+				<h3>Friends</h3>
+				<%= render partial: "users/friends", locals: { friends: @user_show.unique_friends } %>
+			<% end %>
+		</div>
+	</div>
+
+	<div class="col s12 l6">
+		<%= render partial: "activities/activities", locals: { activities: @user_show.future_activities, group: @user_show.groups.first } %>
+	</div>
 </div>
 
-<% if @user.unique_friends.any? %>
-	<div class="col-md-6">
-		<h3>Friends</h3>
-		<ul class="list-group">
-			<% @user.unique_friends.each do |friend| %>
-					<li class="list-group-item">
-						<%= link_to friend.name, public_profile_user_path(friend) %>
-						<span class='badge'><%= current_user.unviewed_personal_notifications_from_user_count(friend) %></span>
-					</li>
-			<% end %>
-		</ul>
+<div class="modal" id="friends">
+	<div class="modal-content">
+		<h4>Friends</h4>
+		<%= render partial: "users/friends", locals: { friends: @user_show.unique_friends } %>
 	</div>
-<% end %>
-
-<div class="col-md-6">
-	<h3>Groups</h3>
-	<ul class="list-group">
-		<% @user.groups.each do |group| %>
-			<li class="list-group-item"><%= link_to group.name, group_path(group) %>
-				<span class='badge'><%= current_user.unviewed_group_notification_count(group) %></span>
-			</li>
-		<% end %>
-	</ul>
 </div>
-
-<% if @user.future_activities.any? %>
-	<div class="col-md-6">
-		<h3>Upcoming Activities</h3>
-		<ul class="list-group">
-			<% @user.future_activities.each do |activity| %>
-				<li class="list-group-item">
-					<%= link_to activity.plan, activity_path(activity) %> with <%= activity.group_name %> <%= local_time_ago(activity.appointment) %>
-					<span class='badge'><%= current_user.unviewed_activity_notifications_count(activity) %></span>
-				</li>
-			<% end %>
-		</ul>
-	</div>
-<% end %>

@@ -8,20 +8,26 @@ $(document).ready(function(){
 	$('.topics > li:first-child').addClass('selected-topic')
 
 	highlightTopic();
+
+	$(".dropdown-button").dropdown();
+	$(".button-collapse").sideNav({
+		closeOnClick: true
+	});
+	$('.modal-trigger').leanModal();
+	$('.parallax').parallax();
+
+	$("#map-hider").click(function () {
+		$('#map-canvas').toggle();
+	})
 })
 
 $(window).resize(function() {
 	resize_window('.messages')
 })
 
-var autocomplete;
 
-function dateTime() {
-	$('#datetimepicker').datetimepicker({
-		format: 'YYYY-MM-DD hh:mm A',
-		minDate: new Date()
-	});
-}
+
+var autocomplete;
 
 function scrollBottom() {
 	$('.messages').scrollTop($('.messages').prop("scrollHeight"));
@@ -45,7 +51,14 @@ function setCoordinates() {
 
 function resize_window(div) {
 	var window_height = $(window).height();
-	var content_height = window_height * .25;
+	var size;
+
+	if ($("#activity-messages").length) {
+		size = .25
+	} else {
+		size = .45
+	}
+	var content_height = window_height * size;
 	$(div).height(content_height);
 }
 
@@ -55,4 +68,10 @@ function highlightTopic() {
 		$(this).find('a span').remove()
 		$(this).addClass('selected-topic')
 	})
+}
+
+function setActivityAppointment() {
+	var time = $("#time_field").val();
+	var date = $("#date_field").val();
+	$("#activity_appointment").val(date + " " + time);
 }

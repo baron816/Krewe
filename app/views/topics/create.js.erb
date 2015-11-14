@@ -1,4 +1,4 @@
-$('.topics').prepend('<li><%= j link_to @topic.name, change_topic_path(@topic), class: "btn btn-info", remote: true %></li>')
+$('.topics').prepend('<%= j link_to @topic.name, change_topic_path(@topic), class: "waves-effect btn", remote: true %>')
 $('.message-group').html('<%= j render partial: "topic", locals: { topic: @topic_show } %>')
 $('#topic_name').val("")
 
@@ -7,3 +7,4 @@ $('.topics > li:first-child').addClass('selected-topic')
 
 resize_window('.messages');
 mentioning(<%= @topic.names_data(current_user) %>)
+$('.topics').animate({ scrollLeft: 0 }, 1000)

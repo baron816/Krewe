@@ -1,31 +1,64 @@
 <%= form_for([@group, @activity]) do |f| %>
   <%= render 'shared/errors', object: @activity %>
 
-  <ul class="list-group" id="spots">
-    <li class="list-group-item">Suggested Places</li>
-    <li class="list-group-item">
-      <div class="btn-group" role="group" aria-label="suggestion type">
-        <button type="button" class="btn btn-info place-type" data-type='bar' data-plan='Get drinks'>Bars</button> <button type="button" class="btn btn-info place-type" data-type='restaurant' data-plan='Get food'>Restaurants</button> <button type="button" class="btn btn-info place-type" data-type='cafe' data-plan='Get coffee'>Cafes</button>
-      </div>
-    </li>
-  </ul>
+  <div class="row">
+    <div class="col s12 m6">
 
-  <%= f.text_field :plan, placeholder: "What's the plan?", class: 'form-control', required: true %>
-  <%= f.text_field :location, placeholder: "Where?", class: 'form-control', required: true %>
-  <div class="form-group">
-    <div class="input-group date" id='datetimepicker'>
-      <%= f.text_field :appointment, placeholder: 'When? Hit button -->', class: 'form-control', required: true %>
-      <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+      <div class="row">
+        <ul class="tabs">
+          <li class="tab col s2"><a href="#" class="active place-type" data-type='bar' data-plan='Get drinks'><i class="material-icons">local_bar</i></a></li>
+          <li class="tab col s2"><a href="#" class="place-type" data-type='restaurant' data-plan='Get food'><i class="material-icons">local_dining</i></a></li>
+          <li class="tab col s2"><a href="#" class="place-type" data-type='cafe' data-plan='Get coffee'><i class="material-icons">local_cafe</i></a></li>
+        </ul>
+      </div>
+
+      <ul class="collection" id="spots">
+        <li class="collection-item">Some places nearby...</li>
+      </ul>
     </div>
+
+  <div class="col s12 m6">
+    <div class="input-field">
+      <%= f.text_field :plan, class: "validate", required: true %>
+      <%= f.label :plan, "What's the plan?" %>
+    </div>
+    <div class="input-field">
+      <%= f.text_field :location, placeholder: "",class: "validate", required: true %>
+      <%= f.label :location, "Where?" %>
+    </div>
+
+    <div class="input-field">
+      <%= text_field_tag :day, "", class: "datepicker", id: "date_field", required: true %>
+      <%= label_tag :date_field, "What day?" %>
+    </div>
+
+    <div class="input-field">
+      <%= text_field_tag :time, "", id: "time_field", required: true %>
+      <%= label_tag :time_field, "What time?" %>
+    </div>
+
+      <%= f.hidden_field :appointment %>
   </div>
-  <%= f.hidden_field :proposer_id, value: current_user.id %>
+
   <%= f.hidden_field :longitude %>
   <%= f.hidden_field :latitude %>
-  <div id="map-canvas"></div> <br>
-  <%= f.submit "Submit", class: 'btn btn-success' %>
+  <div id="map-canvas"></div>
+
+  <div class="modal-footer">
+    <%= f.submit "Submit", class: 'btn green' %>
+  </div>
+  </div>
 <% end %>
 
 <%= javascript_tag do %>
-  dateTime();
   mapLocation('<%= @group.latitude %>', '<%= @group.longitude %>');
+  $('.datepicker').pickadate()
+  $('#time_field').pickatime({
+    twelvehour: true
+  })
+
+  $('#date_field, #time_field').change(function(){
+    setActivityAppointment()
+  })
+  $('ul.tabs').tabs();
 <% end %>
