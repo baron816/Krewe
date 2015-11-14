@@ -46,7 +46,14 @@ function setCoordinates() {
 
 function resize_window(div) {
 	var window_height = $(window).height();
-	var content_height = window_height * .45;
+	var size;
+
+	if ($("#activity-messages").length) {
+		size = .25
+	} else {
+		size = .45
+	}
+	var content_height = window_height * size;
 	$(div).height(content_height);
 }
 
