@@ -61,6 +61,10 @@ class User < ActiveRecord::Base
 		@unique_friends ||= friends.where.not(id: self).uniq
 	end
 
+	def unique_friends_count
+	  unique_friends.count
+	end
+
 	def is_friends_with?(user)
 	  unique_friends.include?(user)
 	end
