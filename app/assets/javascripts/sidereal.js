@@ -9,18 +9,23 @@ $(document).ready(function(){
 
 	highlightTopic();
 
-
 	$(".dropdown-button").dropdown();
 	$(".button-collapse").sideNav({
 		closeOnClick: true
 	});
 	$('.modal-trigger').leanModal();
 	$('.parallax').parallax();
+
+	$("#map-hider").click(function () {
+		$('#map-canvas').toggle();
+	})
 })
 
 $(window).resize(function() {
 	resize_window('.messages')
 })
+
+
 
 var autocomplete;
 
