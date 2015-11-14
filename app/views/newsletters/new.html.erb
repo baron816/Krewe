@@ -1,11 +1,15 @@
 <% provide(:title, "Sign up for newsletter") %>
 
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <h1>Signup for Newsletter</h1>
+<div class="container">
+  <div class="card-panel">
+    <h3>Signup for Newsletter</h3>
     <%= form_for(:newsletter, url: newsletters_path) do |f| %>
-      <%= f.email_field :email, placeholder: "Email", class: 'form-control' %>
-      <br>
+
+      <div class="input-field">
+        <%= f.email_field :email, required: true %>
+        <%= f.label :email %>
+      </div>
+
       <%= f.submit "Submit", class: 'btn blue' %>
     <% end %>
   </div>

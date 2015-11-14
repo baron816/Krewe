@@ -2,38 +2,40 @@
 		<%= render 'shared/errors', object: @user %>
 
 		<div class="input-field">
+			<%= f.text_field :name, class: 'validate', required: true %>
 			<%= f.label :name %>
-			<%= f.text_field :name %>
 		</div>
 		<div class="input-field">
+			<%= f.email_field :email, class: 'validate', required: true %>
 			<%= f.label :email  %>
-			<%= f.email_field :email, class: 'validate' %>
 		</div>
 
     <div class="input-field">
+			<%= f.text_field :address, placeholder: "", required: true %>
 			<%= f.label :address %>
-			<%= f.text_field :address, required: true %>
     </div>
 
 		<div class="input-field">
-			<%= f.select(:category, categories, include_blank: true, required: true) %>
-			<label>Select Your Category</label>
+			<%= f.select :category, categories, include_blank: true, required: true, class: "validate", required: true %>
+			<%= f.label :category, "Select your category" %>
 		</div>
 
 		<div class="input-field">
+			<%= f.password_field :password, class: 'validate', required: true %>
 			<%= f.label :password %>
-			<%= f.password_field :password, required: true %>
 		</div>
 
 		<div class="input-field">
+			<%= f.password_field :password_confirmation, class: "validate", required: true %>
 			<%= f.label :password_confirmation %>
-			<%= f.password_field :password_confirmation, required: true %>
 		</div>
 
 		<%= f.hidden_field :latitude, id: "lat" %>
 		<%= f.hidden_field :longitude, id: 'lng' %>
 
-		<%= f.submit :Submit, class: 'btn blue form-control' %>
+		<div class="modal-footer">
+			<%= f.submit :Submit, class: 'btn blue' %>
+		</div>
 <% end %>
 
 <%= javascript_tag do %>

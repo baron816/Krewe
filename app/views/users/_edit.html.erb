@@ -11,7 +11,7 @@
 
 			<div class="input-field">
 				<%= f.label :email, class: "active" %>
-				<%= f.email_field :email, placeholder: 'Email', class: 'form-control', required: true %>
+				<%= f.email_field :email, required: true %>
 			</div>
 
 			<div class="input-field">
@@ -25,7 +25,7 @@
 
 			<%= f.hidden_field :latitude, id: "lat" %>
 			<%= f.hidden_field :longitude, id: 'lng' %>
-			<%= f.submit "Submit", class: 'btn blue form-control' %>
+			<%= f.submit "Submit", class: 'btn blue' %>
 	<% end %>
 
 <%= javascript_tag do %>
