@@ -29,8 +29,8 @@
 				<%= link_to 'Log Out', logout_path, method: :delete, class: "btn lime white-text" %>
 				<%= link_to "Settings".html_safe, edit_user_path(current_user), class: "btn orange white-text", remote: true %>
 
-				<% if @user %>
-				  <a href="#friends" class="waves-effect btn cyan modal-trigger white-text">Friends (<%= @user.unique_friends_count %>)</a>
+				<% if @user_show %>
+				  <a href="#friends" class="waves-effect btn cyan modal-trigger white-text">Friends (<%= @user_show.unique_friends_count %>)</a>
 				<% end %>
 
 				<% if @group_show %>
