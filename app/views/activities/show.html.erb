@@ -2,11 +2,11 @@
 	<div class="col s12 card-panel z-depth-2">
 		<h3><%= @activity.plan %></h3>
 		<% if @activity.user_going?(current_user) %>
-			<%= link_to "Can't go", remove_user_activity_path(@activity.activity), method: :delete, class: 'btn red' %>
+			<%= link_to "Can't go", remove_user_activity_path(@activity.activity), method: :delete, class: 'btn red waves-effect waves-light' %>
 		<% else %>
-			<%= link_to "Go", add_user_activity_path(@activity.activity), remote: true, method: :post, class: 'btn green', id: "activity-go" %>
+			<%= link_to "Go", add_user_activity_path(@activity.activity), remote: true, method: :post, class: 'btn green waves-effect waves-light', id: "activity-go" %>
 		<% end %>
-		<%= link_to "Edit Activity", edit_activity_path(@activity.activity), class: 'btn orange' if @activity.proposed_by?(current_user) %>
+		<%= link_to "Edit Activity", edit_activity_path(@activity.activity), class: 'btn orange waves-effect waves-light' if @activity.proposed_by?(current_user) %>
 		<h3><%= link_to @activity.group_name, @activity.group %></h3>
 		<h4><%= local_time(@activity.appointment) %></h4>
 		<h4><%= @activity.location %></h4>
@@ -25,7 +25,7 @@
 
 	<div class="col s12 m6">
 		<h3>Messages</h3>
-		<div class="messages card-panel z-depth-2">
+		<div class="messages card-panel z-depth-2" id="activity-messages">
 			<% @activity.messages.each do |message| %>
 			  <%= render partial: 'messages/message', locals: {message: message} %>
 			<% end %>

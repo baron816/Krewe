@@ -13,7 +13,7 @@
         </div>
         <% unless activity.user_going?(current_user) %>
           <div class="card-action">
-            <%= link_to "Go", add_user_activity_path(activity), method: :post, class: 'btn green' %>
+            <%= link_to "Go", add_user_activity_path(activity), method: :post, class: 'btn green waves-effect waves-light' %>
           </div>
         <% end %>
       </div>
