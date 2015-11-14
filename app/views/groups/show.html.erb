@@ -6,11 +6,11 @@
 		<div class="hide-on-med-and-down">
 			<%= render "groups/buttons" %>
 
-			<%= link_to "Propose Activity", new_group_activity_path(@group_show.group), id: 'new_activity', class: 'waves-effect waves-light btn purple', remote: true %>
+			<%= link_to "Propose Activity", new_group_activity_path(@group_show.group), id: 'new_activity', class: 'waves-effect waves-light btn purple white-text', remote: true %>
 		</div>
 	</div>
 
-	<div class="col s12 m9">
+	<div class="col s12 l9">
 		<h4>Messages</h4>
 			<div class="col s12">
 				<ul class="tabs topics">
@@ -25,38 +25,18 @@
 		</div>
 	</div>
 
-	<div class="col s12 m3">
-		<h4>Activities</h4>
-		<% if @group_show.activities_any? %>
-					<% @group_show.activities.each do |activity| %>
-					<div class="card">
-						<div class="card-content">
-							<span class="card-title"><%= link_to activity.plan, activity_path(activity) %></span>
-							<p>
-								<%= activity.location %>
-								<%= local_time(activity.appointment) %>
-							</p>
-						</div>
-						<% unless activity.user_going?(current_user) %>
-							<div class="card-action">
-								<%= link_to "Go", add_user_activity_path(activity), method: :post %>
-							</div>
-						<% end %>
-					</div>
-					<% end %>
-		<% else %>
-			<div class="card">
-				<div class="card-content">
-					<span class="card-title black-text">No Upcoming Activities</span>
-					<p>
-						<%= link_to "Propose one...", new_group_activity_path(@group_show.group), remote: true %>
-					</p>
-				</div>
-			</div>
-		<% end %>
+	<div class="col s12 m3 hide-on-med-and-down">
+		<%= render partial: "activities/activities", locals: { activities: @group_show.activities, group: @group_show.group } %>
 	</div>
 
 	<div id='new-activity' class="modal"></div>
+
+	<div class="modal" id="activities">
+		<div class="modal-content">
+
+			<%= render partial: "activities/activities", locals: { activities: @group_show.activities, group: @group_show.group } %>
+		</div>
+	</div>
 
 	<div class="modal" id="members">
 		<div class="modal-content">
