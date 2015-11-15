@@ -15,6 +15,7 @@ $(document).ready(function(){
 	});
 	$('.modal-trigger').leanModal();
 	$('.parallax').parallax();
+	$('select').material_select();
 
 	$("#map-hider").click(function () {
 		$('#map-canvas').toggle();
