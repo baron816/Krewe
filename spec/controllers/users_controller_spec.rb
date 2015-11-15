@@ -18,7 +18,7 @@ describe UsersController do
     end
 
     it "locates the user" do
-    	expect(assigns[:user]).to eql(user)
+    	expect(assigns[:user_show]).to eql(user)
     end
   end
 
