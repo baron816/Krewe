@@ -1,4 +1,5 @@
 $('.message-group').html('<%= j render partial: "topic", locals: { topic: @topic } %>')
 resize_window('.messages');
-scrollBottom();
 mentioning(<%= @topic.names_data(current_user) %>);
+responsiveMedia()
+scrollBottom();
