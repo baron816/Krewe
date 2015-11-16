@@ -12,12 +12,9 @@
 
 	<div class="col s12 l9">
 		<h4>Messages</h4>
-			<div class="col s12">
-				<ul class="topics">
-					<%= render partial: 'topics/topics', locals: { topics: @group_show.topics } %>
-				</ul>
+			<div class="topics">
+				<%= render partial: 'topics/topics', locals: { topics: @group_show.topics } %>
 			</div>
-
 			<%= render partial: 'topics/new', locals: { group: @group_show.group, topic: @group_show.new_topic } %>
 
 		<div class="message-group">
