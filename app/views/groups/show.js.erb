@@ -3,5 +3,5 @@ $('.next-topic').replaceWith('<%= j render partial: "topics/topics", locals: { t
   $('.next-topic').remove();
 <% end %>
 
-$('.topics').animate({ scrollLeft: $(this).width() }, 1000)
+$('.topics').animate({ scrollLeft: $('.topics')[0].scrollWidth }, 1000)
 highlightTopic()
