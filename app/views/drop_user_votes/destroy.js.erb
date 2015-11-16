@@ -1,1 +1,1 @@
-$('#undo-btn-<%= @user.id %>').replaceWith('<%= link_to "Remove #{@user.group_drop_votes_count(@group)}/3", group_drop_user_votes_path(@group, user_id: @user), remote: true, method: :post, class: 'btn orange secondary-content', id: "remove-btn-#{@user.id}"%>')
+$('#undo-btn-<%= @user.id %>').replaceWith('<%= link_to "Remove #{@user.group_drop_votes_count(@group)}/3", group_drop_user_votes_path(@group, user_id: @user), remote: true, method: :post, class: 'btn red secondary-content', id: "remove-btn-#{@user.id}"%>')
