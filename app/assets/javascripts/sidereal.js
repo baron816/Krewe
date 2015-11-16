@@ -20,6 +20,8 @@ $(document).ready(function(){
 	$("#map-hider").click(function () {
 		$('#map-canvas').toggle();
 	})
+
+	responsiveMedia();
 })
 
 $(window).resize(function() {
@@ -29,6 +31,11 @@ $(window).resize(function() {
 
 
 var autocomplete;
+
+function responsiveMedia() {
+	$(".video").addClass("video-container")
+	$("p img").addClass("responsive-img")
+}
 
 function scrollBottom() {
 	$('.messages').scrollTop($('.messages').prop("scrollHeight"));
