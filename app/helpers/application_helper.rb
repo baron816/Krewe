@@ -10,6 +10,7 @@ module ApplicationHelper
 
 	def age_groups
 	  [
+			"Select Age Group",
 			"18-24",
 			"22-28",
 			"27-33",
