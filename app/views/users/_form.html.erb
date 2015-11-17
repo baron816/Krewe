@@ -15,9 +15,14 @@
 			<%= f.label :address %>
     </div>
 
+		Pick a Category:
+		<% categories.each do |category| %>
+			<%= f.radio_button :category, category, id: "user_#{category}", checked: true, reqire: true %>
+			<%= f.label category %>
+		<% end %>
+
 		<div class="input-field">
-			<%= f.select :category, categories, include_blank: true, required: true %>
-			<%= f.label :category, "Select your category" %>
+			<%= f.select :age_group, age_groups, {disabled: "Select Age Group", selected: "Select Age Group"}, require: true %>
 		</div>
 
 		<div class="input-field">
