@@ -173,6 +173,8 @@ function createMarker(place, service) {
   		document.getElementById('activity_location').value = result.name;
   		document.getElementById('activity_longitude').value = result.geometry.location.lng()
   		document.getElementById('activity_latitude').value = result.geometry.location.lat()
+
+			$('label[for="activity_location"]').addClass("active")
 		})
 	})
 }
