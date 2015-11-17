@@ -15,11 +15,15 @@ class ActivitiesController < ApplicationController
 	end
 
 	def add_user
-		@activity.users << current_user
-		@activity.check_attendance
-		respond_to do |format|
-			format.html { redirect_to activity_path(@activity) }
-			format.js
+		unless @activity.user_going?(current_user)
+			@activity.users << current_user
+			@activity.check_attendance
+			respond_to do |format|
+				format.html { redirect_to activity_path(@activity) }
+				format.js
+			end
+		else
+			redirect_to activity_path(@activity)
 		end
 	end
 
