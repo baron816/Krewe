@@ -1,10 +1,11 @@
-<div class="well">
-<h1>404 Not Found</h1>
-<%= image_tag :lost, id: "lost" %>
-<% if current_user %>
-  <h2>Crap, <%= current_user.first_name %>. I think we're lost. Let's go <%= link_to "back", user_path(current_user) %>.</h2>
-<% else %>
-  <h2>Look's like we're lost. Let's go <%= link_to "home.", root_path %></h2>
-<% end %>
-
+<div class="container">
+  <div class="card-panel">
+    <h1>404 Not Found</h1>
+    <%= image_tag :lost, id: "lost" %>
+    <% if current_user %>
+      <h2>Crap, <%= current_user.first_name %>. I think we're lost. Let's go <%= link_to "back", user_path(current_user) %>.</h2>
+    <% else %>
+      <h2>Look's like we're lost. Let's go <%= link_to "home.", root_path %></h2>
+    <% end %>
+  </div>
 </div>
