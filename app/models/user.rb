@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
 	validates :email, presence: true, length: { maximum: 255}, format: { with: VALID_EMAIL_REGEX }, uniqueness: true
 	validates :password, presence: true, length: { minimum: 6 }, on: :create
 	validates_presence_of :longitude, :latitude, :address, :category, :age_group
+	validate :multiple_words?
 
 	has_secure_password
 	has_many :user_groups
@@ -113,6 +114,12 @@ class User < ActiveRecord::Base
 			:name,
 			[:slug_hex]
 		]
+	end
+
+	def multiple_words?
+	  unless name.split.count > 1
+			errors.add(:name, "must include at first and last")
+		end
 	end
 
 	def slug_hex
