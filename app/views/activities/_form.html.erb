@@ -52,7 +52,11 @@
 
 <%= javascript_tag do %>
   mapLocation('<%= @group.latitude %>', '<%= @group.longitude %>');
-  $('.datepicker').pickadate()
+  $('.datepicker').pickadate({
+    close: "Done",
+    min: new Date()
+  })
+
   $('#time_field').pickatime({
     twelvehour: true
   })
