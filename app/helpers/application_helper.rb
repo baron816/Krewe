@@ -3,7 +3,7 @@ module ApplicationHelper
 		[
 			"Professional",
 			"Creative",
-			"Working",
+			"Working Class",
 			"Doesn't Matter"
 		]
 	end
@@ -18,6 +18,14 @@ module ApplicationHelper
 			"38-55",
 			"52-67",
 			"65+",
+			"Doesn't Matter"
+		]
+	end
+
+	def gender_groups
+	  [
+			"Women Only",
+			"Men Only",
 			"Doesn't Matter"
 		]
 	end
