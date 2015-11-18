@@ -5,30 +5,51 @@
 			<%= render 'shared/errors', object: @user %>
 
 			<div class="input-field">
-				<%= f.label :name, class: "active" %>
-				<%= f.text_field :name, required: true %>
+				<%= f.text_field :name, class: 'validate', required: true %>
+				<%= f.label :name %>
 			</div>
-
 			<div class="input-field">
-				<%= f.label :email, class: "active" %>
-				<%= f.email_field :email, required: true %>
+				<%= f.email_field :email, class: 'validate', required: true %>
+				<%= f.label :email  %>
 			</div>
 
-			<div class="input-field">
-				<%= f.label :address, class: 'active' %>
-				<%= f.text_field :address, required: true %>
+	    <div class="input-field tooltipped" data-position="top" data-tooltip="You will need to drop your old group if you move.">
+				<%= f.text_field :address, placeholder: "", class: "active", required: true %>
+				<%= f.label :address %>
+	    </div>
+
+			<div class="input-field tooltipped" data-position="top" data-tooltip="You will need to drop your old group if you want to change types.">
+				<%= f.select :age_group, age_groups, { disabled: "Select Age Group" }, require: true %>
 			</div>
 
-			<div class="input-field col s12">
-				<%= f.select(:category, categories, {}, required: true) %>
+			<div class="tooltipped" data-position="top" data-tooltip="You will need to drop your old group if you want to change types.">
+				People Type?
+				<% categories.each_with_index do |category, index| %>
+					<%= f.radio_button :category, category, id: "user_category_#{index}", checked: (category == "Doesn't Matter") %>
+					<%= f.label "category_#{index}", category %>
+				<% end %>
+			</div>
+
+			<div class="tooltipped" data-position="top" data-tooltip="You will need to drop your old group if you want to change types.">
+				Single gender?
+				<% gender_groups.each_with_index do |gender_group, index| %>
+					<%= f.radio_button :gender_group, gender_group, id: "user_gender_#{index}", checked: (gender_group == "Doesn't Matter") %>
+					<%= f.label "gender_#{index}", gender_group %>
+				<% end %>
 			</div>
 
 			<%= f.hidden_field :latitude, id: "lat" %>
 			<%= f.hidden_field :longitude, id: 'lng' %>
-			<%= f.submit "Submit", class: 'btn blue' %>
+			<br>
+				<%= f.submit :Submit, class: 'btn blue' %>
 	<% end %>
 
 <%= javascript_tag do %>
 	initAutoComplete()
 	$('select').material_select();
+	$('.tooltipped').tooltip();
+
+	$('label[for="user_name"]').addClass("active")
+	$('label[for="user_email"]').addClass("active")
+	$('label[for="user_address"]').addClass("active")
 <% end %>
