@@ -41,7 +41,7 @@ class User < ActiveRecord::Base
 	scope :users_by_slug, -> (slugs) { where(slug: slugs)  }
 
 	def find_or_create_group
-		group = Group.search(category: category, age_group: age_group, gender_group: gender_group, friend_ids: friends.ids, latitude: latitude, longitude: longitude, group_ids: dropped_group_ids)
+		group = Group.search(category: category, age_group: age_group, gender_group: gender_group, latitude: latitude, longitude: longitude, group_ids: dropped_group_ids)
 
 		if group
 			group.users << self
