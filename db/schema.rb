@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151117211550) do
+ActiveRecord::Schema.define(version: 20151118140709) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -85,7 +85,12 @@ ActiveRecord::Schema.define(version: 20151117211550) do
   end
 
   add_index "groups", ["age_group"], name: "index_groups_on_age_group", using: :btree
+  add_index "groups", ["can_join"], name: "index_groups_on_can_join", using: :btree
+  add_index "groups", ["category"], name: "index_groups_on_category", using: :btree
+  add_index "groups", ["degree"], name: "index_groups_on_degree", using: :btree
   add_index "groups", ["gender_group"], name: "index_groups_on_gender_group", using: :btree
+  add_index "groups", ["latitude"], name: "index_groups_on_latitude", using: :btree
+  add_index "groups", ["longitude"], name: "index_groups_on_longitude", using: :btree
   add_index "groups", ["slug"], name: "index_groups_on_slug", using: :btree
 
   create_table "messages", force: :cascade do |t|
