@@ -25,11 +25,12 @@ class Group < ActiveRecord::Base
 	scope :excluded_users, ->(friend_ids) { where.not(id: user_friend_group_ids(friend_ids)) }
 	scope :non_former_groups, ->(group_ids) { where.not(id: group_ids) }
 	scope :same_age, ->(age_group) { where(age_group: age_group) }
+	scope :same_gender, ->(gender_group) { where(gender_group: gender_group) }
 	scope :degree_groups, ->(degree) { where(degree: degree) }
 	scope :ready_groups, -> { where(ready_to_expand: true) }
 
 	def self.search(params)
-		self.open_groups.category_groups(params[:category]).excluded_users(params[:friend_ids]).same_age(params[:age_group]).degree_groups(1).near([params[:latitude], params[:longitude]], 0.5).non_former_groups(params[:group_ids])[0]
+		self.open_groups.category_groups(params[:category]).excluded_users(params[:friend_ids]).same_age(params[:age_group]).same_gender(params[:gender_group]).degree_groups(1).near([params[:latitude], params[:longitude]], 0.5).non_former_groups(params[:group_ids])[0]
 	end
 
 	def check_space(user)
