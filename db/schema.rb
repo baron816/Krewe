@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151118140709) do
+ActiveRecord::Schema.define(version: 20151118142341) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -102,6 +102,7 @@ ActiveRecord::Schema.define(version: 20151118140709) do
     t.string   "messageable_type"
   end
 
+  add_index "messages", ["messageable_id", "messageable_type"], name: "index_messages_on_messageable_id_and_messageable_type", using: :btree
   add_index "messages", ["poster_id"], name: "index_messages_on_poster_id", using: :btree
 
   create_table "notifications", force: :cascade do |t|
@@ -115,6 +116,9 @@ ActiveRecord::Schema.define(version: 20151118140709) do
     t.string   "notification_type"
   end
 
+  add_index "notifications", ["notifiable_id", "notifiable_type"], name: "index_notifications_on_notifiable_id_and_notifiable_type", using: :btree
+  add_index "notifications", ["notifiable_id"], name: "index_notifications_on_notifiable_id", using: :btree
+  add_index "notifications", ["poster_id"], name: "index_notifications_on_poster_id", using: :btree
   add_index "notifications", ["user_id"], name: "index_notifications_on_user_id", using: :btree
 
   create_table "surveys", force: :cascade do |t|
@@ -130,6 +134,8 @@ ActiveRecord::Schema.define(version: 20151118140709) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "topics", ["group_id"], name: "index_topics_on_group_id", using: :btree
 
   create_table "user_activities", force: :cascade do |t|
     t.integer "activity_id"
