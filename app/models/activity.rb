@@ -8,9 +8,7 @@ class Activity < ActiveRecord::Base
 
 	reverse_geocoded_by :latitude, :longitude
 
-	after_create do
-		send_notifications("ActivityCreate")
-	end
+	after_create :send_notifications
 
 	validates :plan, presence: true, length: { minimum: 3 }
 	validates_presence_of :location, :appointment, :group_id, :proposer_id
