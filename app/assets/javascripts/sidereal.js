@@ -9,7 +9,9 @@ $(document).ready(function(){
 
 	highlightTopic();
 
-	$(".dropdown-button").dropdown();
+	$(".dropdown-button").dropdown({
+		constrain_width: false
+	});
 	$(".button-collapse").sideNav({
 		closeOnClick: true
 	});
