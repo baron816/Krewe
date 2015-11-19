@@ -1,5 +1,3 @@
-<% if current_user %>
-	<ul class="dropdown-content" id="note-alerts">
 		<% current_user.unviewed_notifications.each do |note| %>
 			<% case note.notification_type %>
 			<% when "TopicMessage" %>
@@ -16,5 +14,3 @@
 		  	<li><%= link_to "#{note.poster_name} made changes to #{note.notifiable.plan}", activity_path(note.notifiable) %></li>
 			<% end %>
 		<% end %>
-	</ul>
-<% end %>
