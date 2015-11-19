@@ -2,6 +2,7 @@ class Notification < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :notifiable, polymorphic: true
 	belongs_to :message, ->{ where(notifications: {notifiable_type: "Message"}) }, foreign_key: 'notifiable_id'
+	belongs_to :activity, ->{ where(notifications: { notification_type: "ActivityCreate" }) }, foreign_key: 'notifiable_id'
 	belongs_to :poster, class_name: 'User'
 
 	delegate :name, to: :poster, prefix: true
@@ -53,7 +54,7 @@ class Notification < ActiveRecord::Base
 	end
 
 	def self.unviewed_group_notification_count(group)
-		group_count = unviewed_group_notifications_from_group(group).count + unviewed_message_notifications_from_group(group).count
+		group_count = unviewed_group_notifications_from_group(group).count + unviewed_message_notifications_from_group(group).count + unviewed_activity_create_notifications_from_group(group).count
 		group_count if group_count > 0
 	end
 
@@ -62,7 +63,7 @@ class Notification < ActiveRecord::Base
 	end
 
 	def self.dismiss_group_notifications_from_group(group)
-		group_notes = unviewed_group_notifications_from_group(group)
+		group_notes = unviewed_group_notifications_from_group(group) + unviewed_activity_create_notifications_from_group(group)
 		group_notes.each(&:dismiss) if group_notes.any?
 	end
 
@@ -80,6 +81,10 @@ class Notification < ActiveRecord::Base
 		topic_notes.each(&:dismiss) if topic_notes.any?
 	end
 	#activity
+
+	def self.unviewed_activity_create_notifications_from_group(group)
+	  unviewed_notifications.includes(:activity).where("activities.group_id" => group.id)
+	end
 
 	def self.unviewed_activity_message_notifications(activity)
 	  unviewed_notifications.includes(:message).where("messages.messageable_id" => activity.id)
