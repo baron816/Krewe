@@ -10,11 +10,11 @@
 			<% if current_user %>
 
 				<li> <%= link_to "Home", user_path(current_user) %></li>
-				<% if current_user.notifications && current_user.unviewed_notifications_count > 0 %>
+				<% if current_user.show_notifications_count > 0 %>
 					<li><a class="dropdown-button" href="#!" data-activates="note-alerts">Notifications<i class="material-icons right">arrow_drop_down</i></a></li>
 
 					<ul id="note-alerts" class="dropdown-content">
-						<li><%= render 'layouts/dropdown' %></li>
+						<li><%= render 'layouts/notifications' %></li>
 					</ul>
 				<% end %>
 				<li> <%=  link_to 'Log Out', logout_path, method: :delete %></li>

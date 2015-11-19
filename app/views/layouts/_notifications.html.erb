@@ -1,0 +1,23 @@
+<% current_user.poster_sorted_category_notifications("TopicMessage").each do |name, notifications| %>
+  <li><%= link_to "#{name} wrote in #{notifications.first.notifiable.messageable.group.name} (#{notifications.count})", group_path(notifications.first.notifiable.messageable.group) %></li>
+<% end %>
+
+<% current_user.poster_sorted_category_notifications("UserMessage").each do |name, notifications| %>
+  <li><%= link_to "#{name} sent you a message (#{notifications.count})", public_profile_user_path(notifications.first.poster) %></li>
+<% end %>
+
+<% current_user.unviewed_category_notifications("Join").each do |notification| %>
+  <li><%= link_to "#{notification.poster_name} joined #{notification.notifiable.name}", group_path(notification.notifiable) %></li>
+<% end %>
+
+<% current_user.unviewed_future_activity_notifications("Activity").each do |notification| %>
+  	<li><%= link_to "#{notification.poster_name} proposed an activity: #{notification.notifiable.plan}", activity_path(notification.notifiable) %></li>
+<% end %>
+
+<% current_user.poster_sorted_category_notifications("ActivityMessage").each do |name, notifications| %>
+  <li><%= link_to "#{name} wrote in #{notifications.first.notifiable.messageable.plan} (#{notifications.count})", activity_path(notifications.first.notifiable.messageable) %></li>
+<% end %>
+
+<% current_user.unviewed_future_activity_notifications("ActivityUpdate").each do |notification| %>
+  <li><%= link_to  "#{notification.poster_name} made changes to #{notification.notifiable.plan}", activity_path(notification.notifiable) %></li>
+<% end %>
