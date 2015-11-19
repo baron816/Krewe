@@ -17,36 +17,36 @@
       </ul>
     </div>
 
-  <div class="col s12 m6">
-    <div class="input-field">
-      <%= f.text_field :plan, class: "validate", required: true %>
-      <%= f.label :plan, "What's the plan?" %>
+    <div class="col s12 m6">
+      <div class="input-field">
+        <%= f.text_field :plan, class: "validate", required: true %>
+        <%= f.label :plan, "What's the plan?" %>
+      </div>
+      <div class="input-field">
+        <%= f.text_field :location, placeholder: "",class: "validate", required: true %>
+        <%= f.label :location, "Where?" %>
+      </div>
+
+      <div class="input-field">
+        <%= text_field_tag :day, "", class: "datepicker", id: "date_field", required: true %>
+        <%= label_tag :date_field, "What day?" %>
+      </div>
+
+      <div class="input-field">
+        <%= text_field_tag :time, "", id: "time_field", required: true %>
+        <%= label_tag :time_field, "What time?" %>
+      </div>
+
+        <%= f.hidden_field :appointment %>
     </div>
-    <div class="input-field">
-      <%= f.text_field :location, placeholder: "",class: "validate", required: true %>
-      <%= f.label :location, "Where?" %>
+
+    <%= f.hidden_field :longitude %>
+    <%= f.hidden_field :latitude %>
+    <div id="map-canvas"></div>
+
+    <div class="modal-footer">
+      <%= f.submit "Submit", class: 'btn green' %>
     </div>
-
-    <div class="input-field">
-      <%= text_field_tag :day, "", class: "datepicker", id: "date_field", required: true %>
-      <%= label_tag :date_field, "What day?" %>
-    </div>
-
-    <div class="input-field">
-      <%= text_field_tag :time, "", id: "time_field", required: true %>
-      <%= label_tag :time_field, "What time?" %>
-    </div>
-
-      <%= f.hidden_field :appointment %>
-  </div>
-
-  <%= f.hidden_field :longitude %>
-  <%= f.hidden_field :latitude %>
-  <div id="map-canvas"></div>
-
-  <div class="modal-footer">
-    <%= f.submit "Submit", class: 'btn green' %>
-  </div>
   </div>
 <% end %>
 
