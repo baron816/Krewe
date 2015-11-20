@@ -6,6 +6,7 @@
 			<%= image_tag 'krewe', id: 'logo' %>
 		</a>
 		<a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+
 		<ul class="right hide-on-med-and-down">
 			<% if current_user %>
 
@@ -25,11 +26,17 @@
 			<% end %>
 		</ul>
 
+
 		<ul id="nav-mobile" class="side-nav">
 			<% if current_user %>
 				<%= link_to "Home", user_path(current_user), class: "btn blue white-text" %>
 				<%= link_to 'Log Out', logout_path, method: :delete, class: "btn lime white-text" %>
 				<%= link_to "Settings".html_safe, edit_user_path(current_user), class: "btn orange white-text" %>
+
+				<% if current_user.show_notifications_count > 0 %>
+					<a href="#notifications" class="waves-effect btn amber modal-trigger white-text">Notifications (<%= current_user.show_notifications_count %>)</a>
+
+				<% end %>
 
 				<% if @user_show %>
 				  <a href="#friends" class="waves-effect btn cyan modal-trigger white-text">Friends (<%= @user_show.unique_friends_count %>)</a>
@@ -49,6 +56,13 @@
 	</div>
 </nav>
 
-<div id='edit-user' class="modal">
-	<div class="modal-content"></div>
+<div id='notifications' class="modal">
+	<div class="modal-content">
+		<div class="card-panel">
+			<h3>Notifications</h3>
+			<ul class="collection">
+				<%= render 'layouts/notifications' %>
+			</ul>
+		</div>
+	</div>
 </div>
