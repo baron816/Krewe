@@ -42,4 +42,9 @@ module ApplicationHelper
 	def self.mean(*args)
 	  args.inject(:+) / args.length.to_f
 	end
+
+	def avatar_url(user)
+	  gravatar_id = Digest::MD5.hexdigest(user.email)
+		"http://gravatar.com/avatar/#{gravatar_id}.png?s=48&d=mm"
+	end
 end
