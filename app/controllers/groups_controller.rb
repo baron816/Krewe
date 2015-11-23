@@ -11,7 +11,7 @@ class GroupsController < ApplicationController
 	end
 
 	def drop_user
-		@group = Group.includes(:users).friendly.find(params[:id])
+		@group = Group.friendly.find(params[:id])
 		if @group.includes_user?(current_user)
 			@group.drop_user(current_user)
 			if @group.primary_group?

@@ -13,7 +13,7 @@ class TopicShow
   delegate :next_page, to: :messages
 
   def messages
-    @messages ||= this_topic.messages.includes(:poster).page(page).per(per_page).order(created_at: :desc)
+    @messages ||= this_topic.messages.page(page).per(per_page).order(created_at: :desc)
   end
 
   def new_message

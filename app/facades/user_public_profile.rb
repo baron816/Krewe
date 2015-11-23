@@ -15,7 +15,7 @@ class UserPublicProfile
   end
 
   def personal_messages
-    @personal_messages ||= Message.personal_messages(user, current_user).includes(:poster).page(page).per(per_page)
+    @personal_messages ||= Message.personal_messages(user, current_user).page(page).per(per_page)
   end
 
   def new_message

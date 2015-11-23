@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 	before_action :user_logged?, only: [:update, :edit]
 
 	def show
-		@user_show = User.includes(:groups).friendly.find(params[:id])
+		@user_show = User.friendly.find(params[:id])
 		message_root_redirect("You do not have access to go there.") unless @user_show == current_user
 	end
 

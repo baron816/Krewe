@@ -14,7 +14,7 @@ class ActivityShow
   end
 
   def messages
-    @messages ||= activity.messages.includes(:poster)
+    @messages ||= activity.messages
   end
 
 end

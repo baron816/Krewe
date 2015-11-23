@@ -121,7 +121,7 @@ class Group < ActiveRecord::Base
 	end
 
 	def self.user_friend_group_ids(friend_ids)
-		self.includes(:users).references(:users).where("users.id in (?)", friend_ids).ids.uniq
+		self.references(:users).where("users.id in (?)", friend_ids).ids.uniq
 	end
 
 	def aged?(period)

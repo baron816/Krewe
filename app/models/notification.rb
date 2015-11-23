@@ -9,8 +9,6 @@ class Notification < ActiveRecord::Base
 	delegate :plan, to: :notifiable, prefix: true
 
 
-	default_scope -> { includes(:poster) }
-
 	scope :unviewed_notifications, ->{ where(viewed: false) }
 	scope :category_notifications, ->(category) { where(notification_type: category) }
 	scope :poster_notifications, ->(poster) { where(poster_id: poster)}
