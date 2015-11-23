@@ -11,7 +11,7 @@
 			<% if current_user %>
 
 				<li> <%= link_to "Home", user_path(current_user) %></li>
-				<% if current_user && current_user.show_notifications_count > 0 %>
+				<% if current_user.try(:show_notifications_positive?) %>
 					<li><a class="dropdown-button" href="#!" data-activates="note-alerts">Notifications<i class="material-icons right">arrow_drop_down</i></a></li>
 
 					<ul id="note-alerts" class="dropdown-content">
@@ -32,7 +32,7 @@
 				<%= link_to 'Log Out', logout_path, method: :delete, class: "btn lime white-text" %>
 				<%= link_to "Settings".html_safe, edit_user_path(current_user), class: "btn orange white-text" %>
 
-				<% if current_user.show_notifications_count > 0 %>
+				<% if current_user.try(:show_notifications_positive?) %>
 					<a href="#notifications" class="waves-effect btn amber modal-trigger white-text">Notifications (<%= current_user.show_notifications_count %>)</a>
 
 				<% end %>
@@ -59,7 +59,7 @@
 
 </div>
 
-<% if current_user && current_user.show_notifications_count > 0 %>
+<% if current_user.try(:show_notifications_positive?) %>
 	<div id='notifications' class="modal">
 		<div class="modal-content">
 			<div class="card-panel">
