@@ -2,7 +2,7 @@
 	<div class="col m12">
 	<h1><%= @user_show.name %></h1>
 		<div class="hide-on-med-and-down">
-			<%= link_to "<i class='material-icons medium'>settings</i> Settings".html_safe, edit_user_path, class: "btn orange", remote: true %>
+			<%= link_to "<i class='material-icons medium'>settings</i> Settings".html_safe, edit_user_path, class: "btn orange" %>
 		</div>
 		<%= link_to "Join Group", join_group_user_path, class: "btn green", method: :post if @user_show.under_group_limit? %></h5>
 	</div>
@@ -33,8 +33,4 @@
 		<h4>Friends</h4>
 		<%= render partial: "users/friends", locals: { friends: @user_show.unique_friends } %>
 	</div>
-</div>
-
-<div id='edit-user' class="modal">
-	<div class="modal-content"></div>
 </div>
