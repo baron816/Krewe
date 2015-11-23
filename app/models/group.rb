@@ -48,6 +48,7 @@ class Group < ActiveRecord::Base
 		user.add_dropped_group(id)
 
 		user.votes_to_drop_delete_all
+		user.dismiss_all_notifications
 		self.delete if users_empty?
 	end
 

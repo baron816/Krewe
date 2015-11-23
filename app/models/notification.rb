@@ -16,6 +16,10 @@ class Notification < ActiveRecord::Base
 	scope :poster_notifications, ->(poster) { where(poster_id: poster)}
 	scope :notifiable_notifications, ->(id) { where(notifiable_id: id)}
 
+	def self.dismiss_all_notifications
+	  unviewed_notifications.each(&:dismiss)
+	end
+
 	def messageable_group
 	  @group ||= notifiable.messageable.group
 	end
@@ -26,6 +30,10 @@ class Notification < ActiveRecord::Base
 
 	def self.show_notifications_count
 	  show_notifications.count
+	end
+
+	def self.show_notifications_positive?
+	  !show_notifications_count.zero?
 	end
 
 	def self.poster_sorted_category_notifications(category)
