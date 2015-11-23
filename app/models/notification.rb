@@ -6,6 +6,8 @@ class Notification < ActiveRecord::Base
 	belongs_to :poster, class_name: 'User'
 
 	delegate :name, to: :poster, prefix: true
+	delegate :plan, to: :notifiable, prefix: true
+
 
 	default_scope -> { includes(:poster) }
 
@@ -13,6 +15,10 @@ class Notification < ActiveRecord::Base
 	scope :category_notifications, ->(category) { where(notification_type: category) }
 	scope :poster_notifications, ->(poster) { where(poster_id: poster)}
 	scope :notifiable_notifications, ->(id) { where(notifiable_id: id)}
+
+	def messageable_group
+	  @group ||= notifiable.messageable.group
+	end
 
 	def self.show_notifications
 	  unviewed_category_notifications(["TopicMessage", "UserMessage", "Join", "ActivityMessage"]) + unviewed_future_activity_notifications(["Activity", "ActivityUpdate"])
