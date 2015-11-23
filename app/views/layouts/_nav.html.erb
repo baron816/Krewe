@@ -11,7 +11,7 @@
 			<% if current_user %>
 
 				<li> <%= link_to "Home", user_path(current_user) %></li>
-				<% if current_user.show_notifications_count > 0 %>
+				<% if current_user && current_user.show_notifications_count > 0 %>
 					<li><a class="dropdown-button" href="#!" data-activates="note-alerts">Notifications<i class="material-icons right">arrow_drop_down</i></a></li>
 
 					<ul id="note-alerts" class="dropdown-content">
@@ -56,13 +56,15 @@
 	</div>
 </nav>
 
-<div id='notifications' class="modal">
-	<div class="modal-content">
-		<div class="card-panel">
-			<h3>Notifications</h3>
-			<ul class="collection">
-				<%= render 'layouts/notifications' %>
-			</ul>
+<% if current_user && current_user.show_notifications_count > 0 %>
+	<div id='notifications' class="modal">
+		<div class="modal-content">
+			<div class="card-panel">
+				<h3>Notifications</h3>
+				<ul class="collection">
+					<%= render 'layouts/notifications' %>
+				</ul>
+			</div>
 		</div>
 	</div>
-</div>
+<% end %>
