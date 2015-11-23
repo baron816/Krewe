@@ -62,3 +62,5 @@ gem 'friendly_id'
 gem 'jquery-atwho-rails'
 
 gem 'sidekiq'
+
+gem "goldiloader"
