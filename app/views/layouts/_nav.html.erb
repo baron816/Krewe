@@ -26,7 +26,6 @@
 			<% end %>
 		</ul>
 
-
 		<ul id="nav-mobile" class="side-nav">
 			<% if current_user %>
 				<%= link_to "Home", user_path(current_user), class: "btn blue white-text" %>
@@ -55,6 +54,10 @@
 		</ul>
 	</div>
 </nav>
+
+<div class="modal" id="create-user">
+
+</div>
 
 <% if current_user && current_user.show_notifications_count > 0 %>
 	<div id='notifications' class="modal">
