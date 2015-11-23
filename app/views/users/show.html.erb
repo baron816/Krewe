@@ -24,7 +24,7 @@
 	</div>
 
 	<div class="col s12 l6">
-		<%= render partial: "activities/activities", locals: { activities: @user_show.future_activities, group: @user_show.groups.first } %>
+		<%= render partial: "activities/activities", locals: { activities: @user_show.future_activities, group: @user_show.groups.first, user_show: true } %>
 	</div>
 </div>
 
