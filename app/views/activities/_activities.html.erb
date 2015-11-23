@@ -11,7 +11,7 @@
             <span class='badge'><%= current_user.unviewed_activity_notifications_count(activity) %></span>
           </p>
         </div>
-        <% unless activity.user_going?(current_user) %>
+        <% unless user_show && activity.user_going?(current_user) %>
           <div class="card-action">
             <%= link_to "Go", add_user_activity_path(activity), method: :post, class: 'btn green waves-effect waves-light' %>
           </div>
