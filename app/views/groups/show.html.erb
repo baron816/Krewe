@@ -23,7 +23,7 @@
 	</div>
 
 	<div class="col s12 m3 hide-on-med-and-down">
-		<%= render partial: "activities/activities", locals: { activities: @group_show.activities, group: @group_show.group } %>
+		<%= render partial: "activities/activities", locals: { activities: @group_show.activities, group: @group_show.group, user_show: false } %>
 	</div>
 
 	<div id='new-activity' class="modal"></div>
@@ -31,7 +31,7 @@
 	<div class="modal" id="activities">
 		<div class="modal-content">
 
-			<%= render partial: "activities/activities", locals: { activities: @group_show.activities, group: @group_show.group } %>
+			<%= render partial: "activities/activities", locals: { activities: @group_show.activities, group: @group_show.group, user_show: false } %>
 		</div>
 	</div>
 
