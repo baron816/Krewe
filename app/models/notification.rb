@@ -13,6 +13,17 @@ class Notification < ActiveRecord::Base
 	scope :category_notifications, ->(category) { where(notification_type: category) }
 	scope :poster_notifications, ->(poster) { where(poster_id: poster)}
 	scope :notifiable_notifications, ->(id) { where(notifiable_id: id)}
+	scope :unviewed_category_notifications, ->(category) { unviewed_notifications.category_notifications(category) }
+	scope :unviewed_personal_notifications_from_user, ->(user) { unviewed_category_notifications("UserMessage").poster_notifications(user) }
+	scope :unviewed_group_notifications_from_group, ->(group) { unviewed_category_notifications("Join").notifiable_notifications(group.id)  }
+	scope :unviewed_message_notifications_from_group, ->(group) { unviewed_notifications.includes(:message).where("messages.messageable_id" => group.topics_ids) }
+	scope :unviewed_message_notifications_from_topic, ->(topic) { unviewed_notifications.includes(:message).where("messages.messageable_id" => topic.id) }
+	scope :unviewed_future_activity_notifications, ->(category) { unviewed_category_notifications(category).includes(:activity).where("activities.appointment" => [DateTime.now..DateTime.now + 10.years]) }
+	scope :unviewed_activity_create_notifications_from_group, ->(group) { unviewed_category_notifications("Activity").includes(:activity).where("activities.group_id" => group.id).where("activities.appointment" => [DateTime.now..DateTime.now + 10.years]) }
+	scope :unviewed_activity_message_notifications, ->(activity) { unviewed_notifications.includes(:message).where("messages.messageable_id" => activity.id) }
+	scope :unviewed_activity_update_notifications_from_activity, ->(activity) { unviewed_category_notifications("ActivityUpdate").notifiable_notifications(activity) }
+	scope :unviewed_activity_notifications, ->(activity) { unviewed_notifications.notifiable_notifications(activity) }
+
 
 	def self.dismiss_all_notifications
 	  unviewed_notifications.each(&:dismiss)
@@ -47,23 +58,10 @@ class Notification < ActiveRecord::Base
 		save
 	end
 
-	def self.unviewed_notifications_count
-		unviewed_notifications.count
-	end
-
-	def self.unviewed_category_notifications(category)
-		unviewed_notifications.category_notifications(category)
-	end
-
 	#personal
 
-	def self.unviewed_personal_notifications_from_user(user)
-		unviewed_category_notifications("UserMessage").poster_notifications(user)
-	end
-
 	def self.unviewed_personal_notifications_from_user_count(user)
-		personal_count = unviewed_personal_notifications_from_user(user).count
-		personal_count if personal_count > 0
+		unviewed_personal_notifications_from_user(user).positive_count
 	end
 
 	def self.dismiss_personal_notifications_from_user(user)
@@ -73,17 +71,8 @@ class Notification < ActiveRecord::Base
 
 	#group
 
-	def self.unviewed_group_notifications_from_group(group)
-		unviewed_category_notifications("Join").notifiable_notifications(group.id)
-	end
-
 	def self.unviewed_group_notification_count(group)
-		group_count = unviewed_group_notifications_from_group(group).count + unviewed_message_notifications_from_group(group).count + unviewed_activity_create_notifications_from_group(group).count
-		group_count if group_count > 0
-	end
-
-	def self.unviewed_message_notifications_from_group(group)
-		unviewed_notifications.includes(:message).where("messages.messageable_id" => group.topics_ids)
+		(unviewed_group_notifications_from_group(group) + unviewed_message_notifications_from_group(group) + unviewed_activity_create_notifications_from_group(group)).positive_count
 	end
 
 	def self.dismiss_group_notifications_from_group(group)
@@ -91,13 +80,8 @@ class Notification < ActiveRecord::Base
 		group_notes.each(&:dismiss) if group_notes.any?
 	end
 
-	def self.unviewed_message_notifications_from_topic(topic)
-	  unviewed_notifications.includes(:message).where("messages.messageable_id" => topic.id)
-	end
-
 	def self.unviewed_message_notifications_from_topic_count(topic)
-	  count = unviewed_message_notifications_from_topic(topic).count
-	 	count if count > 0
+	  unviewed_message_notifications_from_topic(topic).positive_count
 	end
 
 	def self.dismiss_topic_notifications_from_topic(topic)
@@ -105,29 +89,9 @@ class Notification < ActiveRecord::Base
 		topic_notes.each(&:dismiss) if topic_notes.any?
 	end
 	#activity
-	def self.unviewed_future_activity_notifications(category)
-	  unviewed_category_notifications(category).includes(:activity).where("activities.appointment" => [DateTime.now..DateTime.now + 10.years])
-	end
-
-	def self.unviewed_activity_create_notifications_from_group(group)
-	  unviewed_category_notifications("Activity").includes(:activity).where("activities.group_id" => group.id).where("activities.appointment" => [DateTime.now..DateTime.now + 10.years])
-	end
-
-	def self.unviewed_activity_message_notifications(activity)
-	  unviewed_notifications.includes(:message).where("messages.messageable_id" => activity.id)
-	end
-
-	def self.unviewed_activity_update_notifications_from_activity(activity)
-	  unviewed_category_notifications("ActivityUpdate").notifiable_notifications(activity)
-	end
 
 	def self.unviewed_activity_notifications_count(activity)
-	  count = unviewed_activity_message_notifications(activity).count + unviewed_activity_update_notifications_from_activity(activity).count
-		count if count > 0
-	end
-
-	def self.unviewed_activity_notifications(activity)
-		unviewed_notifications.notifiable_notifications(activity)
+	  (unviewed_activity_message_notifications(activity) + unviewed_activity_update_notifications_from_activity(activity)).positive_count
 	end
 
 	def self.dismiss_activity_notification(activity)
