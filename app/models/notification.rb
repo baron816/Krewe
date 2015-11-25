@@ -8,7 +8,6 @@ class Notification < ActiveRecord::Base
 	delegate :name, to: :poster, prefix: true
 	delegate :plan, to: :notifiable, prefix: true
 
-
 	scope :unviewed_notifications, ->{ where(viewed: false) }
 	scope :category_notifications, ->(category) { where(notification_type: category) }
 	scope :poster_notifications, ->(poster) { where(poster_id: poster)}
@@ -23,7 +22,6 @@ class Notification < ActiveRecord::Base
 	scope :unviewed_activity_message_notifications, ->(activity) { unviewed_notifications.includes(:message).where("messages.messageable_id" => activity.id) }
 	scope :unviewed_activity_update_notifications_from_activity, ->(activity) { unviewed_category_notifications("ActivityUpdate").notifiable_notifications(activity) }
 	scope :unviewed_activity_notifications, ->(activity) { unviewed_notifications.notifiable_notifications(activity) }
-
 
 	def self.dismiss_all_notifications
 	  unviewed_notifications.each(&:dismiss)
