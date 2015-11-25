@@ -11,10 +11,6 @@ describe "Notification" do
 			expect(Notification.count).to eql(3)
   	end
 
-  	it "user has unviewed_notifications" do
-  		expect(user.unviewed_notifications_count).to eql(2)
-  	end
-
   	context "join notification" do
 	  	it "user has active notifications for join" do
 	  		expect(user.unviewed_group_notification_count(group)).to eql(2)
