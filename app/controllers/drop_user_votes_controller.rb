@@ -1,6 +1,5 @@
 class DropUserVotesController < ApplicationController
 	before_action :set_group
-	before_action :user_logged?
 
 	def create
 		@user = User.friendly.find(params[:user_id])

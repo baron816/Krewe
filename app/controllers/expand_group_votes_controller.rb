@@ -1,6 +1,5 @@
 class ExpandGroupVotesController < ApplicationController
   before_action :set_group
-  before_action :user_logged?
 
   def create
     @expand_vote = @group.expand_group_votes.create(voter_id: current_user.id) if @group.includes_user?(current_user)
