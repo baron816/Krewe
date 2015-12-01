@@ -50,7 +50,7 @@
 						 <% if @group_show.primary_group? %>
 							 	<% if current_user.can_vote?(user) %>
 							 		<%= link_to "Remove from group #{user.group_drop_votes_count(@group_show.group)}/3", group_drop_user_votes_path(@group_show.group, user_id: user), remote: true, method: :post, class: 'btn red', id: "remove-btn-#{user.id}", data: {confirm: "Vote to remove this user?", text: "Remove inactive users, but only if they're inactive."} %>
-							 	<% elsif user.not_self(current_user) %>
+							 	<% elsif user.not_self(current_user) && user.is_friends_with?(current_user) %>
 							 		<%= link_to "Undo #{user.group_drop_votes_count(@group_show.group)}/3", group_drop_user_vote_path(@group_show.group, user.voter_vote(current_user)), remote: true, method: :delete, class: 'btn orange', id: "undo-btn-#{user.id}" %>
 							 	<% end %>
 						 <% end %>
