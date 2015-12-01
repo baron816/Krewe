@@ -2,16 +2,13 @@ class TopicsController < ApplicationController
   before_action :get_topic, except: :create
   before_action :get_group, only: :create
 
-  def show
-    @topic = TopicShow.new(@topic, params[:page], current_user)
-  end
-
   def change
     @topic = TopicShow.new(@topic, params[:page], current_user)
   end
 
   def create
     @topic = @group.topics.new(group_params)
+    authorize! :create, @topic
 
     @topic.save
 
