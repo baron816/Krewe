@@ -4,7 +4,8 @@ class Message < ActiveRecord::Base
 	has_many :notifications, as: :notifiable
 
 	delegate :name, to: :poster, prefix: true
-	delegate :users, :group, to: :messageable, prefix: true
+	delegate :users, :group, :is_friends_with?, to: :messageable, prefix: true
+	delegate :group_includes_user?, to: :messageable
 
 	validates :content, presence: true
 	validates_presence_of :messageable, :messageable_type, :poster
