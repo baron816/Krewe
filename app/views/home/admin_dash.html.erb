@@ -1,0 +1,55 @@
+<div class="container">
+
+  <div class="card-panel">
+
+    <h3>Total Groups: <%= @admin.group_count %></h3>
+    <h3>Total Users: <%= @admin.users_count %></h3>
+
+    <h3>Groups</h3>
+    <table>
+    <thead>
+      <tr>
+        <th data-field="id">
+          Group Name
+        </th>
+        <th data-field="user-count">
+          User Count
+        </th>
+        <th data-field="degree">
+          Degree
+        </th>
+        <th data-field="attended-activities">
+          Attended Activites
+        </th>
+        <th data-field="upcoming-activities">
+          Upcoming Activities
+        </th>
+      </tr>
+    </thead>
+    <% @admin.groups.each do |group| %>
+      <tr>
+        <td>
+          <%= link_to group.name, group_path(group) %>
+        </td>
+
+        <td>
+          <%= group.users_count %>
+        </td>
+
+        <td>
+          <%= group.degree %>
+        </td>
+
+        <td>
+          <%= group.attended_activities_count %>
+        </td>
+
+        <td>
+          <%= group.future_activities.count %>
+        </td>
+      </tr>
+    <% end %>
+
+    </table>
+  </div>
+</div>
