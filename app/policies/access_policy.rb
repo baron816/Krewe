@@ -7,6 +7,7 @@ class AccessPolicy
       can :read, User
       can :read, Activity
       can :update, Activity
+      can :post, Message
       can :public_profile, User
     end
 
@@ -29,6 +30,16 @@ class AccessPolicy
 
       can :public_profile, User do |user, current_user|
         current_user.is_friends_with?(user) || user == current_user
+      end
+
+      can :post, Message do |message, user|
+        case message.messageable.class.name
+        when "Topic", "Activity"
+          p message.group_includes_user?(user)
+          message.group_includes_user?(user)
+        when "User"
+          message.messageable_is_friends_with?(user)
+        end
       end
     end
   end
