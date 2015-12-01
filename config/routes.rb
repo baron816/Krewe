@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     delete 'drop_user', on: :member
     resources :drop_user_votes, only: [:create, :destroy]
     resources :expand_group_votes, only: [:create, :destroy]
-    resources :topics, shallow: true, only: [:create, :show] do
+    resources :topics, shallow: true, only: [:create] do
       resources :messages, only: :create
       get 'change', on: :member
     end
@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   resources :surveys, only: [:new, :create]
 
   root 'home#index'
+  get "*any", via: :all, to: "errors#not_found"
 
   namespace :api do
     namespace :v1 do
@@ -60,6 +61,4 @@ Rails.application.routes.draw do
       resources :sessions, only: [:create, :destroy]
     end
   end
-
-  get "*any", via: :all, to: "errors#not_found"
 end
