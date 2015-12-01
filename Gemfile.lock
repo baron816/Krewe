@@ -1,6 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    access-granted (1.0.4)
     actionmailer (4.2.1)
       actionpack (= 4.2.1)
       actionview (= 4.2.1)
@@ -270,6 +271,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  access-granted
   active_model_serializers
   auto_html
   autoprefixer-rails
