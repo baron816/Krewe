@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   resources :surveys, only: [:new, :create]
 
   root 'home#index'
+  get "admin_dash" => "home#admin_dash"
   get "*any", via: :all, to: "errors#not_found"
 
   namespace :api do
