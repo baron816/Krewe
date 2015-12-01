@@ -1,18 +1,15 @@
 class UsersController < ApplicationController
 	before_action :set_user, only: [:edit, :update, :public_profile, :join_group, :destroy]
-	before_action :user_logged?, only: [:update, :edit]
+	before_action :authorize_read, only: [:update, :edit, :destroy]
 
 	def show
 		@user_show = User.friendly.find(params[:id])
-		message_root_redirect("You do not have access to go there.") unless @user_show == current_user
+		authorize! :read, @user_show
 	end
 
 	def public_profile
-		if current_user.is_friends_with?(@user) || current_user == @user
-			@user = UserPublicProfile.new(@user, current_user, params[:page])
-		else
-			message_root_redirect("You do not know that person.")
-		end
+		authorize! :public_profile, @user	
+		@user = UserPublicProfile.new(@user, current_user, params[:page])
 	end
 
 	def edit
@@ -23,14 +20,10 @@ class UsersController < ApplicationController
 	end
 
 	def update
-		if @user == current_user
-			if @user.update(user_params)
-				redirect_to user_path(@user)
-			else
-				render :edit
-			end
+		if @user.update(user_params)
+			redirect_to user_path(@user)
 		else
-			message_root_redirect("You do not have access to do that.")
+			render :edit
 		end
 	end
 
@@ -62,19 +55,19 @@ class UsersController < ApplicationController
 	end
 
 	def destroy
-		if @user == current_user
-			group = @user.degree_groups(1).take
-			@user.destroy
-			group.check_space(@user)
-			redirect_to new_survey_path(params: { email: @user.email })
-		else
-			message_root_redirect("You do not have access to do that.")
-		end
+		group = @user.degree_groups(1).take
+		@user.destroy
+		group.check_space(@user)
+		redirect_to new_survey_path(params: { email: @user.email })
 	end
 
 	private
 	def set_user
 		@user = User.friendly.find(params[:id])
+	end
+
+	def authorize_read
+	  authorize! :read, @user
 	end
 
 	def user_params

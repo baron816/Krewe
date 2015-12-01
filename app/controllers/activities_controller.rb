@@ -1,9 +1,9 @@
 class ActivitiesController < ApplicationController
 	before_action :set_activity, only: [:edit, :update, :add_user, :remove_user, :show]
-	before_action :user_logged?, only: [:create, :update, :edit, :new]
 	before_action :set_group, only: [:create, :new]
 
 	def create
+		authorize! :read, @group
 		@activity = @group.activities.new(activity_params)
 
 		if @activity.save
@@ -15,6 +15,8 @@ class ActivitiesController < ApplicationController
 	end
 
 	def add_user
+		authorize! :read, @activity.group
+
 		unless @activity.user_going?(current_user)
 			@activity.users << current_user
 			@activity.check_attendance
@@ -28,17 +30,19 @@ class ActivitiesController < ApplicationController
 	end
 
 	def remove_user
+		authorize! :read, @activity.group
 		@activity.users.delete(current_user)
 		@activity.check_attendance
 		redirect_to current_user
 	end
 
 	def edit
+		authorize! :update, @activity
 	end
 
 	def update
-		if @activity.update(activity_params) && @activity.proposed_by?(current_user)
-			@activity.send_notifications("ActivityUpdate")
+		authorize! :update, @activity
+		if @activity.update(activity_params)
 			redirect_to activity_path(@activity)
 		else
 			redirect_to edit_activity_path(@activity), flash: { errors: @activity.errors.full_messages }
@@ -47,12 +51,13 @@ class ActivitiesController < ApplicationController
 
 	def show
 		@activity = ActivityShow.new(@activity, current_user)
+		authorize! :read, @activity.group
 
-		redirect_to root_path unless @activity.group_includes_user?(current_user)
 		current_user.dismiss_activity_notification(@activity.activity)
 	end
 
 	def new
+		authorize! :read, @group
 		@activity = Activity.new
 	end
 

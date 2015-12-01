@@ -1,9 +1,8 @@
 class MessagesController < ApplicationController
-	before_action :user_logged?
-
 	def create
 		@message = load_messageable.messages.new(message_params)
-
+		authorize! :post, @message
+		
 		@message.save!
 
 		respond_to do |format|

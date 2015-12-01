@@ -64,3 +64,5 @@ gem 'jquery-atwho-rails'
 gem 'sidekiq'
 
 gem "goldiloader"
+
+gem 'access-granted'

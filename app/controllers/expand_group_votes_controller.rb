@@ -1,9 +1,9 @@
 class ExpandGroupVotesController < ApplicationController
   before_action :set_group
-  before_action :user_logged?
 
   def create
-    @expand_vote = @group.expand_group_votes.create(voter_id: current_user.id) if @group.includes_user?(current_user)
+    authorize! :vote, @group
+    @expand_vote = @group.expand_group_votes.create(voter_id: current_user.id)
 
     if @group.voted_to_expand? && @group.ripe_for_expansion?
       new_group = ExpandGroup.new(@group).expand_group
