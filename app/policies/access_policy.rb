@@ -9,6 +9,9 @@ class AccessPolicy
       can :update, Activity
       can :post, Message
       can :public_profile, User
+      can :vote, DropUserVote
+      can :vote, ExpandGroupVote
+      can :create, Topic
     end
 
     role :member, proc { |user| user.present? } do
@@ -40,6 +43,18 @@ class AccessPolicy
         when "User"
           message.messageable_is_friends_with?(user)
         end
+      end
+
+      can :vote, DropUserVote do |vote, current_user|
+        current_user.can_vote?(vote.user)
+      end
+
+      can :vote, ExpandGroupVote do |vote, user|
+        vote.group_includes_user?(user)
+      end
+
+      can :create, Topic do |topic, user|
+        topic.group_includes_user?(user)
       end
     end
   end
