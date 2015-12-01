@@ -4,10 +4,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   include SessionsHelper
 
-  before_action :user_logged?, except: [:new, :index, :create, :edit, :update]
-
-  def user_logged?
-    message_root_redirect("Please log in first.") unless current_user
+  rescue_from "AccessGranted::AccessDenied" do |exception|
+    redirect_to root_path, alert: "You don't have access to do that."
   end
 
   def message_root_redirect(message)
