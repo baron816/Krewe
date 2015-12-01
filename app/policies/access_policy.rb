@@ -12,6 +12,7 @@ class AccessPolicy
       can :vote, DropUserVote
       can :vote, ExpandGroupVote
       can :create, Topic
+      can :read, AdminDash
     end
 
     role :member, proc { |user| user.present? } do
