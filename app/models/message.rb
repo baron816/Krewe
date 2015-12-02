@@ -50,12 +50,16 @@ class Message < ActiveRecord::Base
 			end
 			send_mention_email_alerts
 		when 'User'
+			UserMailer.delay.user_message_alert(self) unless messageable.unviewed_personal_notifications_from_user_count(poster)
 			create_notification(messageable)
-			UserMailer.delay.user_message_alert(self)
 		end
 	end
 
 	def create_notification(user)
 	  self.notifications.create(user: user, poster: self.poster, notification_type: "#{messageable_type}Message")
+	end
+
+	def last_message
+	  #code
 	end
 end
