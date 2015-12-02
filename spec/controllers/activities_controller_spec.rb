@@ -59,6 +59,7 @@ describe ActivitiesController do
 
   describe "GET #edit" do
     before do
+      cookies[:auth_token] = activity.proposer.auth_token
       get :edit, id: activity, group_id: group
     end
 
@@ -73,6 +74,7 @@ describe ActivitiesController do
 
   describe "PUT #update" do
     before do
+      cookies[:auth_token] = activity.proposer.auth_token
       put :update, {group_id: group, id: activity, activity: {plan: "Get some sodas"}}
     end
 
