@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       resources :messages, only: :create
       get 'change', on: :member
     end
-    resources :activities, shallow: true, except: [:index, :destroy] do
+    resources :activities, shallow: true, except: [:index] do
       resources :messages, only: :create
       member do
         post 'add_user'
@@ -23,7 +23,6 @@ Rails.application.routes.draw do
       end
     end
   end
-
 
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'

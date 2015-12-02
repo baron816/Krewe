@@ -1,5 +1,5 @@
 class ActivitiesController < ApplicationController
-	before_action :set_activity, only: [:edit, :update, :add_user, :remove_user, :show]
+	before_action :set_activity, except: [:new, :create]
 	before_action :set_group, only: [:create, :new]
 
 	def create
@@ -59,6 +59,13 @@ class ActivitiesController < ApplicationController
 	def new
 		authorize! :read, @group
 		@activity = Activity.new
+	end
+
+	def destroy
+	  authorize! :update, @activity
+
+		@activity.destroy
+		redirect_to current_user
 	end
 
 	private

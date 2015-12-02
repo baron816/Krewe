@@ -6,7 +6,10 @@
 		<% else %>
 			<%= link_to "Go", add_user_activity_path(@activity.activity), remote: true, method: :post, class: 'btn green waves-effect waves-light', id: "activity-go" %>
 		<% end %>
-		<%= link_to "Edit Activity", edit_activity_path(@activity.activity), class: 'btn orange waves-effect waves-light' if @activity.proposed_by?(current_user) %>
+		<% if @activity.proposed_by?(current_user) %>
+			<%= link_to "Edit Activity", edit_activity_path(@activity.activity), class: 'btn orange waves-effect waves-light' %>
+			<%= link_to "Delete Activity", activity_path(@activity.activity), method: :delete, class: "btn red white-text", data: {confirm: "Are you sure you want to delete this activity?"} %>
+		<% end %>
 		<button type="button" class="btn light-green waves-effect waves-light right-align" id="map-hider" >Toggle Map</button>
 		<h3><%= link_to @activity.group_name, @activity.group %></h3>
 		<h4><%= local_time(@activity.appointment) %></h4>
