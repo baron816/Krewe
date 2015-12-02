@@ -57,7 +57,7 @@ class Group < ActiveRecord::Base
 	end
 
 	def ripe_for_expansion?
-	  aged?(degree.month) && attended_activities_count >= 4 && can_join == false && has_expanded == false && ready_to_expand == false
+	  aged?(1.month) && attended_activities_count >= 4 && can_join == false && has_expanded == false && ready_to_expand == false
 	end
 
 	def voted_to_expand?
