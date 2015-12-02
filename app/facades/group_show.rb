@@ -25,7 +25,7 @@ class GroupShow
   end
 
   def activities
-    @activities ||= group.future_activities
+    @activities ||= group.future_activities.includes(:users)
   end
 
   def topics
