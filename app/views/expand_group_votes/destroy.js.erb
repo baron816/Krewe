@@ -1,3 +1,1 @@
-$('#remain').first().replaceWith('<%= link_to "Expand Group #{@group.expand_group_votes_size}/#{@group.users_count}", group_expand_group_votes_path(@group), method: :post, class: 'waves-effect btn deep-orange white-text', id: 'expand', remote: true %>')
-
-$('#remain').last().replaceWith('<%= link_to "Expand Group #{@group.expand_group_votes_size}/#{@group.users_count}", group_expand_group_votes_path(@group), method: :post, class: 'waves-effect btn deep-orange white-text', id: 'expand', remote: true %>')
+$('.remain').replaceWith('<%= link_to "Expand Group #{@group.expand_group_votes_size}/#{@group.users_count}", group_expand_group_votes_path(@group), method: :post, class: 'waves-effect btn deep-orange white-text expand', remote: true %>')
