@@ -2,8 +2,10 @@ class ExpandGroupVotesController < ApplicationController
   before_action :set_group
 
   def create
-    authorize! :vote, @group
-    @expand_vote = @group.expand_group_votes.create(voter_id: current_user.id)
+    @expand_vote = @group.expand_group_votes.new(voter_id: current_user.id)
+    authorize! :vote, @expand_vote
+
+    @expand_vote.save
 
     if @group.voted_to_expand? && @group.ripe_for_expansion?
       new_group = ExpandGroup.new(@group).expand_group
