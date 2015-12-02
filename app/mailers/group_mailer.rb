@@ -12,4 +12,11 @@ class GroupMailer < ApplicationMailer
 
     mail to: @user.email, subject: "#{@poster.name} joined group #{@group.name}"
   end
+
+  def activity_proposal(user, activity)
+    @user = user
+    @activity = activity
+
+    mail to: @user, subject: "#{@activity.proposer} proposed an activity: #{@activity.plan}"
+  end
 end
