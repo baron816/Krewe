@@ -5,5 +5,5 @@ class Topic < ActiveRecord::Base
   delegate :names_data, :users, to: :group
   delegate :includes_user?, to: :group, prefix: true
 
-  validates_presence_of :name
+  validates :name, presence: true, length: { maximum: 20 }
 end
