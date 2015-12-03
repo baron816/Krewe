@@ -11,8 +11,12 @@ $secondary: #3580d9;
 	src: font-url('JosefinSans-SemiBold.ttf') format('truetype');
 }
 
-h1, h2, h3, h4, h5, h6, p, div {
-	font-family: 'Josefin Sans';
+html {
+	font-family: 'Josefin Sans', Roboto, Calibri, sans-serif;
+}
+
+h1.header, h5.header {
+	text-shadow: 1px 1px black;
 }
 
 p {
