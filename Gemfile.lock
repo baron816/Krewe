@@ -52,6 +52,8 @@ GEM
     browser-timezone-rails (0.0.8)
       jquery-rails
       rails (>= 3.1)
+    bugsnag (2.8.12)
+      json (~> 1.7, >= 1.7.7)
     builder (3.2.2)
     bullet (4.14.7)
       activesupport (>= 3.0.0)
@@ -277,6 +279,7 @@ DEPENDENCIES
   autoprefixer-rails
   bcrypt (~> 3.1.7)
   browser-timezone-rails
+  bugsnag
   bullet
   byebug
   coffee-rails (~> 4.1.0)
