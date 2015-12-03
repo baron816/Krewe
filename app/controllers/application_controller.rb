@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
 
   rescue_from "AccessGranted::AccessDenied" do |exception|
-    redirect_to root_path, alert: "You don't have access to do that."
+    redirect_to root_path, notice: "You do not have permission to do that."
   end
 
   def message_root_redirect(message)
