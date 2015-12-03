@@ -37,7 +37,7 @@ class Activity < ActiveRecord::Base
 	def send_notifications(type = self.class.name)
 		group_users.each do |user|
 			unless user == proposer
-				self.notifications.create(user: user, poster: self.proposer, notification_type: type)
+				self.notifications.create(user: user, poster: self.proposer, notification_type: type).delay
 				GroupMailer.delay.activity_proposal({user: user, activity: self}) if type == "Activity"
 			end
 		end

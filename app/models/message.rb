@@ -46,7 +46,7 @@ class Message < ActiveRecord::Base
 		case messageable_type
 		when 'Activity', 'Topic'
 			messageable_users.each do |user|
-				 create_notification(user) unless user == self.poster
+				 create_notification(user).delay unless user == self.poster
 			end
 			send_mention_email_alerts
 		when 'User'
@@ -56,10 +56,6 @@ class Message < ActiveRecord::Base
 	end
 
 	def create_notification(user)
-	  self.notifications.create(user: user, poster: self.poster, notification_type: "#{messageable_type}Message")
-	end
-
-	def last_message
-	  #code
+	  self.notifications.create(user: user, poster: self.poster, notification_type: "#{messageable_type}Message").delay
 	end
 end
