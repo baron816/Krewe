@@ -31,6 +31,7 @@ Rails.application.routes.draw do
 
   resources :password_resets, except: [:get, :destroy]
   resources :newsletters, only: [:new, :create]
+  resources :beta_codes, only: [:new, :create]
   resources :surveys, only: [:new, :create]
 
   root 'home#index'
