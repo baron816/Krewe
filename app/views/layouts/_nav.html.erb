@@ -22,7 +22,7 @@
 
 			<% else %>
 				<li><%= link_to "Log In", login_path, remote: true %></li>
-				<li><%= link_to "Sign Up", new_user_path, remote: true %></li>
+				<li><%= link_to "Sign Up For Beta", beta_signup_path %></li>
 			<% end %>
 
 			<li><%= link_to "<i class='material-icons'>help</i>".html_safe, faq_path %></li>
@@ -51,17 +51,13 @@
 
 			<% else %>
 				<%= link_to "Log In", login_path, class: "waves-effect btn light-blue white-text" %>
-				<%= link_to "Sign Up", new_user_path, class: "waves-effect btn teal white-text" %>
+				<%= link_to "Sign Up For Beta", beta_signup_path, class: "waves-effect btn teal white-text" %>
 			<% end %>
 
 			<%= link_to "FAQ", faq_path, class: "btn deep-orange white-text" %>
 		</ul>
 	</div>
 </nav>
-
-<div class="modal" id="create-user">
-
-</div>
 
 <% if current_user.try(:show_notifications_positive?) %>
 	<div id='notifications' class="modal">

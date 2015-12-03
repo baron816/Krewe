@@ -33,6 +33,9 @@ Rails.application.routes.draw do
   resources :newsletters, only: [:new, :create]
   resources :surveys, only: [:new, :create]
 
+  get "beta_signup" => "beta_codes#new"
+  post "beta_signup" => "beta_codes#create"
+
   root 'home#index'
   get "admin_dash" => "home#admin_dash"
   get "faq" => "home#faq"

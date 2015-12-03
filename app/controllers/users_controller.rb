@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 	end
 
 	def public_profile
-		authorize! :public_profile, @user	
+		authorize! :public_profile, @user
 		@user = UserPublicProfile.new(@user, current_user, params[:page])
 	end
 
@@ -28,6 +28,9 @@ class UsersController < ApplicationController
 	end
 
 	def new
+		beta_code = BetaCode.find_by(auth_token: params[:code])
+		return redirect_to root_path, notice: "Please request beta" unless beta_code && !beta_code.used
+
 		@user = User.new
 
 		respond_to do |format|
@@ -40,6 +43,7 @@ class UsersController < ApplicationController
 		@user = User.new(user_params)
 
 		if @user.save
+			BetaCode.find_by(auth_token: params[:code]).update_column(:used, true)
 			log_in(@user)
 			redirect_to user_path(@user)
 		else
@@ -71,6 +75,6 @@ class UsersController < ApplicationController
 	end
 
 	def user_params
-		params.require(:user).permit(:name, :email, :address, :password, :password_confirmation, :address, :category, :age_group, :gender_group, :latitude, :longitude)
+		params.require(:user).permit(:name, :email, :address, :password, :password_confirmation, :address, :category, :age_group, :gender_group, :latitude, :longitude, :code)
 	end
 end

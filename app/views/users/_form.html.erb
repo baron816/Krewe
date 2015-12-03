@@ -5,10 +5,7 @@
 			<%= f.text_field :name, class: 'validate', required: true %>
 			<%= f.label :name %>
 		</div>
-		<div class="input-field">
-			<%= f.email_field :email, class: 'validate', required: true %>
-			<%= f.label :email  %>
-		</div>
+
 
     <div class="input-field">
 			<%= f.text_field :address, placeholder: "", required: true %>
@@ -47,6 +44,8 @@
 
 		<%= f.hidden_field :latitude, id: "lat" %>
 		<%= f.hidden_field :longitude, id: 'lng' %>
+		<%= f.hidden_field :email, value: params[:email], required: true %>
+		<%= hidden_field_tag :code, params[:code] %>
 
 		<div class="modal-footer">
 			<%= f.submit :Submit, class: 'btn blue' %>

@@ -1,5 +1,11 @@
 class UserMailer < ApplicationMailer
 
+  def beta_code(beta_code)
+    @beta_code = beta_code
+
+    mail to: @beta_code.email, subject: "Sign up for Krewe!"
+  end
+
   def password_reset(user)
     @user = user
 

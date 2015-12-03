@@ -10,7 +10,7 @@
 				<% if current_user %>
 					<%= link_to "Home", user_path(current_user), class: "modal-trigger", class: 'btn-large waves-effect blue' %>
 				<% else %>
-					<%= link_to "Sign Up", new_user_path, class: "modal-trigger",  class: 'btn-large waves-effect blue', remote: true %>
+					<%= link_to "Sign Up For Beta", beta_signup_path, class: "modal-trigger",  class: 'btn-large waves-effect blue' %>
 				<% end %>
 			</div>
 			<br><br>
