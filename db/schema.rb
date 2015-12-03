@@ -33,8 +33,9 @@ ActiveRecord::Schema.define(version: 20151202222116) do
   add_index "activities", ["proposer_id"], name: "index_activities_on_proposer_id", using: :btree
 
   create_table "beta_codes", force: :cascade do |t|
-    t.string "auth_token"
-    t.string "email"
+    t.string  "auth_token"
+    t.string  "email"
+    t.boolean "used",       default: false
   end
 
   add_index "beta_codes", ["auth_token"], name: "index_beta_codes_on_auth_token", using: :btree
