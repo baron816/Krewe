@@ -6,11 +6,12 @@ class GroupMailer < ApplicationMailer
   #   en.group_mailer.join_group.subject
   #
   def join_group(params = {})
-    @user = params[:user]
     @group = params[:group]
     @poster = params[:poster]
+    emails = @group.users.pluck(:email)
+    emails.delete(@poster.email)
 
-    mail to: @user.email, subject: "#{@poster.name} joined group #{@group.name}"
+    mail bcc: emails, subject: "#{@poster.name} joined group #{@group.name}"
   end
 
   def activity_proposal(params = {})
