@@ -1,0 +1,16 @@
+<% provide(:title, "Sign up for Krewe") %>
+
+<div class="container">
+  <div class="card-panel">
+    <h3>Signup for Krewe</h3>
+    <%= form_for(@beta_code, url: beta_signup_path) do |f| %>
+
+      <div class="input-field">
+        <%= f.email_field :email, required: true %>
+        <%= f.label :email %>
+      </div>
+
+      <%= f.submit "Submit", class: 'btn blue' %>
+    <% end %>
+  </div>
+</div>
