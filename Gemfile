@@ -19,6 +19,17 @@ gem 'momentjs-rails', '>= 2.9.0'
 gem 'sweetalert-rails'
 gem 'sweet-alert-confirm'
 gem 'auto_html'
+gem 'bullet', group: 'development'
+gem 'active_model_serializers'
+gem 'responders'
+gem 'rails_12factor', group: :production
+gem 'rest-client'
+gem 'friendly_id'
+gem 'jquery-atwho-rails'
+gem 'sidekiq'
+gem "goldiloader"
+gem 'access-granted'
+gem 'meta-tags'
 
 gem 'jquery-rails'
 gem 'jquery-turbolinks'
@@ -47,23 +58,3 @@ group :development, :test do
 
   gem 'lol_dba'
 end
-
-gem 'bullet', group: 'development'
-
-gem 'active_model_serializers'
-
-gem 'responders'
-
-gem 'rails_12factor', group: :production
-
-gem 'rest-client'
-
-gem 'friendly_id'
-
-gem 'jquery-atwho-rails'
-
-gem 'sidekiq'
-
-gem "goldiloader"
-
-gem 'access-granted'
