@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
 	validates :email, presence: true, length: { maximum: 255}, format: { with: VALID_EMAIL_REGEX }, uniqueness: true
 	validates :password, presence: true, length: { minimum: 6 }, on: :create
 	validates_presence_of :longitude, :latitude, :address, :category, :age_group, :gender_group
+	validates :terms_of_service, acceptance: true
 	validate :multiple_words?
 
 	has_secure_password
