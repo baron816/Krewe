@@ -39,6 +39,7 @@ Rails.application.routes.draw do
   root 'home#index'
   get "admin_dash" => "home#admin_dash"
   get "faq" => "home#faq"
+  get "privacy_policy" => "home#privacy_policy"
   get "*any", via: :all, to: "errors#not_found"
 
   namespace :api do

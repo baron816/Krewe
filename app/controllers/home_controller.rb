@@ -5,6 +5,9 @@ class HomeController < ApplicationController
 	def faq
 	end
 
+	def privacy_policy
+	end
+
 	def admin_dash
 	  @admin = AdminDash.new
 		authorize! :read, @admin
