@@ -3,7 +3,7 @@
 
 		<div class="input-field">
 			<%= f.text_field :name, class: 'validate', required: true %>
-			<%= f.label :name %>
+			<%= f.label :name, "First and Last Name" %>
 		</div>
 
 
@@ -42,6 +42,11 @@
 			<%= f.label :password_confirmation %>
 		</div>
 
+		<p>
+			<%= check_box_tag :terms_of_service, true, true %>
+			<%= label_tag :terms_of_service, "I agree to the #{link_to "Terms of Service", terms_of_service_path}".html_safe %>
+		</p>
+
 		<%= f.hidden_field :latitude, id: "lat" %>
 		<%= f.hidden_field :longitude, id: 'lng' %>
 		<%= f.hidden_field :email, value: params[:email], required: true %>
@@ -55,4 +60,8 @@
 <%= javascript_tag do %>
 	initAutoComplete()
 	$('.tooltipped').tooltip();
+
+	$('form').submit(function(event){
+		validateCheckbox(event);
+	})
 <% end %>
