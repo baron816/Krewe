@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <%= display_meta_tags %>
   <title>Krewe<% if current_user.try(:show_notifications_positive?) %> (<%= current_user.show_notifications_count %>)
   <% end %>
   </title>

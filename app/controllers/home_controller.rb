@@ -1,8 +1,10 @@
 class HomeController < ApplicationController
 	def index
+		prepare_meta_tags
 	end
 
 	def faq
+		prepare_meta_tags
 	end
 
 	def privacy_policy
