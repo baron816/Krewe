@@ -85,3 +85,10 @@ function setActivityAppointment() {
 	var date = $("#date_field").val();
 	$("#activity_appointment").val(date + " " + time);
 }
+
+function validateCheckbox(event) {
+	if ( !document.getElementById("terms_of_service").checked ) {
+		event.preventDefault()
+		swal("Please accept the terms of service")
+	}
+}
