@@ -11,7 +11,7 @@ class PasswordResetsController < ApplicationController
 
 		if @user
 			@user.send_password_reset
-			redirect_to root_path, notice: "An email was just sent to #{email} to reset your password. It will expire in one hour"
+			redirect_to root_path, notice: "An email was just sent to #{email} to reset your password. It will expire in one hour."
 		else
 			flash.now[:danger] = "Email Address not found"
 			render :new
