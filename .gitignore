@@ -13,5 +13,3 @@
 /tmp
 .env
 dump.rdb
-bundle.pem
-server.*
