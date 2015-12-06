@@ -83,6 +83,10 @@ class Group < ActiveRecord::Base
 		user_names_hash(current_user).to_json.html_safe
 	end
 
+	def city
+	  users.first.city
+	end
+
 	private
 	def create_general_topic
 	  self.topics.create(name: "General")
