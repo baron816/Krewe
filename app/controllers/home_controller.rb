@@ -14,7 +14,7 @@ class HomeController < ApplicationController
 	end
 
 	def admin_dash
-	  @admin = AdminDash.new
+	  @admin = AdminDash.new(params[:page])
 		authorize! :read, @admin
 	end
 end
