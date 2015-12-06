@@ -18,11 +18,23 @@
         <th data-field="degree">
           Degree
         </th>
+        <th data-field="gender">
+          Gender
+        </th>
+        <th data-field="category">
+          Category
+        </th>
+        <th data-field="age-group">
+          Age Group
+        </th>
         <th data-field="attended-activities">
           Attended Activites
         </th>
         <th data-field="upcoming-activities">
           Upcoming Activities
+        </th>
+        <th>
+          City
         </th>
       </tr>
     </thead>
@@ -41,15 +53,33 @@
         </td>
 
         <td>
+          <%= group.gender_group %>
+        </td>
+
+        <td>
+          <%= group.category %>
+        </td>
+
+        <td>
+          <%= group.age_group %>
+        </td>
+
+        <td>
           <%= group.attended_activities_count %>
         </td>
 
         <td>
           <%= group.future_activities.count %>
         </td>
+
+        <td>
+          <%= group.city %>
+        </td>
       </tr>
     <% end %>
 
     </table>
+
+    <%= paginate @admin.groups %>
   </div>
 </div>
