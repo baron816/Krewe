@@ -109,6 +109,10 @@ class User < ActiveRecord::Base
 	  groups_count < group_limit
 	end
 
+	def city
+	  address.split(',')[1..-1].join(',')
+	end
+
 	private
 	def slug_candidates
 	  [

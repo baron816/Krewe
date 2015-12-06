@@ -6,13 +6,9 @@ class UserPublicProfile
     @page = page
   end
 
-  delegate :name, :email, :category, :id, to: :user, prefix: true
+  delegate :name, :email, :category, :id, :city, to: :user, prefix: true
   delegate :any?, :count, to: :personal_messages, prefix: true
   delegate :next_page, to: :personal_messages
-
-  def user_location
-    user.address.split(',')[1..-1].join(',')
-  end
 
   def personal_messages
     @personal_messages ||= Message.personal_messages(user, current_user).page(page).per(per_page)
