@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151203181057) do
+ActiveRecord::Schema.define(version: 20151206013957) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,8 +29,10 @@ ActiveRecord::Schema.define(version: 20151203181057) do
     t.boolean  "well_attended", default: false
   end
 
+  add_index "activities", ["appointment"], name: "index_activities_on_appointment", using: :btree
   add_index "activities", ["group_id"], name: "index_activities_on_group_id", using: :btree
   add_index "activities", ["proposer_id"], name: "index_activities_on_proposer_id", using: :btree
+  add_index "activities", ["well_attended"], name: "index_activities_on_well_attended", using: :btree
 
   create_table "beta_codes", force: :cascade do |t|
     t.string  "auth_token"
