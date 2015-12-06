@@ -23,7 +23,7 @@
     <div class="card-content ">
       <span class="card-title black-text">No Upcoming Activities</span>
       <p>
-        <%= link_to "Propose one...", new_group_activity_path(group) %>
+        <%= link_to "Propose one...", new_group_activity_path(group) if group %>
       </p>
     </div>
   </div>
