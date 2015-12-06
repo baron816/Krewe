@@ -15,13 +15,14 @@ class GroupMailer < ApplicationMailer
   def activity_proposal(params = {})
     @group = params[:group]
     @activity = params[:activity]
+    @poster = @activity.proposer
 
-    mail bcc: emails, subject: "#{@activity.proposer.name} proposed an activity: #{@activity.plan}"
+    mail bcc: emails, subject: "#{@poster.name} proposed an activity: #{@activity.plan}"
   end
 
   private
 
   def emails
-    @group.users.pluck(:email).delete_if { |x| x == User.find(44).email }
+    @group.users.pluck(:email).delete_if { |x| x == @poster.email }
   end
 end
