@@ -24,6 +24,10 @@ $(document).ready(function(){
 		$('#map-canvas').toggle();
 	})
 
+	$('.new-message').focus(function(){
+		$('body').height('+=100')
+	})
+
 	responsiveMedia();
 })
 
