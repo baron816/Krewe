@@ -47,7 +47,7 @@ function scrollBottom(div) {
 }
 
 function setBodyHeight() {
-	var z = 400 - ($('body').height() - $('.new-message').position().top)
+	var z = 450 - ($('body').height() - $('.new-message').position().top)
 
 	$('.new-message').focus(function(){
 		$('body').height("+=" + z)
