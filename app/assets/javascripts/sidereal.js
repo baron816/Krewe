@@ -3,7 +3,7 @@ $(document).ready(function(){
 
 	resize_window('#map')
 
-	scrollBottom()
+	scrollBottom('.messages')
 
 	$('.topics > a:first-child').addClass('lighten-3')
 
@@ -24,9 +24,7 @@ $(document).ready(function(){
 		$('#map-canvas').toggle();
 	})
 
-	$('.new-message').focus(function(){
-		$('body').height('+=100')
-	})
+	setBodyHeight()
 
 	responsiveMedia();
 })
@@ -44,8 +42,21 @@ function responsiveMedia() {
 	$("p img").addClass("responsive-img")
 }
 
-function scrollBottom() {
-	$('.messages').scrollTop($('.messages').prop("scrollHeight"));
+function scrollBottom(div) {
+	$(div).scrollTop($(div).prop("scrollHeight"));
+}
+
+function setBodyHeight() {
+	var z = 400 - ($('body').height() - $('.new-message').position().top)
+
+	$('.new-message').focus(function(){
+		$('body').height("+=" + z)
+		scrollBottom('body')
+	})
+
+	$('.new-message').focusout(function () {
+		$('body').height("-=" + z)
+	})
 }
 
 function initAutoComplete() {
