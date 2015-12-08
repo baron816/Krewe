@@ -12,11 +12,6 @@ class GroupsController < ApplicationController
 		authorize! :read, @group
 
 		@group.drop_user(current_user)
-		if @group.primary_group?
-			new_group = current_user.find_or_create_group
-			redirect_to group_path(new_group)
-		else
-			redirect_to user_path(current_user)
-		end
+		redirect_to user_path(current_user)
 	end
 end
