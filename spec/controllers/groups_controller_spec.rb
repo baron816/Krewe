@@ -31,13 +31,8 @@ describe GroupsController do
   		expect(assigns[:group]).to eq(group)
   	end
 
-    it "drops the user's group and creates a new one" do
-    	expect { delete :drop_user, id: group }.to change(user.groups, :count).by(0)
-    end
-
-    it "only drops the user's group if it's not a first degree group" do
-      group.update_column(:degree, 3)
-      expect { delete :drop_user, id: group }.to change(user.groups, :count).by(-1)
+    it "drops the user's group" do
+    	expect { delete :drop_user, id: group }.to change(user.groups, :count).by(-1)
     end
   end
 end
