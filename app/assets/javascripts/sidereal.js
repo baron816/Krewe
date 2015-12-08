@@ -49,12 +49,12 @@ function scrollBottom(div) {
 function setBodyHeight() {
 	var z = 450 - ($('body').height() - $('.new-message').position().top)
 
-	$('.new-message').focus(function(){
+	$('.new-message, #new-message-submit').focus(function(){
 		$('body').height("+=" + z)
 		scrollBottom('body')
 	})
 
-	$('.new-message').focusout(function () {
+	$('.new-message, #new-message-submit').focusout(function () {
 		$('body').height("-=" + z)
 	})
 }
