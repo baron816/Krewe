@@ -23,6 +23,6 @@ class GroupMailer < ApplicationMailer
   private
 
   def emails
-    @group.users.pluck(:email).delete_if { |x| x == @poster.email }
+    @group.users.pluck(:email) - [@poster.email]
   end
 end
