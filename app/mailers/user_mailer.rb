@@ -21,7 +21,8 @@ class UserMailer < ApplicationMailer
 
   def user_message_alert(message)
     @message = message
+    messageable = @message.messageable
 
-    mail to: @message.messageable.email, subject: "#{@message.poster_name} sent you a message"
+    mail to: messageable.email, subject: "#{@message.poster_name} sent you a message"
   end
 end
