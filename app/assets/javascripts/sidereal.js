@@ -47,16 +47,18 @@ function scrollBottom(div) {
 }
 
 function setBodyHeight() {
-	var z = 450 - ($('body').height() - $('.new-message').position().top)
+	if ($('.new-message')[0]) {
+		var z = 450 - ($('body').height() - $('.new-message').position().top)
 
-	$('.new-message, #new-message-submit').focus(function(){
-		$('body').height("+=" + z)
-		scrollBottom('body')
-	})
+		$('.new-message, #new-message-submit').focus(function(){
+			$('body').height("+=" + z)
+			scrollBottom('body')
+		})
 
-	$('.new-message, #new-message-submit').focusout(function () {
-		$('body').height("-=" + z)
-	})
+		$('.new-message, #new-message-submit').focusout(function () {
+			$('body').height("-=" + z)
+		})
+	}
 }
 
 function initAutoComplete() {
