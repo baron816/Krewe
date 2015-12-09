@@ -3,7 +3,7 @@ module ApplicationHelper
 		[
 			"Professional",
 			"Creative",
-			"Working Class",
+			"Blue Collar",
 			"Doesn't Matter"
 		]
 	end
