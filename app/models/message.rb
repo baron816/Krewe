@@ -37,22 +37,28 @@ class Message < ActiveRecord::Base
 	def send_mention_email_alerts
 		send_to_users = mentioned_user_slugs.include?("group") ? messageable_users : messageable_users.users_by_slug(mentioned_user_slugs)
 
-		send_to_users.each do |user|
-			UserMailer.delay.mention_alert(self, user) if user != poster && user.send_notification?('mention')
-	  end
+		GroupMailer.delay.mention_alert(self, send_to_users)
 	end
 
 	def send_notifications
 		case messageable_type
 		when 'Activity', 'Topic'
-			messageable_users.each do |user|
-				 create_notification(user).delay unless user == self.poster
-			end
-			send_mention_email_alerts
+			send_group_or_activity_message_notifications
 		when 'User'
-			UserMailer.delay.user_message_alert(self) if !messageable.unviewed_personal_notifications_from_user_count(poster) && messageable.send_notification?('personal')
-			create_notification(messageable)
+			send_user_notification
 		end
+	end
+
+	def send_group_or_activity_message_notifications
+		messageable_users.each do |user|
+			 create_notification(user).delay unless user == self.poster
+		end
+		send_mention_email_alerts
+	end
+
+	def send_user_notification
+	  UserMailer.delay.user_message_alert(self) if !messageable.unviewed_personal_notifications_from_user_count(poster) && messageable.send_notification?('personal')
+		create_notification(messageable)
 	end
 
 	def create_notification(user)
