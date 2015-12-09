@@ -7,6 +7,10 @@ class HomeController < ApplicationController
 		prepare_meta_tags
 	end
 
+	def about
+	  prepare_meta_tags
+	end
+
 	def privacy_policy
 	end
 
