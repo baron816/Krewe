@@ -113,6 +113,10 @@ class User < ActiveRecord::Base
 	  address.split(',')[1..-1].join(',')
 	end
 
+	def send_notification?(type)
+	   notification_settings[type].nil? || notification_settings[type].to_bool
+	end
+
 	private
 	def slug_candidates
 	  [
