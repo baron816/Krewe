@@ -38,4 +38,17 @@ RSpec.describe GroupMailer, :type => :mailer do
       expect(mail.from).to eq(["no-reply@gokrewe.com"])
     end
   end
+
+  describe "mention_alert" do
+    let!(:message) { Message.create(messageable: group.topics.first, poster: poster, content: Faker::Lorem.sentence(5, true, 8))}
+
+    let(:mail) { GroupMailer.mention_alert(message, group.users) }
+
+    it "renders the headers" do
+      expect(mail.subject).to eq("#{poster.name} mentioned you in a post")
+      expect(mail.bcc).to include(user.email, user2.email)
+      expect(mail.bcc).to_not include(poster.email, user3.email)
+      expect(mail.from).to eq(["no-reply@gokrewe.com"])
+    end
+  end
 end
