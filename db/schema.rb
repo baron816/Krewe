@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151206013957) do
+ActiveRecord::Schema.define(version: 20151208182820) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
 
   create_table "activities", force: :cascade do |t|
     t.integer  "group_id"
@@ -189,6 +190,7 @@ ActiveRecord::Schema.define(version: 20151206013957) do
     t.string   "age_group"
     t.string   "gender_group"
     t.boolean  "is_admin",               default: false
+    t.hstore   "notification_settings",  default: {}
   end
 
   add_index "users", ["slug"], name: "index_users_on_slug", using: :btree
