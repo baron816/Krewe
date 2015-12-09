@@ -81,10 +81,12 @@
 	<div class="container">
 		<div class="row">
 			<div class="col l6 s12">
-				<p class="white-text">Founded by Baron M. Willeford</p>
-				<%= link_to "Terms of Service", terms_of_service_path, class: 'white-text' %>
-				<br>
-				<%= link_to "Privacy Policy", privacy_policy_path, class: 'white-text' %>
+				<h5 class="white-text">Founded by Baron Willeford</h5>
+				<ul>
+					<li><%= link_to "About Krewe", about_path, class: 'white-text' %></li>
+					<li><%= link_to "Terms of Service", terms_of_service_path, class: 'white-text' %></li>
+					<li><%= link_to "Privacy Policy", privacy_policy_path, class: 'white-text' %></li>
+				</ul>
 			</div>
 
 			<div class="col l6 s12">
