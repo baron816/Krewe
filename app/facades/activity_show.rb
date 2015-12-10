@@ -14,7 +14,7 @@ class ActivityShow
   end
 
   def messages
-    @messages ||= activity.messages
+    @messages ||= activity.messages.order(created_at: :asc)
   end
 
 end
