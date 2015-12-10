@@ -61,7 +61,7 @@ class UsersController < ApplicationController
 	def destroy
 		group = @user.degree_groups(1).take
 		@user.destroy
-		group.check_space(@user)
+		group.users_empty? ? group.destroy : group.check_space(@user)
 		redirect_to new_survey_path(params: { email: @user.email })
 	end
 
