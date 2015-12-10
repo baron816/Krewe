@@ -14,7 +14,7 @@ class TopicsController < ApplicationController
     @topic = @group.topics.new(group_params)
     authorize! :create, @topic
 
-    @topic.save
+    @topic.save!
 
     @topic_show = TopicShow.new(@topic, params[:page], current_user)
 
