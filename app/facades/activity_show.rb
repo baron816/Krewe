@@ -23,7 +23,11 @@ class ActivityShow
 
   def per_page
     note_count = user.unviewed_activity_message_notifications_count(activity)
+    dismiss_notifications
     (note_count || 0) >= 5 ? note_count : 5
   end
 
+  def dismiss_notifications
+    user.dismiss_activity_notification(@activity)
+  end
 end

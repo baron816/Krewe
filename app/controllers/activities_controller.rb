@@ -52,8 +52,6 @@ class ActivitiesController < ApplicationController
 	def show
 		@activity = ActivityShow.new({activity: @activity, user: current_user, page: params[:page]})
 		authorize! :read, @activity.group
-
-		current_user.dismiss_activity_notification(@activity.activity)
 	end
 
 	def new
