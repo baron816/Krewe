@@ -79,6 +79,16 @@
 						On
 					</label>
 				</div>
+
+				<div class="switch">
+					Group Expansion Emails:
+					<label>
+						Off
+						<%= p.check_box :expand, {checked: @user.send_notification?("expand")}, "true", "false" %>
+						<span class="lever"></span>
+						On
+					</label>
+				</div>
 			<% end %>
 
 			<%= f.hidden_field :latitude, id: "lat" %>
