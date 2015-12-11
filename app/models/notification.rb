@@ -92,6 +92,10 @@ class Notification < ActiveRecord::Base
 	  (unviewed_activity_message_notifications(activity) + unviewed_activity_update_notifications_from_activity(activity)).positive_count
 	end
 
+	def self.unviewed_activity_message_notifications_count(activity)
+	  unviewed_activity_message_notifications(activity).count
+	end
+
 	def self.dismiss_activity_notification(activity)
 		activity_notes = unviewed_activity_notifications(activity) + unviewed_activity_update_notifications_from_activity(activity) + unviewed_activity_message_notifications(activity)
 		activity_notes.each(&:dismiss) if activity_notes.any?
