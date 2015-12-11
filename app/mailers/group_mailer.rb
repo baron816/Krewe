@@ -30,6 +30,13 @@ class GroupMailer < ApplicationMailer
     mail bcc: emails("mention"), subject: "#{@poster.name} mentioned you in a post"
   end
 
+  def expand_group(group)
+    @group = group
+    @users = @group.users
+
+    mail bcc: emails("expand"), subject: "You have a new group!"
+  end
+
   private
 
   def emails(type)
