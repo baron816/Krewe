@@ -15,7 +15,7 @@ FactoryGirl.define do
 				address "135 William Street, New York, NY"
 				longitude -74.00671419999999
 				latitude 40.7094706
-				notification_settings {{'join' => 'true', 'proposal' => 'true', 'personal' => 'true', 'mention' => 'true'}}
+				notification_settings {{'join' => 'true', 'proposal' => 'true', 'personal' => 'true', 'mention' => 'true', 'expand' => 'true'}}
 			end
 
 			factory :user_wtc do
@@ -28,7 +28,7 @@ FactoryGirl.define do
 				address "121 Fulton Street, New York, NY"
 				longitude -74.0070554
 				latitude 40.7100732
-				notification_settings {{"join" => "false", "proposal" => 'false', "personal" => "false", 'mention' => 'false'}}
+				notification_settings {{"join" => "false", "proposal" => 'false', "personal" => "false", 'mention' => 'false', 'expand' => 'false'}}
 			end
 
 			factory :user_dbc do
