@@ -51,4 +51,15 @@ RSpec.describe GroupMailer, :type => :mailer do
       expect(mail.from).to eq(["no-reply@gokrewe.com"])
     end
   end
+
+  describe "expand_group" do
+    let(:mail) { GroupMailer.expand_group(group)}
+
+    it "renders the headers" do
+      expect(mail.subject).to eq("You have a new group!")
+      expect(mail.bcc).to include(user.email, user2.email, poster.email)
+      expect(mail.bcc).to_not include(user3.email)
+      expect(mail.from).to eq(["no-reply@gokrewe.com"])
+    end
+  end
 end
