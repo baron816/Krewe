@@ -8,7 +8,7 @@ $secondary: #3580d9;
 
 @font-face {
 	font-family: 'Josefin Sans';
-	src: font-url('JosefinSans-SemiBold.ttf') format('truetype');
+	src: font-url('JosefinSans-Regular.ttf') format('truetype');
 }
 
 html {
@@ -20,11 +20,11 @@ h1.header, h5.header {
 }
 
 p {
-	font-size: 1.3em;
+	font-size: 1.4em;
 }
 
-a {
-	font-size: 1.1em;
+a, time {
+	font-size: 1.3em;
 }
 
 #logo {
