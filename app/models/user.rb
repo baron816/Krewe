@@ -33,7 +33,7 @@ class User < ActiveRecord::Base
 	after_validation :geocode
 	reverse_geocoded_by :latitude, :longitude
 
-	delegate :unviewed_notifications, :dismiss_personal_notifications_from_user, :unviewed_personal_notifications_from_user_count, :unviewed_group_notification_count, :dismiss_group_notifications_from_group, :unviewed_category_notifications, :dismiss_activity_notification, :unviewed_activity_notifications_count, :unviewed_message_notifications_from_topic_count, :dismiss_topic_notifications_from_topic, :unviewed_activity_create_notifications_from_group, :poster_sorted_category_notifications, :unviewed_future_activity_notifications, :show_notifications_count, :show_notifications_positive?, :dismiss_all_notifications, to: :notifications
+	delegate :unviewed_notifications, :dismiss_personal_notifications_from_user, :unviewed_personal_notifications_from_user_count, :unviewed_group_notification_count, :dismiss_group_notifications_from_group, :unviewed_category_notifications, :dismiss_activity_notification, :unviewed_activity_notifications_count, :unviewed_activity_message_notifications_count, :unviewed_message_notifications_from_topic_count, :dismiss_topic_notifications_from_topic, :unviewed_activity_create_notifications_from_group, :poster_sorted_category_notifications, :unviewed_future_activity_notifications, :show_notifications_count, :show_notifications_positive?, :dismiss_all_notifications, to: :notifications
 	delegate :has_not_voted?, :group_drop_votes_count, :voter_vote, to: :drop_user_votes
 	delegate :future_activities, to: :activities
 	delegate :count, to: :groups, prefix: true
