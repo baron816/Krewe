@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
 	extend FriendlyId
+	include Sluggable
 	friendly_id :slug_candidates, use: :slugged
 
 	validates :name, presence: true, length: { minimum: 3, maximum: 50 }
@@ -118,25 +119,10 @@ class User < ActiveRecord::Base
 	end
 
 	private
-	def slug_candidates
-	  [
-			:name,
-			[:slug_hex]
-		]
-	end
-
 	def multiple_words?
 	  unless name.split.count > 1
 			errors.add(:name, "must include at first and last")
 		end
-	end
-
-	def slug_hex
-		slug = normalize_friendly_id(name)
-		begin
-			hexed = "#{slug}-#{SecureRandom.hex(3)}"
-		end while User.exists?(slug: hexed)
-		hexed
 	end
 
 	def should_generate_new_friendly_id?

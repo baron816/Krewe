@@ -1,5 +1,6 @@
 class Group < ActiveRecord::Base
 	extend FriendlyId
+	include Sluggable
 	friendly_id :slug_candidates, use: :slugged
 
 	has_many :user_groups
@@ -22,7 +23,6 @@ class Group < ActiveRecord::Base
 
 	scope :open_groups, -> { where(can_join: true) }
 	scope :category_groups, ->(category) { where(category: category) }
-	scope :excluded_users, ->(friend_ids) { where.not(id: user_friend_group_ids(friend_ids)) }
 	scope :non_former_groups, ->(group_ids) { where.not(id: group_ids) }
 	scope :same_age, ->(age_group) { where(age_group: age_group) }
 	scope :same_gender, ->(gender_group) { where(gender_group: gender_group) }
@@ -87,6 +87,10 @@ class Group < ActiveRecord::Base
 	  users.first.city
 	end
 
+	def name_group
+		self.name = GroupNameHelper.name.sample
+	end
+
 	private
 	def create_general_topic
 	  self.topics.create(name: "General")
@@ -100,30 +104,6 @@ class Group < ActiveRecord::Base
 
 	def group_hash
 	  Hash[:name, "Group", :slug, "group", :full_name, name]
-	end
-
-	def slug_candidates
-		name_group
-		[
-			:name,
-			:slug_hex
-		]
-	end
-
-	def slug_hex
-		slug = normalize_friendly_id(name)
-		begin
-			hexed = "#{slug}-#{SecureRandom.hex(6)}"
-		end while Group.exists?(slug: hexed)
-		hexed
-	end
-
-	def name_group
-		self.name = GroupNameHelper.name.sample
-	end
-
-	def self.user_friend_group_ids(friend_ids)
-		self.references(:users).where("users.id in (?)", friend_ids).ids.uniq
 	end
 
 	def aged?(period)
