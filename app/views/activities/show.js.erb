@@ -1,0 +1,6 @@
+$('.individual-messages').prepend('<%= j render @activity.messages.reverse %>')
+<% if @activity.next_page %>
+  $('.more-messages').replaceWith('<%= j link_to_next_page @activity.messages, "Load More", remote: true, class: 'btn blue more-messages' %>')
+<% else %>
+  $('.more-messages').remove();
+<% end %>
