@@ -30,9 +30,16 @@
 	<div class="col s12 m6">
 		<h3>Messages</h3>
 		<div class="messages card-panel z-depth-2" id="activity-messages">
-			<% @activity.messages.each do |message| %>
-			  <%= render partial: 'messages/message', locals: {message: message} %>
-			<% end %>
+			<div class="text-center">
+				<%= link_to_next_page @activity.messages, "Load More", remote: true, class: 'btn blue more-messages' %>
+			</div>
+
+			<div class="individual-messages">
+				<% @activity.messages.reverse_each do |message| %>
+				  <%= render partial: 'messages/message', locals: {message: message} %>
+				<% end %>
+			</div>
+
 		</div>
 
 		<%= render partial: 'messages/new', locals: { messageable: @activity.activity, message: @activity.new_message } %>
