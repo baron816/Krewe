@@ -51,7 +51,7 @@ class Message < ActiveRecord::Base
 
 	def send_group_or_activity_message_notifications
 		messageable_users.each do |user|
-			 create_notification(user).delay unless user == self.poster
+			 create_notification(user) unless user == self.poster
 		end
 		send_mention_email_alerts
 	end
@@ -62,6 +62,6 @@ class Message < ActiveRecord::Base
 	end
 
 	def create_notification(user)
-	  self.notifications.create(user: user, poster: self.poster, notification_type: "#{messageable_type}Message").delay
+	  self.notifications.delay.create(user: user, poster: self.poster, notification_type: "#{messageable_type}Message")
 	end
 end
