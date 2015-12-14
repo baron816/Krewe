@@ -62,6 +62,6 @@ class Message < ActiveRecord::Base
 	end
 
 	def create_notification(user)
-	  self.notifications.delay.create(user: user, poster: self.poster, notification_type: "#{messageable_type}Message")
+	  self.notifications.create(user: user, poster: self.poster, notification_type: "#{messageable_type}Message").delay
 	end
 end
