@@ -50,7 +50,7 @@ class ActivitiesController < ApplicationController
 	end
 
 	def show
-		@activity = ActivityShow.new({activity: @activity, user: current_user, page: params[:page]})
+		@activity_show = ActivityShow.new({activity: @activity, user: current_user, page: params[:page]})
 		authorize! :read, @activity.group
 	end
 
