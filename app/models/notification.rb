@@ -93,7 +93,7 @@ class Notification < ActiveRecord::Base
 	end
 
 	def self.unviewed_activity_message_notifications_count(activity)
-	  unviewed_activity_message_notifications(activity).count
+	  unviewed_activity_message_notifications(activity).positive_count
 	end
 
 	def self.dismiss_activity_notification(activity)
