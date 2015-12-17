@@ -2,13 +2,18 @@ class MessagesController < ApplicationController
 	def create
 		@message = load_messageable.messages.new(message_params)
 		authorize! :post, @message
-		
+
 		@message.save!
 
 		respond_to do |format|
 			format.html { redirect_to(current_user) }
 			format.js
 		end
+	end
+
+	def index
+	  activity = Activity.find(params[:activity_id])
+		@activity = ActivityShow.new(activity: activity, user: current_user, page: params[:page])
 	end
 
 	private
