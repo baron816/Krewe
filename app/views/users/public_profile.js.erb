@@ -1,6 +1,1 @@
-$('.individual-messages').prepend('<%= j render @user.personal_messages.reverse %>')
-<% if @user.next_page %>
-  $('.more-messages').replaceWith('<%= j link_to_next_page @user.personal_messages, "Load More", remote: true, class: 'btn blue more-messages' %>')
-<% else %>
-  $('.more-messages').remove();
-<% end %>
+<%= render partial: 'messages/more_messages.js.erb', locals: { messages: @user.personal_messages, next_page: @user.next_page } %>
