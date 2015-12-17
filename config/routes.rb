@@ -16,7 +16,7 @@ Rails.application.routes.draw do
       get 'change', on: :member
     end
     resources :activities, shallow: true, except: [:index] do
-      resources :messages, only: :create
+      resources :messages, only: [:create, :index]
       member do
         post 'add_user'
         delete 'remove_user'
