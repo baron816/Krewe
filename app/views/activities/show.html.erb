@@ -1,50 +1,38 @@
 <div class="row container">
 	<div class="col s12 card-panel z-depth-2">
-		<h3><%= @activity.plan %></h3>
-		<% if @activity.user_going?(current_user) %>
-			<%= link_to "Can't go", remove_user_activity_path(@activity.activity), method: :delete, class: 'btn red waves-effect waves-light' %>
+		<h3><%= @activity_show.plan %></h3>
+		<% if @activity_show.user_going?(current_user) %>
+			<%= link_to "Can't go", remove_user_activity_path(@activity_show.activity), method: :delete, class: 'btn red waves-effect waves-light' %>
 		<% else %>
-			<%= link_to "Go", add_user_activity_path(@activity.activity), remote: true, method: :post, class: 'btn green waves-effect waves-light', id: "activity-go" %>
+			<%= link_to "Go", add_user_activity_path(@activity_show.activity), remote: true, method: :post, class: 'btn green waves-effect waves-light', id: "activity-go" %>
 		<% end %>
-		<% if @activity.proposed_by?(current_user) %>
-			<%= link_to "Edit Activity", edit_activity_path(@activity.activity), class: 'btn orange waves-effect waves-light' %>
-			<%= link_to "Delete Activity", activity_path(@activity.activity), method: :delete, class: "btn red white-text", data: {confirm: "Are you sure you want to delete this activity?"} %>
+		<% if @activity_show.proposed_by?(current_user) %>
+			<%= link_to "Edit Activity", edit_activity_path(@activity_show.activity), class: 'btn orange waves-effect waves-light' %>
+			<%= link_to "Delete Activity", activity_path(@activity_show.activity), method: :delete, class: "btn red white-text", data: {confirm: "Are you sure you want to delete this activity?"} %>
 		<% end %>
 		<button type="button" class="btn light-green waves-effect waves-light right-align" id="map-hider" >Toggle Map</button>
-		<h3><%= link_to @activity.group_name, @activity.group %></h3>
-		<h4><%= local_time(@activity.appointment) %></h4>
-		<h4><%= @activity.location %></h4>
+		<h3><%= link_to @activity_show.group_name, @activity_show.group %></h3>
+		<h4><%= local_time(@activity_show.appointment) %></h4>
+		<h4><%= @activity_show.location %></h4>
 
 		<div id="map-canvas"></div>
 	</div>
 
-	<div class="col s12 m6">
+	<div class="col l6 m12 s12">
 		<h3>People going</h3>
 			<ul class="collection">
-			<% @activity.users.each do |user| %>
+			<% @activity_show.users.each do |user| %>
 				<%= link_to user.name, public_profile_user_path(user), class: "collection-item" %>
 			<% end %>
 			</ul>
 	</div>
 
-	<div class="col s12 m6">
+	<div class="col l6 hide-on-med-and-down" id="activity-messages">
 		<h3>Messages</h3>
-		<div class="messages card-panel z-depth-2" id="activity-messages">
-			<div class="text-center">
-				<%= link_to_next_page @activity.messages, "Load More", remote: true, class: 'btn blue more-messages' %>
-			</div>
+		<%= render partial: "messages/messages", locals: { messages: @activity_show.messages, messageable: @activity_show.activity, new_message: @activity_show.new_message } %>
 
-			<div class="individual-messages">
-				<% @activity.messages.reverse_each do |message| %>
-				  <%= render partial: 'messages/message', locals: {message: message} %>
-				<% end %>
-			</div>
-
-		</div>
-
-		<%= render partial: 'messages/new', locals: { messageable: @activity.activity, message: @activity.new_message } %>
 	</div>
 </div>
 <%= javascript_tag do %>
-	mapActivityLocation('<%= @activity.latitude %>', ' <%= @activity.longitude %>')
+	mapActivityLocation('<%= @activity_show.latitude %>', ' <%= @activity_show.longitude %>')
 <% end %>
