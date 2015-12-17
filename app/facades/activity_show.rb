@@ -19,10 +19,13 @@ class ActivityShow
     @messages ||= activity.messages.page(page).per(per_page).order(created_at: :desc)
   end
 
-  private
+  def note_count
+    @note_count ||= user.unviewed_activity_message_notifications_count(activity)
+  end
 
+  private
   def per_page
-    note_count = user.unviewed_activity_message_notifications_count(activity)
+    note_count
     dismiss_notifications
     (note_count || 0) >= 5 ? note_count : 5
   end
