@@ -52,6 +52,10 @@
 					<%= link_to "Propose Activity", new_group_activity_path(@group_show.group), id: 'new_activity', class: 'waves-effect waves-light btn purple white-text' %>
 				<% end %>
 
+				<% if @activity_show %>
+					<%= link_to "Messages #{@activity_show.note_count}", activity_messages_path(@activity_show.activity), class: 'waves-effect waves-light btn purple white-text' %>
+				<% end %>
+
 			<% else %>
 				<%= link_to "Log In", login_path, class: "waves-effect btn light-blue white-text" %>
 				<%= link_to "Sign Up For Beta", beta_signup_path, class: "waves-effect btn teal white-text" %>
