@@ -1,0 +1,18 @@
+<div class="messages card-panel z-depth-2">
+  <% if messages.any? %>
+    <div class="text-center">
+      <%= link_to_next_page messages, "Load More", remote: true, class: 'btn blue more-messages' %>
+    </div>
+
+    <div class="individual-messages">
+
+      <% messages.reverse_each do |message| %>
+        <%= render partial: 'messages/message', locals: {message: message} %>
+      <% end %>
+    </div>
+  <% else %>
+    <h3 id="intro">No messages yet...</h3>
+  <% end %>
+</div>
+
+<%= render partial: 'messages/new', locals: { messageable: messageable, message: new_message } %>
