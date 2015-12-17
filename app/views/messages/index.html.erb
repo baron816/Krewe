@@ -1,0 +1,5 @@
+<div class="container">
+    <h3><%= link_to @activity.plan, activity_path(@activity.activity) %></h3>
+
+    <%= render partial: 'messages/messages', locals: { messages: @activity.messages, messageable: @activity.activity, new_message: @activity.new_message } %>
+</div>
