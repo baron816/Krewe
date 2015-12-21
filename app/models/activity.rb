@@ -19,7 +19,7 @@ class Activity < ActiveRecord::Base
 
 	delegate :name, :users, :includes_user?, to: :group, prefix: true
 
-	scope :future_activities, -> { where('appointment > ?', Time.now).order(appointment: :asc) }
+	scope :future_activities, -> { where('appointment > ?', Time.now - 2.hours).order(appointment: :asc) }
 	scope :past_activities, -> { where('appointment < ?', Time.now) }
 	scope :attended_activities, -> { past_activities.where( well_attended: true ) }
 	scope :attended_activities_count, -> { attended_activities.size }
