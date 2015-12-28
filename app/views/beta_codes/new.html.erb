@@ -2,7 +2,7 @@
 
 <div class="container">
   <div class="card-panel">
-    <h3>Signup for Krewe</h3>
+    <h4>Signup for Krewe Beta</h4>
     <%= form_for(@beta_code, url: beta_signup_path) do |f| %>
 
       <div class="input-field">
@@ -10,7 +10,13 @@
         <%= f.label :email %>
       </div>
 
-      <%= f.submit "Submit", class: 'btn blue' %>
+      <div class="right-align input-field">
+          <%= f.submit "Submit", class: 'btn blue' %>
+      </div>
+      <br>
+      <div class="right-align">
+        <%= link_to "Log in instead", login_path %>
+      </div>
     <% end %>
   </div>
 </div>
