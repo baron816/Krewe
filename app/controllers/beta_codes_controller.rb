@@ -1,5 +1,7 @@
 class BetaCodesController < ApplicationController
   def new
+    return redirect_to current_user if current_user
+
     @beta_code = BetaCode.new
   end
 
