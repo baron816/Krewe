@@ -44,3 +44,14 @@
 
   <li><%= link_to "FAQ", faq_path, class: 'white-text' %></li>
 </ul>
+
+<% if current_user.try(:show_notifications_positive?) %>
+	<div id='notifications' class="modal">
+		<div class="modal-content">
+				<h3>Notifications</h3>
+				<ul class="collection">
+					<%= render 'shared/notifications' %>
+				</ul>
+		</div>
+	</div>
+<% end %>

@@ -26,18 +26,5 @@
 
 			<li><%= link_to "<i class='material-icons'>help</i>".html_safe, faq_path %></li>
 		</ul>
-
-		<%= render 'shared/sidebar' %>
 	</div>
 </nav>
-
-<% if current_user.try(:show_notifications_positive?) %>
-	<div id='notifications' class="modal">
-		<div class="modal-content">
-				<h3>Notifications</h3>
-				<ul class="collection">
-					<%= render 'shared/notifications' %>
-				</ul>
-		</div>
-	</div>
-<% end %>
