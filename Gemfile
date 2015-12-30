@@ -32,6 +32,7 @@ gem 'access-granted'
 gem 'meta-tags'
 
 gem 'jquery-rails'
+gem 'jquery_mobile_rails'
 gem 'jquery-turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
