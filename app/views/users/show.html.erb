@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col m12">
-		<h4><%= request.user_agent == 'appdeck' %></h4>
+		<h4><%= request.user_agent %></h4>
 	<h3><%= @user_show.name %></h3>
 		<span class="hide-on-med-and-down">
 			<%= link_to "<i class='material-icons medium'>settings</i> Settings".html_safe, edit_user_path, class: "btn orange" %>
