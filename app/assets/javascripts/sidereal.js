@@ -27,8 +27,6 @@ $(document).ready(function(){
 	setBodyHeight()
 
 	responsiveMedia();
-
-	app.addTopMenuButton("!action", 'javascript:alert(\'button\')', 'Button')
 })
 
 $(window).resize(function() {
