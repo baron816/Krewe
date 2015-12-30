@@ -30,7 +30,6 @@ gem 'sidekiq'
 gem "goldiloader"
 gem 'access-granted'
 gem 'meta-tags'
-gem 'user-agent'
 
 gem 'jquery-rails'
 gem 'jquery-turbolinks'
