@@ -18,7 +18,7 @@
   <meta name="appdeck-menu-entry" content="javascript:$('.button-collapse').sideNav('show');" icon="!menu" type="button">
 </head>
 <body>
-<%= render 'shared/nav' %>
+<%= render 'shared/nav' unless request.user_agent == 'appdeck' %>
 	<%= yield %>
 
 </body>
