@@ -27,6 +27,8 @@ $(document).ready(function(){
 	setBodyHeight()
 
 	responsiveMedia();
+
+	app.clearcache();
 })
 
 $(window).resize(function() {
