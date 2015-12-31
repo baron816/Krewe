@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   include SessionsHelper
 
+  before_action :set_cache_headers
+
   rescue_from "AccessGranted::AccessDenied" do |exception|
     redirect_to root_path, notice: "You do not have permission to do that."
   end
@@ -26,5 +28,11 @@ class ApplicationController < ActionController::Base
     options.reverse_merge!(defaults)
 
     set_meta_tags options
+  end
+
+  def set_cache_headers
+    response.headers["Cache-Control"] = "no-cache, no-store, max-age=0, must-revalidate"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "Fri, 01 Jan 1990 00:00:00 GMT"
   end
 end
