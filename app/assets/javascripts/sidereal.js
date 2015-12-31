@@ -28,16 +28,12 @@ $(document).ready(function(){
 
 	responsiveMedia();
 
-	reload();
+	app.refreshUI();
 })
 
 $(window).resize(function() {
 	resize_window('.messages')
 })
-
-function reload() {
-	app.reload();
-}
 
 var autocomplete;
 
