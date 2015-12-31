@@ -27,13 +27,17 @@ $(document).ready(function(){
 	setBodyHeight()
 
 	responsiveMedia();
+
+	reload();
 })
 
 $(window).resize(function() {
 	resize_window('.messages')
 })
 
-
+function reload() {
+	app.reload();
+}
 
 var autocomplete;
 
