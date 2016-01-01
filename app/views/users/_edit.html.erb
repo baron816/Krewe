@@ -30,14 +30,6 @@
 				<% end %>
 			</div>
 
-			<div class="tooltipped" data-position="top" data-tooltip="You will need to drop your old group if you want to change types.">
-				Single gender?
-				<% gender_groups.each_with_index do |gender_group, index| %>
-					<%= f.radio_button :gender_group, gender_group, id: "user_gender_#{index}" %>
-					<%= f.label "gender_#{index}", gender_group %>
-				<% end %>
-			</div>
-
 			<h3>Notification Settings</h3>
 			<%= f.fields_for :notification_settings do |p| %>
 				<div class="switch">

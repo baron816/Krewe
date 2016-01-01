@@ -24,14 +24,6 @@
 			<% end %>
 		</div>
 
-		<div>
-			Single Gender?
-			<% gender_groups.each_with_index do |gender_group, index| %>
-				<%= f.radio_button :gender_group, gender_group, id: "user_gender_#{index}", checked: (gender_group == "Doesn't Matter") %>
-				<%= f.label "gender_#{index}", gender_group %>
-			<% end %>
-		</div>
-
 		<div class="input-field">
 			<%= f.password_field :password, class: 'validate', required: true %>
 			<%= f.label :password %>

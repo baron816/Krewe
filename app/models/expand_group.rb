@@ -1,7 +1,7 @@
 class ExpandGroup
   attr_reader :group
 
-  delegate :degree, :category, :gender_group, :age_group, :latitude, :longitude, :user_limit, :id, to: :group
+  delegate :degree, :category, :age_group, :latitude, :longitude, :user_limit, :id, to: :group
 
   def initialize(expanding_group)
     @group = expanding_group
@@ -20,13 +20,13 @@ class ExpandGroup
 
   private
   def find_mergable_group
-    @mergeable_group ||= Group.category_groups(category).same_age(age_group).same_gender(gender_group).degree_groups(degree).where.not(id: id).near([latitude, longitude], 0.5).ready_groups.first
+    @mergeable_group ||= Group.category_groups(category).same_age(age_group).degree_groups(degree).where.not(id: id).near([latitude, longitude], 0.5).ready_groups.first
   end
 
   def merge_groups
     mid_lng, mid_lat = ApplicationHelper.mean(longitude, find_mergable_group.longitude), ApplicationHelper.mean(latitude, find_mergable_group.latitude)
 
-    new_group = Group.create(longitude: mid_lng, latitude: mid_lat, category: category, age_group: age_group, gender_group: gender_group, user_limit: new_group_user_limit, can_join: false, degree: new_degree)
+    new_group = Group.create(longitude: mid_lng, latitude: mid_lat, category: category, age_group: age_group, user_limit: new_group_user_limit, can_join: false, degree: new_degree)
     new_group.users << (group.users + find_mergable_group.users)
 
     set_ready_to_expand_to_false

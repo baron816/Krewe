@@ -22,14 +22,6 @@ module ApplicationHelper
 		]
 	end
 
-	def gender_groups
-	  [
-			"Women Only",
-			"Men Only",
-			"Doesn't Matter"
-		]
-	end
-
 	def reasons_for_leaving
 	  [
 			"Didn't form connection with others in group",

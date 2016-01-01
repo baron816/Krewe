@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 	validates :email, presence: true, length: { maximum: 255}, format: { with: VALID_EMAIL_REGEX }, uniqueness: true
 	validates :password, presence: true, length: { minimum: 6 }, on: :create
-	validates_presence_of :longitude, :latitude, :address, :category, :age_group, :gender_group
+	validates_presence_of :longitude, :latitude, :address, :category, :age_group
 	validates :terms_of_service, acceptance: true
 	validate :multiple_words?
 
@@ -43,12 +43,12 @@ class User < ActiveRecord::Base
 	scope :users_by_slug, -> (slugs) { where(slug: slugs)  }
 
 	def find_or_create_group
-		group = Group.search(category: category, age_group: age_group, gender_group: gender_group, latitude: latitude, longitude: longitude, group_ids: dropped_group_ids)
+		group = Group.search(category: category, age_group: age_group, latitude: latitude, longitude: longitude, group_ids: dropped_group_ids)
 
 		if group
 			group.users << self
 		else
-			group = self.groups.create(longitude: longitude, latitude: latitude, category: category, age_group: age_group, gender_group: gender_group)
+			group = self.groups.create(longitude: longitude, latitude: latitude, category: category, age_group: age_group)
 		end
 		group
 	end

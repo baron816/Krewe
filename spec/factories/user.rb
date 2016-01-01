@@ -3,7 +3,6 @@ FactoryGirl.define do
 		sequence(:name) { Faker::Name.name }
 		sequence(:email) { Faker::Internet.email }
 		age_group "65+"
-		gender_group "Doesn't Matter"
 		password = '123456'
 		sequence(:password) { password }
 		sequence(:password_confirmation) { password }

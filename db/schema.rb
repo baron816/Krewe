@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151208182820) do
+ActiveRecord::Schema.define(version: 20160101191824) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -92,14 +92,12 @@ ActiveRecord::Schema.define(version: 20151208182820) do
     t.boolean  "has_expanded",    default: false
     t.string   "slug"
     t.string   "age_group"
-    t.string   "gender_group"
   end
 
   add_index "groups", ["age_group"], name: "index_groups_on_age_group", using: :btree
   add_index "groups", ["can_join"], name: "index_groups_on_can_join", using: :btree
   add_index "groups", ["category"], name: "index_groups_on_category", using: :btree
   add_index "groups", ["degree"], name: "index_groups_on_degree", using: :btree
-  add_index "groups", ["gender_group"], name: "index_groups_on_gender_group", using: :btree
   add_index "groups", ["latitude"], name: "index_groups_on_latitude", using: :btree
   add_index "groups", ["longitude"], name: "index_groups_on_longitude", using: :btree
   add_index "groups", ["slug"], name: "index_groups_on_slug", using: :btree
@@ -188,7 +186,6 @@ ActiveRecord::Schema.define(version: 20151208182820) do
     t.string   "slug"
     t.string   "address"
     t.string   "age_group"
-    t.string   "gender_group"
     t.boolean  "is_admin",               default: false
     t.hstore   "notification_settings",  default: {}
   end
