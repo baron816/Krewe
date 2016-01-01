@@ -4,7 +4,7 @@ describe ActivitiesController do
   let!(:user) { create(:user_home) }
   let!(:group) { Group.first }
   before do
-    cookies[:auth_token] = user.auth_token
+    cookies.signed[:auth_token] = user.auth_token
   end
 
   describe "POST #create" do
@@ -59,7 +59,7 @@ describe ActivitiesController do
 
   describe "GET #edit" do
     before do
-      cookies[:auth_token] = activity.proposer.auth_token
+      cookies.signed[:auth_token] = activity.proposer.auth_token
       get :edit, id: activity, group_id: group
     end
 
@@ -74,7 +74,7 @@ describe ActivitiesController do
 
   describe "PUT #update" do
     before do
-      cookies[:auth_token] = activity.proposer.auth_token
+      cookies.signed[:auth_token] = activity.proposer.auth_token
       put :update, {group_id: group, id: activity, activity: {plan: "Get some sodas"}}
     end
 

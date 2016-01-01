@@ -5,7 +5,7 @@ describe ExpandGroupVotesController do
   let!(:group) { Group.first}
   before do
     group.update_column(:created_at, Time.now - 2.months)
-    cookies[:auth_token] = user.auth_token
+    cookies.signed[:auth_token] = user.auth_token
   end
 
   describe "POST #create" do

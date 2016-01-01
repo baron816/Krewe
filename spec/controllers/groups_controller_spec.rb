@@ -4,7 +4,7 @@ describe GroupsController do
   let!(:user) { create(:user_home) }
   let!(:group) { Group.first }
   before do
-    cookies[:auth_token] = user.auth_token
+    cookies.signed[:auth_token] = user.auth_token
   end
 
   describe "GET #show" do
