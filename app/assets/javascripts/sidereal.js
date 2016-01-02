@@ -28,7 +28,7 @@ $(document).ready(function(){
 
 	responsiveMedia();
 
-	app.reload();
+	app.refreshPreviousNextPage();
 })
 
 $(window).resize(function() {
