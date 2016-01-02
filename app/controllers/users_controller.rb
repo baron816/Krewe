@@ -1,13 +1,15 @@
 class UsersController < ApplicationController
-	before_action :set_user, only: [:edit, :update, :public_profile, :join_group, :destroy]
+	before_action :set_user, only: [:edit, :update, :join_group, :destroy]
 	before_action :authorize_read, only: [:update, :edit, :destroy]
 
 	def show
-		@user_show = User.friendly.find(params[:id])
+		@user_show = current_user
+		return redirect_to get_started_path unless @user_show
 		authorize! :read, @user_show
 	end
 
 	def public_profile
+		@user = User.friendly.find(params[:id])
 		authorize! :public_profile, @user
 		@user = UserPublicProfile.new(@user, current_user, params[:page])
 	end
@@ -21,7 +23,7 @@ class UsersController < ApplicationController
 
 	def update
 		if @user.update(user_params)
-			redirect_to user_path(@user)
+			redirect_to root_path
 		else
 			render :edit
 		end
@@ -45,7 +47,7 @@ class UsersController < ApplicationController
 		if @user.save
 			BetaCode.find_by(auth_token: params[:code]).update_column(:used, true)
 			log_in(@user)
-			redirect_to user_path(@user)
+			redirect_to root_path
 		else
 			render :new
 		end
@@ -67,7 +69,7 @@ class UsersController < ApplicationController
 
 	private
 	def set_user
-		@user = User.friendly.find(params[:id])
+		@user = current_user
 	end
 
 	def authorize_read
