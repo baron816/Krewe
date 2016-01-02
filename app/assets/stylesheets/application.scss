@@ -25,6 +25,10 @@ main {
 	flex: 1 0 auto;
 }
 
+nav {
+	background-color: #3580d9;
+}
+
 h1.header, h5.header {
 	text-shadow: 1px 1px black;
 }
@@ -92,6 +96,7 @@ a, time, button, .new-message {
 
 footer.page-footer {
 	width: 100%;
+	background-color: #3580d9;
 
 	a {
 		font-size: .9em;
