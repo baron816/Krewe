@@ -15,6 +15,16 @@ html {
 	font-family: 'Josefin Sans', Roboto, Calibri, sans-serif;
 }
 
+body {
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+}
+
+main {
+	flex: 1 0 auto;
+}
+
 h1.header, h5.header {
 	text-shadow: 1px 1px black;
 }
@@ -79,9 +89,8 @@ a, time, button, .new-message {
 	color: white;
 }
 
+
 footer.page-footer {
-	position: absolute;
-	bottom: 0;
 	width: 100%;
 
 	a {
