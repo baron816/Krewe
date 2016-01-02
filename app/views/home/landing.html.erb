@@ -1,59 +1,35 @@
-<div id="index-banner" class="parallax-container">
-	<div class="section no-pad-bot">
-		<div class="container">
-			<br><br>
-			<h1 class="header center">Krewe</h1>
-			<div class="row center">
-				<h5 class="header col s12 light">The best way to form your social network</h5>
+<div class="container">
+	<div class="row section no-pad-bot card-panel sign-up-card">
+		<div class="col s12 m6">
+			<h3 class="header blue-text">The best way to form your social network</h3>
+			<h5 class="blue-text"><i class="material-icons">group</i> Join a local social group and build close friendships</h5>
+			<h5 class="blue-text"><i class="material-icons">my_location</i> Everyone lives within walking distance</h5>
+			<h5 class="blue-text"><i class="material-icons">insert_invitation</i> Getting together frequently is easy</h5>
+		</div>
+
+		<div class="col s12 m6">
+			<div>
+				<h4 class="blue-text">Sign Up</h4>
+				<%= render 'beta_codes/form' %>
+				<br>
 			</div>
-			<div class="row center">
-				<%= form_for(@beta_code, url: beta_signup_path) do |f| %>
-
-					<div class="input-field">
-						<%= f.email_field :email, required: true %>
-						<%= f.label :email %>
-					</div>
-
-					<div class="right-align input-field">
-							<%= f.submit "Submit", class: 'btn blue' %>
-					</div>
-
-				<% end %>
-			</div>
-			<br><br>
-
 		</div>
 	</div>
 	<div class="parallax"><%= image_tag "landing", id: 'landing' %></div>
 </div>
 
 
-
 <footer class="page-footer blue">
 	<div class="container">
-		<div class="row">
-			<div class="col l6 s12">
-				<h5 class="white-text">Founded by Baron Willeford</h5>
-				<ul>
-					<li><%= link_to "About Krewe", about_path, class: 'white-text' %></li>
-					<li><%= link_to "Terms of Service", terms_of_service_path, class: 'white-text' %></li>
-					<li><%= link_to "Privacy Policy", privacy_policy_path, class: 'white-text' %></li>
-				</ul>
-			</div>
+		<div class="row center">
+					<%= link_to "About", about_path, class: 'white-text' %>
+					<%= link_to "Terms", terms_of_service_path, class: 'white-text' %>
+					<%= link_to "Privacy", privacy_policy_path, class: 'white-text' %>
 
-			<div class="col l6 s12">
-				<h5 class="white-text">Connect</h5>
-				<ul>
-					<li><%= mail_to "support@gokrewe.com", "Support", class: "white-text" %></li>
-					<li><a class="white-text" href="https://twitter.com/gokrewe">Twitter</a></li>
-					<li><a class="white-text" href="https://www.facebook.com/gokrewe/">Facebook</a></li>
-				</ul>
-			</div>
-		</div>
-	</div>
-	<div class="footer-copyright">
-		<div class="container">
-		<a class="brown-text text-lighten-3" href="http://gokrewe.com">Krewe Incorporated © 2014</a>
+					<%= mail_to "support@gokrewe.com", "Support", class: "white-text" %>
+					<a class="white-text" href="https://twitter.com/gokrewe">Twitter</a>
+					<a class="white-text" href="https://www.facebook.com/gokrewe/">Facebook</a>
+							<a class="brown-text text-lighten-3" href="http://gokrewe.com">Krewe Incorporated © 2016</a>
 		</div>
 	</div>
 </footer>
