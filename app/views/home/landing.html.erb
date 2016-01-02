@@ -1,35 +1,32 @@
-<div class="container">
-	<div class="row section no-pad-bot card-panel sign-up-card">
-		<div class="col s12 m6">
-			<h3 class="header blue-text">The best way to form your social network</h3>
-			<h5 class="blue-text"><i class="material-icons">group</i> Join a local social group and build close friendships</h5>
-			<h5 class="blue-text"><i class="material-icons">my_location</i> Everyone lives within walking distance</h5>
-			<h5 class="blue-text"><i class="material-icons">insert_invitation</i> Getting together frequently is easy</h5>
-		</div>
+<main>
+	<div class="container">
+		<div class="row section no-pad-bot card-panel sign-up-card">
+			<div class="col s12 m6">
+				<h3 class="header blue-text">The best way to form your social network</h3>
+				<h5 class="blue-text"><i class="material-icons">group</i> Join a small, local social group and build close friendships and community</h5>
+				<h5 class="blue-text"><i class="material-icons">my_location</i> Everyone lives within walking distance</h5>
+				<h5 class="blue-text"><i class="material-icons">insert_invitation</i> Getting together frequently is easy</h5>
+			</div>
 
-		<div class="col s12 m6">
-			<div>
-				<h4 class="blue-text">Sign Up</h4>
-				<%= render 'beta_codes/form' %>
-				<br>
+			<div class="col s12 m6">
+					<h4 class="blue-text">Sign Up</h4>
+					<%= render 'beta_codes/form' %>
+					<br>
 			</div>
 		</div>
+		<div class="parallax"><%= image_tag "landing", class:'responsive-img' %></div>
 	</div>
-	<div class="parallax"><%= image_tag "landing", class:'responsive-img' %></div>
-</div>
-
+</main>
 
 <footer class="page-footer blue">
-	<div class="container">
-		<div class="row center">
-					<%= link_to "About", about_path, class: 'white-text' %>
-					<%= link_to "Terms", terms_of_service_path, class: 'white-text' %>
-					<%= link_to "Privacy", privacy_policy_path, class: 'white-text' %>
+	<div class="row center">
+				<%= link_to "About", about_path, class: 'white-text' %>
+				<%= link_to "Terms", terms_of_service_path, class: 'white-text' %>
+				<%= link_to "Privacy", privacy_policy_path, class: 'white-text' %>
 
-					<%= mail_to "support@gokrewe.com", "Support", class: "white-text" %>
-					<a class="white-text" href="https://twitter.com/gokrewe">Twitter</a>
-					<a class="white-text" href="https://www.facebook.com/gokrewe/">Facebook</a>
-							<a class="brown-text text-lighten-3" href="http://gokrewe.com">Krewe Incorporated © 2016</a>
-		</div>
+				<%= mail_to "support@gokrewe.com", "Support", class: "white-text" %>
+				<a class="white-text" href="https://twitter.com/gokrewe">Twitter</a>
+				<a class="white-text" href="https://www.facebook.com/gokrewe/">Facebook</a>
+						<a class="brown-text text-lighten-3" href="http://gokrewe.com">Krewe Incorporated ©2016</a>
 	</div>
 </footer>
