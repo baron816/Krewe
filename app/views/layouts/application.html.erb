@@ -25,3 +25,11 @@
 
 </body>
 </html>
+
+<%= javascript_tag do %>
+	$(document).ready(function(){
+		if ('<%= notice %>') {
+			sweetAlert('<%= notice %>')
+		}
+	})
+<% end %>
