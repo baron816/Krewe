@@ -71,7 +71,7 @@ describe UsersController do
 
     it "redirects to user" do
     	post :create, user: user_attributes, code: code
-    	expect(response).to redirect_to user_path(assigns[:user])
+    	expect(response).to redirect_to root_path
     end
   end
 
