@@ -27,6 +27,7 @@
 </html>
 
 <%= javascript_tag do %>
+  app.reload();
 	$(document).ready(function(){
 		if ('<%= notice %>') {
 			sweetAlert('<%= notice %>')
