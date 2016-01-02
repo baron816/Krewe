@@ -1,0 +1,11 @@
+<%= form_for(@beta_code, url: beta_signup_path) do |f| %>
+
+  <div class="input-field">
+    <%= f.email_field :email, required: true %>
+    <%= f.label :email %>
+  </div>
+
+  <div class="right-align input-field">
+      <%= f.submit "Submit", class: 'btn blue' %>
+  </div>
+<% end %>
