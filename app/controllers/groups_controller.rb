@@ -12,6 +12,6 @@ class GroupsController < ApplicationController
 		authorize! :read, @group
 
 		@group.drop_user(current_user)
-		redirect_to user_path(current_user)
+		redirect_to root_path
 	end
 end
