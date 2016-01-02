@@ -39,7 +39,6 @@ class AccessPolicy
       can :post, Message do |message, user|
         case message.messageable.class.name
         when "Topic", "Activity"
-          p message.group_includes_user?(user)
           message.group_includes_user?(user)
         when "User"
           message.messageable_is_friends_with?(user)
