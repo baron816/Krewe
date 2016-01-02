@@ -2,7 +2,7 @@
 	<div class="col m12">
 	<h3><%= @user_show.name %></h3>
 		<span class="hide-on-med-and-down">
-			<%= link_to "<i class='material-icons medium'>settings</i> Settings".html_safe, edit_user_path, class: "btn orange" %>
+			<%= link_to "<i class='material-icons medium'>settings</i> Settings".html_safe, edit_user_path(@user_show), class: "btn orange" %>
 		</span>
 		<%= link_to "Join Group", join_group_user_path, class: "btn green", method: :post if @user_show.under_group_limit? %></h5>
 	</div>
