@@ -1,0 +1,59 @@
+<div id="index-banner" class="parallax-container">
+	<div class="section no-pad-bot">
+		<div class="container">
+			<br><br>
+			<h1 class="header center">Krewe</h1>
+			<div class="row center">
+				<h5 class="header col s12 light">The best way to form your social network</h5>
+			</div>
+			<div class="row center">
+				<%= form_for(@beta_code, url: beta_signup_path) do |f| %>
+
+					<div class="input-field">
+						<%= f.email_field :email, required: true %>
+						<%= f.label :email %>
+					</div>
+
+					<div class="right-align input-field">
+							<%= f.submit "Submit", class: 'btn blue' %>
+					</div>
+
+				<% end %>
+			</div>
+			<br><br>
+
+		</div>
+	</div>
+	<div class="parallax"><%= image_tag "landing", id: 'landing' %></div>
+</div>
+
+
+
+<footer class="page-footer blue">
+	<div class="container">
+		<div class="row">
+			<div class="col l6 s12">
+				<h5 class="white-text">Founded by Baron Willeford</h5>
+				<ul>
+					<li><%= link_to "About Krewe", about_path, class: 'white-text' %></li>
+					<li><%= link_to "Terms of Service", terms_of_service_path, class: 'white-text' %></li>
+					<li><%= link_to "Privacy Policy", privacy_policy_path, class: 'white-text' %></li>
+				</ul>
+			</div>
+
+			<div class="col l6 s12">
+				<h5 class="white-text">Connect</h5>
+				<ul>
+					<li><%= mail_to "support@gokrewe.com", "Support", class: "white-text" %></li>
+					<li><a class="white-text" href="https://twitter.com/gokrewe">Twitter</a></li>
+					<li><a class="white-text" href="https://www.facebook.com/gokrewe/">Facebook</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="footer-copyright">
+		<div class="container">
+		<a class="brown-text text-lighten-3" href="http://gokrewe.com">Krewe Incorporated © 2014</a>
+		</div>
+	</div>
+</footer>
