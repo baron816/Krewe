@@ -67,14 +67,8 @@ a, time, button, .new-message {
   z-index: 1050 !important;
 }
 
-.parallax-container {
-  min-height: 380px;
-  line-height: 0;
-  height: auto;
-  color: $secondary;
-}
-.parallax-container .section {
-  width: 100%;
+#landing {
+	width: 100%;
 }
 
 .tabs .tab a {
