@@ -36,12 +36,13 @@ Rails.application.routes.draw do
   get "beta_signup" => "beta_codes#new"
   post "beta_signup" => "beta_codes#create"
 
-  root 'home#index'
+  get "get_started" => "home#landing"
   get "admin_dash" => "home#admin_dash"
   get "faq" => "home#faq"
   get "about" => "home#about"
   get "privacy_policy" => "home#privacy_policy"
   get "terms_of_service" => "home#terms_of_service"
+  root 'users#show'
   get "*any", via: :all, to: "errors#not_found"
 
   namespace :api do
