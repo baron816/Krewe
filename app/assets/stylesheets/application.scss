@@ -93,6 +93,13 @@ a, time, button, .new-message {
 	color: white;
 }
 
+.landing {
+	background: url(landing.jpg) no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
 
 footer.page-footer {
 	width: 100%;

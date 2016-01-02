@@ -13,5 +13,8 @@
 				<br>
 		</div>
 	</div>
-	<div class="parallax"><%= image_tag "landing", class:'responsive-img' %></div>
 </div>
+
+<%= javascript_tag do %>
+	$('html').addClass('landing')
+<% end %>
