@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
 
 		if @user
 			log_in(@user)
-			redirect_to user_path(@user)
+			redirect_to root_path
 		else
 			flash[:error] = "Email or Password not found"
 			render :new
