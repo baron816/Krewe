@@ -16,5 +16,6 @@
 </div>
 
 <%= javascript_tag do %>
-	$('html').addClass('landing')
+	$('html').addClass('landing');
+	mixpanel.track("Viewed landing");
 <% end %>
