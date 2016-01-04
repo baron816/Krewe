@@ -12,8 +12,6 @@ class UserMailer < ApplicationMailer
     mail to: @user.email, subject: "Reset Krewe Password"
   end
 
-
-
   def user_message_alert(message)
     @message = message
     messageable = @message.messageable
