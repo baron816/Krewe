@@ -11,7 +11,7 @@ class BetaCodesController < ApplicationController
     if @beta_code.save
       UserMailer.delay.beta_code(@beta_code)
 
-      redirect_to root_path, notice: "Thanks for signing up for the beta. Keep an eye out for an email."
+      redirect_to root_path, notice: "Awesome, we sent you an email. Use that to finish signing up."
     else
       render :new
     end
