@@ -17,7 +17,5 @@
 
 <%= javascript_tag do %>
 	$('html').addClass('landing');
-	<% if Rails.env.production? %>
-		mixpanel.track("Viewed landing");
-	<% end %>
+	mixpanel.track("Viewed landing");
 <% end %>
