@@ -24,5 +24,7 @@ module Krewe
     config.active_record.raise_in_transactional_callbacks = true
 
     config.exceptions_app = self.routes
+
+    config.action_mailer.asset_host = "https://www.gokrewe.com"
   end
 end
