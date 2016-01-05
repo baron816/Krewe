@@ -1,10 +1,11 @@
 class Group < ActiveRecord::Base
 	extend FriendlyId
 	include Sluggable
+	include ApplicationHelper
 	friendly_id :slug_candidates, use: :slugged
 
 	has_many :user_groups
-	has_many :users, through: :user_groups, after_add: [:check_space, :join_group_notifications], after_remove: :check_space
+	has_many :users, through: :user_groups, after_add: [:check_space, Proc.new { |group, new_user| JoinNotifications.new(group, new_user).send_notifications }], after_remove: :check_space
 	has_many :messages, as: :messageable
 	has_many :topics
 	has_many :notifications, as: :notifiable
@@ -59,13 +60,6 @@ class Group < ActiveRecord::Base
 	  users.include?(user)
 	end
 
-	def join_group_notifications(new_user)
-		users.each do |user|
-			self.notifications.create(user: user, poster: new_user, notification_type: "Join").delay unless user == new_user
-		end
-		GroupMailer.delay.join_group({group: self, poster: new_user})
-	end
-
 	def names_data(current_user)
 		user_names_hash(current_user).to_json.html_safe
 	end
@@ -85,7 +79,7 @@ class Group < ActiveRecord::Base
 
 	def user_names_hash(current_user)
 		users.map do |user|
-			Hash[:name, user.first_name, :slug, user.slug, :full_name, user.name] unless user == current_user
+			Hash[:name, first_word(user.name), :slug, user.slug, :full_name, user.name] unless user == current_user
 		end.compact << group_hash
 	end
 
