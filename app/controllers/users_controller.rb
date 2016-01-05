@@ -55,7 +55,7 @@ class UsersController < ApplicationController
 
 	def join_group
 	  if @user.under_group_limit?
-	  	new_group = @user.find_or_create_group
+	  	new_group = FindGroup.new(@user).find_or_create
 			redirect_to group_path(new_group)
 	  end
 	end
