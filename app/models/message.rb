@@ -10,7 +10,7 @@ class Message < ActiveRecord::Base
 	validates :content, presence: true
 	validates_presence_of :messageable, :messageable_type, :poster
 
-	after_create { MessageNotifications.new(self).send_notifications }
+	after_create { MessageNotification.new(self).send_notifications }
 
 	scope :users_messages, -> { where(messageable_type: "User")  }
 	scope :poster_messages,  -> (poster){ where(poster: poster)  }
