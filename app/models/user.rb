@@ -40,6 +40,7 @@ class User < ActiveRecord::Base
 	delegate :count, to: :groups, prefix: true
 	delegate :degree_groups, to: :groups
 	delegate :delete_all, to: :votes_to_drop, prefix: true
+	delegate :include?, :count, to: :unique_friends, prefix: true
 
 	scope :users_by_slug, -> (slugs) { where(slug: slugs)  }
 
@@ -47,25 +48,17 @@ class User < ActiveRecord::Base
 		@unique_friends ||= friends.where.not(id: self).uniq
 	end
 
-	def unique_friends_count
-	  unique_friends.count
-	end
-
-	def is_friends_with?(user)
-	  unique_friends.include?(user)
-	end
-
 	def add_dropped_group(id)
 		dropped_group_ids << id
 		save
 	end
 
-	def not_self(user)
-		self != user
+	def can_unvote?(user)
+		self != user && user.voter_vote(self) && self.unique_friends_include?(user)
 	end
 
 	def can_vote?(user)
-		not_self(user) && !user.voter_vote(self) && self.is_friends_with?(user)
+		self != user && !user.voter_vote(self) && self.unique_friends_include?(user)
 	end
 
 	def send_password_reset
@@ -77,10 +70,6 @@ class User < ActiveRecord::Base
 
 	def password_reset_expired?
 		password_reset_sent_at < 1.hours.ago
-	end
-
-	def first_name
-	  name.split.first
 	end
 
 	def under_group_limit?
