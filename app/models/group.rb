@@ -55,13 +55,6 @@ class Group < ActiveRecord::Base
 		drop_user(user) if user.group_drop_votes_count(self) >= 3
 	end
 
-	def ripe_for_expansion?
-	  aged?(1.month) && attended_activities_count >= 4 && can_join == false && has_expanded == false && ready_to_expand == false
-	end
-
-	def voted_to_expand?
-		expand_group_votes_size == users_count
-	end
 
 	def includes_user?(user)
 	  users.include?(user)
@@ -103,9 +96,5 @@ class Group < ActiveRecord::Base
 
 	def group_hash
 	  Hash[:name, "Group", :slug, "group", :full_name, name]
-	end
-
-	def aged?(period)
-		(Time.now - created_at) > period
 	end
 end
