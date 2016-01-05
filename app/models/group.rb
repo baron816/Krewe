@@ -55,13 +55,8 @@ class Group < ActiveRecord::Base
 		drop_user(user) if user.group_drop_votes_count(self) >= 3
 	end
 
-
 	def includes_user?(user)
 	  users.include?(user)
-	end
-
-	def primary_group?
-	  degree == 1
 	end
 
 	def join_group_notifications(new_user)
