@@ -33,7 +33,7 @@ class AccessPolicy
       end
 
       can :public_profile, User do |user, current_user|
-        current_user.is_friends_with?(user) || user == current_user
+        current_user.unique_friends_include?(user) || user == current_user
       end
 
       can :post, Message do |message, user|
@@ -41,7 +41,7 @@ class AccessPolicy
         when "Topic", "Activity"
           message.group_includes_user?(user)
         when "User"
-          message.messageable_is_friends_with?(user)
+          message.messageable_unique_friends_include?(user)
         end
       end
 
