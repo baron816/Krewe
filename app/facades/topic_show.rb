@@ -20,6 +20,10 @@ class TopicShow
     @message ||= Message.new
   end
 
+  def names_data
+    MentionName.new(this_topic.group, user).names_data
+  end
+
   private
   def per_page
     note_count = user.unviewed_message_notifications_from_topic_count(this_topic)

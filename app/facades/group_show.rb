@@ -3,7 +3,7 @@ class GroupShow
   delegate :users_count, :expand_group_votes_size, :includes_user?, to: :group
   delegate :any?, :count, to: :activities, prefix: true
   delegate :any?, to: :messages, prefix: true
-  delegate :users, :names_data, to: :group
+  delegate :users, to: :group
   delegate :count, to: :users, prefix: true
   delegate :name, to: :group, prefix: true
   delegate :next_page, to: :topics
@@ -55,4 +55,8 @@ class GroupShow
 	def primary_group?
 	  group.degree == 1
 	end
+
+  def names_data
+    MentionName.new(group, user).names_data
+  end
 end
