@@ -1,4 +1,4 @@
-class MessageNotifications
+class MessageNotification
   attr_reader :message
 
   delegate :messageable, :notifications, :poster, :messageable_type, :content, to: :message
