@@ -4,5 +4,5 @@ $('.message-group').html('<%= j render partial: "topic", locals: { topic: @topic
 
 
 resize_window('.messages');
-mentioning(<%= @topic.names_data(current_user) %>)
+mentioning(<%= MentionName.new(@topic.group, current_user).names_data %>)
 $('.topics').animate({ scrollLeft: 0 }, 1000)
