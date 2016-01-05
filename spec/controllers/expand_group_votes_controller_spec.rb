@@ -46,16 +46,16 @@ describe ExpandGroupVotesController do
       end
 
       it "both groups are ripe_for_expansion" do
-        expect(group.ripe_for_expansion?).to eq(true)
-        expect(@group2.ripe_for_expansion?).to eq(true)
+        expect(ExpansionCheck.new(group).ripe_for_expansion?).to eq(true)
+        expect(ExpansionCheck.new(@group2).ripe_for_expansion?).to eq(true)
       end
 
       it "group2 has voted to expand" do
-        expect(@group2.voted_to_expand?).to eq(true)
+        expect(ExpansionCheck.new(@group2).send(:voted_to_expand?)).to eq(true)
       end
 
       it "group has not voted to expand" do
-        expect(group.voted_to_expand?).to eq(false)
+        expect(ExpansionCheck.new(group).send(:voted_to_expand?)).to eq(false)
       end
 
       it "creates a new group when voting to expand and group2 has expanded" do
