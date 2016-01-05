@@ -75,11 +75,11 @@ describe User do
 
     describe "#is_friends_with" do
       it "user2 is a friend?" do
-        expect(user.unique_friends_include(user2)).to eq(true)
+        expect(user.unique_friends_include?(user2)).to eq(true)
       end
 
       it "user3 is not a friend" do
-        expect(user.unique_friends_include(user3)).to eq(false)
+        expect(user.unique_friends_include?(user3)).to eq(false)
       end
     end
 
