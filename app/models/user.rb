@@ -102,10 +102,6 @@ class User < ActiveRecord::Base
 		end
 	end
 
-	def should_generate_new_friendly_id?
-	  :name_changed? || super
-	end
-
 	def downcase_email
 		self.email = email.downcase
 	end
