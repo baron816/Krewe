@@ -45,12 +45,12 @@ describe User do
       end
 
       it "user isn't put in a group it's already in" do
-        user.find_or_create_group
+        FindGroup.new(user).find_or_create
         expect(user.groups.first).not_to eql(user.groups.second)
       end
 
       it "user2 only adds one group" do
-        user2.find_or_create_group
+        FindGroup.new(user2).find_or_create
         expect(user2.groups.count).to eql(2)
       end
 
