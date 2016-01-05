@@ -1,4 +1,4 @@
-class JoinNotifications
+class JoinNotification
   attr_reader :group, :new_user
 
   delegate :users, :notifications, to: :group
