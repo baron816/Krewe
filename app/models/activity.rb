@@ -2,7 +2,7 @@ class Activity < ActiveRecord::Base
 	belongs_to :group
 	belongs_to :proposer, class_name: "User"
 	has_many :user_activities
-	has_many :users, through: :user_activities
+	has_many :users, through: :user_activities, after_add: :check_attendance, after_remove: :check_attendance
 	has_many :notifications, as: :notifiable
 	has_many :messages, as: :messageable
 
@@ -16,6 +16,7 @@ class Activity < ActiveRecord::Base
 	validate :is_a_time?
 
 	delegate :name, :users, :includes_user?, to: :group, prefix: true
+	delegate :size, to: :users, prefix: true
 
 	scope :future_activities, -> { where('appointment > ?', Time.now - 2.hours).order(appointment: :asc) }
 	scope :past_activities, -> { where('appointment < ?', Time.now) }
@@ -32,13 +33,11 @@ class Activity < ActiveRecord::Base
 		end
 	end
 
-	def check_attendance
-	  users_count = users.size
-
-		if users_count == 3 && self.well_attended != true
+	def check_attendance(user = nil)
+		if users_size == 3 && self.well_attended != true
 			self.well_attended = true
 			save
-		elsif users_count == 2 && self.well_attended != false
+		elsif users_size == 2 && self.well_attended != false
 			self.well_attended = false
 			save
 		end
