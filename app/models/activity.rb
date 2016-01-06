@@ -8,10 +8,8 @@ class Activity < ActiveRecord::Base
 
 	reverse_geocoded_by :latitude, :longitude
 
-	after_create :send_notifications
-	after_update do
-		send_notifications("ActivityUpdate")
-	end
+	after_create { ActivityNotification.new(self).send_notifications }
+	after_update { ActivityNotification.new(self, "ActivityUpdate").send_notifications }
 
 	validates :plan, presence: true, length: { minimum: 3 }
 	validates_presence_of :location, :appointment, :group_id, :proposer_id
@@ -32,13 +30,6 @@ class Activity < ActiveRecord::Base
 		unless appointment.is_a?(Time)
 			errors.add(:appointment, "must be a time")
 		end
-	end
-
-	def send_notifications(type = self.class.name)
-		group_users.each do |user|
-			self.notifications.create(user: user, poster: self.proposer, notification_type: type).delay unless user == proposer
-		end
-		GroupMailer.delay.activity_proposal(self) if type == "Activity"
 	end
 
 	def check_attendance
