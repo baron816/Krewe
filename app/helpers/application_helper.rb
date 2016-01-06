@@ -31,7 +31,7 @@ module ApplicationHelper
 		]
 	end
 
-	def self.mean(*args)
+	def mean(*args)
 	  args.inject(:+) / args.length.to_f
 	end
 
