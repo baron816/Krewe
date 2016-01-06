@@ -16,7 +16,6 @@ describe Activity do
   end
 
   it "is not well attended" do
-    activity.check_attendance
     expect(activity.well_attended).to eq(false)
   end
 
@@ -55,7 +54,6 @@ describe Activity do
   describe "#check_attendance" do
     before do
       activity.users << [user1, user2]
-      activity.check_attendance
     end
 
     it "has users" do
@@ -68,13 +66,11 @@ describe Activity do
 
     it "is well attended when another user is added" do
       activity.users << user3
-      activity.check_attendance
       expect(activity.well_attended).to eq(true)
     end
 
     it "is not well attended if someone drops out" do
       activity.users.delete(user3)
-      activity.check_attendance
       expect(activity.well_attended).to eq(false)
     end
   end
@@ -92,7 +88,6 @@ describe Activity do
 
     it "has had_attended_activities once user is added" do
       activity2.users << user3
-      activity2.check_attendance
 
       expect(Activity.attended_activities.size).to eq(1)
     end
