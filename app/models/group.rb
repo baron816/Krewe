@@ -4,7 +4,7 @@ class Group < ActiveRecord::Base
 	friendly_id :slug_candidates, use: :slugged
 
 	has_many :user_groups
-	has_many :users, through: :user_groups, after_add: [:check_space, Proc.new { |group, new_user| JoinNotification.new(group, new_user).send_notifications }], after_remove: :check_space
+	has_many :users, through: :user_groups, after_add: [:check_space, Proc.new { |group, new_user| JoinNotification.new(group, new_user).send_notifications if group.degree == 1 }], after_remove: :check_space
 	has_many :messages, as: :messageable
 	has_many :topics
 	has_many :notifications, as: :notifiable
