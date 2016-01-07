@@ -9,13 +9,9 @@ class PasswordResetsController < ApplicationController
 		email = params[:password_reset][:email]
 		@user = User.find_by(email: email.downcase)
 
-		if @user
-			@user.send_password_reset
-			redirect_to root_path, notice: "An email was just sent to #{email} to reset your password. It will expire in one hour."
-		else
-			flash.now[:danger] = "Email Address not found"
-			render :new
-		end
+		@user.send_password_reset if @user
+
+		redirect_to root_path, notice: "An email was just sent to #{email} to reset your password. It will expire in one hour."
 	end
 
 	def edit
