@@ -53,6 +53,13 @@ describe ExpandGroup do
       end
     end
 
+    describe "#set_ready_to_expand_to_false" do
+      it "sets group2.ready_to_expand to false" do
+        expander.send(:set_ready_to_expand_to_false)
+        expect(Group.second.ready_to_expand).to eq(false)
+      end
+    end
+
     describe "#merge_groups" do
       it "creates a new group" do
         expect(expander.send(:merge_groups)).to eq(Group.fourth)
@@ -60,6 +67,11 @@ describe ExpandGroup do
 
       it "has 12 users" do
         expect(expander.send(:merge_groups).users_count).to eq(12)
+      end
+
+      it "sets second group to not ready to expand" do
+        expander.send(:merge_groups)
+        expect(Group.second.ready_to_expand).to eq(false)
       end
 
       it "does not send new notifications" do
