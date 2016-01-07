@@ -96,8 +96,16 @@ class User < ActiveRecord::Base
 	end
 
 	def password_complexity
-		if password.present? and not password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d). /)
-			errors.add :password, "must include at least one lowercase letter, one uppercase letter, and one digit"
+		return if password.nil?
+
+		if password.size < 6
+			errors.add :password, "must be at least 6 characters long"
+		end
+
+		required_complexity = 3
+
+		unless CheckPasswordComplexityService.new(password, required_complexity).valid?
+			errors.add :password, "mustbe be stronger"
 		end
 	end
 end
