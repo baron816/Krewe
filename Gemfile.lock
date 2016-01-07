@@ -156,6 +156,8 @@ GEM
       mini_portile (~> 0.6.0)
     pg (0.18.2)
     rack (1.6.4)
+    rack-attack (4.3.1)
+      rack
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.1)
@@ -302,6 +304,7 @@ DEPENDENCIES
   meta-tags
   momentjs-rails (>= 2.9.0)
   pg
+  rack-attack
   rails (= 4.2.1)
   rails_12factor
   responders
