@@ -31,12 +31,16 @@ module ApplicationHelper
 		]
 	end
 
-	def self.mean(*args)
+	def mean(*args)
 	  args.inject(:+) / args.length.to_f
 	end
 
 	def avatar_url(user)
 	  gravatar_id = Digest::MD5.hexdigest(user.email)
 		"http://gravatar.com/avatar/#{gravatar_id}.png?s=48&d=mm"
+	end
+
+	def first_word(phrase)
+	  phrase.split.first
 	end
 end

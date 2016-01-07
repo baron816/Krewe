@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
 	extend FriendlyId
 	include Sluggable
+	include Tokenable
 	friendly_id :slug_candidates, use: :slugged
 
 	validates :name, presence: true, length: { minimum: 3, maximum: 50 }
@@ -26,7 +27,7 @@ class User < ActiveRecord::Base
 	has_many :expand_group_votes, foreign_key: "voter_id", dependent: :destroy
 	has_many :posted_notifications, class_name: "Notification", foreign_key: "poster_id", dependent: :destroy
 
-	after_create :find_or_create_group
+	after_create { FindGroup.new(self).find_or_create}
 	before_create { generate_token(:auth_token) }
 	before_save :downcase_email
 
@@ -39,37 +40,12 @@ class User < ActiveRecord::Base
 	delegate :count, to: :groups, prefix: true
 	delegate :degree_groups, to: :groups
 	delegate :delete_all, to: :votes_to_drop, prefix: true
+	delegate :include?, :count, to: :unique_friends, prefix: true
 
 	scope :users_by_slug, -> (slugs) { where(slug: slugs)  }
 
-	def find_or_create_group
-		group = Group.search(category: category, age_group: age_group, latitude: latitude, longitude: longitude, group_ids: dropped_group_ids)
-
-		if group
-			group.users << self
-		else
-			group = self.groups.create(longitude: longitude, latitude: latitude, category: category, age_group: age_group)
-		end
-		group
-	end
-
-	def update_sign_in(ip)
-		self.last_sign_in_at = Time.now
-		self.sign_in_count += 1
-		self.last_sign_in_ip = ip
-		save
-	end
-
 	def unique_friends
 		@unique_friends ||= friends.where.not(id: self).uniq
-	end
-
-	def unique_friends_count
-	  unique_friends.count
-	end
-
-	def is_friends_with?(user)
-	  unique_friends.include?(user)
 	end
 
 	def add_dropped_group(id)
@@ -77,18 +53,12 @@ class User < ActiveRecord::Base
 		save
 	end
 
-	def not_self(user)
-		self != user
+	def can_unvote?(user)
+		self != user && user.voter_vote(self) && self.unique_friends_include?(user)
 	end
 
 	def can_vote?(user)
-		not_self(user) && !user.voter_vote(self) && self.is_friends_with?(user)
-	end
-
-	def generate_token(column)
-		begin
-			self[column] = SecureRandom.urlsafe_base64
-		end while User.exists?(column => self[column])
+		self != user && !user.voter_vote(self) && self.unique_friends_include?(user)
 	end
 
 	def send_password_reset
@@ -100,10 +70,6 @@ class User < ActiveRecord::Base
 
 	def password_reset_expired?
 		password_reset_sent_at < 1.hours.ago
-	end
-
-	def first_name
-	  name.split.first
 	end
 
 	def under_group_limit?
@@ -123,10 +89,6 @@ class User < ActiveRecord::Base
 	  unless name.split.count > 1
 			errors.add(:name, "must include at first and last")
 		end
-	end
-
-	def should_generate_new_friendly_id?
-	  :name_changed? || super
 	end
 
 	def downcase_email

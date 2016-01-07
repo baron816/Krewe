@@ -45,12 +45,12 @@ describe User do
       end
 
       it "user isn't put in a group it's already in" do
-        user.find_or_create_group
+        FindGroup.new(user).find_or_create
         expect(user.groups.first).not_to eql(user.groups.second)
       end
 
       it "user2 only adds one group" do
-        user2.find_or_create_group
+        FindGroup.new(user2).find_or_create
         expect(user2.groups.count).to eql(2)
       end
 
@@ -75,11 +75,11 @@ describe User do
 
     describe "#is_friends_with" do
       it "user2 is a friend?" do
-        expect(user.is_friends_with?(user2)).to eq(true)
+        expect(user.unique_friends_include?(user2)).to eq(true)
       end
 
       it "user3 is not a friend" do
-        expect(user.is_friends_with?(user3)).to eq(false)
+        expect(user.unique_friends_include?(user3)).to eq(false)
       end
     end
 
@@ -91,16 +91,6 @@ describe User do
       it "adding dropped group works" do
         user.add_dropped_group(1)
         expect(user.dropped_group_ids).to include(1)
-      end
-    end
-
-    describe "#not_self" do
-      it "self returns false" do
-        expect(user.not_self(user)).to eq(false)
-      end
-
-      it "not self returns true" do
-        expect(user.not_self(user2)).to eq(true)
       end
     end
 

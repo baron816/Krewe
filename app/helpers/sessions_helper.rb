@@ -5,7 +5,6 @@ module SessionsHelper
 		else
 			cookies.signed[:auth_token] = user.auth_token
 		end
-		user.update_sign_in(request.remote_ip)
 	end
 
 	def log_out

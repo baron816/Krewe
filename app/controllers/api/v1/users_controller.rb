@@ -29,7 +29,7 @@ class Api::V1::UsersController < ApiController
 
   def add_group
     if @user.under_group_limit?
-      group = @user.find_or_create_group
+      group = FindGroup.new(@user).find_or_create
       render json: group
     else
       render json: { errors: "Group limit already reached" }, status: 422

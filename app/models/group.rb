@@ -4,7 +4,7 @@ class Group < ActiveRecord::Base
 	friendly_id :slug_candidates, use: :slugged
 
 	has_many :user_groups
-	has_many :users, through: :user_groups, after_add: [:check_space, :join_group_notifications], after_remove: :check_space
+	has_many :users, through: :user_groups, after_add: [:check_space, Proc.new { |group, new_user| JoinNotification.new(group, new_user).send_notifications if group.degree == 1 }], after_remove: :check_space
 	has_many :messages, as: :messageable
 	has_many :topics
 	has_many :notifications, as: :notifiable
@@ -55,31 +55,8 @@ class Group < ActiveRecord::Base
 		drop_user(user) if user.group_drop_votes_count(self) >= 3
 	end
 
-	def ripe_for_expansion?
-	  aged?(1.month) && attended_activities_count >= 4 && can_join == false && has_expanded == false && ready_to_expand == false
-	end
-
-	def voted_to_expand?
-		expand_group_votes_size == users_count
-	end
-
 	def includes_user?(user)
 	  users.include?(user)
-	end
-
-	def primary_group?
-	  degree == 1
-	end
-
-	def join_group_notifications(new_user)
-		users.each do |user|
-			self.notifications.create(user: user, poster: new_user, notification_type: "Join").delay unless user == new_user
-		end
-		GroupMailer.delay.join_group({group: self, poster: new_user})
-	end
-
-	def names_data(current_user)
-		user_names_hash(current_user).to_json.html_safe
 	end
 
 	def city
@@ -93,19 +70,5 @@ class Group < ActiveRecord::Base
 	private
 	def create_general_topic
 	  self.topics.create(name: "General")
-	end
-
-	def user_names_hash(current_user)
-		users.map do |user|
-			Hash[:name, user.first_name, :slug, user.slug, :full_name, user.name] unless user == current_user
-		end.compact << group_hash
-	end
-
-	def group_hash
-	  Hash[:name, "Group", :slug, "group", :full_name, name]
-	end
-
-	def aged?(period)
-		(Time.now - created_at) > period
 	end
 end

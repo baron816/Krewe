@@ -66,7 +66,7 @@ describe Group do
 		let(:group4) { create(:old_group) }
 
 		it "does not indicate group is ripe for expansion" do
-		  expect(group4.ripe_for_expansion?).to eq(false)
+		  expect(ExpansionCheck.new(group4).ripe_for_expansion?).to eq(false)
 		end
 
 		it "is right for expansion with activities" do
@@ -74,7 +74,7 @@ describe Group do
 				group4.activities << create(:activity_past)
 			end
 
-			expect(group4.ripe_for_expansion?).to eq(true)
+			expect(ExpansionCheck.new(group4).ripe_for_expansion?).to eq(true)
 		end
 	end
 

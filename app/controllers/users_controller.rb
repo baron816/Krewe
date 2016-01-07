@@ -33,7 +33,7 @@ class UsersController < ApplicationController
 		beta_code = BetaCode.find_by(auth_token: params[:code])
 		return redirect_to root_path, notice: "Please sign up for the beta." unless beta_code && !beta_code.used
 
-		@user = User.new
+		@user = User.new(email: params[:email])
 
 		respond_to do |format|
 			format.html
@@ -55,7 +55,7 @@ class UsersController < ApplicationController
 
 	def join_group
 	  if @user.under_group_limit?
-	  	new_group = @user.find_or_create_group
+	  	new_group = FindGroup.new(@user).find_or_create
 			redirect_to group_path(new_group)
 	  end
 	end
