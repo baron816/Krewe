@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
 	validates :name, presence: true, length: { minimum: 3, maximum: 50 }
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 	validates :email, presence: true, length: { maximum: 255}, format: { with: VALID_EMAIL_REGEX }, uniqueness: true
-	validates :password, presence: true, length: { minimum: 6 }, on: :create
+	validate :password_complexity
 	validates_presence_of :longitude, :latitude, :address, :category, :age_group
 	validates :terms_of_service, acceptance: true
 	validate :multiple_words?
@@ -93,5 +93,11 @@ class User < ActiveRecord::Base
 
 	def downcase_email
 		self.email = email.downcase
+	end
+
+	def password_complexity
+		if password.present? and not password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d). /)
+			errors.add :password, "must include at least one lowercase letter, one uppercase letter, and one digit"
+		end
 	end
 end
