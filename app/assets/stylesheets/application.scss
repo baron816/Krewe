@@ -37,8 +37,12 @@ p {
 	font-size: 1.4em;
 }
 
-a, time, button, .new-message {
+a, time, button, input[type=text], label, .error-messages, .new-message, #people-type {
 	font-size: 1.3em;
+}
+
+.input-field label.active {
+	font-size: 0.9rem;
 }
 
 #logo {
