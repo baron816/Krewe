@@ -33,7 +33,7 @@ class UsersController < ApplicationController
 		beta_code = BetaCode.find_by(auth_token: params[:code])
 		return redirect_to root_path, notice: "Please sign up for the beta." unless beta_code && !beta_code.used
 
-		@user = User.new(email: params[:email])
+		@user = User.new(email: params[:email], category: "Doesn't Matter")
 
 		respond_to do |format|
 			format.html
