@@ -29,6 +29,7 @@ $(document).ready(function(){
 	responsiveMedia();
 })
 
+
 $(window).resize(function() {
 	resize_window('.messages')
 })
@@ -103,6 +104,20 @@ function setActivityAppointment() {
 	var time = $("#time_field").val();
 	var date = $("#date_field").val();
 	$("#activity_appointment").val(date + " " + time);
+}
+
+function setActiveClass() {
+	$('input').focus(function(){
+		var label = $("label[for='"+ $(this).attr('id') + "']")
+
+		label.addClass("active");
+
+		$(this).focusout(function () {
+			if (!$(this).val()) {
+				label.removeClass("active")
+			}
+		})
+	})
 }
 
 function validateCheckbox(event) {
