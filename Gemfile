@@ -31,6 +31,7 @@ gem "goldiloader"
 gem 'access-granted'
 gem 'meta-tags'
 gem 'rack-attack'
+gem 'sanitize'
 
 gem 'jquery-rails'
 gem 'jquery-turbolinks'
