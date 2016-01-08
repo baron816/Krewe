@@ -11,7 +11,9 @@
 		<h3>Groups</h3>
 		<div class="collection">
 			<% @user_show.groups.each do |group| %>
-				<%= link_to "#{group.name} <span class='badge'>#{current_user.unviewed_group_notification_count(group)}</span>".html_safe, group_path(group), class: "collection-item" %>
+				<%= link_to group_path(group), class: "collection-item" do %>
+				<%= group.name %> <span class='badge'><%= current_user.unviewed_group_notification_count(group) %></span>
+				<% end %>
 			<% end %>
 		</div>
 
