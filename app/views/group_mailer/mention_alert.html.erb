@@ -1,6 +1,6 @@
 <p><%= @poster.name %> mentioned you in a post:</p>
 
-<%= @message.content.html_safe %>
+<%= sanitize @message.content.html_safe %>
 
 <p>
 Click <%= link_to "here", group_url(@message.messageable.group) %> to view.

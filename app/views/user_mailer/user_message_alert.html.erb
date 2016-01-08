@@ -1,4 +1,4 @@
-<%= @message.content.html_safe %>
+<%= sanitize @message.content.html_safe %>
 
 <p>
   You can see it <%= link_to "here", public_profile_user_url(@message.poster) %>
