@@ -105,7 +105,7 @@ class User < ActiveRecord::Base
 		required_complexity = 3
 
 		unless CheckPasswordComplexityService.new(password, required_complexity).valid?
-			errors.add :password, "mustbe be stronger"
+			errors.add :password, "must be be stronger"
 		end
 	end
 end
