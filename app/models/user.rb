@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
 
 	after_create { FindGroup.new(self).find_or_create}
 	before_create { generate_token(:auth_token) }
-	before_save :downcase_email
+	before_save :downcase_email, :sanitize_fields
 
 	after_validation :geocode
 	reverse_geocoded_by :latitude, :longitude
@@ -85,6 +85,10 @@ class User < ActiveRecord::Base
 	end
 
 	private
+	def sanitize_fields
+	  self.name = Sanitize.fragment(name)
+	end
+
 	def multiple_words?
 	  unless name.split.count > 1
 			errors.add(:name, "must include at first and last")
