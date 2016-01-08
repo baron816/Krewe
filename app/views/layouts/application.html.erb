@@ -22,7 +22,7 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
   <meta name="appdeck-menu-entry" content="javascript:$('.button-collapse').sideNav('show');" icon="!menu" type="button">
 </head>
 <body>
-  <%= render 'shared/nav' unless request.user_agent.include?('AppDeck') %>
+  <%= render 'shared/nav' unless request.user_agent.try(:include?, "AppDeck") %>
   <%= render 'shared/sidebar' %>
 
   <main>
