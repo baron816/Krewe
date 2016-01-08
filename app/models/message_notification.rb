@@ -23,8 +23,6 @@ class MessageNotification
   end
 
   def send_mention_email_alerts
-    send_to_users = mentioned_user_slugs.include?("group") ? messageable_users : messageable_users.users_by_slug(mentioned_user_slugs)
-
     GroupMailer.delay.mention_alert(message, send_to_users)
   end
 
@@ -33,6 +31,10 @@ class MessageNotification
        create_notification(user) unless user == poster
     end
     send_mention_email_alerts
+  end
+
+  def send_to_users
+    mentioned_user_slugs.include?("group") ? messageable_users : messageable_users.users_by_slug(mentioned_user_slugs)
   end
 
   def send_user_notification
