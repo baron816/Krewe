@@ -12,7 +12,7 @@
 
     <% if @user_show %>
       <li><a href="#friends" class="modal-trigger white-text">Friends (<%= @user_show.unique_friends_count %>)</a></li>
-      <li><%= link_to "Settings".html_safe, edit_user_path(current_user), class: 'white-text' %></li>
+      <li><%= link_to "Settings", edit_user_path(current_user), class: 'white-text' %></li>
       <li><%= link_to "FAQ", faq_path, class: 'white-text' %></li>
     <% end %>
 
