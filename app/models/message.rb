@@ -10,7 +10,7 @@ class Message < ActiveRecord::Base
 	validates :content, presence: true
 	validates_presence_of :messageable, :messageable_type, :poster
 
-	after_create { MessageNotification.new(self).send_notifications }
+	after_create :send_notifications
 
 	scope :users_messages, -> { where(messageable_type: "User")  }
 	scope :poster_messages,  -> (poster){ where(poster: poster)  }
@@ -27,5 +27,10 @@ class Message < ActiveRecord::Base
 		t = Message.arel_table
 
 		Message.where(t[:poster_id].in([first_user.id, second_user.id]).and(t[:messageable_id].in([first_user.id, second_user.id])), messageable_type: "User").order(created_at: :desc)
+	end
+
+	private
+	def send_notifications
+	  MessageNotification.new(self).send_notifications
 	end
 end
