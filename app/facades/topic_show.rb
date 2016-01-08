@@ -1,5 +1,6 @@
 class TopicShow
   attr_reader :this_topic, :page, :per_page, :user
+
   def initialize(topic, page, current_user)
     @this_topic = topic
     @page = page
@@ -17,7 +18,7 @@ class TopicShow
   end
 
   def new_message
-    @message ||= Message.new
+    Message.new(poster_id: user.id)
   end
 
   def names_data
