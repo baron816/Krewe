@@ -25,7 +25,7 @@ module Krewe
 
     config.exceptions_app = self.routes
 
-    config.middleware.user Rack::Attack
+    config.middleware.use Rack::Attack
 
     config.action_mailer.asset_host = "https://www.gokrewe.com"
   end
