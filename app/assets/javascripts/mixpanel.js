@@ -1,3 +1,9 @@
-$('.new_beta_code').submit(function (event) {
-  mixpanel.track("Submitted Email")
+$(document).ready(function () {
+  $('.new_beta_code').submit(function () {
+    mixpanel.track("Submitted Email")
+  })
+
+  $('.new_user').submit(function () {
+    mixpanel.track("Finished Signup")
+  })
 })
