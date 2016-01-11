@@ -1,1 +1,11 @@
-Thanks for your interest in Krewe. <%= link_to "Click here", new_user_url(code: @beta_code.auth_token, email: @beta_code.email) %> to sign up for our beta (it's really quick and easy). Please be aware that we're just getting started and we don't have a lot of users yet, but we'll be sure to let you know when people join your group. If you have any trouble, let us know at <%= mail_to "support@gokrewe.com", "support@gokrewe.com" %> and we'll try to fix things right away.
+<p>
+  Thanks for your interest in Krewe.
+</p>
+
+<p>
+  Please <%= link_to "click here", new_user_url(code: @beta_code.auth_token, email: @beta_code.email) %> to finish setting up your account (it's really quick and easy).
+</p>
+
+<p>
+  Be aware that we're just getting started and we don't have a lot of users yet, but we'll be sure to let you know when people join your group. If you have any trouble, let us know at <%= mail_to "support@gokrewe.com", "support@gokrewe.com" %> and we'll try to fix things right away.
+</p>
