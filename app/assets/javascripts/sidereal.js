@@ -46,7 +46,7 @@ function scrollBottom(div) {
 }
 
 function setBodyHeight() {
-	if (/iPad/i.test(navigator.userAgent && $('.new-message')[0])) {
+	if (/iPad/i.test(navigator.userAgent) && $('.new-message')[0]) {
 		var z = 450 - ($('body').height() - $('.new-message').position().top)
 
 		$('.new-message, #new-message-submit').focus(function(){
