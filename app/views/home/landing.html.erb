@@ -8,7 +8,7 @@
 		</div>
 
 		<div class="col s12 m6">
-				<h4>Sign Up</h4>
+				<h4>Sign Up for Beta</h4>
 				<%= render 'beta_codes/form' %>
 				<br>
 		</div>
@@ -16,6 +16,5 @@
 </div>
 
 <%= javascript_tag do %>
-	$('html').addClass('landing');
 	mixpanel.track("Viewed landing");
 <% end %>
