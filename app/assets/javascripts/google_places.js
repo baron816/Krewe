@@ -1,9 +1,10 @@
 markers = [];
 var plan;
+var autocomplete;
 
 function mapLocation(startingLat, startingLng) {
 	mapOptions = {
-		center: new google.maps.LatLng(startingLat, startingLng),
+		center: new google.maps.LatLng($("#map-canvas").data("latitude"), $("#map-canvas").data("longitude")),
 		zoom: 15
 	};
 
@@ -53,8 +54,8 @@ function mapLocation(startingLat, startingLng) {
 	})
 }
 
-function mapActivityLocation(startingLat, startingLng) {
-	var latLng = new google.maps.LatLng(startingLat, startingLng)
+function mapActivityLocation() {
+	var latLng = new google.maps.LatLng($("#map-canvas").data("latitude"), $("#map-canvas").data("longitude"))
 
 	mapOptions = {
 		center: latLng,
@@ -177,6 +178,22 @@ function createMarker(place, service) {
 			$('label[for="activity_location"]').addClass("active")
 		})
 	})
+}
+
+function initAutoComplete() {
+	autocomplete = new google.maps.places.Autocomplete(
+		/** @type {!HTMLInputElement} */(document.getElementById('user_address')),
+      {types: ['geocode']});
+
+	autocomplete.addListener('place_changed', setCoordinates)
+}
+
+function setCoordinates() {
+	var place = autocomplete.getPlace();
+	var geo = place.geometry.location
+
+	$('#lat').val(geo.lat())
+	$('#lng').val(geo.lng())
 }
 
 function resize(lat, lng) {
