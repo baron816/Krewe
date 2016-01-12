@@ -3,13 +3,3 @@
 	<%= f.hidden_field :content, required: true %>
 	<%= f.submit "Submit", class: 'btn blue', id: 'new-message-submit' %>
 <% end %>
-
-<%= javascript_tag do %>
-  $('.new-message').on('keyup', function(){
-		$('#message_content').val($('.new-message').html())
-	})
-
-	$('#new-message-submit').click(function(){
-		$('.new-message').empty()
-	})
-<% end %>
