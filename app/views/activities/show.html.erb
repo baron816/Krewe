@@ -15,7 +15,7 @@
 		<h4><%= local_time(@activity_show.appointment) %></h4>
 		<h4><%= @activity_show.location %></h4>
 
-		<div id="map-canvas"></div>
+		<div id="map-canvas" data-latitude="<%= @activity_show.latitude %>" data-longitude="<%= @activity_show.longitude %>"></div>
 	</div>
 
 	<div class="col l6 m12 s12">
@@ -30,9 +30,5 @@
 	<div class="col l6 hide-on-med-and-down" id="activity-messages">
 		<h3>Messages</h3>
 		<%= render partial: "messages/messages", locals: { messages: @activity_show.messages, messageable: @activity_show.activity, new_message: @activity_show.new_message } %>
-
 	</div>
 </div>
-<%= javascript_tag do %>
-	mapActivityLocation('<%= @activity_show.latitude %>', ' <%= @activity_show.longitude %>')
-<% end %>

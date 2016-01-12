@@ -48,14 +48,3 @@
 			<%= f.submit :Submit, class: 'btn blue' %>
 		</div>
 <% end %>
-
-<%= javascript_tag do %>
-	initAutoComplete()
-	$('.tooltipped').tooltip();
-
-	$('form').submit(function(event){
-		validateCheckbox(event);
-	})
-
-	setActiveClass();
-<% end %>

@@ -44,7 +44,7 @@
 
         <%= f.hidden_field :longitude %>
         <%= f.hidden_field :latitude %>
-        <div id="map-canvas"></div>
+        <div id="map-canvas" data-latitude="<%= @activity.latitude %>" data-longitude="<%= @activity.longitude %>"></div>
 
         <div class="modal-footer">
           <%= f.submit "Submit", class: 'btn green' %>
@@ -52,20 +52,3 @@
       </div>
     <% end %>
 </div>
-
-<%= javascript_tag do %>
-  mapLocation('<%= @activity.latitude %>', '<%= @activity.longitude %>');
-  $('.datepicker').pickadate({
-    close: "Done",
-    min: new Date()
-  })
-
-  $('#time_field').pickatime({
-    twelvehour: true
-  })
-
-  $('#date_field, #time_field').change(function(){
-    setActivityAppointment()
-  })
-  $('ul.tabs').tabs();
-<% end %>

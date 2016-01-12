@@ -88,12 +88,3 @@
 			<br>
 				<%= f.submit :Submit, class: 'btn blue' %>
 	<% end %>
-
-<%= javascript_tag do %>
-	initAutoComplete()
-	$('.tooltipped').tooltip();
-
-	$('label[for="user_name"]').addClass("active")
-	$('label[for="user_email"]').addClass("active")
-	$('label[for="user_address"]').addClass("active")
-<% end %>
