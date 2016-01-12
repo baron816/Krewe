@@ -3,6 +3,6 @@ $('.topics').prepend('<%= j link_to @topic.name, change_topic_path(@topic), clas
 $('.message-group').html('<%= j render partial: "topic", locals: { topic: @topic_show } %>')
 
 
-resize_window('.messages');
-mentioning(<%= MentionName.new(@topic.group, current_user).names_data %>)
+new Formatter().resizeWindow('.messages');
+new Mentions().mentioning(<%= MentionName.new(@topic.group, current_user).names_data %>)
 $('.topics').animate({ scrollLeft: 0 }, 1000)

@@ -1,6 +1,5 @@
-$('.message-group').html('<%= j render partial: "topic", locals: { topic: @topic } %>')
-resize_window('.messages');
-mentioning(<%= @topic.names_data %>);
-responsiveMedia()
-scrollBottom();
-setBodyHeight();
+$('.message-group').html('<%= j render partial: "topic", locals: { topic: @topic, names_data: @topic.names_data } %>')
+new Mentions().mentioning();
+
+new Formatter().setChangeTopicDefaults();
+setMessageBox();
