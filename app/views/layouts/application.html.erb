@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="<%= 'landing' if @beta_code %>">
+<html lang="en">
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
   <%= display_meta_tags %>
@@ -21,7 +21,7 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
 
   <meta name="appdeck-menu-entry" content="javascript:$('.button-collapse').sideNav('show');" icon="!menu" type="button">
 </head>
-<body>
+<body class="<%= controller_name %> <%= action_name %>" data-notice="<%= notice %>">
   <%= render 'shared/nav' unless request.user_agent.try(:include?, "AppDeck") %>
   <%= render 'shared/sidebar' %>
 
@@ -33,11 +33,3 @@ mixpanel.init("<%= ENV['MIXPANEL_TOKEN'] %>");</script><!-- end Mixpanel -->
 
 </body>
 </html>
-
-<%= javascript_tag do %>
-	$(document).ready(function(){
-		if ('<%= notice %>') {
-			sweetAlert('<%= notice %>')
-		}
-	})
-<% end %>
