@@ -10,7 +10,7 @@ class MentionName
   end
 
   def names_data
-		user_names_hash.to_json.html_safe
+		user_names_hash.to_json
 	end
 
   private
