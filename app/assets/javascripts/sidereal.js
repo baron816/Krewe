@@ -27,6 +27,10 @@ $(document).ready(function(){
 	setBodyHeight()
 
 	responsiveMedia();
+
+	if ($('body').data("notice")) {
+		swal($('body').data("notice"))
+	}
 })
 
 
