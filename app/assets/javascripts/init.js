@@ -24,8 +24,12 @@ $(document).ready(function(){
   }
 
   $('#new_user').submit(function(event){
-    validateCheckbox(event);
+    new Validator().validateCheckbox(event);
   })
 
-  setMessageBox();
+  new Message().setMessageBox();
+})
+
+$(window).resize(function() {
+	new Formatter().resizeWindow('.messages')
 })
