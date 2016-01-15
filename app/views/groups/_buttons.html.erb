@@ -1,4 +1,4 @@
-<%= link_to "Leave Group", drop_user_group_path(@group_show.group), method: :delete, class: 'btn red white-text', data: {confirm: "Are you sure you want to drop this group?", text: "You will not be able to rejoin it.", 'confirm-button-text': "Yeah, these guys are jerks"} %>
+<%= link_to "Leave Group", drop_user_group_path(@group_show.group), method: :delete, class: 'btn red white-text', data: @group_show.delete_confirm_message %>
 
 <% if @group_show.ripe_for_expansion? %>
   <% unless @group_show.user_expand_group_votes(current_user) %>
