@@ -40,14 +40,14 @@ describe Activity do
     end
   end
 
-  describe "#group_includes_user?" do
+  describe "#group_users_include?" do
     it "includes user1 and user2" do
-      expect(activity.group_includes_user?(user1)).to eq(true)
+      expect(activity.group_users_include?(user1)).to eq(true)
     end
 
     it "does not include a user not in the group" do
       @user4 = create(:user_stucco)
-      expect(activity.group_includes_user?(@user4)).to eq(false)
+      expect(activity.group_users_include?(@user4)).to eq(false)
     end
   end
 

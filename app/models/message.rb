@@ -5,7 +5,7 @@ class Message < ActiveRecord::Base
 
 	delegate :name, to: :poster, prefix: true
 	delegate :users, :group, :unique_friends_include?, to: :messageable, prefix: true
-	delegate :group_includes_user?, to: :messageable
+	delegate :group_users_include?, to: :messageable
 
 	validates :content, presence: true
 	validates_presence_of :messageable, :messageable_type, :poster

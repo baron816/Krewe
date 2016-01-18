@@ -15,7 +15,7 @@ class Activity < ActiveRecord::Base
 	validates_presence_of :location, :appointment, :group_id, :proposer_id
 	validate :is_a_time?
 
-	delegate :name, :users, :includes_user?, to: :group, prefix: true
+	delegate :name, :users, :users_include?, to: :group, prefix: true
 	delegate :size, to: :users, prefix: true
 
 	scope :future_activities, -> { where('appointment > ?', Time.now - 2.hours).order(appointment: :asc) }

@@ -7,7 +7,7 @@ class ActivityShow
     @page = params[:page]
   end
 
-  delegate :group, :plan, :latitude, :longitude, :appointment, :location, :proposed_by?, :users, :group_includes_user?, :user_going?, to: :activity
+  delegate :group, :plan, :latitude, :longitude, :appointment, :location, :proposed_by?, :users, :group_users_include?, :user_going?, to: :activity
   delegate :name, to: :group, prefix: true
   delegate :next_page, to: :messages
 
