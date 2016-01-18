@@ -1,6 +1,6 @@
 <%= form_for(:session, url: login_path) do |f| %>
     <% if flash[:error] %>
-      <div class="alert alert-danger">
+      <div class="red-text error-messages">
         <%= flash[:error] %>
       </div>
     <% end %>
