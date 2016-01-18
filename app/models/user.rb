@@ -7,10 +7,9 @@ class User < ActiveRecord::Base
 	validates :name, presence: true, length: { minimum: 3, maximum: 50 }
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 	validates :email, presence: true, length: { maximum: 255}, format: { with: VALID_EMAIL_REGEX }, uniqueness: true
-	validate :password_complexity
 	validates_presence_of :longitude, :latitude, :address, :category, :age_group
 	validates :terms_of_service, acceptance: true
-	validate :multiple_words?
+	validate :multiple_words?, :password_complexity
 
 	has_secure_password
 	has_many :user_groups
@@ -94,6 +93,6 @@ class User < ActiveRecord::Base
 	end
 
 	def password_complexity
-		CheckPasswordComplexityService.new(password, errors).password_errors
+		CheckPasswordComplexityService.new(password, errors).password_errors if password
 	end
 end
