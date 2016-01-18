@@ -84,13 +84,15 @@ describe User do
     end
 
     describe "#add_dropped_group" do
+      let(:group) {user.groups.first}
+
       it "doesn't have any dropped groups" do
         expect(user.dropped_group_ids).to be_empty
       end
 
       it "adding dropped group works" do
-        user.add_dropped_group(1)
-        expect(user.dropped_group_ids).to include(1)
+        DropUser.new(group, user).drop
+        expect(user.dropped_group_ids).to include(group.id)
       end
     end
 
