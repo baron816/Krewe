@@ -4,7 +4,7 @@ class Group < ActiveRecord::Base
 	friendly_id :slug_candidates, use: :slugged
 
 	has_many :user_groups
-	has_many :users, through: :user_groups, after_add: [:check_space, Proc.new { |group, new_user| JoinNotification.new(group, new_user).send_notifications if group.degree == 1 }], after_remove: :check_space
+	has_many :users, through: :user_groups, after_add: [:check_space, :join_notification], after_remove: :check_space
 	has_many :messages, as: :messageable
 	has_many :topics
 	has_many :notifications, as: :notifiable
@@ -33,26 +33,15 @@ class Group < ActiveRecord::Base
 	end
 
 	def check_space(user)
-		if users_count == user_limit - 1 && self.can_join != true
-			self.can_join = true
-			save
-		elsif users_count == user_limit && self.can_join != false
-			self.can_join = false
-			save
-		end
+		GroupSpaceCheck.new(self, user).check_space
 	end
 
 	def drop_user(user)
-		users.delete(user)
-		user.add_dropped_group(id)
-
-		user.votes_to_drop_delete_all
-		user.dismiss_all_notifications
-		self.delete if users_empty?
+		DropUser.new(self, user).drop
 	end
 
 	def kick_user(user)
-		drop_user(user) if user.group_drop_votes_count(self) >= 3
+		DropUser.new(self, user).kick_user
 	end
 
 	def includes_user?(user)
@@ -70,5 +59,9 @@ class Group < ActiveRecord::Base
 	private
 	def create_general_topic
 	  self.topics.create(name: "General")
+	end
+
+	def join_notification(user)
+	  JoinNotification.new(self, user).send_notifications if self.degree == 1
 	end
 end
