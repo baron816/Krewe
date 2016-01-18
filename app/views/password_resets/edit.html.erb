@@ -3,11 +3,8 @@
 <div class="container">
 	<div class="card-panel">
 		<h1>Reset Password</h1>
-		<% if flash[:danger] %>
-			<div class="alert alert-danger">
-				<%= flash[:danger] %>
-			</div>
-		<% end %>
+		<%= render 'shared/errors', object: @user %><br>
+		
 		<%= form_for(@user, url: password_reset_path(params[:id])) do |f| %>
 			<%= hidden_field_tag :email, @user.email %>
 
