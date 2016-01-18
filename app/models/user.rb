@@ -27,30 +27,24 @@ class User < ActiveRecord::Base
 	has_many :expand_group_votes, foreign_key: "voter_id", dependent: :destroy
 	has_many :posted_notifications, class_name: "Notification", foreign_key: "poster_id", dependent: :destroy
 
-	after_create { FindGroup.new(self).find_or_create}
+	after_create { FindGroup.new(self).find_or_create }
 	before_create { generate_token(:auth_token) }
 	before_save :downcase_email, :sanitize_fields
 
 	after_validation :geocode
 	reverse_geocoded_by :latitude, :longitude
 
-	delegate :unviewed_notifications, :dismiss_personal_notifications_from_user, :unviewed_personal_notifications_from_user_count, :unviewed_group_notification_count, :dismiss_group_notifications_from_group, :unviewed_category_notifications, :dismiss_activity_notification, :unviewed_activity_notifications_count, :unviewed_activity_message_notifications_count, :unviewed_message_notifications_from_topic_count, :dismiss_topic_notifications_from_topic, :unviewed_activity_create_notifications_from_group, :poster_sorted_category_notifications, :unviewed_future_activity_notifications, :show_notifications_count, :show_notifications_positive?, :dismiss_all_notifications, to: :notifications
-	delegate :has_not_voted?, :group_drop_votes_count, :voter_vote, to: :drop_user_votes
+	delegate :unviewed_notifications, :dismiss_personal_notifications_from_user, :unviewed_personal_notifications_from_user_count, :unviewed_group_notification_count, :dismiss_group_notifications_from_group, :unviewed_category_notifications, :dismiss_activity_notification, :unviewed_activity_notifications_count, :unviewed_activity_message_notifications_count, :unviewed_message_notifications_from_topic_count, :dismiss_topic_notifications_from_topic, :unviewed_activity_create_notifications_from_group, :poster_sorted_category_notifications, :unviewed_future_activity_notifications, :show_notifications_count, :show_notifications_positive?, to: :notifications
+	delegate :group_drop_votes_count, :voter_vote, to: :drop_user_votes
 	delegate :future_activities, to: :activities
 	delegate :count, to: :groups, prefix: true
 	delegate :degree_groups, to: :groups
-	delegate :delete_all, to: :votes_to_drop, prefix: true
 	delegate :include?, :count, to: :unique_friends, prefix: true
 
 	scope :users_by_slug, -> (slugs) { where(slug: slugs)  }
 
 	def unique_friends
 		@unique_friends ||= friends.where.not(id: self).uniq
-	end
-
-	def add_dropped_group(id)
-		dropped_group_ids << id
-		save
 	end
 
 	def can_unvote?(user)
@@ -109,7 +103,7 @@ class User < ActiveRecord::Base
 		required_complexity = 3
 
 		unless CheckPasswordComplexityService.new(password, required_complexity).valid?
-			errors.add :password, "must be be stronger"
+			errors.add :password, "must be stronger"
 		end
 	end
 end
