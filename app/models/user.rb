@@ -94,16 +94,6 @@ class User < ActiveRecord::Base
 	end
 
 	def password_complexity
-		return if password.nil?
-
-		if password.size < 6
-			errors.add :password, "must be at least 6 characters long"
-		end
-
-		required_complexity = 3
-
-		unless CheckPasswordComplexityService.new(password, required_complexity).valid?
-			errors.add :password, "must be stronger"
-		end
+		CheckPasswordComplexityService.new(password, errors).password_errors
 	end
 end
