@@ -1,31 +1,39 @@
 class CheckPasswordComplexityService
-  attr_reader :password, :required_complexity
+  include PasswordHelper
+  attr_reader :password, :required_complexity, :errors
 
-  def initialize(password, required_complexity)
+  def initialize(password, errors)
     @password = password
     @required_complexity = required_complexity
+    @errors = errors
   end
 
-  def valid?
-    score = has_uppercase_letters? + has_digits? + has_extra_chars? + has_downcase_letters?
-
-    score >= required_complexity
+  def password_errors
+    run_checks
   end
 
   private
-  def has_uppercase_letters?
-    password.match(/[A-Z]/) ? 1 : 0
+  def run_checks
+    check_presence
+    check_length
+    check_commonality
   end
 
-  def has_digits?
-    password.match(/\d/) ? 1 : 0
+  def check_presence
+    if password.nil?
+      errors.add :password, "cannot be blank"
+    end
   end
 
-  def has_extra_chars?
-    password.match(/\W/) ? 1 : 0
+  def check_length
+    if password.size < 6
+      errors.add :password, "must be at least 6 characters long"
+    end
   end
 
-  def has_downcase_letters?
-    password.match(/[a-z]{1}/) ? 1 : 0
+  def check_commonality
+    if PasswordHelper::COMMON_PASSWORDS.include?(password.downcase)
+      errors.add :password, "is too common. Hackers will easily crack it."
+    end
   end
 end
