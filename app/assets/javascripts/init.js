@@ -30,6 +30,12 @@ $(document).ready(function(){
   new Message().setMessageBox();
 })
 
+$(document).on({
+  'DOMNodeInserted': function() {
+    $('.pac-item, .pac-item span', this).addClass('needsclick');
+  }
+}, '.pac-container');
+
 $(window).resize(function() {
 	new Formatter().resizeWindow('.messages')
 })
