@@ -4,7 +4,7 @@ $(document).ready(function(){
   new Mentions().mentioning();
 
 	$("#map-hider").click(function () {
-		$('#map-activity-canvas').toggle();
+		$('#map-canvas').toggle();
 	})
 
 	if ($('body').data("notice")) {
