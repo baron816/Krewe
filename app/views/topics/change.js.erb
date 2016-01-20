@@ -1,5 +1,5 @@
-$('.message-group').html('<%= j render partial: "topic", locals: { topic: @topic, names_data: @topic.names_data } %>')
+$('.message-group').html('<%= j render partial: "topic", locals: { topic: @topic } %>')
 new Mentions().mentioning();
 
 new Formatter().setChangeTopicDefaults();
-setMessageBox();
+new Message().setMessageBox();
