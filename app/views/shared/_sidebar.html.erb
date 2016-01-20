@@ -17,7 +17,7 @@
     <% end %>
 
     <% if @group_show %>
-      <li><%= link_to "Propose Activity", new_group_activity_path(@group_show.group), class: 'white-text', id: 'new_activity', remote: true %></li>
+      <li><%= link_to "Propose Activity", new_group_activity_path(@group_show.group), class: 'white-text', id: 'new_activity' %></li>
       <li><a href="#activities" class="modal-trigger white-text">Upcoming Activities (<%= @group_show.activities_count %>)</a></li>
       <li><a href="#new-topic" class="modal-trigger white-text">New Thread</a></li>
       <li><a href="#members" class="modal-trigger white-text">Members (<%= @group_show.users_count %>)</a></li>
