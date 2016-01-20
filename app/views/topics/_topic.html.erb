@@ -1,7 +1,7 @@
-<div class="messages card-panel z-depth-2" data-namesdata="<%= names_data %>">
+<div class="messages card-panel z-depth-2" data-namesdata="<%= topic.names_data %>">
   <% if topic.messages_any? %>
     <div class="center-align">
-      <%= link_to_next_page topic.messages, "See More", params: {controller: 'topics', action: 'show', id: topic.id}, remote:true, class: "btn blue more-messages" %>
+      <%= link_to_next_page topic.messages, "See More", params: {controller: 'topics', action: 'show', id: topic.id}, remote: true, class: "btn blue more-messages" %>
     </div>
 
     <div class="individual-messages">
