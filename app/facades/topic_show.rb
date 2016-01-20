@@ -9,7 +9,7 @@ class TopicShow
   end
 
   delegate :any?, to: :messages, prefix: true
-  delegate :names_data, :id, to: :this_topic
+  delegate :name, :group, :id, to: :this_topic
   delegate :count, to: :found_messages, prefix: true
   delegate :next_page, to: :messages
 
