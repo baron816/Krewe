@@ -1,8 +1,8 @@
 $('.topics > a').removeClass('lighten-3')
-$('.topics').prepend('<%= j link_to @topic.name, change_topic_path(@topic), class: "waves-effect btn indigo lighten-3", remote: true %>')
-$('.message-group').html('<%= j render partial: "topic", locals: { topic: @topic_show } %>')
+$('.topics').prepend('<%= j link_to @topic_show.name, change_topic_path(@topic_show.this_topic), class: "waves-effect btn indigo lighten-3", remote: true %>')
+$('.message-group').html('<%= j render partial: "topics/topic", locals: { topic: @topic_show } %>')
 
 
 new Formatter().resizeWindow('.messages');
-new Mentions().mentioning(<%= MentionName.new(@topic.group, current_user).names_data %>)
+new Mentions().mentioning()
 $('.topics').animate({ scrollLeft: 0 }, 1000)
