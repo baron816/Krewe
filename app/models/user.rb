@@ -54,17 +54,6 @@ class User < ActiveRecord::Base
 		self != user && !user.voter_vote(self) && self.unique_friends_include?(user)
 	end
 
-	def send_password_reset
-		generate_token(:password_reset_token)
-		self.password_reset_sent_at = Time.zone.now
-		save
-		UserMailer.password_reset(self).deliver_now
-	end
-
-	def password_reset_expired?
-		password_reset_sent_at < 1.hours.ago
-	end
-
 	def under_group_limit?
 	  groups_count < group_limit
 	end
