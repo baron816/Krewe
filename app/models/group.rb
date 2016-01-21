@@ -40,10 +40,6 @@ class Group < ActiveRecord::Base
 		DropUser.new(self, user).drop
 	end
 
-	def kick_user(user)
-		DropUser.new(self, user).kick_user
-	end
-
 	def city
 	  users.first.city
 	end
