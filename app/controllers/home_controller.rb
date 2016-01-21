@@ -1,8 +1,8 @@
 class HomeController < ApplicationController
 	def landing
+		return redirect_to root_path if current_user
 		prepare_meta_tags
 
-		return redirect_to root_path if current_user
 		@beta_code = BetaCode.new
 	end
 
