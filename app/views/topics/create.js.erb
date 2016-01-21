@@ -1,6 +1,6 @@
 $('.topics > a').removeClass('lighten-3')
-$('.topics').prepend('<%= j link_to @topic_show.name, change_topic_path(@topic_show.this_topic), class: "waves-effect btn indigo lighten-3", remote: true %>')
-$('.message-group').html('<%= j render partial: "topics/topic", locals: { topic: @topic_show } %>')
+$('.topics').prepend('<%= j link_to @topic.name, change_topic_path(@topic.this_topic), class: "waves-effect btn indigo lighten-3", remote: true %>')
+$('.message-group').html('<%= j render partial: "topics/topic", locals: { topic: @topic } %>')
 
 
 new Formatter().resizeWindow('.messages');
