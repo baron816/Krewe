@@ -1,14 +1,24 @@
 FactoryGirl.define do
 	factory :user do
-		sequence(:name) { Faker::Name.name }
-		sequence(:email) { Faker::Internet.email }
 		age_group "65+"
 		password = '12ab34CD'
 		sequence(:password) { password }
 		sequence(:password_confirmation) { password }
 
+		factory :baron do
+			category "Blue Collar"
+			name "Baron Willeford"
+			email "baron@mail.com"
+			address "135 William Street, New York, NY"
+			longitude -74.00671419999999
+			latitude 40.7094706
+		end
+
+
 		factory :professionals do
 			category 'Professional'
+			sequence(:name) { Faker::Name.name }
+			sequence(:email) { Faker::Internet.email }
 
 			factory :user_home do
 				address "135 William Street, New York, NY"
