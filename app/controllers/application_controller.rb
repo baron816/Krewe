@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
     defaults = {
       site: site,
       description: description,
-      keywords: %w[social networking groups friends relationships]
+      keywords: %w[social networking local groups make friends relationships community]
     }
 
     options.reverse_merge!(defaults)
