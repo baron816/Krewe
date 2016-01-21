@@ -7,26 +7,8 @@ describe DropUserVote do
   let!(:user4) { create(:user_dbc) }
   let(:group) { Group.first }
 
-  it "@user doesn't have any drop_user_votes" do
-  	expect(user1.group_drop_votes_count(group)).to eql(0)
-  end
-
-  describe "User#can_vote?" do
-    before do
-      DropUserVote.create(voter: user1, user: user2, group: group)
-    end
-
-    it "doesn't let user vote for itself" do
-    	expect(user1.can_vote?(user1)).to eql(false)
-    end
-
-    it "does let user vote for another voter" do
-    	expect(user1.can_vote?(user3)).to eql(true)
-    end
-
-    it "does not let user vote for another user twice" do
-    	expect(user1.can_vote?(user2)).to eql(false)
-    end
+  it "user doesn't have any drop_user_votes" do
+  	expect(DropUserVote.user_vote_count(user1)).to eql(0)
   end
 
   describe "Group#kick_user" do
@@ -36,13 +18,11 @@ describe DropUserVote do
     end
 
     it "doesn't kick user after two votes" do
-    	group.kick_user(user2)
     	expect(group.users).to include(user2)
     end
 
     it "kicks user after third vote" do
     	DropUserVote.create(voter: user4, user: user2, group: group)
-    	group.kick_user(user2)
     	expect(group.users).not_to include(user2)
     end
   end
