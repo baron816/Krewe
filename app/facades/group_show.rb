@@ -16,8 +16,8 @@ class GroupShow
     dismiss_first_topic_notifications
   end
 
-  def user_expand_group_votes(user)
-    group.expand_group_votes.user_votes(user)
+  def user_expand_group_votes(voter)
+    group.expand_group_votes.user_votes(voter)
   end
 
   def not_almost_expandable?
