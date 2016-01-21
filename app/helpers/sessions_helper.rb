@@ -1,6 +1,6 @@
 module SessionsHelper
-	def log_in(user, params = {})
-		if params[:remember_me]
+	def log_in(user, params)
+		if params[:remember_me] == "1"
 			cookies.permanent.signed[:auth_token] = user.auth_token
 		else
 			cookies.signed[:auth_token] = user.auth_token
