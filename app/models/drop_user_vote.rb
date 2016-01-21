@@ -5,11 +5,15 @@ class DropUserVote < ActiveRecord::Base
 
 	validates_presence_of :user, :group, :voter
 
-	scope :user_votes, -> (user){ where(user_id: user) }
-	scope :group_votes, -> (group){ where(group_id: group) }
-	scope :group_drop_votes_count, -> (group){ group_votes(group).count }
+	after_create :kick_user
+
+	scope :user_vote_count, -> (user){ where(user_id: user).count }
 
 	def self.voter_vote(voter)
 	  find_by(voter_id: voter)
+	end
+
+	def kick_user
+		DropUser.new(group, user).drop if DropUserVote.user_vote_count(user) >= 3
 	end
 end
