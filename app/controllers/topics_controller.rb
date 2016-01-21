@@ -1,13 +1,12 @@
 class TopicsController < ApplicationController
   before_action :get_topic, except: :create
+  before_action :set_topic_show, except: :create
   before_action :get_group, only: :create
 
   def show
-    @topic = TopicShow.new(@topic, params[:page], current_user)
   end
 
   def change
-    @topic = TopicShow.new(@topic, params[:page], current_user)
   end
 
   def create
@@ -16,7 +15,7 @@ class TopicsController < ApplicationController
 
     @topic.save!
 
-    @topic_show = TopicShow.new(@topic, params[:page], current_user)
+    set_topic_show
 
     respond_to do |format|
       format.html { redirect_to(@group) }
@@ -27,6 +26,10 @@ class TopicsController < ApplicationController
   private
   def get_topic
     @topic = Topic.find(params[:id])
+  end
+
+  def set_topic_show
+    @topic = TopicShow.new(@topic, params[:page], current_user)
   end
 
   def get_group
