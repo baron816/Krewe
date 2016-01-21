@@ -56,4 +56,19 @@ describe SessionsController do
       end
     end
   end
+
+  describe "#DELETE destry" do
+    before do
+      log_in(user)
+      delete :destroy
+    end
+
+    it "sets cookies to nil" do
+      expect(cookies.signed['auth_token']).to be_nil
+    end
+
+    it "redirects to get_started_path" do
+      expect(response).to redirect_to(get_started_path)
+    end
+  end
 end
