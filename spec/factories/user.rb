@@ -12,6 +12,10 @@ FactoryGirl.define do
 			address "135 William Street, New York, NY"
 			longitude -74.00671419999999
 			latitude 40.7094706
+
+			factory :baron_admin do
+				is_admin true
+			end
 		end
 
 
