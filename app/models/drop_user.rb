@@ -19,10 +19,6 @@ class DropUser
     group.delete if users_empty?
   end
 
-  def kick_user
-    drop if user.group_drop_votes_count(group) >= 3
-  end
-
   private
   def remember_dropped_group_id
     user.dropped_group_ids << group.id
