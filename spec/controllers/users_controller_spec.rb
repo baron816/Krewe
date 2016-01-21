@@ -5,7 +5,7 @@ describe UsersController do
   let!(:user2) { create(:user_wtc) }
   let!(:group) { Group.first }
   before do
-    cookies.signed[:auth_token] = user.auth_token
+    log_in(user)
   end
 
   describe "GET #show" do

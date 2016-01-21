@@ -5,7 +5,7 @@ describe TopicsController do
   let(:group) { Group.first }
   let(:topic) { group.topics.first }
   before do
-    cookies.signed[:auth_token] = user.auth_token
+    log_in(user)
   end
 
   describe "#GET show" do
