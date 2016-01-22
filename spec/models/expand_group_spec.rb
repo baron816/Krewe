@@ -2,23 +2,21 @@ require 'rails_helper'
 
 describe ExpandGroup do
   before do
-    6.times do
-      create(:user_home)
-    end
-    6.times do
-      create(:user_wtc)
-    end
-    6.times do
-      create(:user_stucco)
-    end
+    create_list(:user_home, 6)
+    create_list(:user_wtc, 6)
   end
 
   let!(:group1) { Group.first }
   let!(:group2) { Group.second }
-  let!(:group3) { Group.third }
   let!(:expander) { ExpandGroup.new(group1) }
 
+
   describe "#find_mergeable_group" do
+    before do
+      create_list(:user_stucco, 6)
+    end
+    let!(:group3) { Group.third }
+
     it "not find a group since none are ready" do
       expect(expander.send(:find_mergeable_group)).to be_nil
     end
@@ -62,7 +60,7 @@ describe ExpandGroup do
 
     describe "#merge_groups" do
       it "creates a new group" do
-        expect(expander.send(:merge_groups)).to eq(Group.fourth)
+        expect(expander.send(:merge_groups)).to eq(Group.third)
       end
 
       it "has 12 users" do
@@ -76,13 +74,13 @@ describe ExpandGroup do
 
       it "does not send new notifications" do
         expander.send(:merge_groups)
-        expect(Group.fourth.notifications.count).to eq(0)
+        expect(Group.third.notifications.count).to eq(0)
       end
     end
 
     describe "#expand_group" do
       it "returns a new group" do
-        expect(expander.expand_group).to eq(Group.fourth)
+        expect(expander.expand_group).to eq(Group.third)
       end
 
       it "sets the group to expanded" do
@@ -101,6 +99,55 @@ describe ExpandGroup do
       it "sets ready_to_expand to true" do
         expander.expand_group
         expect(group1.ready_to_expand).to eq(true)
+      end
+    end
+  end
+
+  context "third degree group" do
+    before do
+      create_list(:user_home, 12)
+
+      Group.find_each do |group|
+        ExpandGroup.new(group).expand_group
+      end
+    end
+    let(:group5) { Group.last(2).first }
+    let(:group6) { Group.last }
+
+    it "has 6 groups" do
+      expect(Group.count).to eq(6)
+    end
+
+    it "last two groups are second degree groups" do
+      expect(group5.degree).to eq(2)
+      expect(group6.degree).to eq(2)
+    end
+
+    it "makes last two groups with 12 members each" do
+      expect(group5.users_count).to eq(12)
+      expect(group6.users_count).to eq(12)
+    end
+
+    context "another expansion" do
+      before do
+        ExpandGroup.new(group5).expand_group
+      end
+      let(:group7) { ExpandGroup.new(group6).expand_group }
+
+      it "creates a new group from the last two" do
+        expect(group7).to be_a(Group)
+      end
+
+      it "has new group with 24 users" do
+        expect(group7.users_count).to eq(24)
+      end
+
+      it "has a degree of 3" do
+        expect(group7.degree).to eq(3)
+      end
+
+      it "does not create a new group when expanding group 7" do
+        expect(ExpandGroup.new(group7).expand_group).to be_nil
       end
     end
   end
