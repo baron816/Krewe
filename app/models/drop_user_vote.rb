@@ -8,6 +8,7 @@ class DropUserVote < ActiveRecord::Base
 	after_create :kick_user
 
 	scope :user_vote_count, -> (user){ where(user_id: user).count }
+	scope :group_drop_votes_count, -> (group) { where(group_id: group).count }
 
 	def self.voter_vote(voter)
 	  find_by(voter_id: voter)
