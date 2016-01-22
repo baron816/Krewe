@@ -9,7 +9,7 @@ describe Group do
 	let(:group1) { Group.first }
 
 	it	'has 2 user' do
-		expect(group1.users.count).to eq(2)
+		expect(group1.users_count).to eq(2)
 	end
 
 	context "more users" do
@@ -24,17 +24,15 @@ describe Group do
 		  let(:group3) { Group.third }
 
 		it "group has first four users. fifth is out of range" do
-			expect(group1.users.length).to eq(4)
+			expect(group1.users_count).to eq(4)
 		end
 
 		it "second group only has one user" do
-			expect(group2.users.length).to eq(2)
+			expect(group2.users_count).to eq(2)
 		end
 
 		it "third group doesn't find anyone but the original user" do
-			expect(group3.users.length).to eq(1)
+			expect(group3.users_count).to eq(1)
 		end
 	end
-
-
 end
