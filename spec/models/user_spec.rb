@@ -83,18 +83,6 @@ describe User do
       end
     end
 
-    describe "#add_dropped_group" do
-      let(:group) {user.groups.first}
-
-      it "doesn't have any dropped groups" do
-        expect(user.dropped_group_ids).to be_empty
-      end
-
-      it "adding dropped group works" do
-        DropUser.new(group, user).drop
-        expect(user.dropped_group_ids).to include(group.id)
-      end
-    end
 
     describe "#can_vote?" do
       it "user can't vote for itself" do
