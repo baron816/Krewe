@@ -34,22 +34,6 @@ describe User do
     end
     let!(:user3) { create(:user_130) }
 
-    describe "#find_or_create_group" do
-      it "user isn't put in a group it's already in" do
-        FindGroup.new(user).find_or_create
-        expect(user.groups.first).not_to eql(user.groups.second)
-      end
-
-      it "user2 only adds one group" do
-        FindGroup.new(user2).find_or_create
-        expect(user2.groups.count).to eql(2)
-      end
-
-      it "user2's second group is the same as first users group" do
-        expect(user2.groups.second).to eq(user.groups.second)
-      end
-    end
-
     describe "#uniq_friends" do
       it "user has 6 friends" do
         expect(user.unique_friends.count).to eq(5)
