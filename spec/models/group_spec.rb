@@ -34,47 +34,7 @@ describe Group do
 		it "third group doesn't find anyone but the original user" do
 			expect(group3.users.length).to eq(1)
 		end
-
-		context "when group not full" do
-			describe "#drop_user" do
-			  it "correctly removes a user" do
-			  	group1.drop_user(User.first)
-			  	expect(group1.users.count).to eq(3)
-			  end
-
-			  context "description" do
-				  before do
-		  	    create(:user_138)
-		        create(:user_122)
-		        create(:user_130)
-					end
-
-				  it "still adds users to first group" do
-			        expect(group1.users.count).to eql(6)
-				  end
-
-				  it "resets can_join to true" do
-				  	group1.drop_user(User.first)
-				  	expect(group1.can_join).to be true
-				  end
-			  end
-			end
-		end
 	end
 
-	describe "#ripe_for_expansion" do
-		let(:group4) { create(:old_group) }
 
-		it "does not indicate group is ripe for expansion" do
-		  expect(ExpansionCheck.new(group4).ripe_for_expansion?).to eq(false)
-		end
-
-		it "is right for expansion with activities" do
-			4.times do
-				group4.activities << create(:activity_past)
-			end
-
-			expect(ExpansionCheck.new(group4).ripe_for_expansion?).to eq(true)
-		end
-	end
 end
