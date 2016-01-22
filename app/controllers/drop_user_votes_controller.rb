@@ -1,9 +1,10 @@
 class DropUserVotesController < ApplicationController
-	def create
-		group = Group.friendly.find(params[:group_id])
-		user = User.friendly.find(params[:user_id])
+	before_action :set_group
 
-		vote = group.drop_user_votes.new(user: user, voter: current_user)
+	def create
+		@user = User.friendly.find(params[:user_id])
+
+		vote = @group.drop_user_votes.new(user: @user, voter: current_user)
 		authorize! :vote, vote
 		vote.save!
 
@@ -14,12 +15,18 @@ class DropUserVotesController < ApplicationController
 	end
 
 	def destroy
-		vote = DropUserVote.find(params[:id])
+		@vote = DropUserVote.find(params[:id])
+		@user = @vote.user
 
-		vote.destroy!
+		@vote.destroy!
 		respond_to do |format|
-			format.html { redirect_to vote.group }
+			format.html { redirect_to @vote.group }
 			format.js
 		end
+	end
+
+	private
+	def set_group
+	  @group = Group.friendly.find(params[:group_id])
 	end
 end
