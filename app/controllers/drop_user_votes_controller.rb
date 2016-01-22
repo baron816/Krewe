@@ -9,7 +9,7 @@ class DropUserVotesController < ApplicationController
 		vote.save!
 
 		respond_to do |format|
-			format.html { redirect_to group }
+			format.html { redirect_to @group }
 			format.js
 		end
 	end
