@@ -29,7 +29,7 @@ class Group < ActiveRecord::Base
 	scope :ready_groups, -> { where(ready_to_expand: true) }
 
 	def self.search(params)
-		self.open_groups.category_groups(params[:category]).same_age(params[:age_group]).degree_groups(1).near([params[:latitude], params[:longitude]], 0.5).non_former_groups(params[:group_ids])[0]
+		self.open_groups.category_groups(params[:category]).same_age(params[:age_group]).degree_groups(1).near([params[:latitude], params[:longitude]], 0.5).order(created_at: :asc).non_former_groups(params[:group_ids])[0]
 	end
 
 	def check_space(user)

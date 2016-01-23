@@ -28,8 +28,7 @@ describe GroupSpaceCheck do
         expect(group.can_join).to eq(true)
       end
 
-      it "puts new user in group after other group fills up" do
-        create_list(:user_home, 4)
+      it "puts new user in group" do
         new_user = create(:user_home)
         expect(group.users).to include(new_user)
         expect(Group.count).to eq(2)
