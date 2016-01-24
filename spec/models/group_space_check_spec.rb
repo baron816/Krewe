@@ -21,16 +21,16 @@ describe GroupSpaceCheck do
 
     context "after dropping user" do
       before do
-        group.drop_user(group.users.first)
+        DropUser.new(group, group.users.first).drop
       end
 
       it "sets can join to true" do
-        expect(group.can_join).to eq(true)
+        expect(Group.first.can_join).to eq(true)
       end
 
       it "puts new user in group" do
         new_user = create(:user_home)
-        expect(group.users).to include(new_user)
+        expect(Group.first.users).to include(new_user)
         expect(Group.count).to eq(2)
       end
     end

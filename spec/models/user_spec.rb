@@ -84,7 +84,7 @@ describe User do
       end
 
       it "user is under the limit when group dropped" do
-        Group.first.drop_user(user)
+        DropUser.new(Group.first, user).drop
         expect(user.under_group_limit?).to eq(true)
       end
     end

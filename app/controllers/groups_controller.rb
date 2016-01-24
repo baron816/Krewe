@@ -11,7 +11,7 @@ class GroupsController < ApplicationController
 		@group = Group.friendly.find(params[:id])
 		authorize! :read, @group
 
-		@group.drop_user(current_user)
+		DropUser.new(@group, current_user).drop
 		redirect_to root_path
 	end
 end

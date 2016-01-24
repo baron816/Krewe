@@ -7,7 +7,7 @@ class Api::V1::GroupsController < ApiController
   end
 
   def drop_user
-    @group.drop_user(current_user)
+    DropUser.new(@group, current_user).drop
     head 204
   end
 

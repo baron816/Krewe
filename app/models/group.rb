@@ -36,10 +36,6 @@ class Group < ActiveRecord::Base
 		GroupSpaceCheck.new(self, user).check_space
 	end
 
-	def drop_user(user)
-		DropUser.new(self, user).drop
-	end
-
 	def city
 	  users.first.city
 	end
