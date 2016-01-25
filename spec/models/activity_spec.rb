@@ -11,8 +11,8 @@ describe Activity do
     expect(activity).to be_an(Activity)
   end
 
-  it "doesn't have any users" do
-    expect(activity.users.size).to eq(0)
+  it "proposer is a user" do
+    expect(activity.users).to include(user1)
   end
 
   it "is not well attended" do
@@ -21,12 +21,12 @@ describe Activity do
 
   describe "#user_going?" do
     it "@user is not going" do
-      expect(activity.user_going?(user1)).to eq(false)
+      expect(activity.user_going?(user2)).to eq(false)
     end
 
-    it "@user is going when its going" do
-      activity.users << user1
-      expect(activity.user_going?(user1)).to eq(true)
+    it "user2 is going when its going" do
+      activity.users << user2
+      expect(activity.user_going?(user2)).to eq(true)
     end
   end
 
@@ -53,7 +53,7 @@ describe Activity do
 
   describe "#check_attendance" do
     before do
-      activity.users << [user1, user2]
+      activity.users << user2
     end
 
     it "has users" do
@@ -76,10 +76,10 @@ describe Activity do
   end
 
   describe "#attended_activities" do
-    let(:activity2) { create(:activity_past, group: Group.first) }
+    let(:activity2) { create(:activity_past, group: Group.first, proposer: user1) }
 
     before do
-      activity2.users << [user1, user2]
+      activity2.users << user2
     end
 
     it "does not have any had_attended_activities" do
