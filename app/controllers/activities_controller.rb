@@ -7,7 +7,6 @@ class ActivitiesController < ApplicationController
 		@activity = @group.activities.new(activity_params)
 
 		if @activity.save
-			@activity.users << @activity.proposer
 			redirect_to activity_path(@activity)
 		else
 			render :new

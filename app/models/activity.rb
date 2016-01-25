@@ -8,6 +8,7 @@ class Activity < ActiveRecord::Base
 
 	reverse_geocoded_by :latitude, :longitude
 
+	before_create :add_proposer_to_users
 	after_create { ActivityNotification.new(self).send_notifications }
 	after_update { ActivityNotification.new(self, "ActivityUpdate").send_notifications }
 
@@ -45,5 +46,10 @@ class Activity < ActiveRecord::Base
 
 	def proposed_by?(user)
 		proposer == user
+	end
+
+	private
+	def add_proposer_to_users
+	  users << proposer
 	end
 end
