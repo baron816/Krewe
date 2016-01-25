@@ -3,13 +3,14 @@ require 'rails_helper'
 describe ExpansionCheck do
   let(:group) { create(:old_group) }
 
+
   describe "#ripe_for_expansion" do
     it "does not indicate group is ripe for expansion" do
       expect(ExpansionCheck.new(group).ripe_for_expansion?).to eq(false)
     end
 
     it "is ripe for expansion with activities" do
-      group.activities << create_list(:activity_past, 4)
+      create_list(:activity_past, 4, :well_attended, group: group)
 
       expect(ExpansionCheck.new(group).ripe_for_expansion?).to eq(true)
     end
@@ -17,7 +18,7 @@ describe ExpansionCheck do
 
   describe "#ripe_and_voted?" do
     before do
-      group.activities << create_list(:activity_past, 4)
+      create_list(:activity_past, 4, :well_attended, group: group)
       group.users << create_list(:user_home, 6)
     end
 
