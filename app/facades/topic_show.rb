@@ -10,7 +10,6 @@ class TopicShow
 
   delegate :any?, to: :messages, prefix: true
   delegate :name, :group, :id, to: :this_topic
-  delegate :count, to: :found_messages, prefix: true
   delegate :next_page, to: :messages
 
   def messages
