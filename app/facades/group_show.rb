@@ -56,10 +56,6 @@ class GroupShow
 	  group.degree == 1
 	end
 
-  def names_data
-    MentionName.new(group, user).names_data
-  end
-
   def delete_confirm_message
     if one_user?
       {confirm: "People who fit your criteria will join your group automatically when they sign up for Krewe", text: "You will need to change your settings if you want to be in a different type of group", 'confirm-button-text': "I Want a Different Group Type"}
