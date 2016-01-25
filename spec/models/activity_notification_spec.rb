@@ -6,7 +6,7 @@ describe ActivityNotification do
   let!(:user3) { create(:user_121) }
   let!(:group) { Group.first }
 
-  let!(:activity) { Activity.create(group_id: Group.first.id, proposer_id: user1.id, appointment: (Time.now + 1.week), plan: "do stuff", location: "Seaport" ) }
+  let!(:activity) { create(:activity_future, group: group, proposer: user1) }
 
   describe "#send_notifications" do
     context "propose activity" do
