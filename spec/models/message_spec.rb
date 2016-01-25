@@ -9,8 +9,8 @@ describe "Message" do
   end
 
   context "topic message" do
-    let!(:topic) { Topic.first }
-    let!(:message) { Message.create(messageable: topic, poster: user, content: Faker::Lorem.sentence(5, true, 8)) }
+    let(:topic) { Topic.first }
+    let(:message) { create(:message, poster: user, messageable: topic) }
 
     it "has string content" do
       expect(message.content).to be_a(String)
@@ -26,7 +26,7 @@ describe "Message" do
   end
 
   context "personal message" do
-    let!(:message2) { Message.create(messageable: user2, poster: user, content: Faker::Lorem.sentence(5, true, 8)) }
+    let!(:message2) { create(:message, poster: user, messageable: user2) }
 
     it "messageable is user" do
       expect(message2.messageable).to be_a(User)
@@ -34,6 +34,15 @@ describe "Message" do
 
     it "personal_messages has one message" do
       expect(Message.personal_messages(user, user2).count).to eq(1)
+    end
+  end
+
+  context 'activity message' do
+    let(:activity) { create(:activity_future, group: Group.first) }
+    let(:message3) { create(:message, poster: user, messageable: activity)}
+
+    it "makes messageable an activity" do
+      expect(message3.messageable).to be_an(Activity)
     end
   end
 end

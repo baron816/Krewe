@@ -24,7 +24,7 @@ describe "Notification" do
 
   	context "group message" do
 		before do
-		  Message.create(messageable: Topic.first, poster: user, content: Faker::Lorem.sentence(5, true, 8))
+			create(:message, messageable: Topic.first, poster: user)
 		end
 
 	  	it "new message creates notifications" do
@@ -51,7 +51,7 @@ describe "Notification" do
 
   	context "personal message" do
   		before do
-  			Message.create(messageable: User.second, poster: user, content: Faker::Lorem.sentence(5, true, 8))
+				create(:message, poster: user, messageable: User.second)
   		end
 
 	  	it "new personal message creates notification" do
@@ -76,7 +76,7 @@ describe "Notification" do
 
 	  	describe "dismiss_notifications" do
 	  	  before do
-	  	    Message.create(messageable: User.second, poster: user3, content: Faker::Lorem.sentence(5, true, 8))
+					create(:message, messageable: User.second, poster: user3)
 	  	  end
 
 	  	  it "user2 can dismiss user's notification without dismissing user3's" do
@@ -87,7 +87,7 @@ describe "Notification" do
   	end
 
   	context "activity" do
-  		let!(:activity) { Activity.create(group_id: group.id, plan: "go somewhere", appointment: Time.now, proposer_id: user.id, location: "World Trade Center") }
+  		let!(:activity) { create(:activity_future, group: group) }
 
   		it "creates a activity notifications" do
   			expect(user2.unviewed_category_notifications("Activity").count).to eql(1)
@@ -111,7 +111,7 @@ describe "Notification" do
 			context "activity message" do
 				before do
 				  activity.users << [user, user2, user3]
-					activity.messages.create!(poster: user, content: Faker::Lorem.sentence(5, true, 8))
+					create(:message, poster: user, messageable: activity)
 				end
 
 				it "does not send a notification to user" do
@@ -123,6 +123,4 @@ describe "Notification" do
 				end
 			end
   	end
-
-
 end
