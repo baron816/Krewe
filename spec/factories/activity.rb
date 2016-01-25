@@ -14,7 +14,10 @@ FactoryGirl.define do
 		factory :activity_past do
 			association :proposer, factory: :user_home
 			appointment { Faker::Time.between(DateTime.now - 1.month, DateTime.now)}
-			well_attended true
+
+			trait :well_attended do
+				well_attended true
+			end 
 		end
 	end
 end
