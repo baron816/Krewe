@@ -31,6 +31,6 @@ class ActivityShow
   end
 
   def dismiss_notifications
-    user.dismiss_activity_notification(@activity)
+    user.dismiss_activity_notification(activity)
   end
 end
