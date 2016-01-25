@@ -5,7 +5,7 @@ describe Activity do
 	let!(:user2) { create(:user_wtc) }
   let!(:user3) { create(:user_121) }
 
-  let!(:activity) { Activity.create(group_id: Group.first.id, proposer_id: user1.id, appointment: (Time.now + 1.week), plan: "do stuff", location: "Seaport" ) }
+  let!(:activity) { create(:activity_future, group: Group.first, proposer: user1) }
 
   it "created activity" do
     expect(activity).to be_an(Activity)
@@ -46,8 +46,8 @@ describe Activity do
     end
 
     it "does not include a user not in the group" do
-      @user4 = create(:user_stucco)
-      expect(activity.group_users_include?(@user4)).to eq(false)
+      user4 = create(:user_stucco)
+      expect(activity.group_users_include?(user4)).to eq(false)
     end
   end
 
@@ -76,7 +76,7 @@ describe Activity do
   end
 
   describe "#attended_activities" do
-    let(:activity2) { Activity.create(group_id: Group.first.id, proposer_id: user1.id, appointment: (Time.now - 1.week), plan: "do things", location: "Seaport" ) }
+    let(:activity2) { create(:activity_past, group: Group.first) }
 
     before do
       activity2.users << [user1, user2]
