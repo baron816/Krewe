@@ -45,7 +45,7 @@
 				<% @group_show.users.each do |user| %>
 					<li class="collection-item avatar">
 						<%= image_tag avatar_url(user), class: "circle" %>
-						<span class="title"><%= link_to user.name, public_profile_user_path(user) %></span>
+						<span class="title"><%= link_to user.name, personal_messages_user_path(user) %></span>
 
 						 <% if @group_show.primary_group? %>
 							 	<% if current_user.can_vote?(user) %>

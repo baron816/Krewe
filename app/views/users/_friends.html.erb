@@ -1,6 +1,6 @@
 <div class="collection">
   <% friends.each do |friend| %>
-      <%= link_to public_profile_user_path(friend), class: "collection-item" do %> <%= friend.name %> <span class='badge'><%= current_user.unviewed_personal_notifications_from_user_count(friend) %></span>
+      <%= link_to personal_messages_user_path(friend), class: "collection-item" do %> <%= friend.name %> <span class='badge'><%= current_user.unviewed_personal_notifications_from_user_count(friend) %></span>
       <% end %>
   <% end %>
 </div>

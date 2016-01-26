@@ -8,7 +8,7 @@ class AccessPolicy
       can :read, Activity
       can :update, Activity
       can :post, Message
-      can :public_profile, User
+      can :personal_messages, User
       can :vote, DropUserVote
       can :vote, ExpandGroupVote
       can :create, Topic
@@ -32,7 +32,7 @@ class AccessPolicy
         activity.proposed_by?(user)
       end
 
-      can :public_profile, User do |user, current_user|
+      can :personal_messages, User do |user, current_user|
         current_user.unique_friends_include?(user) || user == current_user
       end
 

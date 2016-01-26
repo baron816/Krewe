@@ -51,13 +51,13 @@ RSpec.describe Api::V1::UsersController, type: :controller do
     end
   end
 
-  describe "GET #public_profile" do
+  describe "GET #personal_messages" do
     before do
       @user = create(:user_home)
       api_authorization_header(@user.auth_token)
       @user2 = create(:user_wtc)
       @message = Message.create(poster: @user, messageable: @user2, content: "hello there")
-      get :public_profile, id: @user2.id, format: :json
+      get :personal_messages, id: @user2.id, format: :json
     end
 
     it "renders the messages" do

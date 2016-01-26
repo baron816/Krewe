@@ -3,7 +3,7 @@
 <% end %>
 
 <% current_user.poster_sorted_category_notifications("UserMessage").each do |name, notifications| %>
-  <li class="collection-item"><%= link_to "#{name} sent you a message (#{notifications.count})", public_profile_user_path(notifications.first.poster) %></li>
+  <li class="collection-item"><%= link_to "#{name} sent you a message (#{notifications.count})", personal_messages_user_path(notifications.first.poster) %></li>
 <% end %>
 
 <% current_user.unviewed_category_notifications("Join").each do |notification| %>

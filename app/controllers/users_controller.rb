@@ -8,10 +8,10 @@ class UsersController < ApplicationController
 		authorize! :read, @user_show
 	end
 
-	def public_profile
+	def personal_messages
 		@user = User.friendly.find(params[:id])
-		authorize! :public_profile, @user
-		@user = UserPublicProfile.new(@user, current_user, params[:page])
+		authorize! :personal_messages, @user
+		@user = UserPersonalMessageShow.new(@user, current_user, params[:page])
 	end
 
 	def edit

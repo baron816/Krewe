@@ -6,7 +6,7 @@
 	</div>
 
 	<% unless @user.own_profile? %>
-		<%= render partial: 'messages/messages', locals: { messages: @user.personal_messages, messageable: @user.user, new_message: @user.new_message} %>
+		<%= render partial: 'messages/messages', locals: { messages: @user.messages, messageable: @user.user, new_message: @user.new_message} %>
 <% end %>
 
 </div>

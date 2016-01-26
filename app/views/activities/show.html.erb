@@ -22,7 +22,7 @@
 		<h3>People going</h3>
 			<ul class="collection">
 			<% @activity_show.users.each do |user| %>
-				<%= link_to user.name, public_profile_user_path(user), class: "collection-item" %>
+				<%= link_to user.name, personal_messages_user_path(user), class: "collection-item" %>
 			<% end %>
 			</ul>
 	</div>

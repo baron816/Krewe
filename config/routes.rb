@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :users, except: [:index] do
     resources :messages, only: :create
     member do
-      get 'public_profile'
+      get 'personal_messages'
       post 'join_group'
     end
   end
@@ -49,7 +49,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users, only: [:show, :update, :create] do
         member do
-          get 'public_profile'
+          get 'personal_messages'
           post 'add_group'
         end
       end

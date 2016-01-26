@@ -22,18 +22,18 @@ describe UsersController do
     end
   end
 
-  describe "GET #public_profile" do
+  describe "GET #personal_messages" do
     let!(:message) {  Message.create(poster: user, messageable: user2, content: "The message content") }
     before do
-      get :public_profile, id: user2.id
+      get :personal_messages, id: user2.id
     end
 
-    it "renders public_profile template" do
-    	expect(response).to render_template(:public_profile)
+    it "renders personal_messages template" do
+    	expect(response).to render_template(:personal_messages)
     end
 
     it "returns the personal messages" do
-    	expect(assigns[:user].personal_messages).to include(message)
+    	expect(assigns[:user].messages).to include(message)
     end
   end
 

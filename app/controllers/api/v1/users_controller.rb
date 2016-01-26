@@ -1,5 +1,5 @@
 class Api::V1::UsersController < ApiController
-  before_action :set_user, only: [:public_profile, :update, :add_group, :show]
+  before_action :set_user, only: [:personal_messages, :update, :add_group, :show]
   respond_to :json
 
   def show
@@ -15,7 +15,7 @@ class Api::V1::UsersController < ApiController
     end
   end
 
-  def public_profile
+  def personal_messages
     render json: { messages: Message.personal_messages(@user, current_user) }
   end
 

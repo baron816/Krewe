@@ -1,4 +1,4 @@
-class UserPublicProfile
+class UserPersonalMessageShow
   attr_reader :user, :current_user, :page
   def initialize(user, current_user, page)
     @user = user
@@ -10,8 +10,8 @@ class UserPublicProfile
   delegate :any?, :count, to: :personal_messages, prefix: true
   delegate :next_page, to: :personal_messages
 
-  def personal_messages
-    @personal_messages ||= Message.personal_messages(user, current_user).page(page).per(per_page)
+  def messages
+    @messages ||= Message.personal_messages(user, current_user).page(page).per(per_page)
   end
 
   def new_message
