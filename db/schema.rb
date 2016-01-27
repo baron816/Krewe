@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160127151118) do
+ActiveRecord::Schema.define(version: 20160127163247) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,14 +34,6 @@ ActiveRecord::Schema.define(version: 20160127151118) do
   add_index "activities", ["group_id"], name: "index_activities_on_group_id", using: :btree
   add_index "activities", ["proposer_id"], name: "index_activities_on_proposer_id", using: :btree
   add_index "activities", ["well_attended"], name: "index_activities_on_well_attended", using: :btree
-
-  create_table "beta_codes", force: :cascade do |t|
-    t.string  "auth_token"
-    t.string  "email"
-    t.boolean "used",       default: false
-  end
-
-  add_index "beta_codes", ["auth_token"], name: "index_beta_codes_on_auth_token", using: :btree
 
   create_table "drop_user_votes", force: :cascade do |t|
     t.integer  "user_id"
