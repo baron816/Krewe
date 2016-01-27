@@ -19,10 +19,6 @@ describe HomeController do
         get :landing
       end
 
-      it "makes a new beta code" do
-        expect(assigns[:beta_code]).to be_a_new(BetaCode)
-      end
-
       it "renders the template" do
         expect(response).to render_template(:landing)
       end

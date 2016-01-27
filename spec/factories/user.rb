@@ -1,9 +1,8 @@
 FactoryGirl.define do
 	factory :user do
 		age_group "65+"
-		password = '12ab34CD'
-		sequence(:password) { password }
-		sequence(:password_confirmation) { password }
+		after(:create) { |user| user.send(:find_group) }
+		sign_up_complete true
 
 		factory :baron do
 			category "Blue Collar"
@@ -21,8 +20,8 @@ FactoryGirl.define do
 
 		factory :professionals do
 			category 'Professional'
-			sequence(:name) { Faker::Name.name }
-			sequence(:email) { Faker::Internet.email }
+			name { Faker::Name.name }
+			email { Faker::Internet.email }
 
 			factory :user_home do
 				address "135 William Street, New York, NY"

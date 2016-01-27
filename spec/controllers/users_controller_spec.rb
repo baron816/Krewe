@@ -61,28 +61,15 @@ describe UsersController do
     end
   end
 
-  describe "POST #create" do
-    let!(:code) { BetaCode.create(email: user.email).auth_token }
-    let!(:user_attributes) { attributes_for(:user_121) }
-
-    it "creates a user" do
-    	expect { post :create, user: user_attributes, code: code }.to change(User, :count).by(1)
-    end
-
-    it "redirects to user" do
-    	post :create, user: user_attributes, code: code
-    	expect(response).to redirect_to root_path
-    end
-  end
 
   describe "GET #new" do
+    let(:user) { create(:user_home) }
     before do
-      code = BetaCode.create(email: user.email).auth_token
-      get :new, { code: code }
+      get :new
     end
 
     it "makes a new user" do
-    	expect(assigns[:user]).to be_a_new(User)
+    	expect(assigns[:user]).to eq(user)
     end
 
     it "renders new template" do
