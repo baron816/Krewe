@@ -79,7 +79,7 @@ describe HomeController do
     end
 
     context "admin logged in" do
-      let(:user) { create(:baron_admin)}
+      let(:user) { create(:baron, :admin)}
       before do
         log_in(user)
         get :admin_dash
