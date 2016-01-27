@@ -3,6 +3,12 @@ FactoryGirl.define do
 		age_group "65+"
 		after(:create) { |user| user.send(:find_group) }
 		sign_up_complete true
+		uid '12345'
+		provider 'facebook'
+
+		trait :admin do
+			is_admin true
+		end
 
 		factory :baron do
 			category "Blue Collar"
@@ -11,10 +17,6 @@ FactoryGirl.define do
 			address "135 William Street, New York, NY"
 			longitude -74.00671419999999
 			latitude 40.7094706
-
-			factory :baron_admin do
-				is_admin true
-			end
 		end
 
 
