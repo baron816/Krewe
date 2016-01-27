@@ -1,12 +1,10 @@
 class UsersController < ApplicationController
 	before_action :set_user, only: [:edit, :update, :join_group, :destroy, :new]
-	before_action :authorize_read, only: [:update, :edit, :destroy]
 
 	def show
 		@user_show = current_user
 		return redirect_to get_started_path unless current_user
 		return redirect_to new_user_path unless current_user.sign_up_complete?
-		authorize! :read, @user_show
 	end
 
 	def personal_messages
@@ -53,10 +51,6 @@ class UsersController < ApplicationController
 	private
 	def set_user
 		@user = current_user
-	end
-
-	def authorize_read
-	  authorize! :read, @user
 	end
 
 	def user_params
