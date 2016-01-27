@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
 
 	def create
 		auth = request.env["omniauth.auth"]
-		user = User.where(provider: auth["provider"], uid: auth["uid"]).first
+		user = User.find_by(provider: auth[:provider], uid: auth[:uid])
 
 		if user
 			log_in(user)
