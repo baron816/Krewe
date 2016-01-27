@@ -32,6 +32,7 @@ gem 'access-granted'
 gem 'meta-tags'
 gem 'rack-attack'
 gem 'sanitize'
+gem 'omniauth-facebook'
 
 gem 'jquery-rails'
 gem 'jquery-turbolinks'
