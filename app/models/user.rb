@@ -4,14 +4,9 @@ class User < ActiveRecord::Base
 	include Tokenable
 	friendly_id :slug_candidates, use: :slugged
 
-	validates :name, presence: true, length: { minimum: 3, maximum: 50 }
-	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-	validates :email, presence: true, length: { maximum: 255}, format: { with: VALID_EMAIL_REGEX }, uniqueness: true
-	validates_presence_of :longitude, :latitude, :address, :category, :age_group
+	validates :longitude, :latitude, :address, :category, :age_group, presence: true, on: :update
 	validates :terms_of_service, acceptance: true
-	validate :multiple_words?, :password_complexity
 
-	has_secure_password
 	has_many :user_groups
 	has_many :groups, through: :user_groups
 	has_many :posted_messages, class_name: "Message", foreign_key: "poster_id", dependent: :destroy
@@ -26,9 +21,9 @@ class User < ActiveRecord::Base
 	has_many :expand_group_votes, foreign_key: "voter_id", dependent: :destroy
 	has_many :posted_notifications, class_name: "Notification", foreign_key: "poster_id", dependent: :destroy
 
-	after_create { FindGroup.new(self).find_or_create }
+	after_update { find_group if sign_up_complete_changed? }
+	before_update { self.sign_up_complete = true unless sign_up_complete? }
 	before_create { generate_token(:auth_token) }
-	before_save :downcase_email, :sanitize_fields
 
 	after_validation :geocode
 	reverse_geocoded_by :latitude, :longitude
@@ -41,6 +36,16 @@ class User < ActiveRecord::Base
 	delegate :include?, :count, to: :unique_friends, prefix: true
 
 	scope :users_by_slug, -> (slugs) { where(slug: slugs)  }
+
+	def self.create_with_omniauth(auth)
+		create! do |user|
+			user.provider = auth.provider
+			user.uid = auth.uid
+			user.name = auth.info.name
+			user.email = auth.info.email
+			user.photo_url = auth.info.image
+		end
+	end
 
 	def unique_friends
 		@unique_friends ||= friends.where.not(id: self).uniq
@@ -66,22 +71,7 @@ class User < ActiveRecord::Base
 	   notification_settings[type].nil? || notification_settings[type].to_bool
 	end
 
-	private
-	def sanitize_fields
-	  self.name = Sanitize.fragment(name)
-	end
-
-	def multiple_words?
-	  unless name.split.count > 1
-			errors.add(:name, "must include at first and last")
-		end
-	end
-
-	def downcase_email
-		self.email = email.downcase
-	end
-
-	def password_complexity
-		CheckPasswordComplexityService.new(password, errors).password_errors if password
+	def find_group
+	  FindGroup.new(self).find_or_create
 	end
 end
