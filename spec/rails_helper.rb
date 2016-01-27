@@ -61,3 +61,10 @@ RSpec.configure do |config|
   config.include Request::HeadersHelpers, type: :controller
   config.include SessionsHelper
 end
+
+OmniAuth.config.test_mode = true
+OmniAuth.config.add_mock(:facebook, {
+  provider: 'facebook',
+  uid: '12345',
+  info: { email: 'some-email@mail.com', name: 'Some Dude' }
+})
