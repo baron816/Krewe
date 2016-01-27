@@ -9,5 +9,9 @@ module Request
     def api_authorization_header(token)
       request.headers['Authorization'] = token
     end
+
+    def omniauth_headers(user)
+      request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:facebook]
+    end
   end
 end
