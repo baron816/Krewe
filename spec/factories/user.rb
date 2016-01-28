@@ -1,9 +1,14 @@
 FactoryGirl.define do
 	factory :user do
 		age_group "65+"
-		password = '12ab34CD'
-		sequence(:password) { password }
-		sequence(:password_confirmation) { password }
+		after(:create) { |user| user.send(:find_group) }
+		sign_up_complete true
+		uid '12345'
+		provider 'facebook'
+
+		trait :admin do
+			is_admin true
+		end
 
 		factory :baron do
 			category "Blue Collar"
@@ -12,17 +17,13 @@ FactoryGirl.define do
 			address "135 William Street, New York, NY"
 			longitude -74.00671419999999
 			latitude 40.7094706
-
-			factory :baron_admin do
-				is_admin true
-			end
 		end
 
 
 		factory :professionals do
 			category 'Professional'
-			sequence(:name) { Faker::Name.name }
-			sequence(:email) { Faker::Internet.email }
+			name { Faker::Name.name }
+			email { Faker::Internet.email }
 
 			factory :user_home do
 				address "135 William Street, New York, NY"

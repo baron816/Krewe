@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :users, except: [:index] do
+  resources :users, except: [:index, :create] do
     resources :messages, only: :create
     member do
       get 'personal_messages'
@@ -24,17 +24,13 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'login' => 'sessions#new'
-  post 'login' => 'sessions#create'
+  get 'auth/:provider/callback', to: 'sessions#create'
+  get 'auth/failure', to: redirect('/get_started')
   delete 'logout' => 'sessions#destroy'
-
 
   resources :password_resets, except: [:get, :destroy]
   resources :newsletters, only: [:new, :create]
   resources :surveys, only: [:new, :create]
-
-  get "beta_signup" => "beta_codes#new"
-  post "beta_signup" => "beta_codes#create"
 
   get "get_started" => "home#landing"
   get "admin_dash" => "home#admin_dash"
@@ -45,28 +41,28 @@ Rails.application.routes.draw do
   root 'users#show'
   get "*any", via: :all, to: "errors#not_found"
 
-  namespace :api do
-    namespace :v1 do
-      resources :users, only: [:show, :update, :create] do
-        member do
-          get 'personal_messages'
-          post 'add_group'
-        end
-      end
-
-      resources :groups, only: :show do
-        delete 'drop_user', on: :member
-        resources :activities, only: [:create, :update, :show] do
-          member do
-            post 'add_user'
-            delete 'remove_user'
-          end
-        end
-      end
-
-
-      resources :messages, only: :create
-      resources :sessions, only: [:create, :destroy]
-    end
-  end
+  # namespace :api do
+  #   namespace :v1 do
+  #     resources :users, only: [:show, :update, :create] do
+  #       member do
+  #         get 'personal_messages'
+  #         post 'add_group'
+  #       end
+  #     end
+  #
+  #     resources :groups, only: :show do
+  #       delete 'drop_user', on: :member
+  #       resources :activities, only: [:create, :update, :show] do
+  #         member do
+  #           post 'add_user'
+  #           delete 'remove_user'
+  #         end
+  #       end
+  #     end
+  #
+  #
+  #     resources :messages, only: :create
+  #     resources :sessions, only: [:create, :destroy]
+  #   end
+  # end
 end

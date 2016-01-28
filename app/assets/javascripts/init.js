@@ -19,7 +19,7 @@ $(document).ready(function(){
     new Activity().activitySetup();
   }
 
-  if ($('.users.edit').length || $('.users.new').length) {
+  if ($('.users.edit').length || $('#user_address').length) {
     initAutoComplete();
   }
 

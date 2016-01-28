@@ -1,20 +1,16 @@
 class SessionsController < ApplicationController
-	def new
-		respond_to do |format|
-		  format.html
-		  format.js
-		end
-	end
 
 	def create
-		@user = User.find_by(email: user_params[:email].downcase).try(:authenticate, user_params[:password])
+		auth = request.env["omniauth.auth"]
+		user = User.find_by(provider: auth[:provider], uid: auth[:uid])
 
-		if @user
-			log_in(@user, { remember_me: user_params[:remember_me] } )
-			redirect_to root_path
+		if user
+			log_in(user)
+			redirect_to(root_path)
 		else
-			flash[:error] = "Email or Password not found"
-			render :new
+			user = User.create_with_omniauth(auth)
+			log_in(user)
+			redirect_to(new_user_path)
 		end
 	end
 

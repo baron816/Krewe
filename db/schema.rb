@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160107201818) do
+ActiveRecord::Schema.define(version: 20160127163247) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,14 +34,6 @@ ActiveRecord::Schema.define(version: 20160107201818) do
   add_index "activities", ["group_id"], name: "index_activities_on_group_id", using: :btree
   add_index "activities", ["proposer_id"], name: "index_activities_on_proposer_id", using: :btree
   add_index "activities", ["well_attended"], name: "index_activities_on_well_attended", using: :btree
-
-  create_table "beta_codes", force: :cascade do |t|
-    t.string  "auth_token"
-    t.string  "email"
-    t.boolean "used",       default: false
-  end
-
-  add_index "beta_codes", ["auth_token"], name: "index_beta_codes_on_auth_token", using: :btree
 
   create_table "drop_user_votes", force: :cascade do |t|
     t.integer  "user_id"
@@ -167,27 +159,25 @@ ActiveRecord::Schema.define(version: 20160107201818) do
   add_index "user_groups", ["user_id"], name: "index_user_groups_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "name",                                              null: false
-    t.string   "password_digest",                                   null: false
-    t.string   "email",                                             null: false
-    t.string   "category",               default: "Doesn't Matter", null: false
+    t.string   "name",                                             null: false
+    t.string   "email",                                            null: false
+    t.string   "category",              default: "Doesn't Matter"
     t.float    "latitude"
     t.float    "longitude"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "sign_in_count",          default: 0
-    t.datetime "last_sign_in_at"
-    t.inet     "last_sign_in_ip"
     t.string   "auth_token"
-    t.integer  "dropped_group_ids",      default: [],                            array: true
-    t.string   "password_reset_token"
-    t.datetime "password_reset_sent_at"
-    t.integer  "group_limit",            default: 1
+    t.integer  "dropped_group_ids",     default: [],                            array: true
+    t.integer  "group_limit",           default: 1
     t.string   "slug"
     t.string   "address"
     t.string   "age_group"
-    t.boolean  "is_admin",               default: false
-    t.hstore   "notification_settings",  default: {}
+    t.hstore   "notification_settings", default: {}
+    t.string   "provider"
+    t.string   "uid"
+    t.boolean  "sign_up_complete",      default: false
+    t.string   "photo_url"
+    t.boolean  "is_admin",              default: false
   end
 
   add_index "users", ["slug"], name: "index_users_on_slug", using: :btree

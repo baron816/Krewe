@@ -19,10 +19,6 @@ describe HomeController do
         get :landing
       end
 
-      it "makes a new beta code" do
-        expect(assigns[:beta_code]).to be_a_new(BetaCode)
-      end
-
       it "renders the template" do
         expect(response).to render_template(:landing)
       end
@@ -83,7 +79,7 @@ describe HomeController do
     end
 
     context "admin logged in" do
-      let(:user) { create(:baron_admin)}
+      let(:user) { create(:baron, :admin)}
       before do
         log_in(user)
         get :admin_dash

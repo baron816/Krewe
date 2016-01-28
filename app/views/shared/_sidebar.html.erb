@@ -38,11 +38,9 @@
       <li><%= link_to "Messages #{@activity_show.note_count}", activity_messages_path(@activity_show.activity), class: 'white-text' %></li>
     <% end %>
 
-  <li><%= link_to 'Log Out', logout_path, class: 'white-text', method: :delete %></li>
-
+    <li><%= link_to 'Log Out', logout_path, class: 'white-text', method: :delete %></li>
   <% else %>
-    <%= link_to "Log In", login_path, class: 'white-text' %>
-    <%= link_to "Sign Up For Beta", beta_signup_path, class: 'white-text' %>
+    <%= link_to "Sign Up With Facebook", '/auth/facebook' class: "white-text" %>
   <% end %>
 </ul>
 

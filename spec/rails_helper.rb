@@ -61,3 +61,5 @@ RSpec.configure do |config|
   config.include Request::HeadersHelpers, type: :controller
   config.include SessionsHelper
 end
+
+OmniAuth.config.test_mode = true
