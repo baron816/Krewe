@@ -19,7 +19,7 @@
 				<% end %>
 				<li> <%=  link_to 'Log Out', logout_path, method: :delete %></li>
 			<% else %>
-				<li><%= link_to "Log In", '/auth/facebook' %></li>
+				<li><%= link_to "Log In", '/auth/facebook', class: "omniauth" %></li>
 			<% end %>
 
 			<li><%= link_to "<i class='material-icons'>help</i>".html_safe, faq_path %></li>
