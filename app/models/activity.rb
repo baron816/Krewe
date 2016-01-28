@@ -3,7 +3,7 @@ class Activity < ActiveRecord::Base
 	belongs_to :proposer, class_name: "User"
 	has_many :user_activities
 	has_many :users, through: :user_activities, after_add: :check_attendance, after_remove: :check_attendance
-	has_many :notifications, as: :notifiable
+	has_many :notifications, as: :notifiable, dependent: :destroy
 	has_many :messages, as: :messageable
 
 	reverse_geocoded_by :latitude, :longitude
