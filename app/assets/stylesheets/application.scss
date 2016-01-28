@@ -50,7 +50,7 @@ a, time, button, input[type=text], label, .error-messages, .new-message, #people
 }
 
 .messages, .topics {
-	overflow: auto;
+	overflow: scroll;
 }
 
 .topics {
@@ -81,7 +81,7 @@ a, time, button, input[type=text], label, .error-messages, .new-message, #people
 }
 
 .pac-container {
-  z-index: 10000 !important;
+  z-index: 1050 !important;
 }
 
 .tabs .tab a {
