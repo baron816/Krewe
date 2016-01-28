@@ -28,7 +28,6 @@ Rails.application.routes.draw do
   get 'auth/failure', to: redirect('/get_started')
   delete 'logout' => 'sessions#destroy'
 
-  resources :password_resets, except: [:get, :destroy]
   resources :newsletters, only: [:new, :create]
   resources :surveys, only: [:new, :create]
 
