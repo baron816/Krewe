@@ -18,9 +18,4 @@ class SessionsController < ApplicationController
 		log_out
 		redirect_to get_started_path
 	end
-
-	private
-	def user_params
-		params.require(:session).permit(:email, :password, :remember_me)
-	end
 end
