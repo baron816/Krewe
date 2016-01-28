@@ -20,11 +20,7 @@
   <%= render 'shared/nav' unless request.user_agent.try(:include?, "AppDeck") %>
   <%= render 'shared/sidebar' %>
 
-  <main>
-    <%= yield %>
-  </main>
-
-  <%= render 'shared/footer' %>
+  <%= yield %>
 
 </body>
 </html>
