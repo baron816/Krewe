@@ -3,9 +3,9 @@
 <ul id="nav-mobile" class="side-nav blue">
   <li><a href="/"><%= image_tag 'krewe.png', id: 'logo' %></a></li>
 
-  <% if current_user %>
-    <li><%= link_to "Home", root_path, class: 'white-text' %></li>
+  <li><%= link_to "Home", root_path, class: 'white-text' %></li>
 
+  <% if current_user %>
     <% if current_user.try(:show_notifications_positive?) %>
       <li><a href="#notifications" class="modal-trigger white-text">Notifications (<%= current_user.show_notifications_count %>)</a></li>
     <% end %>
@@ -41,6 +41,7 @@
     <li><%= link_to 'Log Out', logout_path, class: 'white-text', method: :delete %></li>
   <% else %>
     <%= link_to "Sign Up With Facebook", '/auth/facebook', class: "white-text omniauth" %>
+    <li><%= link_to "FAQ", faq_path, class: 'white-text' %></li>
   <% end %>
 </ul>
 
