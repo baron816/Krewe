@@ -1,7 +1,7 @@
 class Message < ActiveRecord::Base
 	belongs_to :poster, class_name: "User"
 	belongs_to :messageable, polymorphic: true, touch: true
-	has_many :notifications, as: :notifiable
+	has_many :notifications, as: :notifiable, dependent: :destroy
 
 	delegate :name, to: :poster, prefix: true
 	delegate :users, :group, :unique_friends_include?, to: :messageable, prefix: true

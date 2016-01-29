@@ -6,11 +6,11 @@ class Group < ActiveRecord::Base
 	has_many :user_groups
 	has_many :users, through: :user_groups, after_add: [:check_space, :join_notification], after_remove: :check_space
 	has_many :messages, as: :messageable
-	has_many :topics
-	has_many :notifications, as: :notifiable
-	has_many :activities
-	has_many :drop_user_votes
-	has_many :expand_group_votes
+	has_many :topics, dependent: :destroy
+	has_many :notifications, as: :notifiable, dependent: :destroy
+	has_many :activities, dependent: :destroy
+	has_many :drop_user_votes, dependent: :destroy
+	has_many :expand_group_votes, dependent: :destroy
 
 	reverse_geocoded_by :latitude, :longitude
 

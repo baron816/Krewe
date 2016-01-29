@@ -4,7 +4,7 @@ class Activity < ActiveRecord::Base
 	has_many :user_activities
 	has_many :users, through: :user_activities, after_add: :check_attendance, after_remove: :check_attendance
 	has_many :notifications, as: :notifiable, dependent: :destroy
-	has_many :messages, as: :messageable
+	has_many :messages, as: :messageable, dependent: :destroy
 
 	reverse_geocoded_by :latitude, :longitude
 
