@@ -43,6 +43,9 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'unicorn'
 
+group :development do
+  gem "better_errors"
+end
 
 group :development, :test do
   gem 'byebug'
