@@ -4,15 +4,6 @@
 		<%= form_for(@user) do |f| %>
 			<%= render 'shared/errors', object: @user %>
 
-			<div class="input-field">
-				<%= f.text_field :name, class: 'validate', required: true %>
-				<%= f.label :name %>
-			</div>
-			<div class="input-field">
-				<%= f.email_field :email, class: 'validate', required: true %>
-				<%= f.label :email  %>
-			</div>
-
 	    <div class="input-field tooltipped" data-position="top" data-tooltip="You will need to drop your old group if you move.">
 				<%= f.text_field :address, placeholder: "", class: "active", required: true %>
 				<%= f.label :address %>
