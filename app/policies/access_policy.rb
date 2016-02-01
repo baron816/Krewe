@@ -33,7 +33,7 @@ class AccessPolicy
       end
 
       can :personal_messages, User do |user, current_user|
-        current_user.unique_friends_include?(user) || user == current_user
+        current_user.unique_friends_include?(user) || user == current_user || user.is_admin?
       end
 
       can :post, Message do |message, user|
