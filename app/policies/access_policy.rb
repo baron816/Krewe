@@ -41,7 +41,7 @@ class AccessPolicy
         when "Topic", "Activity"
           message.group_users_include?(user)
         when "User"
-          message.messageable_unique_friends_include?(user)
+          message.messageable_unique_friends_include?(user) || user.is_admin?
         end
       end
 
