@@ -3,7 +3,7 @@
     <h4>New Thread</h4>
     <%= form_for([group, topic], remote: true) do |f| %>
       <div class="input-field">
-        <%= f.text_field :name, required: true, length: "20" %>
+        <%= f.text_field :name, required: true, length: "20", maxlength: '20' %>
       </div>
       <br>
       <div class="modal-footer">
