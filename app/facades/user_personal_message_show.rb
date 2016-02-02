@@ -6,7 +6,7 @@ class UserPersonalMessageShow
     @page = page
   end
 
-  delegate :name, :email, :category, :id, :city, to: :user, prefix: true
+  delegate :name, :photo_url, :category, :city, to: :user, prefix: true
   delegate :any?, :count, to: :personal_messages, prefix: true
   delegate :next_page, to: :personal_messages
 
