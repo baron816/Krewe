@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 
 	validates :longitude, :latitude, :address, :category, :age_group, presence: true, on: :update
 	validates :terms_of_service, acceptance: true
+	validate :multiple_words?, on: :update
 
 	has_many :user_groups
 	has_many :groups, through: :user_groups
@@ -73,5 +74,12 @@ class User < ActiveRecord::Base
 
 	def find_group
 	  FindGroup.new(self).find_or_create
+	end
+
+	private
+	def multiple_words?
+	  unless name.split.count > 1
+			errors.add(:name, "must include a first and last")
+		end
 	end
 end
