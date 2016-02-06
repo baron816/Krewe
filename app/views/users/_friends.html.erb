@@ -1,6 +1,14 @@
-<div class="collection">
-  <% friends.each do |friend| %>
-      <%= link_to personal_messages_user_path(friend), class: "collection-item" do %> <%= friend.name %> <span class='badge'><%= current_user.unviewed_personal_notifications_from_user_count(friend) %></span>
-      <% end %>
+<ul class="collection">
+  <% unless friends.any? %>
+  <h5></h5>
+  <li class="collection-item no-users">You haven't been connected with anyone yet. We'll send you an email when someone joins your group.</li>
+  <% else %>
+    <% friends.each do |friend| %>
+      <li class='collection-item avatar'>
+        <%= image_tag friend.photo_url, class: "circle" %>
+        <span class="title"><%= link_to friend.name, personal_messages_user_path(friend) %></span>
+        <span class="secondary-content"><%= current_user.unviewed_personal_notifications_from_user_count(friend) %></span>
+      </li>
+    <% end %>
   <% end %>
-</div>
+</ul>
