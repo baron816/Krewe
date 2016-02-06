@@ -9,9 +9,10 @@
 
 		<br>
 		<div class="col s12 m6 center-align">
-				<%= link_to "Sign Up", '/auth/facebook', class: "btn-large green omniauth" %>
+				<a href="#login" class="waves-effect waves-light btn-large modal-trigger green">Sign Up</a>
 		</div>
 	</div>
 </div>
 
+<%= render "sessions/new" %>
 <%= render 'shared/footer' %>
