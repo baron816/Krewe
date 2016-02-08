@@ -1,8 +1,9 @@
 <div id="login" class="modal">
   <div class="modal-content">
     <h2>Log In/Sign Up</h2>
-    <%= link_to "Connect with Facebook", '/auth/facebook', class: "btn-large blue omniauth center-align" %>
+    <p>Select an option for connecting:</p>
+    <%= link_to "Facebook", '/auth/facebook', class: "btn-large blue omniauth center-align" %>
     <br><br>
-    <%= link_to "Connect with Google", '/auth/google_oauth2', class: 'btn-large red omniauth center-align' %>
+    <%= link_to "Google", '/auth/google_oauth2', class: 'btn-large red omniauth center-align' %>
   </div>
 </div>
