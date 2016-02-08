@@ -9,7 +9,7 @@ class JoinNotification
 
   def send_notifications
      users.each do |user|
-      notifications.create(user: user, poster: new_user, notification_type: "Join").delay unless user == new_user
+      notifications.create(user: user, poster: new_user, notification_type: "Join") unless user == new_user
     end
 
     GroupMailer.delay.join_group({group: group, poster: new_user})
