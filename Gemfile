@@ -26,7 +26,7 @@ gem 'rails_12factor', group: :production
 gem 'rest-client'
 gem 'friendly_id'
 gem 'jquery-atwho-rails'
-gem 'sidekiq'
+gem 'sidekiq', '~> 3.5.2'
 gem "goldiloader"
 gem 'access-granted'
 gem 'meta-tags'
