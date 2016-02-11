@@ -183,7 +183,7 @@ function createMarker(place, service) {
 function initAutoComplete() {
 	autocomplete = new google.maps.places.Autocomplete(
 		/** @type {!HTMLInputElement} */(document.getElementById('user_address')),
-      {types: ['geocode']});
+      {types: ['address']});
 
 	autocomplete.addListener('place_changed', setCoordinates)
 }
