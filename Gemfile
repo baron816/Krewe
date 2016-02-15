@@ -46,11 +46,11 @@ gem 'unicorn'
 
 group :development do
   gem "better_errors"
+  gem 'web-console', '~> 2.0'
 end
 
 group :development, :test do
   gem 'byebug'
-  gem 'web-console', '~> 2.0'
   gem 'spring'
   gem 'rspec-rails'
   gem 'dotenv-rails'
@@ -59,4 +59,5 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'faker'
   gem 'lol_dba'
+  gem 'simplecov', require: false
 end

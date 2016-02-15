@@ -5,6 +5,9 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'support/request_helpers'
 require 'sidekiq/testing'
+require 'simplecov'
+SimpleCov.start 'rails'
+
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
