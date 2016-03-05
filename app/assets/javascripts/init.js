@@ -27,6 +27,10 @@ $(document).ready(function(){
     new Validator().validateCheckbox(event);
   })
 
+  if ($('#welcome-modal').length) {
+    $('#welcome-modal').openModal();
+  }
+
   new Message().setMessageBox();
 })
 
