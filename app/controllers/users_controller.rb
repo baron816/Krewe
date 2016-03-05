@@ -25,7 +25,10 @@ class UsersController < ApplicationController
 	end
 
 	def update
+		sign_up_complete = @user.sign_up_complete?
+		
 		if @user.update(user_params)
+			flash[:welcome] = @user.sign_up_complete? != sign_up_complete
 			redirect_to root_path
 		elsif @user.sign_up_complete?
 			render :edit
