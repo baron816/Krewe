@@ -36,3 +36,7 @@
 		<%= render partial: "users/friends", locals: { friends: @user_show.unique_friends } %>
 	</div>
 </div>
+
+<% if flash[:welcome] == true %>
+	<%= render "shared/welcome", locals: { user: @user_show } %>
+<% end %>
