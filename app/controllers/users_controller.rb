@@ -26,7 +26,7 @@ class UsersController < ApplicationController
 
 	def update
 		sign_up_complete = @user.sign_up_complete?
-		
+
 		if @user.update(user_params)
 			flash[:welcome] = @user.sign_up_complete? != sign_up_complete
 			redirect_to root_path
@@ -47,7 +47,9 @@ class UsersController < ApplicationController
 	def destroy
 		group = @user.degree_groups(1).take
 		@user.destroy
-		group.users_empty? ? group.destroy : group.check_space(@user)
+		if group
+			group.users_empty? ? group.destroy : group.check_space(@user)
+		end
 		redirect_to new_survey_path(params: { email: @user.email })
 	end
 
