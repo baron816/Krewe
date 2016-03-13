@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160206225549) do
+ActiveRecord::Schema.define(version: 20160313183531) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -159,7 +159,7 @@ ActiveRecord::Schema.define(version: 20160206225549) do
   add_index "user_groups", ["user_id"], name: "index_user_groups_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "name",                                             null: false
+    t.string   "name"
     t.string   "email",                                            null: false
     t.string   "category",              default: "Doesn't Matter"
     t.float    "latitude"
@@ -178,6 +178,8 @@ ActiveRecord::Schema.define(version: 20160206225549) do
     t.boolean  "sign_up_complete",      default: false
     t.string   "photo_url"
     t.boolean  "is_admin",              default: false
+    t.string   "password_digest"
+    t.boolean  "email_verified",        default: false
   end
 
   add_index "users", ["provider"], name: "index_users_on_provider", using: :btree
