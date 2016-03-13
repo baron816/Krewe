@@ -1,0 +1,19 @@
+<%= form_for(:session, url: login_path) do |f| %>
+  <div class="input-field">
+    <%= f.label "Email" %>
+    <%= f.email_field :email, class: "validate", required: true %>
+  </div>
+
+  <div class="input-field">
+    <%= f.label :password %>
+    <%= f.password_field :password, class: "validate", required: true %>
+  </div>
+
+  <div class="input-field right-align">
+    <%= f.submit "Log in", class: "btn blue" %>
+  </div>
+
+  <h3>Social log in:</h3>
+  <%= link_to "Facebook", '/auth/facebook', class: "btn-large blue omniauth center-align" %>
+  <%= link_to "Google", '/auth/google_oauth2', class: 'btn-large red omniauth center-align' %>
+<% end %>
