@@ -1,10 +1,29 @@
 class UsersController < ApplicationController
-	before_action :set_user, only: [:edit, :update, :join_group, :destroy, :new]
+	before_action :set_user, only: [:edit, :update, :join_group, :destroy, :complete_sign_up]
+
+	def new
+		@user = User.new
+	  respond_to do |format|
+	    format.html
+	    format.js
+	  end
+	end
+
+	def create
+	  @user = User.new(user_params)
+
+		if @user.save
+			log_in(@user)
+			redirect_to complete_sign_up_users_path
+		else
+			render :new
+		end
+	end
 
 	def show
 		@user_show = current_user
 		return redirect_to get_started_path unless current_user
-		return redirect_to new_user_path unless current_user.sign_up_complete?
+		return redirect_to complete_sign_up_users_path unless current_user.sign_up_complete?
 	end
 
 	def personal_messages
@@ -20,7 +39,7 @@ class UsersController < ApplicationController
 		end
 	end
 
-	def new
+	def complete_sign_up
 		authorize! :read, @user
 	end
 
@@ -59,6 +78,6 @@ class UsersController < ApplicationController
 	end
 
 	def user_params
-		params.require(:user).permit(:name, :address, :category, :age_group, :latitude, :longitude, :sign_up_complete, notification_settings: [:join, :proposal, :mention, :personal, :expand])
+		params.require(:user).permit(:name, :address, :email, :password, :category, :age_group, :latitude, :longitude, :sign_up_complete, notification_settings: [:join, :proposal, :mention, :personal, :expand])
 	end
 end
