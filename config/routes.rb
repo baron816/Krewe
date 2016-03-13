@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  resources :users, except: [:index, :create] do
+  resources :users, except: :index do
     resources :messages, only: :create
+    get 'complete_sign_up', on: :collection
     member do
       get 'personal_messages'
       post 'join_group'
@@ -27,6 +28,7 @@ Rails.application.routes.draw do
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/get_started')
   delete 'logout' => 'sessions#destroy'
+  post 'login' => 'sessions#login'
 
   resources :newsletters, only: [:new, :create]
   resources :surveys, only: [:new, :create]
