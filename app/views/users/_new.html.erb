@@ -1,4 +1,6 @@
 <%= form_for @user do |f| %>
+  <%= render 'shared/errors', object: @user %>
+
   <div class="input-field">
     <%= f.label :email %>
     <%= f.email_field :email, class: "validate", required: true %>
