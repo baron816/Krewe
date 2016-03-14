@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   delete 'logout' => 'sessions#destroy'
   post 'login' => 'sessions#login'
 
+  resources :password_resets, except: [:get, :destroy]
   resources :newsletters, only: [:new, :create]
   resources :surveys, only: [:new, :create]
 
