@@ -3,12 +3,11 @@
     <h3>Complete Sign Up</h3>
     <%= form_for(@user) do |f| %>
       <%= render 'shared/errors', object: @user %>
-      <% unless @user.name && @user.multiple_words? %>
-        <div class="input-field">
-            <%= f.label :name %>
-            <%= f.text_field :name, class: "validate", required: true %>
-        </div>
-      <% end %>
+
+      <div class="input-field">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: "validate", required: true %>
+      </div>
 
       <div class="input-field tooltipped" data-position="top" data-tooltip="We need to know exactly where you live. We'll never tell anyone.">
         <%= f.text_field :address, placeholder: "", required: true %>
