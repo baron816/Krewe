@@ -5,6 +5,7 @@ FactoryGirl.define do
 		sign_up_complete true
 		uid '12345'
 		provider 'facebook'
+		password 'mb76bvkH3&&'
 
 		trait :admin do
 			is_admin true
