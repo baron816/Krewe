@@ -15,7 +15,7 @@ describe SessionsController do
 
       it "redirects to new_user_path" do
         post :create, provider: :facebook
-        expect(response).to redirect_to(new_user_path)
+        expect(response).to redirect_to(complete_sign_up_users_path)
       end
 
       it "logs in the new user" do
