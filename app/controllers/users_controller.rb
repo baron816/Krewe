@@ -10,7 +10,7 @@ class UsersController < ApplicationController
 	end
 
 	def create
-	  @user = User.new(user_params)
+	  @user = User.new(user_params.merge(provider: "email"))
 
 		if @user.save
 			log_in(@user)
@@ -52,7 +52,7 @@ class UsersController < ApplicationController
 		elsif @user.sign_up_complete?
 			render :edit
 		else
-			render :new
+			render :complete_sign_up
 		end
 	end
 
