@@ -6,4 +6,10 @@ class UserMailer < ApplicationMailer
 
     mail to: messageable.email, subject: "#{@message.poster_name} sent you a message"
   end
+
+  def password_reset(user)
+    @user = user
+
+    mail to: @user.email, subject: "Reset Krewe Password"
+  end
 end
