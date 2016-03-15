@@ -1,6 +1,7 @@
 class HomeController < ApplicationController
 	def landing
 		return redirect_to root_path if current_user
+		@user = User.new
 		prepare_meta_tags
 	end
 

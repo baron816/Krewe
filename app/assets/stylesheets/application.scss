@@ -76,6 +76,10 @@ a, time, button, input[type=text], label, .error-messages, .new-message, #people
 	width:  100%;
 }
 
+.new-email-address {
+	display: none;
+}
+
 .more-messages {
 	margin-bottom: 10px;
 }

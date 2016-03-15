@@ -1,0 +1,8 @@
+<div class="container">
+  <div class="card-panel">
+    <% if flash[:error] %>
+      <div class="red-text error-messages"><%= flash[:error] %></div>
+    <% end %>
+    <%= render "sessions/login_form" %>
+  </div>
+</div>

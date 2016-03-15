@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160206225549) do
+ActiveRecord::Schema.define(version: 20160315141536) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -159,29 +159,32 @@ ActiveRecord::Schema.define(version: 20160206225549) do
   add_index "user_groups", ["user_id"], name: "index_user_groups_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "name",                                             null: false
-    t.string   "email",                                            null: false
-    t.string   "category",              default: "Doesn't Matter"
+    t.string   "name"
+    t.string   "email",                                             null: false
+    t.string   "category",               default: "Doesn't Matter"
     t.float    "latitude"
     t.float    "longitude"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "auth_token"
-    t.integer  "dropped_group_ids",     default: [],                            array: true
-    t.integer  "group_limit",           default: 1
+    t.integer  "dropped_group_ids",      default: [],                            array: true
+    t.integer  "group_limit",            default: 1
     t.string   "slug"
     t.string   "address"
     t.string   "age_group"
-    t.hstore   "notification_settings", default: {}
+    t.hstore   "notification_settings",  default: {}
     t.string   "provider"
     t.string   "uid"
-    t.boolean  "sign_up_complete",      default: false
+    t.boolean  "sign_up_complete",       default: false
     t.string   "photo_url"
-    t.boolean  "is_admin",              default: false
+    t.boolean  "is_admin",               default: false
+    t.string   "password_digest"
+    t.boolean  "email_verified",         default: false
+    t.string   "password_reset_token"
+    t.datetime "password_reset_sent_at"
   end
 
-  add_index "users", ["provider"], name: "index_users_on_provider", using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", using: :btree
   add_index "users", ["slug"], name: "index_users_on_slug", using: :btree
-  add_index "users", ["uid"], name: "index_users_on_uid", using: :btree
 
 end

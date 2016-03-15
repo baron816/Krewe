@@ -6,7 +6,12 @@ class User < ActiveRecord::Base
 
 	validates :longitude, :latitude, :address, :category, :age_group, presence: true, on: :update
 	validates :terms_of_service, acceptance: true
-	validate :multiple_words?, on: :update
+	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+	validates :email, presence: true, length: { maximum: 255}, format: { with: VALID_EMAIL_REGEX }, uniqueness: true
+	validate :check_two_word_name, on: :update
+	validate :password_complexity
+
+	has_secure_password
 
 	has_many :user_groups
 	has_many :groups, through: :user_groups
@@ -22,9 +27,14 @@ class User < ActiveRecord::Base
 	has_many :expand_group_votes, foreign_key: "voter_id", dependent: :destroy
 	has_many :posted_notifications, class_name: "Notification", foreign_key: "poster_id", dependent: :destroy
 
+	after_create { UserMailer.confirm_email(self).deliver_now if email_needs_verification?}
 	after_update { find_group if sign_up_complete_changed? }
 	before_update { self.sign_up_complete = true unless sign_up_complete? }
-	before_create { generate_token(:auth_token) }
+	before_create do
+		generate_token(:auth_token)
+		generate_token(:password_reset_token)
+	end
+	before_save :downcase_email
 
 	after_validation :geocode
 	reverse_geocoded_by :latitude, :longitude
@@ -45,6 +55,7 @@ class User < ActiveRecord::Base
 			user.name = auth.info.name
 			user.email = auth.info.email
 			user.photo_url = auth.info.image
+			user.password = SecureRandom.hex(10)
 		end
 	end
 
@@ -76,10 +87,36 @@ class User < ActiveRecord::Base
 	  FindGroup.new(self).find_or_create
 	end
 
-	private
 	def multiple_words?
-	  unless name.split.count > 1
+	  name.split.count > 1
+	end
+
+	def email_needs_verification?
+	  if email_verified?
+			false
+		elsif provider == "facebook" || provider == "email"
+			true
+		else
+			false
+		end
+	end
+
+	private
+	def downcase_email
+	  self.email = email.downcase
+	end
+
+	def check_two_word_name
+	  unless multiple_words?
 			errors.add(:name, "must include a first and last")
 		end
+	end
+
+	def should_generate_new_friendly_id?
+	  name_changed? || super
+	end
+
+	def password_complexity
+	  CheckPasswordComplexityService.new(password, errors).password_errors if password
 	end
 end

@@ -25,7 +25,7 @@ describe UsersController do
       end
 
       it "redirects to new_user_path" do
-        expect(response).to redirect_to(new_user_path)
+        expect(response).to redirect_to(complete_sign_up_users_path)
       end
     end
 
@@ -88,11 +88,11 @@ describe UsersController do
   end
 
 
-  describe "GET #new" do
+  describe "GET #complete_sign_up" do
     let(:user) { create(:user_home) }
     before do
       log_in(user)
-      get :new
+      get :complete_sign_up
     end
 
     it "makes a new user" do
@@ -100,7 +100,7 @@ describe UsersController do
     end
 
     it "renders new template" do
-    	expect(response).to render_template(:new)
+    	expect(response).to render_template(:complete_sign_up)
     end
   end
 

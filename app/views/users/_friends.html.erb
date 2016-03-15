@@ -5,7 +5,7 @@
   <% else %>
     <% friends.each do |friend| %>
       <li class='collection-item avatar'>
-        <%= image_tag friend.photo_url, class: "circle" %>
+        <%= image_tag friend.photo_url || avatar_url(friend), class: "circle" %>
         <span class="title"><%= link_to friend.name, personal_messages_user_path(friend) %></span>
         <span class="secondary-content"><%= current_user.unviewed_personal_notifications_from_user_count(friend) %></span>
       </li>

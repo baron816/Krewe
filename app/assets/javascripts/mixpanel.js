@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  $('.omniauth').click(function(){
+  $('.signed-up').click(function(){
     mixpanel.track("Signed/Logged In")
   })
 

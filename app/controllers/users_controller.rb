@@ -1,10 +1,25 @@
 class UsersController < ApplicationController
-	before_action :set_user, only: [:edit, :update, :join_group, :destroy, :new]
+	before_action :set_user, only: [:edit, :update, :join_group, :destroy, :complete_sign_up, :verify_email, :update_email]
+
+	def new
+		@user = User.new
+	end
+
+	def create
+	  @user = User.new(user_params.merge(provider: "email"))
+
+		if @user.save
+			log_in(@user)
+			redirect_to complete_sign_up_users_path
+		else
+			render :new
+		end
+	end
 
 	def show
 		@user_show = current_user
 		return redirect_to get_started_path unless current_user
-		return redirect_to new_user_path unless current_user.sign_up_complete?
+		return redirect_to complete_sign_up_users_path unless current_user.sign_up_complete?
 	end
 
 	def personal_messages
@@ -20,8 +35,32 @@ class UsersController < ApplicationController
 		end
 	end
 
-	def new
+	def complete_sign_up
+		return redirect_to(verify_email_users_path) if @user.email_needs_verification?
 		authorize! :read, @user
+	end
+
+	def verify_email
+		return redirect_to root_path if @user.sign_up_complete?
+	end
+
+	def email_confirmed
+		@user = User.friendly.find(params[:id])
+
+		if @user.password_reset_token == params[:code]
+			@user.update_column(:email_verified, true)
+			redirect_to complete_sign_up_users_path, notice: "Thanks. You're email address has been confirmed. You can now finish signing up."
+		else
+			render :verify_email
+		end
+	end
+
+	def update_email
+	  if UpdateEmail.new(@user, new_email_params[:email]).update
+			redirect_to verify_email_users_path, notice: "We sent you an email."
+		else
+			render :verify_email
+		end
 	end
 
 	def update
@@ -33,7 +72,7 @@ class UsersController < ApplicationController
 		elsif @user.sign_up_complete?
 			render :edit
 		else
-			render :new
+			render :complete_sign_up
 		end
 	end
 
@@ -58,7 +97,11 @@ class UsersController < ApplicationController
 		@user = current_user
 	end
 
+	def new_email_params
+	  params.require(:user).permit(:email)
+	end
+
 	def user_params
-		params.require(:user).permit(:name, :address, :category, :age_group, :latitude, :longitude, :sign_up_complete, notification_settings: [:join, :proposal, :mention, :personal, :expand])
+		params.require(:user).permit(:name, :address, :email, :password, :category, :age_group, :latitude, :longitude, :sign_up_complete, notification_settings: [:join, :proposal, :mention, :personal, :expand])
 	end
 end

@@ -1,0 +1,22 @@
+<%= form_for(:session, url: login_path) do |f| %>
+  <h3>Log In</h3>
+  <div class="input-field">
+    <%= f.label "Email" %>
+    <%= f.email_field :email, class: "validate", required: true %>
+  </div>
+
+  <div class="input-field">
+    <%= f.label :password %>
+    <%= f.password_field :password, class: "validate", required: true %>
+  </div>
+
+  <div class="input-field right-align">
+    <%= f.submit "Log in", class: "btn blue" %>
+    <br><br>
+    <%= link_to "Reset Password", new_password_reset_path %>
+  </div>
+
+  <h5>Or Log in With:</h5>
+  <%= link_to "Facebook", '/auth/facebook', class: "btn blue omniauth" %>
+  <%= link_to "Google", '/auth/google_oauth2', class: 'btn red omniauth' %>
+<% end %>

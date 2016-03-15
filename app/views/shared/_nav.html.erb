@@ -19,10 +19,12 @@
 				<% end %>
 				<li> <%=  link_to 'Log Out', logout_path, method: :delete %></li>
 			<% else %>
-				<li><a href="#login" class="modal-trigger">Log In/Sign Up</a></li>
+				<li><a href="#login" class="modal-trigger">Log In</a></li>
 			<% end %>
 
 			<li><%= link_to "<i class='material-icons'>help</i>".html_safe, faq_path %></li>
 		</ul>
 	</div>
 </nav>
+
+<%= render "sessions/login" unless current_user %>

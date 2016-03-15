@@ -1,7 +1,15 @@
 Rails.application.routes.draw do
-  resources :users, except: [:index, :create] do
+  resources :users, except: :index do
     resources :messages, only: :create
+
+    collection do
+      get 'complete_sign_up'
+      get 'verify_email'
+      patch 'update_email'
+    end
+
     member do
+      get 'email_confirmed'
       get 'personal_messages'
       post 'join_group'
     end
@@ -27,7 +35,9 @@ Rails.application.routes.draw do
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/get_started')
   delete 'logout' => 'sessions#destroy'
+  post 'login' => 'sessions#login'
 
+  resources :password_resets, except: [:get, :destroy]
   resources :newsletters, only: [:new, :create]
   resources :surveys, only: [:new, :create]
 
