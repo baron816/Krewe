@@ -7,6 +7,11 @@ $(document).ready(function(){
 		$('#map-canvas').toggle();
 	})
 
+  $('.submit-email-button').click(function () {
+    $(".new-email-address").show();
+    $(".submit-email-button").hide();
+  })
+
 	if ($('body').data("notice")) {
 		swal($('body').data("notice"));
 	}
