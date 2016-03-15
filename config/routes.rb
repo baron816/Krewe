@@ -1,8 +1,15 @@
 Rails.application.routes.draw do
   resources :users, except: :index do
     resources :messages, only: :create
-    get 'complete_sign_up', on: :collection
+
+    collection do
+      get 'complete_sign_up'
+      get 'verify_email'
+      patch 'update_email'
+    end
+
     member do
+      get 'email_confirmed'
       get 'personal_messages'
       post 'join_group'
     end
