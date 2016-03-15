@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-	before_action :set_user, only: [:edit, :update, :join_group, :destroy, :complete_sign_up]
+	before_action :set_user, only: [:edit, :update, :join_group, :destroy, :complete_sign_up, :verify_email, :update_email]
 
 	def new
 		@user = User.new
@@ -40,7 +40,31 @@ class UsersController < ApplicationController
 	end
 
 	def complete_sign_up
+		return redirect_to(verify_email_users_path) if @user.email_needs_verification?
 		authorize! :read, @user
+	end
+
+	def verify_email
+		return redirect_to root_path if @user.sign_up_complete?
+	end
+
+	def email_confirmed
+		@user = User.friendly.find(params[:id])
+
+		if @user.password_reset_token == params[:code]
+			@user.update_column(:email_verified, true)
+			redirect_to complete_sign_up_users_path, notice: "Thanks. You're email address has been confirmed. You can now finish signing up."
+		else
+			render :verify_email
+		end
+	end
+
+	def update_email
+	  if UpdateEmail.new(@user, new_email_params[:email]).update
+			redirect_to verify_email_users_path, notice: "We sent you an email."
+		else
+			render :verify_email
+		end
 	end
 
 	def update
@@ -75,6 +99,10 @@ class UsersController < ApplicationController
 	private
 	def set_user
 		@user = current_user
+	end
+
+	def new_email_params
+	  params.require(:user).permit(:email)
 	end
 
 	def user_params
