@@ -1,11 +1,9 @@
-<div id="sign-up" class="modal">
-  <div class="modal-content">
-    <h2>Sign Up</h2>
-    <p>Select an option for connecting:</p>
-    <p><i>We're only going to take your name, email, and profile photo from Facebook or Google</i></p>
-
-    <%= link_to "Email", new_user_path, class: "btn-large orange center-align", remote: true %>
-    <%= link_to "Facebook", '/auth/facebook', class: "btn-large blue omniauth center-align" %>
-    <%= link_to "Google", '/auth/google_oauth2', class: 'btn-large red omniauth center-align' %>
-  </div>
+<h5>Sign Up with Email:</h5>
+<%= render "users/new" %>
+<br>
+<h5>Or Sign up with:</h5>
+<div>
+  <%= link_to "Facebook", '/auth/facebook', class: "btn blue omniauth center-align" %>
+  <%= link_to "Google", '/auth/google_oauth2', class: 'btn red omniauth center-align' %>
 </div>
+<br>
