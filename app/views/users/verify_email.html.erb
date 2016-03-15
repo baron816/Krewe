@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="card-panel">
+    <% if @user.email_verified? %>
+      <h3>Thanks</h3>
+      <p>Continue on to set up your account.</p>
+      <%= link_to "Click here to continue", complete_sign_up_users_path, class: "btn blue" %>
+    <% else %>
+      <h3>Please confirm your email address</h3>
+      <p>We sent to <%= mail_to @user.email %>. Please click the link inside it to confirm that you own that address. If you don't have controll of that email address, click the button below and enter an email you do own.</p>
+      <a href="#" class="waves-effect btn blue submit-email-button">Change Email</a>
+      <br>
+      <div class="new-email-address">
+        <%= form_for(@user, url: update_email_users_path) do |f| %>
+          <%= render "shared/errors", object: @user %>
+
+          <div class="input-field">
+            <%= f.label :email %>
+            <%= f.email_field :email, class: "validate", required: true %>
+          </div>
+
+          <div class="input-field right-align">
+            <%= f.submit "Submit", class: "btn blue" %>
+          </div>
+
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
