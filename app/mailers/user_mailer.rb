@@ -12,4 +12,10 @@ class UserMailer < ApplicationMailer
 
     mail to: @user.email, subject: "Reset Krewe Password"
   end
+
+  def confirm_email(user)
+    @user = user
+
+    mail to: @user.email, subject: "Krewe Email Verification"
+  end
 end
