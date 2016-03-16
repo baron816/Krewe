@@ -6,7 +6,8 @@ class UsersController < ApplicationController
 	end
 
 	def create
-	  @user = User.new(user_params.merge(provider: "email"))
+		password_confirmation = user_params[:password]
+	  @user = User.new(user_params.merge(provider: "email", password_confirmation: password_confirmation))
 
 		if @user.save
 			log_in(@user)
