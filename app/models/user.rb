@@ -49,13 +49,16 @@ class User < ActiveRecord::Base
 	scope :users_by_slug, -> (slugs) { where(slug: slugs)  }
 
 	def self.create_with_omniauth(auth)
+		new_password = SecureRandom.hex(10)
+
 		create! do |user|
 			user.provider = auth.provider
 			user.uid = auth.uid
 			user.name = auth.info.name
 			user.email = auth.info.email
 			user.photo_url = auth.info.image
-			user.password = SecureRandom.hex(10)
+			user.password = new_password
+			user.password_confirmation = new_password
 		end
 	end
 
