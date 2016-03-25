@@ -9,9 +9,7 @@ describe ActivitiesController do
 
   describe "POST #create" do
     before do
-      @activity_attributes = attributes_for(:activity_future)
-      @activity_attributes[:group_id] = group.id
-      @activity_attributes[:proposer_id] = user.id
+      @activity_attributes = attributes_for(:activity_future, group_id: group, proposer_id: user)
     end
 
     it "creates a new activity" do
