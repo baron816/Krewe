@@ -11,7 +11,7 @@ class UsersController < ApplicationController
 
 		if @user.save
 			log_in(@user)
-			redirect_to complete_sign_up_users_path
+			redirect_to verify_email_users_path
 		else
 			render :new
 		end
@@ -49,10 +49,11 @@ class UsersController < ApplicationController
 		@user = User.friendly.find(params[:id])
 
 		if @user.password_reset_token == params[:code]
+			log_in(@user)
 			@user.update_column(:email_verified, true)
 			redirect_to complete_sign_up_users_path, notice: "Thanks. You're email address has been confirmed. You can now finish signing up."
 		else
-			render :verify_email
+			redirect_to root_path
 		end
 	end
 
