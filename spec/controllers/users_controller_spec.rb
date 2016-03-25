@@ -211,7 +211,44 @@ describe UsersController do
   end
 
   describe "#PATCH update_email" do
+    let(:new_email) { "booo@email.com" }
+    before do
+      log_in(user)
+    end
 
+    it "has an email that isn't booo@email.com" do
+      expect(user.email).to_not eq(new_email)
+    end
+
+    context "email successfully updates" do
+      before do
+        patch :update_email, user: { email: new_email }
+      end
+
+      it "sets the users email" do
+        user.reload
+        expect(user.email).to eq(new_email)
+      end
+
+      it "redirects to verify email" do
+        expect(response).to redirect_to verify_email_users_path
+      end
+    end
+
+    context "email does not update" do
+      before do
+        patch :update_email, user: { email: "fasd"}
+      end
+
+      it "keeps the same email" do
+        user.reload
+        expect(user.email).to_not eq(new_email)
+      end
+
+      it "renders verify email template" do
+        expect(response).to render_template(:verify_email)
+      end
+    end
   end
 
   describe "#DELETE #destroy" do
