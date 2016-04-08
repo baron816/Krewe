@@ -1,7 +1,7 @@
 <div class="row group-page">
 	<div class="col s12">
 		<h3>
-			<%= @group_show.group_name %>
+			<u><%= @group_show.group_name %></u>
 		</h3>
 		<div class="hide-on-med-and-down">
 			<%= render "groups/buttons" %>
@@ -11,6 +11,17 @@
 	</div>
 
 	<div class="col s12 l9">
+		<% if @group_show.one_user? %>
+		<div class="card-panel">
+			<h4>You don't have anyone in your group <i>yet</i>.</h4>
+			<p>You'll get an email notification when others join your group. We're working hard to get people in your area to join, so hang tight. Please help us out by liking us on social media. The faster we add users, the faster your group will fill up.</p>
+			<div class="center-align">
+				<a href="https://www.facebook.com/gokrewe" target="_blank"><%= image_tag "facebook" %></a>
+				<a href="https://twitter.com/gokrewe" target="_blank" ><%= image_tag "twitter" %></a>
+			</div>
+		</div>
+
+		<% else %>
 		<h4 class='hide-on-med-and-down'>Messages</h4>
 			<div class="topics">
 				<%= render partial: 'topics/topics', locals: { topics: @group_show.topics } %>
@@ -20,6 +31,7 @@
 		<div class="message-group">
 			<%= render partial: 'topics/topic', locals: { topic: @group_show.topic } %>
 		</div>
+		<% end %>
 	</div>
 
 	<div class="col s12 m3 hide-on-med-and-down">
