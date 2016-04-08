@@ -19,10 +19,9 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
-  <meta name="appdeck-menu-entry" content="javascript:$('.button-collapse').sideNav('show');" icon="!menu" type="button">
 </head>
 <body class="<%= controller_name %> <%= action_name %>" data-notice="<%= notice %>">
-  <%= render 'shared/nav' unless request.user_agent.try(:include?, "AppDeck") %>
+  <%= render 'shared/nav' %>
   <%= render 'shared/sidebar' %>
 
   <%= yield %>
