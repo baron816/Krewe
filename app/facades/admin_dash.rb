@@ -9,7 +9,7 @@ class AdminDash
   end
 
   def full_groups
-    Group.where(can_join: false)
+    Group.where(can_join: false).count
   end
 
   def groups
