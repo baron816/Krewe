@@ -14,12 +14,7 @@ class SessionsController < ApplicationController
 
 	def create
 		auth = request.env["omniauth.auth"]
-
-		if auth.provider == "facebook"
-			user = User.find_by(provider: "facebook", uid: auth.uid)
-		else
-			user = User.find_by(email: auth.info.email)
-		end
+		user = User.find_by(email: auth.info.email)
 
 		if user
 			log_in(user)
