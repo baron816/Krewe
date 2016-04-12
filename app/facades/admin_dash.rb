@@ -8,6 +8,10 @@ class AdminDash
     Group.count
   end
 
+  def full_groups
+    Group.where(can_join: false)
+  end
+
   def groups
     @groups ||= Group.all.page(page).per(15)
   end
