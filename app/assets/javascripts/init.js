@@ -12,6 +12,16 @@ $(document).ready(function(){
     $(".submit-email-button").hide();
   })
 
+  $('#user_address').change( function(){
+    if ($('#lat').val().length === 0) {
+      $(this).removeClass('valid')
+      $(this).addClass("invalid")
+    } else {
+      $(this).removeClass('invalid')
+      $(this).addClass("valid")
+    }
+  })
+
 	if ($('body').data("notice")) {
 		swal($('body').data("notice"));
 	}
