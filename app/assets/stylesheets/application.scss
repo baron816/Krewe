@@ -45,6 +45,16 @@ a, time, button, input[type=text], label, .error-messages, .new-message, #people
 	font-size: 0.9rem;
 }
 
+.input-field input[type=text] {
+	&.invalid + label {
+		width: 100%;
+	}
+
+	& + label:after {
+		display: block;
+	}
+}
+
 #logo {
 	max-width: 150px;
 }
