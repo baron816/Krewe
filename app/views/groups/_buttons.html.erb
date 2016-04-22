@@ -10,4 +10,6 @@
 
 
 <a href="#members" class="waves-effect btn pink modal-trigger white-text">Members (<%= @group_show.users_count %>)</a>
-<a href="#new-topic" class="waves-effect btn indigo modal-trigger white-text">New Thread</a>
+<% unless @group_show.one_user? %>
+  <a href="#new-topic" class="waves-effect btn indigo modal-trigger white-text">New Thread</a>
+<% end %>
