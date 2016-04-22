@@ -11,7 +11,7 @@
 
       <div class="input-field tooltipped" data-position="top" data-tooltip="We need to know exactly where you live. We'll never tell anyone.">
         <%= f.text_field :address, placeholder: "", required: true %>
-        <%= f.label :address %>
+        <%= f.label :address, "Home Address", data: { error: "Please select autocompleted address" } %>
       </div>
 
       <div class="input-field tooltipped" data-position="top" data-tooltip="No one's going to card you. Pick the group you identify with most.">
