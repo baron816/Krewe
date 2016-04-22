@@ -10,8 +10,8 @@
  			</div>
 
 	    <div class="input-field tooltipped" data-position="top" data-tooltip="You will need to drop your old group if you move.">
-				<%= f.text_field :address, placeholder: "", class: "active", required: true %>
-				<%= f.label :address %>
+				<%= f.text_field :address, placeholder: "", class: "active validate", required: true %>
+				<%= f.label :address, "Home Address", data: { error: "Use Autocomplete"} %>
 	    </div>
 
 			<div class="input-field tooltipped" data-position="top" data-tooltip="You will need to drop your old group if you want to change types.">
