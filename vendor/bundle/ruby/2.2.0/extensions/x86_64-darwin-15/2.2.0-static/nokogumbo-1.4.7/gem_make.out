@@ -1,0 +1,42 @@
+current directory: /Users/baronwilleford/Documents/Krewe/vendor/bundle/ruby/2.2.0/gems/nokogumbo-1.4.7/ext/nokogumboc
+/Users/baronwilleford/.rbenv/versions/2.2.2/bin/ruby -r ./siteconf20160422-21620-1can50b.rb extconf.rb
+checking for xmlNewDoc() in -lxml2... yes
+checking for nokogiri.h in /Users/baronwilleford/Documents/Krewe/vendor/bundle/ruby/2.2.0/gems/nokogiri-1.6.7.2/ext/nokogiri... yes
+checking for nokogiri.h in /Users/baronwilleford/Documents/Krewe/vendor/bundle/ruby/2.2.0/gems/nokogiri-1.6.7.2/ext/nokogiri... yes
+checking for gumbo_parse() in -lgumbo... no
+creating Makefile
+
+To see why this extension failed to compile, please check the mkmf.log which can be found here:
+
+  /Users/baronwilleford/Documents/Krewe/vendor/bundle/ruby/2.2.0/extensions/x86_64-darwin-15/2.2.0-static/nokogumbo-1.4.7/mkmf.log
+
+current directory: /Users/baronwilleford/Documents/Krewe/vendor/bundle/ruby/2.2.0/gems/nokogumbo-1.4.7/ext/nokogumboc
+make "DESTDIR=" clean
+
+current directory: /Users/baronwilleford/Documents/Krewe/vendor/bundle/ruby/2.2.0/gems/nokogumbo-1.4.7/ext/nokogumboc
+make "DESTDIR="
+compiling attribute.c
+compiling char_ref.c
+compiling error.c
+compiling nokogumbo.c
+In file included from nokogumbo.c:28:
+/Users/baronwilleford/Documents/Krewe/vendor/bundle/ruby/2.2.0/gems/nokogiri-1.6.7.2/ext/nokogiri/nokogiri.h:13:9: warning: '_GNU_SOURCE' macro redefined [-Wmacro-redefined]
+#define _GNU_SOURCE
+        ^
+/Users/baronwilleford/.rbenv/versions/2.2.2/include/ruby-2.2.0/x86_64-darwin15/ruby/config.h:17:9: note: previous definition is here
+#define _GNU_SOURCE 1
+        ^
+1 warning generated.
+compiling parser.c
+compiling string_buffer.c
+compiling string_piece.c
+compiling tag.c
+compiling tokenizer.c
+compiling utf8.c
+compiling util.c
+compiling vector.c
+linking shared-object nokogumboc.bundle
+
+current directory: /Users/baronwilleford/Documents/Krewe/vendor/bundle/ruby/2.2.0/gems/nokogumbo-1.4.7/ext/nokogumboc
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 nokogumboc.bundle ./.gem.20160422-21620-1t4il94

@@ -1,0 +1,15 @@
+current directory: /Users/baronwilleford/Documents/Krewe/vendor/bundle/ruby/2.3.0/gems/debug_inspector-0.0.2/ext/debug_inspector
+/Users/baronwilleford/.rbenv/versions/2.3.0/bin/ruby -r ./siteconf20160422-95992-17g6ywp.rb extconf.rb
+creating Makefile
+
+current directory: /Users/baronwilleford/Documents/Krewe/vendor/bundle/ruby/2.3.0/gems/debug_inspector-0.0.2/ext/debug_inspector
+make "DESTDIR=" clean
+
+current directory: /Users/baronwilleford/Documents/Krewe/vendor/bundle/ruby/2.3.0/gems/debug_inspector-0.0.2/ext/debug_inspector
+make "DESTDIR="
+compiling debug_inspector.c
+linking shared-object debug_inspector.bundle
+
+current directory: /Users/baronwilleford/Documents/Krewe/vendor/bundle/ruby/2.3.0/gems/debug_inspector-0.0.2/ext/debug_inspector
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 debug_inspector.bundle ./.gem.20160422-95992-18w8vfr
