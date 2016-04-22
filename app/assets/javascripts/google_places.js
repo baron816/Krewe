@@ -194,6 +194,8 @@ function setCoordinates() {
 
 	$('#lat').val(geo.lat())
 	$('#lng').val(geo.lng())
+	$('#user_address').removeClass('invalid')
+	$('#user_address').addClass("valid")
 }
 
 function resize(lat, lng) {
