@@ -14,3 +14,4 @@
 .env
 dump.rdb
 coverage
+/vendor/bundle
