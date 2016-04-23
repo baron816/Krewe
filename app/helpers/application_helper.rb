@@ -37,7 +37,7 @@ module ApplicationHelper
 
 	def avatar_url(user)
 		gravatar_id = Digest::MD5.hexdigest(user.email)
-			"http://gravatar.com/avatar/#{gravatar_id}.png?s=48&d=mm"
+			"https://gravatar.com/avatar/#{gravatar_id}.png?s=48&d=mm"
 	end
 
 	def first_word(phrase)
