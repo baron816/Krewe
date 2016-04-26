@@ -1,7 +1,7 @@
 <ul class="collection">
   <% unless friends.any? %>
   <h5></h5>
-  <li class="collection-item no-users">You haven't been connected with anyone yet. We'll send you an email when someone joins your group.</li>
+  <li class="collection-item no-users">You haven't been connected with anyone yet. We'll send you an email when your group is filled.</li>
   <% else %>
     <% friends.each do |friend| %>
       <li class='collection-item avatar'>
