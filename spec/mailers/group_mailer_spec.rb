@@ -7,14 +7,13 @@ RSpec.describe GroupMailer, :type => :mailer do
   let!(:poster) { create(:user_wtc) }
   let!(:group) { Group.first }
 
-  describe "join_group" do
+  describe "group_filled" do
 
-    let(:mail) { GroupMailer.join_group({group: group, poster: poster}) }
+    let(:mail) { GroupMailer.group_filled(group) }
 
     it "renders the headers" do
-      expect(mail.subject).to eq("#{poster.name} joined group #{group.name}")
-      expect(mail.bcc).to include(user.email, user2.email)
-      expect(mail.bcc).to_not include(user3.email, poster.email)
+      expect(mail.subject).to eq("Congratulations, your Krewe group is complete. Time to have fun.")
+      expect(mail.bcc).to include(user.email, user2.email, user3.email, poster.email)
       expect(mail.from).to eq(["no-reply@gokrewe.com"])
     end
   end
