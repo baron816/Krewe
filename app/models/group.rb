@@ -33,7 +33,7 @@ class Group < ActiveRecord::Base
 	end
 
 	def check_space(user)
-		GroupSpaceCheck.new(self, user).check_space
+		GroupSpaceCheck.new(self, user).check_space if self.degree == 1
 	end
 
 	def city
