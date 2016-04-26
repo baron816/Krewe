@@ -1,16 +1,11 @@
 class GroupMailer < ApplicationMailer
 
-  # Subject can be set in your I18n file at config/locales/en.yml
-  # with the following lookup:
-  #
-  #   en.group_mailer.join_group.subject
-  #
-  def join_group(params = {})
-    @group = params[:group]
-    @poster = params[:poster]
+  def group_filled(group)
+    @group = group
     @users = @group.users
+    @emails = @users.pluck(:email)
 
-    mail bcc: emails("join"), subject: "#{@poster.name} joined group #{@group.name}"
+    mail bcc: @emails, subject: "Congratulations, your Krewe group is complete. Time to have fun."
   end
 
   def activity_proposal(activity)
