@@ -29,16 +29,6 @@
 			<h3>Notification Settings</h3>
 			<%= f.fields_for :notification_settings do |p| %>
 				<div class="switch">
-					User Join Emails:
-					<label>
-						Off
-						<%= p.check_box :join, {checked: @user.send_notification?("join") }, "true", "false" %>
-						<span class="lever"></span>
-						On
-					</label>
-				</div>
-
-				<div class="switch">
 					Group Mention Emails:
 					<label>
 						Off
