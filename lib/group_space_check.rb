@@ -10,21 +10,22 @@ class GroupSpaceCheck
 
   def check_space
     if fell_below_limit
-      set_can_join_as_true
+      reopen_group
     elsif hit_limit
-      set_can_join_as_false
+      close_group
     end
   end
 
   private
-  def set_can_join_as_true
+  def reopen_group
     group.can_join = true
     group.save
   end
 
-  def set_can_join_as_false
+  def close_group
     group.can_join = false
     group.save
+    GroupComplete.perform_in(5.minutes, group.id)
   end
 
   def fell_below_limit
