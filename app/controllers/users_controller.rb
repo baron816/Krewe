@@ -51,7 +51,7 @@ class UsersController < ApplicationController
 		if @user.password_reset_token == params[:code]
 			log_in(@user)
 			@user.update_column(:email_verified, true)
-			redirect_to complete_sign_up_users_path, notice: "Thanks. You're email address has been confirmed. You can now finish signing up."
+			redirect_to complete_sign_up_users_path, notice: "Thanks. Your email address has been confirmed. You can now finish signing up."
 		else
 			redirect_to root_path
 		end
