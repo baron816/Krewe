@@ -26,7 +26,7 @@ describe PasswordResetsController do
     end
 
     it "redirects to root" do
-      expect(response).to redirect_to(root_path)
+      expect(response).to redirect_to(get_started_path)
     end
 
     it "sets a notice" do
@@ -63,7 +63,7 @@ describe PasswordResetsController do
   describe "#PUT/PATCH update" do
     context "empty password field" do
       before do
-        put :update, id: user.password_reset_token, user: { password: "12ab34CD", password_confirmation: ""}
+        put :update, id: user.password_reset_token, user: { password: "", password_confirmation: ""}
       end
 
       it "renders edit template" do
