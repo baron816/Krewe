@@ -112,20 +112,17 @@ describe UsersController do
     it "renders the edit template" do
     	expect(response).to render_template(:edit)
     end
-
-    it "finds the correct_user" do
-    	expect(assigns[:user]).to eql(user)
-    end
   end
 
   describe "PATCH/PUT #update" do
     before do
       log_in(user)
-      put :update, { id: user, user: { category: "Young Parent" } }
+      put :update, { id: user, user: { category: "Celebrity" } }
     end
 
     it "changes user category to young parent" do
-    	expect(assigns[:user].category).to eql("Young Parent")
+      user.reload
+    	expect(user.category).to eql("Celebrity")
     end
   end
 
@@ -136,10 +133,6 @@ describe UsersController do
       before do
         log_in(user)
         get :complete_sign_up
-      end
-
-      it "makes a new user" do
-      	expect(assigns[:user]).to eq(user)
       end
 
       it "renders new template" do
