@@ -1,16 +1,16 @@
 <div class="row">
 	<div class="col m12">
-	<h3><%= @user_show.name %></h3>
+	<h3><%= current_user.name %></h3>
 		<span class="hide-on-med-and-down">
-			<%= link_to "<i class='material-icons medium'>settings</i> Settings".html_safe, edit_user_path(@user_show), class: "btn orange" %>
+			<%= link_to "<i class='material-icons medium'>settings</i> Settings".html_safe, edit_user_path(current_user), class: "btn orange" %>
 		</span>
-		<%= link_to "Join Group", join_group_user_path(current_user), class: "btn green", method: :post if @user_show.under_group_limit? %></h5>
+		<%= link_to "Join Group", join_group_user_path(current_user), class: "btn green", method: :post if current_user.under_group_limit? %></h5>
 	</div>
 
 		<div class="col s12 l6">
 		<h3>Groups</h3>
 		<div class="collection">
-			<% @user_show.groups.each do |group| %>
+			<% current_user.groups.each do |group| %>
 				<%= link_to group_path(group), class: "collection-item" do %>
 				<%= group.name %> <span class='badge'><%= current_user.unviewed_group_notification_count(group) %></span>
 				<% end %>
@@ -18,25 +18,25 @@
 		</div>
 
 		<div class="hide-on-med-and-down">
-			<% if @user_show.unique_friends.any? %>
+			<% if current_user.unique_friends.any? %>
 				<h3>Friends</h3>
-				<%= render partial: "users/friends", locals: { friends: @user_show.unique_friends } %>
+				<%= render partial: "users/friends", locals: { friends: current_user.unique_friends } %>
 			<% end %>
 		</div>
 	</div>
 
 	<div class="col s12 l6">
-		<%= render partial: "activities/activities", locals: { activities: @user_show.future_activities, group: @user_show.groups.first, user_show: true } %>
+		<%= render partial: "activities/activities", locals: { activities: current_user.future_activities, group: current_user.groups.first, user_show: true } %>
 	</div>
 </div>
 
 <div class="modal bottom-sheet" id="friends">
 	<div class="modal-content">
 		<h4>Friends</h4>
-		<%= render partial: "users/friends", locals: { friends: @user_show.unique_friends } %>
+		<%= render partial: "users/friends", locals: { friends: current_user.unique_friends } %>
 	</div>
 </div>
 
 <% if flash[:welcome] == true %>
-	<%= render "shared/welcome", locals: { user: @user_show } %>
+	<%= render "shared/welcome", locals: { user: current_user } %>
 <% end %>

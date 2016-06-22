@@ -1,8 +1,9 @@
-	<%= link_to "Delete Account", user_path(@user), data: {confirm: "Are you sure you want to delete your account?", text: "This cannot be undone. All account information and connections will be permanently destroyed."}, method: :delete, class: "btn red" %>
+	<br>
+	<%= link_to "Delete Account", user_path(current_user), data: {confirm: "Are you sure you want to delete your account?", text: "This cannot be undone. All account information and connections will be permanently destroyed."}, method: :delete, class: "btn red" %>
 
 	<br><br>
-		<%= form_for(@user) do |f| %>
-			<%= render 'shared/errors', object: @user %>
+		<%= form_for(current_user) do |f| %>
+			<%= render 'shared/errors', object: current_user %>
 
 			<div class="input-field">
  				<%= f.text_field :name, class: 'validate', required: true %>
@@ -32,7 +33,7 @@
 					Group Mention Emails:
 					<label>
 						Off
-						<%= p.check_box :mention, {checked: @user.send_notification?("mention") }, "true", "false" %>
+						<%= p.check_box :mention, {checked: current_user.send_notification?("mention") }, "true", "false" %>
 						<span class="lever"></span>
 						On
 					</label>
@@ -42,7 +43,7 @@
 					Personal Emails:
 					<label>
 						Off
-						<%= p.check_box :personal, {checked: @user.send_notification?("personal") }, "true", "false" %>
+						<%= p.check_box :personal, {checked: current_user.send_notification?("personal") }, "true", "false" %>
 						<span class="lever"></span>
 						On
 					</label>
@@ -52,7 +53,7 @@
 					Activity Proposal Emails:
 					<label>
 						Off
-						<%= p.check_box :proposal, {checked: @user.send_notification?("proposal") }, "true", "false" %>
+						<%= p.check_box :proposal, {checked: current_user.send_notification?("proposal") }, "true", "false" %>
 						<span class="lever"></span>
 						On
 					</label>
@@ -62,7 +63,7 @@
 					Group Expansion Emails:
 					<label>
 						Off
-						<%= p.check_box :expand, {checked: @user.send_notification?("expand")}, "true", "false" %>
+						<%= p.check_box :expand, {checked: current_user.send_notification?("expand")}, "true", "false" %>
 						<span class="lever"></span>
 						On
 					</label>
