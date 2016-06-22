@@ -1,6 +1,4 @@
 class PasswordResetsController < ApplicationController
-	before_action :set_user, only: [:edit, :update]
-
 	def new
 	end
 
@@ -14,7 +12,7 @@ class PasswordResetsController < ApplicationController
 	end
 
 	def edit
-		return redirect_to get_started_path unless @user
+		return redirect_to get_started_path unless user
 		check_expiration
 	end
 
@@ -23,8 +21,8 @@ class PasswordResetsController < ApplicationController
 		if params[:user][:password].empty?
 			flash.now[:danger] = "Password can't be empty"
 			render :edit
-		elsif @user.update(user_params)
-			log_in(@user)
+		elsif user.update(user_params)
+			log_in(user)
 			redirect_to root_path
 		else
 			render :edit
@@ -32,8 +30,8 @@ class PasswordResetsController < ApplicationController
 	end
 
 	private
-	def set_user
-		@user = User.find_by(password_reset_token: params[:id])
+	def user
+		@user ||= User.find_by(password_reset_token: params[:id])
 	end
 
 	def user_params
@@ -48,6 +46,6 @@ class PasswordResetsController < ApplicationController
 	end
 
 	def user_password_reset
-	  @user_password_reset ||= UserPasswordReset.new(@user)
+	  @user_password_reset ||= UserPasswordReset.new(user)
 	end
 end

@@ -1,9 +1,13 @@
 class Api::V1::GroupsController < ApiController
   respond_to :json
-  before_action :set_group
+  before_action :set_group, except: :index
 
   def show
     render json: @group
+  end
+
+  def index
+    render json: User.friendly.find(params[:user_id]).groups
   end
 
   def drop_user

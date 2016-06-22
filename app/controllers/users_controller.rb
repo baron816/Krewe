@@ -1,6 +1,4 @@
 class UsersController < ApplicationController
-	before_action :set_user, only: [:edit, :update, :join_group, :destroy, :complete_sign_up, :verify_email, :update_email]
-
 	def new
 		@user = User.new
 	end
@@ -24,9 +22,9 @@ class UsersController < ApplicationController
 	end
 
 	def personal_messages
-		@user = User.friendly.find(params[:id])
-		authorize! :personal_messages, @user
-		@user = UserPersonalMessageShow.new(@user, current_user, params[:page])
+		user = User.friendly.find(params[:id])
+		authorize! :personal_messages, user
+		@user = UserPersonalMessageShow.new(user, current_user, params[:page])
 	end
 
 	def edit
@@ -37,12 +35,12 @@ class UsersController < ApplicationController
 	end
 
 	def complete_sign_up
-		return redirect_to(verify_email_users_path) if @user.email_needs_verification?
-		authorize! :read, @user
+		return redirect_to(verify_email_users_path) if current_user.email_needs_verification?
+		authorize! :read, current_user
 	end
 
 	def verify_email
-		return redirect_to root_path if @user.sign_up_complete?
+		return redirect_to root_path if current_user.sign_up_complete?
 	end
 
 	def email_confirmed
@@ -58,7 +56,7 @@ class UsersController < ApplicationController
 	end
 
 	def update_email
-	  if UpdateEmail.new(@user, new_email_params[:email]).update
+	  if UpdateEmail.new(current_user, new_email_params[:email]).update
 			redirect_to verify_email_users_path, notice: "We sent you an email."
 		else
 			render :verify_email
@@ -66,12 +64,12 @@ class UsersController < ApplicationController
 	end
 
 	def update
-		sign_up_complete = @user.sign_up_complete?
+		sign_up_complete = current_user.sign_up_complete?
 
-		if @user.update(user_params)
-			flash[:welcome] = @user.sign_up_complete? != sign_up_complete
+		if current_user.update(user_params)
+			flash[:welcome] = current_user.sign_up_complete? != sign_up_complete
 			redirect_to root_path
-		elsif @user.sign_up_complete?
+		elsif current_user.sign_up_complete?
 			render :edit
 		else
 			render :complete_sign_up
@@ -79,26 +77,22 @@ class UsersController < ApplicationController
 	end
 
 	def join_group
-	  if @user.under_group_limit?
-	  	new_group = FindGroup.new(@user).find_or_create
+	  if current_user.under_group_limit?
+	  	new_group = FindGroup.new(current_user).find_or_create
 			redirect_to group_path(new_group)
 	  end
 	end
 
 	def destroy
-		group = @user.degree_groups(1).take
-		@user.destroy
+		group = current_user.degree_groups(1).take
+		current_user.destroy
 		if group
-			group.users_empty? ? group.destroy : group.check_space(@user)
+			group.users_empty? ? group.destroy : group.check_space(current_user)
 		end
-		redirect_to new_survey_path(params: { email: @user.email })
+		redirect_to new_survey_path(params: { email: current_user.email })
 	end
 
 	private
-	def set_user
-		@user = current_user
-	end
-
 	def new_email_params
 	  params.require(:user).permit(:email)
 	end

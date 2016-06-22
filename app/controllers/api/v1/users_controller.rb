@@ -1,5 +1,5 @@
 class Api::V1::UsersController < ApiController
-  before_action :set_user, only: [:personal_messages, :update, :add_group, :show]
+  before_action :set_user, except: :create
   respond_to :json
 
   def show
@@ -7,7 +7,8 @@ class Api::V1::UsersController < ApiController
   end
 
   def create
-    user = User.new(user_params)
+    password_confirmation = user_params[:password]
+    user = User.new(user_params.merge(password_confirmation: password_confirmation))
     if user.save
       render json: user, status: 201
     else
