@@ -51,7 +51,7 @@ class ActivitiesController < ApplicationController
 	end
 
 	def new
-		authorize! :read, @group
+		authorize! :read, group
 		@activity = Activity.new
 	end
 
