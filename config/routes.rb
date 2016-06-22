@@ -48,30 +48,32 @@ Rails.application.routes.draw do
   get "privacy_policy" => "home#privacy_policy"
   get "terms_of_service" => "home#terms_of_service"
   root 'users#show'
-  get "*any", via: :all, to: "errors#not_found"
 
-  # namespace :api do
-  #   namespace :v1 do
-  #     resources :users, only: [:show, :update, :create] do
-  #       member do
-  #         get 'personal_messages'
-  #         post 'add_group'
-  #       end
-  #     end
-  #
-  #     resources :groups, only: :show do
-  #       delete 'drop_user', on: :member
-  #       resources :activities, only: [:create, :update, :show] do
-  #         member do
-  #           post 'add_user'
-  #           delete 'remove_user'
-  #         end
-  #       end
-  #     end
-  #
-  #
-  #     resources :messages, only: :create
-  #     resources :sessions, only: [:create, :destroy]
-  #   end
-  # end
+  namespace :api do
+    namespace :v1 do
+      resources :users, only: [:show, :update, :create] do
+        resources :groups, only: [:index]
+        member do
+          get 'personal_messages'
+          post 'add_group'
+        end
+      end
+
+      resources :groups, only: :show do
+        delete 'drop_user', on: :member
+        resources :activities, only: [:create, :update, :show] do
+          member do
+            post 'add_user'
+            delete 'remove_user'
+          end
+        end
+      end
+
+
+      resources :messages, only: :create
+      resources :sessions, only: [:create, :destroy]
+    end
+  end
+
+  get "*any", via: :all, to: "errors#not_found"
 end
