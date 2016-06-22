@@ -36,8 +36,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
 
     context "when it's not created" do
       before do
-        @invalid_user_attributes = attributes_for(:user_home)
-        @invalid_user_attributes[:password] = 'zxcvbnnn'
+        @invalid_user_attributes = attributes_for(:user_home, password: "123456")
         post :create, { user: @invalid_user_attributes }, format: :json
       end
 
@@ -46,7 +45,11 @@ RSpec.describe Api::V1::UsersController, type: :controller do
       end
 
       it "renders the json errors on why the user could not be created" do
-        expect(json_response[:errors][:password_confirmation]).to include "doesn't match Password"
+        expect(json_response[:errors][:password]).to include "is too common. Hackers will easily crack it."
+      end
+
+      it "responds with HTTP status 422" do
+        expect(response).to have_http_status(422)
       end
     end
   end
