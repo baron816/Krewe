@@ -1,3 +1,7 @@
 == README
 
-An app to help people find and make new, real friends
+Krewe is designed to help people make a new group of close friends in their neighborhood and become connected with their local community.
+
+It is built using Ruby on Rails, PostgreSQL, Javascript, and Redis.
+
+© Krewe Incorporated
