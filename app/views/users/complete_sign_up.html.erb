@@ -1,8 +1,8 @@
 <div class="container">
   <div class="card-panel">
     <h3>Complete Sign Up</h3>
-    <%= form_for(@user) do |f| %>
-      <%= render 'shared/errors', object: @user %>
+    <%= form_for(current_user) do |f| %>
+      <%= render 'shared/errors', object: current_user %>
 
       <div class="input-field">
         <%= f.label :name %>
@@ -15,7 +15,7 @@
       </div>
 
       <div class="input-field tooltipped" data-position="top" data-tooltip="No one's going to card you. Pick the group you identify with most.">
-  			<%= f.select :age_group, age_groups, {disabled: "Select Age Group", selected: @user.age_group || "Select Age Group"}, require: true %>
+  			<%= f.select :age_group, age_groups, {disabled: "Select Age Group", selected: current_user.age_group || "Select Age Group"}, require: true %>
   		</div>
 
       <div id="people-type">
