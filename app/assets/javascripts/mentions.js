@@ -1,5 +1,5 @@
-function Mentions() {
-  this.mentioning = function() {
+function mentions() {
+  function mentioning() {
     var data = $('.messages').data("namesdata");
     at_config = {
       at: "@",
@@ -10,5 +10,9 @@ function Mentions() {
 
     $('.atwho-container').remove()
     $('.new-message').atwho(at_config);
+  };
+
+  return {
+    mentioning: mentioning
   };
 }

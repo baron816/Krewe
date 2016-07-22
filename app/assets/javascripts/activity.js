@@ -1,5 +1,5 @@
-function Activity() {
-  this.activitySetup = function() {
+function activity() {
+  function activitySetup() {
   	mapLocation()
 
   	$('.datepicker').pickadate({
@@ -17,9 +17,13 @@ function Activity() {
   	$('ul.tabs').tabs();
   };
 
-  var setActivityAppointment = function() {
-  	var time = $("#time_field").val();
-  	var date = $("#date_field").val();
+  function setActivityAppointment() {
+  	const time = $("#time_field").val();
+  	const date = $("#date_field").val();
   	$("#activity_appointment").val(date + " " + time);
+  }
+
+  return {
+    activitySetup: activitySetup
   }
 }

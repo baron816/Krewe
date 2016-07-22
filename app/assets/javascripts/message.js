@@ -1,5 +1,5 @@
-function Message() {
-  this.setMessageBox = function() {
+function message() {
+  function setMessageBox() {
   	$('.new-message').on('keyup', function(){
   		$('#message_content').val($('.new-message').html())
   	})
@@ -8,4 +8,8 @@ function Message() {
   		$('.new-message').empty()
   	})
   };
+
+  return {
+    setMessageBox: setMessageBox
+  }
 }

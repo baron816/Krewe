@@ -1,17 +1,17 @@
-function Formatter() {
-  this.responsiveMedia = function() {
+function formatter() {
+  function responsiveMedia() {
   	$(".video").addClass("video-container")
   	$("p img").addClass("responsive-img")
   };
 
-  this.scrollBottom = function(div) {
+  function scrollBottom(div) {
   	$(div).scrollTop($(div).prop("scrollHeight"));
   };
 
-  this.setBodyHeight = function() {
+  function setBodyHeight() {
   	if (/iPad/i.test(navigator.userAgent) && $('.new-message')[0]) {
-  		var z = 450 - ($('body').height() - $('.new-message').position().top);
-      var that = this;
+  		let z = 450 - ($('body').height() - $('.new-message').position().top);
+      let that = this;
 
   		$('.new-message, #new-message-submit').focus(function(){
   			$('body').height("+=" + z)
@@ -28,22 +28,22 @@ function Formatter() {
   	}
   };
 
-  this.resizeWindow = function(div) {
-  	var window_height = $(window).height();
-  	var size;
+  function resizeWindow(div) {
+  	let window_height = $(window).height();
+  	let size;
 
   	if ($("#activity-messages").length) {
   		size = .25
   	} else {
   		size = .45
   	}
-  	var content_height = window_height * size;
+  	let content_height = window_height * size;
   	$(div).height(content_height);
   };
 
-  this.setActiveClass = function() {
+  function setActiveClass() {
   	$('input').focus(function(){
-  		var label = $("label[for='"+ $(this).attr('id') + "']")
+  		let label = $("label[for='"+ $(this).attr('id') + "']")
 
   		label.addClass("active");
 
@@ -55,7 +55,7 @@ function Formatter() {
   	})
   };
 
-  this.highlightTopic = function() {
+  function highlightTopic() {
   	$('.topics > a:first-child').addClass('lighten-3')
 
   	$('.topics > a').not(".next-topic").on('click', function () {
@@ -64,20 +64,27 @@ function Formatter() {
   	})
   };
 
-  this.setInitDefaults = function() {
-    this.responsiveMedia();
-    this.resizeWindow('.messages');
-    this.resizeWindow('#map');
-    this.scrollBottom('.messages');
-    this.highlightTopic();
-    this.setBodyHeight()
-    this.setActiveClass();
+  function setInitDefaults() {
+    responsiveMedia();
+    resizeWindow('.messages');
+    resizeWindow('#map');
+    scrollBottom('.messages');
+    highlightTopic();
+    setBodyHeight()
+    setActiveClass();
   };
 
-  this.setChangeTopicDefaults = function() {
-    this.setBodyHeight();
-    this.responsiveMedia();
-    this.resizeWindow(".messages");
-    this.scrollBottom(".messages");
+  function setChangeTopicDefaults() {
+    setBodyHeight();
+    responsiveMedia();
+    resizeWindow(".messages");
+    scrollBottom(".messages");
+  }
+
+  return {
+    setInitDefaults: setInitDefaults,
+    setChangeTopicDefaults: setChangeTopicDefaults,
+    resizeWindow: resizeWindow,
+    highlightTopic: highlightTopic
   }
 }

@@ -1,7 +1,7 @@
 $(document).ready(function(){
-  new Formatter().setInitDefaults();
+  formatter().setInitDefaults();
 
-  new Mentions().mentioning();
+  mentions().mentioning();
 
 	$("#map-hider").click(function () {
 		$('#map-canvas').toggle();
@@ -31,7 +31,7 @@ $(document).ready(function(){
   }
 
   if ($(".activities.edit").length || $(".activities.new").length) {
-    new Activity().activitySetup();
+    activity().activitySetup();
   }
 
   if ($('.users.edit').length || $('#user_address').length) {
@@ -39,14 +39,14 @@ $(document).ready(function(){
   }
 
   $('#new_user').submit(function(event){
-    new Validator().validateCheckbox(event);
+    validator().validateCheckbox(event);
   })
 
   if ($('#welcome-modal').length) {
     $('#welcome-modal').openModal();
   }
 
-  new Message().setMessageBox();
+  message().setMessageBox();
 })
 
 $(document).on({
@@ -56,5 +56,5 @@ $(document).on({
 }, '.pac-container');
 
 $(window).resize(function() {
-	new Formatter().resizeWindow('.messages')
+	formatter().resizeWindow('.messages')
 })
