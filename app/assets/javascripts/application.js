@@ -12,3 +12,4 @@
 //= require sweet-alert
 //= require sweet-alert-confirm
 //= require jquery.atwho
+//= require materialize_clockpicker
