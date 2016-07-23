@@ -55,8 +55,6 @@ $(document).on({
   }
 }, '.pac-container');
 
-
-
 $(window).resize(function() {
 	Formatter.resizeWindow('.messages')
 })
