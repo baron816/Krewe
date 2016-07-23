@@ -1,4 +1,4 @@
-function mentions() {
+const Mentions = (function() {
   function mentioning() {
     var data = $('.messages').data("namesdata");
     at_config = {
@@ -15,4 +15,4 @@ function mentions() {
   return {
     mentioning: mentioning
   };
-}
+}())

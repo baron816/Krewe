@@ -1,5 +1,5 @@
 $('.message-group').html('<%= j render partial: "topic", locals: { topic: @topic } %>')
-new Mentions().mentioning();
+Mentions.mentioning();
 
-formatter().setChangeTopicDefaults();
-message().setMessageBox();
+Formatter.setChangeTopicDefaults();
+Message.setMessageBox();

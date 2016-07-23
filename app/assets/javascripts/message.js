@@ -1,4 +1,4 @@
-function message() {
+const Message = (function() {
   function setMessageBox() {
   	$('.new-message').on('keyup', function(){
   		$('#message_content').val($('.new-message').html())
@@ -12,4 +12,4 @@ function message() {
   return {
     setMessageBox: setMessageBox
   }
-}
+}())

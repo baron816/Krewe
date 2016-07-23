@@ -4,4 +4,4 @@ $('.next-topic').replaceWith('<%= j render partial: "topics/topics", locals: { t
 <% end %>
 
 $('.topics').animate({ scrollLeft: $('.topics')[0].scrollWidth }, 1000)
-formatter().highlightTopic()
+Formatter.highlightTopic()

@@ -1,6 +1,6 @@
-function activity() {
+const Activity = (function() {
   function activitySetup() {
-  	mapLocation()
+  	GooglePlaces.mapLocation()
 
   	$('.datepicker').pickadate({
   	  close: "Done",
@@ -18,12 +18,12 @@ function activity() {
   };
 
   function setActivityAppointment() {
-  	const time = $("#time_field").val();
-  	const date = $("#date_field").val();
+  	let time = $("#time_field").val();
+  	let date = $("#date_field").val();
   	$("#activity_appointment").val(date + " " + time);
   }
 
   return {
     activitySetup: activitySetup
   }
-}
+}())

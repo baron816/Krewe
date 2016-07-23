@@ -1,7 +1,7 @@
 $(document).ready(function(){
-  formatter().setInitDefaults();
+  Formatter.setInitDefaults();
 
-  mentions().mentioning();
+  Mentions.mentioning();
 
 	$("#map-hider").click(function () {
 		$('#map-canvas').toggle();
@@ -27,26 +27,26 @@ $(document).ready(function(){
 	}
 
   if ($(".activities.show").length) {
-    mapActivityLocation();
+    GooglePlaces.mapActivityLocation();
   }
 
   if ($(".activities.edit").length || $(".activities.new").length) {
-    activity().activitySetup();
+    Activity.activitySetup();
   }
 
   if ($('.users.edit').length || $('#user_address').length) {
-    initAutoComplete();
+    GooglePlaces.initAutoComplete();
   }
 
   $('#new_user').submit(function(event){
-    validator().validateCheckbox(event);
+    Validator.validateCheckbox(event);
   })
 
   if ($('#welcome-modal').length) {
     $('#welcome-modal').openModal();
   }
 
-  message().setMessageBox();
+  Message.setMessageBox();
 })
 
 $(document).on({
@@ -55,6 +55,8 @@ $(document).on({
   }
 }, '.pac-container');
 
+
+
 $(window).resize(function() {
-	formatter().resizeWindow('.messages')
+	Formatter.resizeWindow('.messages')
 })

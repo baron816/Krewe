@@ -2,4 +2,6 @@ $('#new-activity').html("<%= j render partial: "new" %>")
 
 $('#new-activity').openModal();
 
-activity().activitySetup();
+Activity.activitySetup();
+$(document).on('click', '.suggested', GooglePlaces.selectSuggested);
+$(document).on('click', '.place-type', GooglePlaces.selectMarked);

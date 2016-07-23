@@ -1,4 +1,4 @@
-function validator() {
+const Validator = (function() {
   function validateCheckbox(event) {
   	if ( !document.getElementById("terms_of_service").checked ) {
   		event.preventDefault()
@@ -9,4 +9,4 @@ function validator() {
   return {
     validateCheckbox: validateCheckbox
   }
-}
+}())

@@ -1,4 +1,4 @@
-function formatter() {
+const Formatter = (function () {
   function responsiveMedia() {
   	$(".video").addClass("video-container")
   	$("p img").addClass("responsive-img")
@@ -87,4 +87,4 @@ function formatter() {
     resizeWindow: resizeWindow,
     highlightTopic: highlightTopic
   }
-}
+}())

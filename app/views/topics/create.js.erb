@@ -3,7 +3,7 @@ $('.topics').prepend('<%= j link_to @topic.name, change_topic_path(@topic.this_t
 $('.message-group').html('<%= j render partial: "topics/topic", locals: { topic: @topic } %>')
 
 
-formatter().resizeWindow('.messages');
-mentions().mentioning()
+Formatter.resizeWindow('.messages');
+Mentions.mentioning()
 $('.topics').animate({ scrollLeft: 0 }, 1000)
-message().setMessageBox();
+Message.setMessageBox();
