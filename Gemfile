@@ -10,6 +10,7 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'materialize-sass'
 gem 'autoprefixer-rails'
 
+gem 'materialize_clockpicker_rails', git: 'git://github.com/baron816/materialize-clockpicker-rails.git'
 gem 'underscore-rails'
 gem 'geocoder'
 gem 'local_time'
