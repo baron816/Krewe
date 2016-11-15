@@ -37,8 +37,8 @@ describe ExpandGroupVotesController do
           @group2.activities.create(location: "South Street", appointment: Time.now - 1.month, proposer_id: user.id, plan: "drinks", well_attended: true)
         end
 
-        group.check_space(user)
-        @group2.check_space(user)
+        Groups::GroupSpaceCheck.new(group, user).check_space
+        Groups::GroupSpaceCheck.new(@group2, user).check_space
       end
 
       it "starts with only two groups" do
@@ -46,20 +46,20 @@ describe ExpandGroupVotesController do
       end
 
       it "both groups are ripe_for_expansion" do
-        expect(ExpansionCheck.new(group).ripe_for_expansion?).to eq(true)
-        expect(ExpansionCheck.new(@group2).ripe_for_expansion?).to eq(true)
+        expect(Groups::ExpansionCheck.new(group).ripe_for_expansion?).to eq(true)
+        expect(Groups::ExpansionCheck.new(@group2).ripe_for_expansion?).to eq(true)
       end
 
       it "group2 has voted to expand" do
-        expect(ExpansionCheck.new(@group2).send(:voted_to_expand?)).to eq(true)
+        expect(Groups::ExpansionCheck.new(@group2).send(:voted_to_expand?)).to eq(true)
       end
 
       it "group has not voted to expand" do
-        expect(ExpansionCheck.new(group).send(:voted_to_expand?)).to eq(false)
+        expect(Groups::ExpansionCheck.new(group).send(:voted_to_expand?)).to eq(false)
       end
 
       it "creates a new group when voting to expand and group2 has expanded" do
-        ExpandGroup.new(@group2).expand_group
+        Groups::ExpandGroup.new(@group2).expand_group
         expect { post :create, group_id: group }.to change(Group, :count).by(1)
       end
     end

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe GroupSpaceCheck do
+describe Groups::GroupSpaceCheck do
   before do
     create_list(:user_home, 8)
   end

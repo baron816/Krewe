@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe ExpandGroup do
+describe Groups::ExpandGroup do
   before do
     create_list(:user_home, 6)
     create_list(:user_wtc, 6)
@@ -8,7 +8,7 @@ describe ExpandGroup do
 
   let!(:group1) { Group.first }
   let!(:group2) { Group.second }
-  let!(:expander) { ExpandGroup.new(group1) }
+  let!(:expander) { Groups::ExpandGroup.new(group1) }
 
 
   describe "#find_mergeable_group" do
@@ -29,7 +29,7 @@ describe ExpandGroup do
     it "will not allow group 3 to find other groups" do
       group1.update_column(:ready_to_expand, true)
       group2.update_column(:ready_to_expand, true)
-      expect(ExpandGroup.new(group3).send(:find_mergeable_group)).to be_nil
+      expect(Groups::ExpandGroup.new(group3).send(:find_mergeable_group)).to be_nil
     end
   end
 
@@ -108,7 +108,7 @@ describe ExpandGroup do
       create_list(:user_home, 12)
 
       Group.find_each do |group|
-        ExpandGroup.new(group).expand_group
+        Groups::ExpandGroup.new(group).expand_group
       end
     end
     let(:group5) { Group.last(2).first }
@@ -130,9 +130,9 @@ describe ExpandGroup do
 
     context "another expansion" do
       before do
-        ExpandGroup.new(group5).expand_group
+        Groups::ExpandGroup.new(group5).expand_group
       end
-      let(:group7) { ExpandGroup.new(group6).expand_group }
+      let(:group7) { Groups::ExpandGroup.new(group6).expand_group }
 
       it "creates a new group from the last two" do
         expect(group7).to be_a(Group)
@@ -147,7 +147,7 @@ describe ExpandGroup do
       end
 
       it "does not create a new group when expanding group 7" do
-        expect(ExpandGroup.new(group7).expand_group).to be_nil
+        expect(Groups::ExpandGroup.new(group7).expand_group).to be_nil
       end
     end
   end
