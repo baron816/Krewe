@@ -44,8 +44,4 @@ class Group < ActiveRecord::Base
 	def create_general_topic
 	  self.topics.create(name: "General")
 	end
-
-	def join_notification(user)
-
-	end
 end
