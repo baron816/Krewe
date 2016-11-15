@@ -87,7 +87,7 @@ class UsersController < ApplicationController
 		group = current_user.degree_groups(1).take
 		current_user.destroy
 		if group
-			group.users_empty? ? group.destroy : group.check_space(current_user)
+			group.users_empty? ? group.destroy : Groups::GroupSpaceCheck.new(group, current_user).check_space
 		end
 		redirect_to new_survey_path(params: { email: current_user.email })
 	end
