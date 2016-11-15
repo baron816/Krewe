@@ -9,6 +9,10 @@ class FindGroup
 
     if group
       group.users << user
+      if group.degree == 1
+        Groups::GroupSpaceCheck.new(group, user).check_space 
+        JoinNotification.new(group, user).send_notifications
+      end
     else
       group = user.groups.create(user_params)
     end
