@@ -12,6 +12,7 @@ class DropUser
 
   def drop
     users.delete(user)
+    Groups::GroupSpaceCheck.new(group, user).check_space
     remember_dropped_group_id
 
     delete_drop_votes
