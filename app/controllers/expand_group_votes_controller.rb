@@ -7,8 +7,8 @@ class ExpandGroupVotesController < ApplicationController
 
     @expand_vote.save
 
-    if ExpansionCheck.new(@group).ripe_and_voted?
-      new_group = ExpandGroup.new(@group).expand_group
+    if Groups::ExpansionCheck.new(@group).ripe_and_voted?
+      new_group = Groups::ExpandGroup.new(@group).expand_group
 
       return redirect_to group_path(new_group) if new_group
     end

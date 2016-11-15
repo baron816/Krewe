@@ -4,7 +4,7 @@ class Group < ActiveRecord::Base
 	friendly_id :slug_candidates, use: :slugged
 
 	has_many :user_groups
-	has_many :users, through: :user_groups, after_add: [:check_space, :join_notification], after_remove: :check_space
+	has_many :users, through: :user_groups
 	has_many :messages, as: :messageable
 	has_many :topics, dependent: :destroy
 	has_many :notifications, as: :notifiable, dependent: :destroy
@@ -32,10 +32,6 @@ class Group < ActiveRecord::Base
 		self.open_groups.category_groups(params[:category]).same_age(params[:age_group]).degree_groups(1).near([params[:latitude], params[:longitude]], 0.5).order(created_at: :asc).non_former_groups(params[:group_ids])[0]
 	end
 
-	def check_space(user)
-		GroupSpaceCheck.new(self, user).check_space if self.degree == 1
-	end
-
 	def city
 	  users.first.city
 	end
@@ -50,6 +46,6 @@ class Group < ActiveRecord::Base
 	end
 
 	def join_notification(user)
-	  JoinNotification.new(self, user).send_notifications if self.degree == 1
+
 	end
 end
